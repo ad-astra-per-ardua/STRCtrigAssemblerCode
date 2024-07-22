@@ -345,7 +345,7 @@ function MiddleBossTrigger()
     M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74}
     M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70}
     TriggerX(P7, {CommandLeastAt(148, "middle4")}, {SetDeaths(P11, Add, 1, 163)}, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 3060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 2060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
 
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetInvincibility(Enable, 116, P6, "middle4")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetDeaths(P11, Subtract, 1, 164)}, preserved)
@@ -353,7 +353,7 @@ function MiddleBossTrigger()
 
     TriggerX(FP, {Deaths(P6, AtLeast, 1, 116)}, {RemoveUnit(179, P6)})
     TriggerX(FP, {Bring(P6, AtLeast, 50, 150, "Anywhere")}, {KillUnitAt(All, 50, "middle4", P6)}, preserved)
-    TriggerX(Force1, {CommandLeastAt(148, "middle4"),Deaths(P11, Exactly, 1900, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
+    TriggerX(Force1, {CommandLeastAt(148, "middle4"),Deaths(P11, Exactly, 900, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
 
     CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 2039, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
