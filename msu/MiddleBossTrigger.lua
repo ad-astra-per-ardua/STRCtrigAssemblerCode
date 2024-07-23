@@ -9,8 +9,8 @@ function MiddleBossTrigger()
     -- end
     -- Use Death Value P11 160 ~
     Shape11_1 = CSMakePolygon(6,60,0,85,7)
-    MiddleGen = CSMakeLine(3,32,0,13,1)
-    MiddleGen2 = CSMakeLine(3,32,0,19,1)
+    MiddleGen = CSMakeLine(3,32,0,22,1)
+    MiddleGen2 = CSMakeLine(3,32,0,22,1)
     EFT11_1 = CSMakeCircleX(6,64,30,54,6)
 
     MBoss11_1T = {55,56,8,12,88,96}
@@ -53,6 +53,7 @@ function MiddleBossTrigger()
     103.4, 104, 104.6, 105.4, 106.1
 }
     RealB = {"starp1","starp2","starg1","starg2"}
+    RealB2 = {"mutant5","wraith1","PNG1","PNG2"}
     HiveEtf2 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 71)
     HiveEtf2A = CSMakeSpiral(6, 16, 1/2, 0, 0, 130, 71)
     TSFL1 = CSMakeLine(1,48,0,10,1)
@@ -109,6 +110,9 @@ function MiddleBossTrigger()
     CSPlotWithProperties(Shape11_1, P5, 27, M11, {495,351}, 1, 32, P6, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)}, nil,nil, Onlyhallucinated)
     for i = 1, 4 do 
         TriggerX(FP, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)}, CreateUnit(1, 27, RealB[i], P5))
+    end
+    for i = 1, 4 do
+        TriggerX(FP, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)},CreateUnit(1, 27, RealB2[i], P5))
     end
     TriggerX(Force2,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed - 10, 160)}, {RemoveUnitAt(All, 27, "middle1", P5)})
     CAPlotWithProperties(CS_Reverse(CS_SortR(HiveEtf2,1)), P5, 11, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, nil, nil, StargateProperties)
@@ -378,9 +382,6 @@ function MiddleBossTrigger()
                 CreateUnit(1,116,"middle4",P6);
                 SetImageScript(925, 131);
                 SetImageColor(925, 16);
-                CreateUnit(1,179,"middle4",P6);
-                SetImageColor(925, 0);
-                SetImageScript(925, 365);
                 TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*7000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr5[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
@@ -406,7 +407,7 @@ function MiddleBossTrigger()
         DisplayText(StrDesignX("몰아치는 감정 속 세계선의 주인, \x0eＴ\x1cｉｄａｌ \x1fＷａｖｅ\x04를 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f2,000,000 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 2000000, Ore),
-        SetDeaths(P6, Add, 1, 203)
+        SetDeaths(P6, SetTo, 1, 203)
     })
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
@@ -448,7 +449,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,7}
     TriggerX(FP, {Deaths(P11, Exactly, 0, 167)}, {SetInvincibility(Disable, 126, P6, "middle3")}, preserved)
 
     for i = 0 ,3 do
-        -- TriggerX(i, {CommandLeastAt(127, "middle3"), Deaths(P11, Exactly, 10, 166)}, {SetAllianceStatus(P8, Ally)}) -- Being Allied P8 for selection
+        TriggerX(i, {CommandLeastAt(127, "middle3"), Deaths(P11, Exactly, 10, 166)}, {SetAllianceStatus(P8, Ally)}) -- Being Allied P8 for selection
     end
 
     
@@ -716,7 +717,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,7}
     CIfEnd()
 
     CTrigger(FP,{
-        TMemory(MBossHP7,AtMost,256*200000);
+        TMemory(MBossHP7,AtMost,256*400000);
         NVar(MBossHP7_2,AtLeast,1);
     },{
         TSetMemory(MBossHP7,SetTo,256*6500000);

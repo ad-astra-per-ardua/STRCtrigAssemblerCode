@@ -6,7 +6,6 @@ function FinalBossTrigger()
         Deaths(P6, AtLeast, 1, 204),
         Deaths(P6, AtLeast, 1, 205),
     }, {
-        CreateUnit(1, 168, "HealZone", P7),
         KillUnitAt(All, 125, "Anywhere", Force1),
         KillUnitAt(All, 125, "Anywhere", P12),
         KillUnitAt(All, "Men", "HealZone", Force2),
@@ -31,6 +30,7 @@ function FinalBossTrigger()
         PlayWAV("staredit\\wav\\CAUTION.wav"),
         PlayWAV("staredit\\wav\\CAUTION.wav"),
         PlayWAV("staredit\\wav\\CAUTION.wav"),
+        CreateUnit(1, 168, "HealZone", P7)
     })
     TriggerX(FP,{
     Deaths(P6, AtLeast, 1, 202),
@@ -48,12 +48,12 @@ function FinalBossTrigger()
         Deaths(P6, AtLeast, 1, 204),
         Deaths(P6, AtLeast, 1, 205),
         Deaths(P7, AtLeast, 1, 168)}, {
-            Wait(5000);
-            Victory();
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
             SetMemoryBA(0x657A9C, SetTo, 1)
+            Wait(5000);
+            Victory();
         })
 
 end
