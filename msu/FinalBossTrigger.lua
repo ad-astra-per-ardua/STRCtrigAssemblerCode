@@ -51,7 +51,7 @@ function FinalBossTrigger()
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
             PlayWAV("staredit\\wav\\BOSSClear.ogg");
-            SetMemoryBA(0x657A9C, SetTo, 1)
+            SetMemoryBA(0x657A9C, SetTo, 1);
             Wait(5000);
             Victory();
         })
