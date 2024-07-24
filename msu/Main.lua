@@ -21,8 +21,8 @@ SnowFlake =
 FP = P8
 SetForces({P1,P2,P3,P4},{P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
-StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
--- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 Include_DataTransfer()
 Include_CBPaint()
@@ -54,6 +54,7 @@ for i = 0, 3 do
     TriggerX(Force1, Always(), {SetMemoryB(0x58D088 + (i * 46) + 15, SetTo, 255)})
 end
 CIf(AllPlayers,{Switch("Switch 249", Set)})
+TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)})
 Install_initial_system_setting()
 Install_normalGunplot()
 Install_SpecialGunplot()
@@ -80,57 +81,57 @@ EUDTurbo(FP)
 
 
 
-for i = 0, 10 do
-if i%2 == 0 then
-Trigger {
-	players = {P1},
-	conditions = {
-		Memory(0x640B60+0xDA*i, Exactly, 0xEABDB2EA);
-		Memory(0x640B64+0xDA*i, Exactly, 0x203AA0B3);	
-	},
-	actions = {
-		SetMemory(0x640B60+0xDA*i,SetTo,0);
-		PreserveTrigger();
-	}
-}
-Trigger {
-	players = {P1},
-	conditions = {
-		Memory(0x640B60+0xDA*i, Exactly, 0x4E524157);
-		Memory(0x640B64+0xDA*i, Exactly, 0x3A474E49);	
-	},
-	actions = {
-		SetMemory(0x640B60+0xDA*i,SetTo,0);
-		PreserveTrigger();
-	}
-}
-else
-Trigger {
-	players = {P1},
-	conditions = {
-		MemoryX(0x640B5E + 0xDA*i, Exactly, 0xB2EA0000,0xFFFF0000);
-		Memory(0x640B62 + 0xDA*i, Exactly, 0xA0B3EABD);	
-		MemoryX(0x640B66 + 0xDA*i, Exactly, 0x203A,0xFFFF);
-	},
-	actions = {
-		SetMemory(0x640B5E + 0xDA*i,SetTo,0);
-		PreserveTrigger();
-	}
-}
-Trigger {
-	players = {P1},
-	conditions = {
-		MemoryX(0x640B5E + 0xDA*i, Exactly, 0x41570000,0xFFFF0000);
-		Memory(0x640B62 + 0xDA*i, Exactly, 0x4E494E52);	
-		MemoryX(0x640B66 + 0xDA*i, Exactly, 0x00003A47,0xFFFF);
-	},
-	actions = {
-		SetMemory(0x640B5E + 0xDA*i,SetTo,0);
-		PreserveTrigger();
-	}
-}
-end
-end
+-- for i = 0, 10 do
+-- if i%2 == 0 then
+-- Trigger {
+-- 	players = {P1},
+-- 	conditions = {
+-- 		Memory(0x640B60+0xDA*i, Exactly, 0xEABDB2EA);
+-- 		Memory(0x640B64+0xDA*i, Exactly, 0x203AA0B3);	
+-- 	},
+-- 	actions = {
+-- 		SetMemory(0x640B60+0xDA*i,SetTo,0);
+-- 		PreserveTrigger();
+-- 	}
+-- }
+-- Trigger {
+-- 	players = {P1},
+-- 	conditions = {
+-- 		Memory(0x640B60+0xDA*i, Exactly, 0x4E524157);
+-- 		Memory(0x640B64+0xDA*i, Exactly, 0x3A474E49);	
+-- 	},
+-- 	actions = {
+-- 		SetMemory(0x640B60+0xDA*i,SetTo,0);
+-- 		PreserveTrigger();
+-- 	}
+-- }
+-- else
+-- Trigger {
+-- 	players = {P1},
+-- 	conditions = {
+-- 		MemoryX(0x640B5E + 0xDA*i, Exactly, 0xB2EA0000,0xFFFF0000);
+-- 		Memory(0x640B62 + 0xDA*i, Exactly, 0xA0B3EABD);	
+-- 		MemoryX(0x640B66 + 0xDA*i, Exactly, 0x203A,0xFFFF);
+-- 	},
+-- 	actions = {
+-- 		SetMemory(0x640B5E + 0xDA*i,SetTo,0);
+-- 		PreserveTrigger();
+-- 	}
+-- }
+-- Trigger {
+-- 	players = {P1},
+-- 	conditions = {
+-- 		MemoryX(0x640B5E + 0xDA*i, Exactly, 0x41570000,0xFFFF0000);
+-- 		Memory(0x640B62 + 0xDA*i, Exactly, 0x4E494E52);	
+-- 		MemoryX(0x640B66 + 0xDA*i, Exactly, 0x00003A47,0xFFFF);
+-- 	},
+-- 	actions = {
+-- 		SetMemory(0x640B5E + 0xDA*i,SetTo,0);
+-- 		PreserveTrigger();
+-- 	}
+-- }
+-- end
+-- end
 
 --[[
 1. Compile 후 시나리오 손상은 특정 trigger의 문제일 가능성이 농후하다.

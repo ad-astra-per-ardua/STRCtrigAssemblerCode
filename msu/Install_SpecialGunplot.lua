@@ -27,8 +27,8 @@ for i = 1 , 4 do
     Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
     TriggerX(Force1, {
         Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
-        Deaths(P7, AtLeast, 1, 106),
-        Deaths(P7, AtLeast, 1, 130)
+        Deaths(P1, AtLeast, 1, 106),
+        Deaths(P1, AtLeast, 1, 130)
     }, {
         PlayWAV("staredit\\wav\\CAUTION.wav"),
         PlayWAV("staredit\\wav\\CAUTION.wav"),

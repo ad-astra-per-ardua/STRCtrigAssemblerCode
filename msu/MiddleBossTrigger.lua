@@ -169,8 +169,8 @@ function MiddleBossTrigger()
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
-        DisplayText(StrDesignX("+ \x1f2,000,000 Ore 획득 !"), 4),
-        SetResources(CurrentPlayer, Add, 2000000, Ore),
+        DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
+        SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
     })
     ------ End of 11 Middle boss trigger -----
@@ -184,18 +184,17 @@ function MiddleBossTrigger()
 
 
     ------ Start of 1 Middle boss trigger ----- + plot death value = 161 | skill death value = 162
-    MB1TL = {33.5, 34, 34.5, 35, 35.5, 36,
-    37, 37.5, 38, 39, 39.5, 40,
-    43, 47, 51, 55, 59,
-    63, 67, 71, 75, 79,
-    83, 87, 91, 95, 99
+    MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
+    31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,
+    96.5, 100.5, 104.5, 108.5, 112.5, 116.5, 120.5, 124.5, 128.5, 132.5, 
+    136.5
 }
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
-    TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161)}, preserved)
-    TriggerX(FP, Deaths(P11, AtLeast, 2000, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
+    TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
+    TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
 
     TriggerX(FP, {Deaths(P12, AtLeast, 1, 226)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
-    TriggerX(FP, {CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, MB1TL[4] * SDspeed, 161)}, {SetDeaths(P11, Add, 1, 162), SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
+    TriggerX(FP, {CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, MB1TL[4] * SDspeed, 161)}, {SetInvincibility(Disable, 68, P6, "middle2")})
     TriggerX(FP, {Deaths(P12, AtLeast, 1, 226)}, {SetDeaths(P12, Subtract, 1, 226)}, preserved)
     TriggerX(FP, {Deaths(P12, Exactly, 0, 226)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
 
@@ -241,7 +240,7 @@ function MiddleBossTrigger()
     TriggerX(FP,{CDeathsX("X",Exactly,2*16777216,BulletTimer,0xFF000000)},{SetImageColor(440,13),SetImageColor(Bimage,13)},{Preserved}) -- Green
     SpreadBullet = InitCFunc(FP)
     CFunc(SpreadBullet)
-        CreateBullet(FP,P8,195,3,ScatteredAngle,1024,RandomRange,{"middle2",3632,335},{Deaths(P11, AtLeast, 1000, 162),Deaths(P6, Exactly, 0, 68)})
+        CreateBullet(FP,P8,195,3,ScatteredAngle,1024,RandomRange,{"middle2",3632,335},{Deaths(P11, AtLeast, 750, 162),Deaths(P6, Exactly, 0, 68)})
     CFuncEnd()
         CDoActions(FP,{TSetNVar(ScatteredAngle,SetTo,_Add(Temp,0*256))})
         CallCFuncX(FP,SpreadBullet)
@@ -278,9 +277,10 @@ function MiddleBossTrigger()
     GenerateRandomIndex,RandomIndex = CreateVars(2,FP)
     
 
-
-    MB1CircleS = CSMakeCircle(6,64,0,37,1)
-    MB1CircleA = CSMakeCircle(6,0,0,37,1)
+    
+    MB1CircleS = CSMakeCircle(6,64,0,61,1)
+    MB1CircleA = CSMakeCircle(6,0,0,61,1)
+    -- CS_BMPGraph(Triangle4, {"0xFF0000"}, "1", nil, nil, 1, nil, nil, nil, 3, 1, 1, 1)
     -- CDoActions(FP, f_Rand(FP,GenerateRandomIndex), preserved)
     -- CDoActions(FP,CMov(FP, RandomIndex, GenerateRandomIndex),preserved)
 
@@ -296,9 +296,9 @@ function MiddleBossTrigger()
         PlayWAV("sound\\Protoss\\ARCHON\\PArYes00.wav"),
         TalkingPortrait(68, 1000)
     })
-    Tier1G = {8, 51 ,65, 66, 16,30, 52, 81, 102, 88, 89,95}
-    Tier2H = {3, 25, 23, 75, 76, 77, 78, 93, 104, 96}
-    Tier3H = {7, 21, 58, 60, 62, 64, 69, 70, 86}
+    Tier1G = {8, 51 ,65, 66, 16,30, 52, 81, 102, 88, 89, 95, 104, 3, 16}
+    Tier2H = {3, 25, 23, 75, 76, 77, 78, 93, 104, 96, 75, 78, 81, 23, 7}
+    Tier3H = {7, 21, 58, 60, 62, 64, 69, 70, 86, 60, 64, 69, 89, 88, 21}
     TriggerX(FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[1]-1) * SDspeed , 161)},{SetScanImage(214)})
     CSPlot(MB1CircleS, P6, 33, LocM1, nil, 1, 32, FP,{CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[1]) * SDspeed , 161)})
     CSPlot(MB1CircleS, P6, 33, LocM1, nil, 1, 32, FP,{CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[2]) * SDspeed , 161)},{SetScanImage(928)})
@@ -317,11 +317,14 @@ function MiddleBossTrigger()
     CSPlotOrder(MB1CircleS, P6, 76, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[12]) * SDspeed , 161)})
 
 
-    for i = 13, 27 do
-        CSPlotOrder(MB1CircleS, P6, Tier1G[(i % 12) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
-        CSPlotOrder(MB1CircleS, P6, Tier2H[(i % 10) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
-        CSPlotOrder(MB1CircleS, P5, Tier3H[(i % 9) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
+    for i = 13, 37 do
+        CSPlotOrder(MB1CircleS, P6, Tier1G[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
+        CSPlotOrder(MB1CircleS, P6, Tier2H[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
+        CSPlotOrder(MB1CircleS, P5, Tier3H[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
     end
+    CSPlotOrder(MB1CircleS, P6, 3, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(MB1CircleS, P6, 7, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(MB1CircleS, P6, 28, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, MB1TL[27] * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {CommandLeastAt(175, "middle2"), Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[27] * SDspeed,161)}, {
@@ -329,8 +332,8 @@ function MiddleBossTrigger()
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         DisplayText(StrDesignX("Palm Island 세계선의 주인, ＣｈｅｅＺｅ를 격파하였습니다 ! "), 4),
-        DisplayText(StrDesignX("+ \x1f2,000,000 Ore 획득 !"), 4),
-        SetResources(CurrentPlayer, Add, 2000000, Ore),
+        DisplayText(StrDesignX("+ \x1f300,000 Ore 획득 !"), 4),
+        SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 204)
     })
 
@@ -346,8 +349,8 @@ function MiddleBossTrigger()
     TempPerAction = {9,10,13,15,16,17}
     M5GenPlot = CSMakeCircle(6,64,0,61,1)
     M5GenPlotA = CSMakeCircle(6,0,0,61,1)
-    M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74}
-    M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70}
+    M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74, 25, 76, 81, 3}
+    M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70, 7, 21, 69, 28}
     TriggerX(P7, {CommandLeastAt(148, "middle4")}, {SetDeaths(P11, Add, 1, 163)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 2060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
 
@@ -367,7 +370,7 @@ function MiddleBossTrigger()
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
     CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
-    for i = 1, 9 do
+    for i = 1, 15 do
         CSPlotOrder(M5GenPlot, P6, M5GenG[i], "middle4", nil, 1, 32, M5GenPlotA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})
         CSPlotOrder(M5GenPlot, P6, M5GenS[i], "middle4", nil,1, 32, M5GenPlotA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)}, {SetDeaths(P11, SetTo, 0, 165)})
     end
@@ -382,18 +385,18 @@ function MiddleBossTrigger()
                 CreateUnit(1,116,"middle4",P6);
                 SetImageScript(925, 131);
                 SetImageColor(925, 16);
-                TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*7000000); -- Next unit pointer offset's HP set
+                TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr5[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,12)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,15)})
     CIfEnd()
 
     CTrigger(FP,{
         TMemory(MBossHP5,AtMost,256*400000);
         NVar(MBossHP5_2,AtLeast,1);
     },{
-        TSetMemory(MBossHP5,SetTo,256*6500000);
+        TSetMemory(MBossHP5,SetTo,256*8000000);
         SetNVar(MBossHP5_2,Subtract,1);
         SetDeaths(P11, SetTo, 1, 165);
         SetDeaths(P11, SetTo, 102, 164);
@@ -405,9 +408,10 @@ function MiddleBossTrigger()
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         DisplayText(StrDesignX("몰아치는 감정 속 세계선의 주인, \x0eＴ\x1cｉｄａｌ \x1fＷａｖｅ\x04를 격파하였습니다 ! "), 4),
-        DisplayText(StrDesignX("+ \x1f2,000,000 Ore 획득 !"), 4),
-        SetResources(CurrentPlayer, Add, 2000000, Ore),
+        DisplayText(StrDesignX("+ \x1f300,000 Ore 획득 !"), 4),
+        SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
+
     })
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
@@ -442,7 +446,7 @@ EnergyProp = {
     }
 
 GTL1 = {51,17,77,65,30,81,95,75,76,93,74}
-STL1 = {21,8,56,58,70,89,64,96,89,88,7}
+STL1 = {21,8,56,58,70,89,64,96,89,88,28}
     TriggerX(P7, {CommandLeastAt(127, "middle3")}, {SetDeaths(P11, Add, 1, 166)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetInvincibility(Enable, 126, P6, "middle3")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetDeaths(P11, Subtract, 1, 167)}, preserved)
@@ -696,8 +700,8 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,7}
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         DisplayText(StrDesignX("\x07절경\x04과 \x08공포\x04의 세계선의 주인, \x08Φ ό β ο ς\x04를 격파하였습니다 ! "), 4),
-        DisplayText(StrDesignX("+ \x1f2,000,000 Ore 획득 !"), 4),
-        SetResources(CurrentPlayer, Add, 2000000, Ore),
+        DisplayText(StrDesignX("+ \x1f 300,000 Ore 획득 !"), 4),
+        SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 202)
     })
     
@@ -713,7 +717,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,7}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,5)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,12)})
     CIfEnd()
 
     CTrigger(FP,{

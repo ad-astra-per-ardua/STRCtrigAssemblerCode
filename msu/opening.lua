@@ -66,7 +66,6 @@ function Install_opening()
             CenterView("Anywhere");
             DisplayText("\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x04- 마린키우기 \x11U\x17niverse \x04-\n\n\x13\x07Created \x04By \x1BAwakenSense \n\x13\x1FSTRCtrigAssembler \x08v5.5 \x04& \x08CB\x04 Paint \x08v2.5\x04 & \x08EP\x0FScript \x04In Used\n\n\n\x13\x04★ \x11Thanks \x04to \x1FG\x04ALAXY_BURST, \x0FM\x04ystia Lorelei, \x17C\x04heeze\x17N\x04acho, \x08[\x04Men\x08]\x04, \x10s\x04eeiogon, \x1BNinfia \x04★\n\x08\x13 And \x04All \x19Precious\x17 Testers.\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n",4);
             SetSwitch("Switch 249",Set);
-            TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)});
         }
     }
 end

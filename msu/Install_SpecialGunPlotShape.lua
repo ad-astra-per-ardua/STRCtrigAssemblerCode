@@ -15,9 +15,12 @@ function Install_SpecialGunPlotShape()
             RunAIScript('Turn ON Shared Vision for Player 8')
     })
 
-    TriggerX(Force2, {Deaths(P11, Exactly, 0, 100)}, {
-        SetAllianceStatus(Force1, Enemy)
-    })
+    
+   
+    for i = 4,6 do 
+        TriggerX(i, {Deaths(P11, Exactly, 0, 100)}, {
+            SetAllianceStatus(Force1, Enemy)})
+    end
     TriggerX(Force1, {Deaths(P11, Exactly, 0, 100)},{
         RunAIScript('Turn OFF Shared Vision for Player 5'),
         RunAIScript('Turn OFF Shared Vision for Player 6'),
@@ -111,22 +114,22 @@ function Install_SpecialGunPlotShape()
     CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(Shell_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(Shell_Arc4, P8, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
 
     CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(SH_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(SH_Arc4, P8, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
 
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(89, P5, "Anywhere", Move, "hive3")})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(58, P8, "Anywhere", Move, "starg3")})
+    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(58, P6, "Anywhere", Move, "starg3")})
 
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 89, P5, "hive3", P6)})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 58, P8, "starg3", P6)})
+    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 58, P6, "starg3", P6)})
 
     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})

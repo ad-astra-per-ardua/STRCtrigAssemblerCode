@@ -438,4 +438,6 @@ function Install_NormalGunPlotShape()
         for i = 1 , 10 do -- 43 ~ 52
             StargateGunplot("starg"..i,  i + 42);
         end
+
+        CSPlot(Triangle4, P6, 64, "fcky1", nil, 1, 32, P6, {CommandLeastAt(146, "fcky1")}, {RunAIScriptAt(JYD, "fcky1")})
 end

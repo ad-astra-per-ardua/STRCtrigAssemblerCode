@@ -1,5 +1,6 @@
 function Install_initial_system_setting()
     -- TriggerX(P7,{Always()},{{Order("Men", P7, "Anywhere", Move, "HealZone")}}) -- For debugging
+    TriggerX(FP, Always(), {CreateUnit(36, 1, "HealZone", P1)})
     TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)});
     DoActions(FP, SetInvincibility(Enable, "Buildings", P12, "Anywhere"),preserved)
     TriggerX(Force1, {Always()}, {PlayWAV("staredit\\wav\\op.ogg")});
@@ -320,5 +321,5 @@ function Install_initial_system_setting()
         PreserveTrigger();
     },
     }
-    Trigger2(P8, {Always()}, SetAllianceStatus(Force1, Ally))
+    DoActions2(P8, SetAllianceStatus(Force1, Ally), preserved)
 end

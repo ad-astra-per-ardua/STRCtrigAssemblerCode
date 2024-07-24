@@ -8,9 +8,23 @@ function FinalBossTrigger()
     }, {
         KillUnitAt(All, 125, "Anywhere", Force1),
         KillUnitAt(All, 125, "Anywhere", P12),
-        KillUnitAt(All, "Men", "HealZone", Force2),
+        KillUnitAt(All, "Men", "Anywhere", Force2),
+        SetDeaths(P8, SetTo, 1, 131),
+        SetDeaths(P8, SetTo, 1, 132);
         
     })
+
+    TriggerX(FP, {
+        Deaths(P6, AtLeast, 1, 202),
+        Deaths(P6, AtLeast, 1, 203),
+        Deaths(P6, AtLeast, 1, 204),
+        Deaths(P6, AtLeast, 1, 205),
+    }, {
+        SetDeaths(P8, SetTo, 1, 131),
+        SetDeaths(P8, SetTo, 1, 132);
+        PreserveTrigger();
+    })
+
     TriggerX(Force1, {
         Deaths(P6, AtLeast, 1, 202),
         Deaths(P6, AtLeast, 1, 203),
