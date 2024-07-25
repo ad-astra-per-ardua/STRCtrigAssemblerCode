@@ -7,6 +7,7 @@ Trigger{
     },
     actions = {
         SetDeaths(P8, Add, 1, 131);
+		SetDeaths(P8, Add, 1, 218);
         PreserveTrigger();
     }
 }

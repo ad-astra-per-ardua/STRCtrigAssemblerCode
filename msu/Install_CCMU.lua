@@ -19,7 +19,7 @@ function Install_CCMU()
         players = {Force1},
         conditions = {
             Memory(0x6283F0, AtLeast, 1600),
-            Deaths(P11, AtLeast, 170, 157)
+            Deaths(P11, AtLeast, 0, 157)
         },
         actions = {
             DisplayText(CanText1, 4),
@@ -27,8 +27,7 @@ function Install_CCMU()
             DisplayText(CanText3, 4),
             PlayWAV("sound\\Terran\\RAYNORM\\URaPss02.WAV"),
             PlayWAV("sound\\Terran\\RAYNORM\\URaPss02.WAV"),
-            -- SetDeaths(P11, Add, 1, 157),
-            Wait(5000),
+            SetDeaths(P11, Add, 1, 157),
             PreserveTrigger();
         },
     }
