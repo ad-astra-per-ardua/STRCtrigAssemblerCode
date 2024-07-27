@@ -278,9 +278,9 @@ function Install_NormalGunPlotShape()
             for i = 1, 12, 2 do
             Trigger2(P6, {CommandLeastAt(114, Starportname),Deaths(P10, Exactly, Starport_gen[i] * SDspeed, Deathvar)})
             CSPlot(PA, P6, 33, Starportname, nil, 1, 64, P5, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
-            CSPlotOrder(PA, P6, 3, Starportname, nil, 1, 64, PAA, 0, Attack, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
-            CSPlotOrder(PB, P6, 66, Starportname, nil, 1, 64, PBA, 0, Patrol, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
-            CSPlotOrder(PC, P6, 65, Starportname, nil, 1, 64, PCA, 0, Patrol, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
+            CSPlotOrder(PB, P6, 3, Starportname, nil, 1, 64, PBA, 0, Attack, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
+            CSPlotOrder(PB, P6, 77, Starportname, nil, 1, 64, PBA, 0, Patrol, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
+            CSPlotOrder(PC, P6, 78, Starportname, nil, 1, 64, PCA, 0, Patrol, "HealZone",nil , 0, nil, P6, {CommandLeastAt(114, Starportname),Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar)})
             end
             for e = 2, 12, 4 do
             Trigger2(P6, {CommandLeastAt(114, Starportname),Deaths(P10, Exactly, Starport_gen[e] * SDspeed, Deathvar)})
@@ -303,9 +303,9 @@ function Install_NormalGunPlotShape()
             end
         Trigger2(P6, {Deaths(P10, AtLeast, (StargateGenTime[1] * SDspeed) - 2, Deathvar)})
         for i = 1,8,8 do
-        CSPlotWithProperties(LGU1, P8, 65, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed, Deathvar)},nil,nil,StargateProperties)
+        CSPlotWithProperties(LGU1, P8, 77, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed, Deathvar)},nil,nil,StargateProperties)
         CSPlotWithProperties(LGU2, P8, 93, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i+1] * SDspeed, Deathvar)},nil,nil,StargateProperties)
-        CSPlotWithProperties(LGU3, P8, 66, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i+2] * SDspeed, Deathvar)},nil,nil,StargateProperties)
+        CSPlotWithProperties(LGU3, P8, 78, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i+2] * SDspeed, Deathvar)},nil,nil,StargateProperties)
         CSPlotWithProperties(LGU4, P8, 3, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i+3] * SDspeed, Deathvar)},nil,nil,StargateProperties)
 
         CSPlotWithProperties(SShape1, P8, 89, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[i+4] * SDspeed, Deathvar)},nil,nil,StargateProperties)
@@ -371,9 +371,9 @@ function Install_NormalGunPlotShape()
 
         ---- after effects ---
 
-        CSPlotWithProperties(LGU1, P8, 65, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
+        CSPlotWithProperties(LGU1, P8, 77, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
         CSPlotWithProperties(LGU2, P8, 93, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
-        CSPlotWithProperties(LGU3, P8, 66, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
+        CSPlotWithProperties(LGU3, P8, 78, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
         CSPlotWithProperties(LGU4, P8, 81, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)
 
         CSPlotWithProperties(SShape1, P8, 89, stargatename, nil, 1, 64, P8, {CommandLeastAt(167, stargatename), Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar)},nil,nil,StargateProperties)

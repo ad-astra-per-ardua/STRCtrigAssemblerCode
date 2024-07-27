@@ -56,6 +56,7 @@ end
 CIf(AllPlayers,{Switch("Switch 249", Set)})
 TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)})
 Install_initial_system_setting()
+Install_APMcounter()
 Install_normalGunplot()
 Install_SpecialGunplot()
 Install_ExchangeTrigger()

@@ -8,12 +8,12 @@ function MiddleBossTrigger()
     --     })
     -- end
     -- Use Death Value P11 160 ~
-    Shape11_1 = CSMakePolygon(6,60,0,85,7)
+    Shape11_1 = CSMakePolygon(6,60,0,92,7)
     MiddleGen = CSMakeLine(3,32,0,22,1)
     MiddleGen2 = CSMakeLine(3,32,0,22,1)
     EFT11_1 = CSMakeCircleX(6,64,30,54,6)
 
-    MBoss11_1T = {55,56,8,12,88,96}
+    MBoss11_1T = {21,81,8,12,88,96}
     MBoss11_2P = {58,62,64,104,70,7,21,75}
     MemoryProp = {
         clocked = false,
@@ -21,8 +21,8 @@ function MiddleBossTrigger()
         intransit = false,
         hallucinated = false,
         invincible = false,
-        hitpoint = 20,
-        shield = 20,
+        hitpoint = 80,
+        shield = 80,
         energy = 0,
         resource = 0,
         hanger = 0,
@@ -144,23 +144,23 @@ function MiddleBossTrigger()
         local index = (i - 1) % n + 1
         CSPlotWithProperties(CS_Rotate3D(MiddleGen2,(360-11.25*i),(11.25*i),(360-11.25*i)), P6, MBoss11_1T[index], "middle1", {495,351}, 1, 32, FP, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, (M11tl[26]*SDspeed) + (12 + i*11),160)}, nil, nil, MemoryProp)
     end
-    CSPlotOrder(Shape11_1, P6, 16, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[27] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 25, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[28] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 60, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[29] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 16, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[27] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 25, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[28] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 60, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[29] * SDspeed, 160)})
 
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     TriggerX(Force2,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     CAPlot(Shape11_1, P6, 60, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[33] * SDspeed, 160)})
     CAPlot(Shape11_1, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[34] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 17, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[35] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 21, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[36] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 62, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[37] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 76, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[38] * SDspeed, 160)})
-    CSPlotOrder(Shape11_1, P6, 28, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,85,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 17, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[35] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 21, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[36] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 62, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[37] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 76, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[38] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 28, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
     TriggerX(Force2,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
 
     CAPlot(CS_SortR(PE,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
@@ -192,33 +192,31 @@ function MiddleBossTrigger()
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, Subtract, 1, 163)}, preserved)
+    TriggerX(FP, {Deaths(P11, Exactly, 0, 163)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
 
-    TriggerX(FP, {Deaths(P12, AtLeast, 1, 226)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
-    TriggerX(FP, {CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, MB1TL[4] * SDspeed, 161)}, {SetInvincibility(Disable, 68, P6, "middle2")})
-    TriggerX(FP, {Deaths(P12, AtLeast, 1, 226)}, {SetDeaths(P12, Subtract, 1, 226)}, preserved)
-    TriggerX(FP, {Deaths(P12, Exactly, 0, 226)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
 
     CIfOnce(FP,{CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, 10, 161)})
         f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
         CMov(FP,MBossHP1,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
                 CreateUnit(1,68,"middle2",P6);
-                SetInvincibility(Enable, 68, P6, "middle2");
-                TSetMemory(Vi(MBossHP1[2],2),SetTo,256*6500000); -- Next unit pointer offset's HP set
+                TSetMemory(Vi(MBossHP1[2],2),SetTo,256*7000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,10)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,20)})
     CIfEnd()
     CTrigger(FP,{
         TMemory(MBossHP1,AtMost,256*400000);
         NVar(MBossHP1_2,AtLeast,1);
     },{
-        TSetMemory(MBossHP1,SetTo,256*6500000);
+        TSetMemory(MBossHP1,SetTo,256*7000000);
         SetNVar(MBossHP1_2,Subtract,1);
-        SetDeaths(P12, SetTo, 102, 226);
+        SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
-    
+
     ------- Start of Bullet function ------
     BulletTimer = CreateCcode()
     Temp, Bangle, RandomRange, ScatteredAngle = CreateVars(4,FP)
@@ -296,6 +294,9 @@ function MiddleBossTrigger()
         PlayWAV("sound\\Protoss\\ARCHON\\PArYes00.wav"),
         TalkingPortrait(68, 1000)
     })
+
+    
+
     Tier1G = {8, 51 ,65, 66, 16,30, 52, 81, 102, 88, 89, 95, 104, 3, 16}
     Tier2H = {3, 25, 23, 75, 76, 77, 78, 93, 104, 96, 75, 78, 81, 23, 7}
     Tier3H = {7, 21, 58, 60, 62, 64, 69, 70, 86, 60, 64, 69, 89, 88, 21}
@@ -326,8 +327,8 @@ function MiddleBossTrigger()
     CSPlotOrder(MB1CircleS, P6, 7, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
     CSPlotOrder(MB1CircleS, P6, 28, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {CommandLeastAt(175, "middle2"), Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, MB1TL[27] * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
-    TriggerX(Force1, {CommandLeastAt(175, "middle2"), Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[27] * SDspeed,161)}, {
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, MB1TL[38] * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
+    TriggerX(Force1, {CommandLeastAt(175, "middle2"), Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[38] * SDspeed,161)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -377,16 +378,15 @@ function MiddleBossTrigger()
     
     
     ----- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
-    MBossPtr5, MBossHP5, MBossHP5_2 = CreateVars(3,FP)
+    MBossPtr5, MBossHP5, MBossHP5_2, MBoss5_EPD = CreateVars(4,FP)
     CIfOnce(FP,{CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 10, 163)})
         f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
         CMov(FP,MBossPtr5,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
                 CreateUnit(1,116,"middle4",P6);
-                SetImageScript(925, 131);
-                SetImageColor(925, 16);
                 TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr5[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
+
             })
         CMov(FP,MBossHP5,Nextptr,2) 
         DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,15)})
@@ -452,11 +452,6 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetDeaths(P11, Subtract, 1, 167)}, preserved)
     TriggerX(FP, {Deaths(P11, Exactly, 0, 167)}, {SetInvincibility(Disable, 126, P6, "middle3")}, preserved)
 
-    for i = 0 ,3 do
-        TriggerX(i, {CommandLeastAt(127, "middle3"), Deaths(P11, Exactly, 10, 166)}, {SetAllianceStatus(P8, Ally)}) -- Being Allied P8 for selection
-    end
-
-    
     CreateLocation = {"patbat1","patbat2","patbat3","patbat4"}
     function VerifingPattern1(deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
@@ -694,6 +689,8 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
     VerifingPattern3((MB7TL[16] + 10))
     VerifingPattern4(MB7TL[24])
     VerifingPattern2((MB7TL[24] + 10))
+    VerifingPattern1(MB7TL[32])
+
     CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),

@@ -19,7 +19,7 @@ function Install_CCMU()
         players = {Force1},
         conditions = {
             Memory(0x6283F0, AtLeast, 1600),
-            Deaths(P11, AtLeast, 0, 157)
+            Deaths(P11, Exactly, 0, 157)
         },
         actions = {
             DisplayText(CanText1, 4),

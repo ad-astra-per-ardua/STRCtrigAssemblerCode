@@ -17,10 +17,11 @@ function Install_SpecialGunPlotShape()
 
     
    
-    for i = 4,6 do 
-        TriggerX(i, {Deaths(P11, Exactly, 0, 100)}, {
-            SetAllianceStatus(Force1, Enemy)})
+
+    for i = 4 , 6 do
+        TriggerX(i, {Deaths(P11, Exactly, 0, 100)}, {SetAllianceStatus(Force1, Enemy)},preserved)
     end
+
     TriggerX(Force1, {Deaths(P11, Exactly, 0, 100)},{
         RunAIScript('Turn OFF Shared Vision for Player 5'),
         RunAIScript('Turn OFF Shared Vision for Player 6'),
@@ -149,8 +150,10 @@ function Install_SpecialGunPlotShape()
     })
 
     ----- Turn on pulling trigger and call trigger
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 35 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
-    TriggerX(P8, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 35 * SDspeed, 62)}, {SetAllianceStatus(Force1, Ally)})
+    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
+    for i = 0, 3 do
+        TriggerX(P8, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
+    end
     TriggerX(Force1, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {
         RunAIScript("Turn OFF Shared Vision for Player 5"),
         RunAIScript("Turn OFF Shared Vision for Player 6"),

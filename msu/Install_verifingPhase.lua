@@ -54,5 +54,15 @@ function Install_verifingPhase()
             SetAllianceStatus(Force1, Ally),
             PreserveTrigger();
         },
-        }
+    }
+    Trigger {
+        players = {FP},
+        conditions = {
+            Switch("Switch 3", Set)
+        },
+        actions = {
+            SetAllianceStatus(Force1, Ally),
+            
+        },
+    }
 end

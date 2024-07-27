@@ -321,5 +321,8 @@ function Install_initial_system_setting()
         PreserveTrigger();
     },
     }
-    DoActions2(P8, SetAllianceStatus(Force1, Ally), preserved)
+
+    
+    DoActions(P8, {SetAllianceStatus(Force1, Ally)}, preserved)
+    
 end
