@@ -68,4 +68,25 @@ function Install_opening()
             SetSwitch("Switch 249",Set);
         }
     }
+    TriggerX(FP, {SetSwitch("Switch 249",Set)}, {
+       CreateUnit(1, 15, "selectlocation", P1) 
+    })
+    TriggerX(FP, {SetSwitch("Switch 249",Set)}, {
+        MoveUnit(All, 0, P1, "Anywhere", "selectlocation"),
+        CopyCpAction({CenterView("selectlocation")}, {P1,P2,P3,P4}, FP)
+    }, preserved)
+    selectArr = {"normallocation","hardlocation"}
+    for i = 1, 2 do
+    TriggerX(FP, {Bring(P1, Exactly, 1,15 , selectArr[i])}, {
+        CopyCpAction({CenterView("HealZone")}, {Force1,Force5}, FP),
+        RemoveUnit(15, P1),
+        PlayWAV("sound\\Misc\\PRescue.wav"),
+        PlayWAV("sound\\Misc\\PRescue.wav"),
+        SetCDeaths(FP, SetTo, i, Difficulty),
+    })  
+    
+    end
+
+
+
 end

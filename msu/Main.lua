@@ -53,8 +53,9 @@ end
 for i = 0, 3 do
     TriggerX(Force1, Always(), {SetMemoryB(0x58D088 + (i * 46) + 15, SetTo, 255)})
 end
-CIf(AllPlayers,{Switch("Switch 249", Set)})
-TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)})
+TriggerX(FP, {Switch("Switch 249", Set)}, {SetMemoryBA(0x657A9C, SetTo, 31)})
+CIf(AllPlayers,CDeaths(FP, AtLeast, 1, Difficulty))
+
 Install_initial_system_setting()
 Install_APMcounter()
 Install_normalGunplot()
