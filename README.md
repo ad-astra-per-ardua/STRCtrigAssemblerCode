@@ -41,6 +41,5 @@ v0.14
 
 1. CAPrint > text prettier
 2. MSQC + APMcounter initial setting
-3. 11 middle boss cxplot
-4. 방어타워 extract 후 재배치
+3. 11 middle boss cxplot 
 5.

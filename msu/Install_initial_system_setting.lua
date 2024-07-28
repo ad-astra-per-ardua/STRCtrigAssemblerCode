@@ -49,7 +49,7 @@ function Install_initial_system_setting()
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe Ver. \x07Test \x04플레이 중입니다.").."\n"..StrDesignX("\x04현재\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..ExRate[i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19테스트에 협력해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07Test\x04 v0.14 플레이 중입니다.").."\n"..StrDesignX("\x04현재\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..ExRate[i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19테스트에 협력해주셔서 감사합니다.(_ _)"));
             },
         }
         end
@@ -94,9 +94,9 @@ function Install_initial_system_setting()
         },
     }
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。Test】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Test】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Test】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。0.14】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。0.14】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。0.14】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
@@ -321,8 +321,5 @@ function Install_initial_system_setting()
         PreserveTrigger();
     },
     }
-
-    
-    DoActions(P8, {SetAllianceStatus(Force1, Ally)}, preserved)
-    
+    DoActions2(P8, SetAllianceStatus(Force1, Ally), preserved)
 end
