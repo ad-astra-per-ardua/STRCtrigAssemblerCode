@@ -64,9 +64,10 @@ function Install_plotshape()
     JYD = "Set Unit Order To: Junk Yard Dog"
     Gentime = SDspeed * 251
     ExRate = {18, 20, 22, 24}
+    HDrate = {25,27,29,31}
     ScanInitSetting(Force2,0)
 
-
+    Difficulty = CreateCcode()
 
     --------- Plot shape
 

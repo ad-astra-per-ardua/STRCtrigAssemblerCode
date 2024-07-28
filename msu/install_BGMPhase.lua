@@ -3,6 +3,14 @@ Fixedtime = 1000
 BGMArray = CreateVarArr(4,FP)
 OB_BGMArray = CreateVar(FP)
     for i = 0, 3 do
+
+        TriggerX(FP,{
+                LocalPlayerID(i);
+                Void(i+1,Exactly,1);
+            },{
+                SetNVar(BGMArray[i+1],SetTo,0);
+            },{Preserved})
+
         IBGM_EPD(FP, {i}, BGMArray[i+1], {
         {1, "staredit\\wav\\hat.ogg", 32 * Fixedtime},
         {2, "staredit\\wav\\Lair.ogg", 28 * Fixedtime},

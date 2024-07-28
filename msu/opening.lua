@@ -68,21 +68,28 @@ function Install_opening()
             SetSwitch("Switch 249",Set);
         }
     }
-    TriggerX(FP, {SetSwitch("Switch 249",Set)}, {
-       CreateUnit(1, 15, "selectlocation", P1) 
+    
+    selectArr = {"normallocation","hardlocation"}
+
+    TriggerX(Force1, {Bring(P1, Exactly, 0, 15, "selectlocation")}, {MoveUnit(1, 15, P1, "Anywhere", "selectlocation")},preserved)
+    TriggerX(FP, {Switch("Switch 249",Set)}, {
+        CreateUnit(1, 15, "selectlocation", P1),
+        CreateUnit(1, 195, "hardlocation",P7),
+        CreateUnit(1, 196, "normallocation", P7) 
     })
-    TriggerX(FP, {SetSwitch("Switch 249",Set)}, {
-        MoveUnit(All, 0, P1, "Anywhere", "selectlocation"),
+    TriggerX(FP, {Switch("Switch 249",Set)}, {
         CopyCpAction({CenterView("selectlocation")}, {P1,P2,P3,P4}, FP)
     }, preserved)
-    selectArr = {"normallocation","hardlocation"}
+    
     for i = 1, 2 do
     TriggerX(FP, {Bring(P1, Exactly, 1,15 , selectArr[i])}, {
-        CopyCpAction({CenterView("HealZone")}, {Force1,Force5}, FP),
-        RemoveUnit(15, P1),
-        PlayWAV("sound\\Misc\\PRescue.wav"),
-        PlayWAV("sound\\Misc\\PRescue.wav"),
-        SetCDeaths(FP, SetTo, i, Difficulty),
+        CopyCpAction({CenterView("HealZone"),
+        PlayWAVX("sound\\glue\\bnetclick.wav"),
+        PlayWAVX("sound\\glue\\bnetclick.wav"),
+    }, {Force1,Force5}, FP),
+        MoveUnit(1, 15, P1, "selectlocation", "admin1"),
+        SetSwitch("Switch 249", Clear),
+        SetCDeaths(FP, SetTo, i, Difficulty);
     })  
     
     end

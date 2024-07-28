@@ -44,7 +44,7 @@ function Install_verifingPhase()
     
     TriggerX(FP, Always(), ModifyUnitShields(All, "Any unit", AllPlayers, "Anywhere", 100));
     TriggerX(FP, Always(), ModifyUnitHitPoints(All, "Any unit", AllPlayers, "Anywhere", 100));
-    TriggerX(FP,Always(),{CreateUnit(1, 15, "admin1",P1)})
+    
     Trigger {
         players = {Force1},
         conditions = {

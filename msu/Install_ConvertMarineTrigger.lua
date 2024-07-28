@@ -35,8 +35,6 @@ function Install_ConvertMarineTrigger()
                     PreserveTrigger();
                 },
             }
-            
-            
         end
     end
     for i = 0 , 3 do

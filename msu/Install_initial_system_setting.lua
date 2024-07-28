@@ -37,11 +37,10 @@ function Install_initial_system_setting()
         }, preserved)
     end
 
-
-
-
-
-
+    Temparray = {ExRate , HDrate}
+    DiffTextArray = {"\x07노멀 \x04모드","\x08하드 \x04모드"}
+for k = 1, 2 do
+    CIf(Force1, {CDeaths(FP, Exactly, k, Difficulty)})
     for i=1, 4 do
         Trigger { -- 미션 오브젝트
             players = {Force1},
@@ -49,10 +48,12 @@ function Install_initial_system_setting()
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07Test\x04 v0.14 플레이 중입니다.").."\n"..StrDesignX("\x04현재\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..ExRate[i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19테스트에 협력해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07Test\x04 v0.14 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19테스트에 협력해주셔서 감사합니다.(_ _)"));
             },
         }
         end
+        CIfEnd()
+    end
     Trigger { -- 싱글 플레이 지원금
 	players = {Force1},
 	conditions = {
@@ -66,33 +67,35 @@ function Install_initial_system_setting()
         DisplayText(StrDesignX("\x07+ 30,000 Ore, \x04영마 \x072마리 \x04추가 지급"), 4);
 		},
 	}
+    for i = 0, 3 do
     Trigger {
-        players = {Force1},
+        players = {i},
         conditions = {
-            Deaths(CurrentPlayer,Exactly,0,158);
+            Void(i+1,Exactly,0);
             Bring(CurrentPlayer,AtLeast,1,12,"mainLocation")
         },
         actions = {
             RemoveUnitAt(1,12,"mainLocation",CurrentPlayer);
             DisplayText(StrDesignX("BGM을 듣지 않습니다 (ㅠ_ㅠ)"));
-            SetDeaths(CurrentPlayer,SetTo,1,158);
+            SetVoid(i+1,SetTo,1);
             PreserveTrigger()
         },
     }
     
     Trigger { -- off
-        players = {Force1},
+        players = {i},
         conditions = {
-            Deaths(CurrentPlayer,Exactly,1,158);
+            Void(i+1,Exactly,1);
             Bring(CurrentPlayer,AtLeast,1,12,"mainLocation")
         },
         actions = {
             RemoveUnitAt(1,12,"mainLocation",CurrentPlayer);
             DisplayText(StrDesignX("BGM을 다시 듣습니다 (^_^)"));
-            SetDeaths(CurrentPlayer,SetTo,0,158);
+            SetVoid(i+1,SetTo,0);
             PreserveTrigger()
         },
     }
+end 
     --- LeaderBoardControl
     TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。0.14】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。0.14】")},preserved);
