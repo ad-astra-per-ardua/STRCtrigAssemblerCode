@@ -5,7 +5,7 @@ SnowFlake =
 
 
 -- Copy from here
------ Laptop
+-- --- Laptop
 -- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping"
 -- __MapDirSetting(__encode_cp949(Curdir)) -- 맵파일 경로(\를 \\로 바꿔야함)
 -- __SubDirSetting(__encode_cp949(Curdir.."\\msu")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
@@ -21,8 +21,8 @@ SnowFlake =
 FP = P8
 SetForces({P1,P2,P3,P4},{P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
--- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
-StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 Include_DataTransfer()
 Include_CBPaint()
@@ -54,7 +54,7 @@ for i = 0, 3 do
     TriggerX(Force1, Always(), {SetMemoryB(0x58D088 + (i * 46) + 15, SetTo, 255)})
 end
 TriggerX(FP, {Switch("Switch 249", Set)}, {SetMemoryBA(0x657A9C, SetTo, 31)})
-CIf(AllPlayers,CDeaths(FP, AtLeast, 1, Difficulty))
+CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
 Install_APMcounter()

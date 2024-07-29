@@ -48,7 +48,7 @@ for k = 1, 2 do
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07Test\x04 v0.14 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19테스트에 협력해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.0 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
             },
         }
         end

@@ -365,11 +365,11 @@ function MiddleBossTrigger()
 
     CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlotOrder(CS_Convert(Circulation1,12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
+    CAPlotOrder(CS_Convert(Circulation1,15), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
     
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
-    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
+    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),15), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
     for i = 1, 15 do
         CSPlotOrder(M5GenPlot, P6, M5GenG[i], "middle4", nil, 1, 32, M5GenPlotA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})

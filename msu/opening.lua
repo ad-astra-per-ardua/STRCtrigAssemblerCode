@@ -64,7 +64,7 @@ function Install_opening()
         
             Wait(250);
             CenterView("Anywhere");
-            DisplayText("\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x04- 마린키우기 \x11U\x17niverse \x04-\n\n\x13\x07Created \x04By \x1BAwakenSense \n\x13\x1FSTRCtrigAssembler \x08v5.5 \x04& \x08CB\x04 Paint \x08v2.5\x04 & \x08EP\x0FScript \x04In Used\n\n\n\x13\x04★ \x11Thanks \x04to \x1FG\x04ALAXY_BURST, \x0FM\x04ystia Lorelei, \x17C\x04heeze\x17N\x04acho, \x08[\x04Men\x08]\x04, \x10s\x04eeiogon, \x1BNinfia \x04★\n\x08\x13 And \x04All \x19Precious\x17 Testers.\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n",4);
+            DisplayText("\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x04- 마린키우기 \x11U\x17niverse \x04-\n\n\x13\x07Created \x04By \x1BAwakenSense \n\x13\x1FSTRCtrigAssembler \x08v5.5 \x04& \x08CB\x04 Paint \x08v2.5\x04 & \x08EP\x0FScript \x04In Used\n\n\n\x13\x04★ \x11Thanks \x04to \x1FG\x04ALAXY_BURST, \x0FM\x04ystia Lorelei, \x17C\x04heeze\x17N\x04acho, \x08[\x04Men\x08]\x04, \x10s\x04eeiogon, \x1BNinfia \x04★\n\x08\x13 And \x04All \x19Precious\x17 Testers ".."\n".."\x13And YOU.\n\n\x13\x04――――――――――――――――――――――――――――――――――――――――――――――――――\n",4);
             SetSwitch("Switch 249",Set);
         }
     }
@@ -80,17 +80,20 @@ function Install_opening()
     TriggerX(FP, {Switch("Switch 249",Set)}, {
         CopyCpAction({CenterView("selectlocation")}, {P1,P2,P3,P4}, FP)
     }, preserved)
-    
+
+    TriggerX(FP, {Switch("Switch 248", Set)}, {SetSwitch("Switch 249", Clear),MoveUnit(1, 15, P1, "selectlocation", "admin1")})
+
     for i = 1, 2 do
     TriggerX(FP, {Bring(P1, Exactly, 1,15 , selectArr[i])}, {
         CopyCpAction({CenterView("HealZone"),
         PlayWAVX("sound\\glue\\bnetclick.wav"),
         PlayWAVX("sound\\glue\\bnetclick.wav"),
     }, {Force1,Force5}, FP),
-        MoveUnit(1, 15, P1, "selectlocation", "admin1"),
         SetSwitch("Switch 249", Clear),
         SetCDeaths(FP, SetTo, i, Difficulty);
+        SetSwitch("Switch 248", Set)
     })  
+
     
     end
 
