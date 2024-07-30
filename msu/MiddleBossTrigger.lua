@@ -114,7 +114,12 @@ function MiddleBossTrigger()
     for i = 1, 4 do
         TriggerX(FP, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)},CreateUnit(1, 27, RealB2[i], P5))
     end
-    TriggerX(Force2,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed - 10, 160)}, {RemoveUnitAt(All, 27, "middle1", P5)})
+    TriggerX(FP,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed - 10, 160)}, {RemoveUnit(27, Force2),SetImageColor(137, 16)})
+    for i = 1, 4 do
+        TriggerX(FP,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, {CreateUnit(1, 57, RealB[i], P5),CreateUnit(1, 57, RealB2[i], P5)})
+    end
+    TriggerX(FP,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed + 1, 160)}, {SetImageColor(137, 0)})
+    
     CAPlotWithProperties(CS_Reverse(CS_SortR(HiveEtf2,1)), P5, 11, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, nil, nil, StargateProperties)
     -- CSPlotOrderWithProperties(CSMakeSpiral(6, 16, 1/2, 0, 0, 130, 71), P5, 11, "nuke3", nil, 1, 32, HiveEtf2, nil, Attack, "middle1", nil, 32, nil, P7, {CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, nil, nil,StargateProperties)
     TriggerX(Force2,{CommandLeastAt(174, "middle1"),Deaths(P11, AtLeast, M11tl[12] * SDspeed, 160)})

@@ -73,4 +73,8 @@ function Install_function()
             return TCDeaths(FP,Type,Value,Code)
         end
     end
+    function PlotSizeCalc(Points,SizeofPolygon)
+        local X = 1+(Points*(SizeofPolygon*(SizeofPolygon+1)/2))
+        return X
+    end
 end

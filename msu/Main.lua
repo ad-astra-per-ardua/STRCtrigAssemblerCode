@@ -47,6 +47,7 @@ Install_function()
 Install_verifingPhase()
 Install_plotshape()
 Install_opening()
+-- check_shape()
 for i = 4, 7 do
     TriggerX(Force2, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})
 end
@@ -69,8 +70,8 @@ Install_ConvertMarineTrigger()
 Install_CCMU()
 Install_BGMPhase()
 Install_HerounitTrigger()
-Install_NormalGunPlotShape()
-Install_SpecialGunPlotShape()
+-- Install_NormalGunPlotShape()
+-- Install_SpecialGunPlotShape()
 MiddleBossTrigger()
 FinalBossTrigger()
 
