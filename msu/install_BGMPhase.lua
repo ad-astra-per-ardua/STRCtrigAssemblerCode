@@ -25,6 +25,8 @@ OB_BGMArray = CreateVar(FP)
         {11, "staredit\\wav\\M5BOSS.ogg", 171 * Fixedtime},
         {12, "staredit\\wav\\M7BOSS.ogg", 95 * Fixedtime},
         {13, "staredit\\wav\\overme.ogg", 64 * Fixedtime},
+        {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
+        {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
         })
     end
     IBGM_EPD(FP, {Force5}, OB_BGMArray, {
@@ -41,6 +43,8 @@ OB_BGMArray = CreateVar(FP)
         {11, "staredit\\wav\\M5BOSS.ogg", 171 * Fixedtime},
         {12, "staredit\\wav\\M7BOSS.ogg", 95 * Fixedtime},
         {13, "staredit\\wav\\overme.ogg", 64 * Fixedtime},
+        {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
+        {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
         })
     
     ----------- Hat BGM ----------
