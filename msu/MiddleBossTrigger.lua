@@ -181,13 +181,6 @@ function MiddleBossTrigger()
     ------ End of 11 Middle boss trigger -----
     
 
-
-
-
-
-
-
-
     ------ Start of 1 Middle boss trigger ----- + plot death value = 161 | skill death value = 162
     MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,

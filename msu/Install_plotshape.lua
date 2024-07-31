@@ -68,6 +68,11 @@ function Install_plotshape()
     ScanInitSetting(Force2,0)
 
     Difficulty = CreateCcode()
+    Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4 = CreateCcodes(4)
+    LairDeathArray = {Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4}
+
+    StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4 = CreateCcodes(4)
+    StarportDeathArray = {StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4}
 
     --------- Plot shape
 
@@ -162,6 +167,17 @@ function Install_plotshape()
     -------- Plot Timeline
     LairTimeline = {3.0, 5.7, 8.5, 14.1, 14.6, 15.3, 15.7, 16, 17, 19.7, 21.6, 22, 22.3, 22.5 }
 
+    LairLv2timeline = {1.6, -- Create Effect shape Bass part
+                2, -- Create unit shape Tremble part, Thus, 1 cycle = + 0.8
+                3.2, 4.8, 6.4, 8, 9.6, 11.2, 12.8, -- 1 phase
+                15.2, 16.8,18.4, 20, 21.6, 23.2, -- 2 phase
+                24.4, 25.2, 25.6 -- End phase
+            }
+
+        LairLv2GenArray = { -- length == 33
+        55, 53, 56, 46, 16, 93, 8, 30, 56, 65, 8
+        }
+
     HiveGenTime = { 1.79, 2.7, 3.60, 4.57, 5.5, 6.5, 7.5, 8.4, 9.3, 10.2, 11.1, 12, 12.9, 13.8, 14.7, 15.8}
     HiveEftTime = {2.22, 3.18, 4.15, 5.07, 6, 7, 7.9 ,8.8 ,9.7,10.6, 11.5, 12.4, 13.3, 14.2, 15.1}
     HiveGenTime2 = {16.8, 18.7, 20.5, 22.4, 24.3, 26.1, 28, 29.9}
@@ -183,7 +199,7 @@ function Install_plotshape()
     -- Lair Eft : 94 | Hive Eft : 84 | SP EFT : 42 | SG EFT : 202 | FT EFT : 11
 
     -- Cerebrate
-    --Circular = CSMakeLineX(1,60,0+15*i,7,1)
+    -- Circular = CSMakeLineX(1,60,0+15*i,7,1)
 
     --- Infested Center
 

@@ -23,9 +23,25 @@ function check_shape()
 	STGateHD1 = CS_RatioXY(EllipseMirror2, 0.5, 0.5)
 	STGateSC1 = CS_RatioXY(EllipseMirror1, 0.5, 0.5)
     
-    temp1 = CS_Merge(STGateHD1, STGateSC1, 1, 1)
+    Lairbaseshape1 = CS_Merge(STGateHD1, STGateSC1, 1, 1)
+	LairbaseshapeArrival = CSMakeLine(1, 1, 0, 64, 0)
 
-    Final_output = CSMakeStar(4, 135, 90, 45, PlotSizeCalc(4*2, 6), PlotSizeCalc(4*2, 5))
+	-- temp1 = CSMakePolygon(6,80,0,CS_Level("Polygon",6,6),0)
 
-    CS_BMPGraph(Final_output, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	-- function HyperCycloidB(T) return {4*math.cos(T) + 2*math.cos(4*T), 4*math.sin(T) - 2*math.sin(4*T)} end
+	-- HCB0 = CSMakeGraphT({32,32},"HyperCycloidB",0,0,12,12,120)
+	-- temp1 = CS_RatioXY(CS_RemoveStack(HCB0,12,0),1.5,1.5)
+
+	
+	-- function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
+	-- Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
+	-- Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
+
+	
+	-- function HyperCycloidD(T) return {6*math.cos(T) - 2*math.cos(6*T), 6*math.sin(T) - 2*math.sin(6*T)} end 
+	-- HCD0 = CSMakeGraphT({24,24},"HyperCycloidD",0,0,1,1,90)
+	-- HCD = CS_RemoveStack(HCD0,20,0)
+	
+	
+    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

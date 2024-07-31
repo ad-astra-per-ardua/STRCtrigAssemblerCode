@@ -138,6 +138,31 @@ function Install_NormalGunPlotShape()
             CSPlotOrderWithProperties(Eftstar, P6, 43, Lairname, nil, 1, 20, Eftstar, 0, Attack , "HealZone", nil, 0, nil, P6, {CommandLeastAt(132, Lairname), Deaths(P10, AtLeast, LairTimeline[14] * SDspeed,Deathvar )},nil,0,TempProperties)
             
             end
+
+
+            function LairGunplotLv2(Lairname, Deathvar)
+                
+                local arrayLength = #LairLv2GenArray
+
+                TriggerX(P7, {CommandLeastAt(132, Lairname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
+                TriggerX(P7, {CommandLeastAt(132, Lairname), CDeaths(FP, AtLeast, 2, Deathvar)}, {SetSpriteImage(227, 503),SetImageScript(503, 131),SetImageColor(503, 16)})
+
+                CSPlot2(CS_SortR(Lairbaseshape1,0), P6, 84, Lairname, nil, 1, 32, P7, {CDeaths(FP, AtLeast, 10, Deathvar)})
+                CSPlot2(CS_SortR(Lairbaseshape1,0), P6, 92, Lairname, nil, 1, 32, P7, {CDeaths(FP, AtLeast, 10, Deathvar)})
+                for i = 1, 15 do
+                    local genIndex = ((i - 1) % arrayLength) + 1
+                    CSPlot2(Lairbaseshape1, P6, 84, Lairname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, LairLv2timeline[i] * SDspeed, Deathvar)})
+                    CSPlotOrder2(Lairbaseshape1, P6,LairLv2GenArray[genIndex] , Lairname, nil, 1, 32, LairbaseshapeArrival, nil, Attack, "HealZone", nil, 32, nil, FP,{CommandLeastAt(132, Lairname), CDeaths(FP, AtLeast, (LairLv2timeline[i] + 0.4) * SDspeed, Deathvar)})
+                end
+
+                for i = 16, 18 do
+                    local genIndex = ((i - 1) % arrayLength) + 1
+                    CSPlot2(Lairbaseshape1, P6, 84, Lairname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, LairLv2timeline[i] * SDspeed, Deathvar)})
+                    CSPlotOrder2(Lairbaseshape1, P6, LairLv2GenArray[genIndex], Lairname, nil, 1, 32, LairbaseshapeArrival, nil, Attack, "HealZone", nil, 32, nil, FP,{CDeaths(FP, AtLeast, (LairLv2timeline[i]) * SDspeed, Deathvar)})
+                end
+                TriggerX(FP, {CDeaths(FP, AtLeast, 27 * SDspeed, Deathvar)}, {KillUnitAt(All, 92, Lairname, P6),SetSpriteImage(227, 983), SetImageColor(503, 0),SetImageScript(503, 292)})
+
+            end
             ------ End of lair shape plot function 
 
 
@@ -429,8 +454,12 @@ function Install_NormalGunPlotShape()
         for i = 7 , 10 do -- 7 ~ 10
             HatcheryGunplot2("hat"..i,i);
         end
-        for i = 1 , 12 do -- 11 ~ 22
+        for i = 1 , 8 do -- 11 ~ 22
             LairGunplot("lair"..i, i + 10);
+        end
+
+        for i = 9, 12 do
+            LairGunplotLv2("lair"..i,LairDeathArray[i-8] );
         end
         for i = 1 , 4 do -- 23 ~ 26
             HiveGunPlot1lv("hive"..i, i + 22);
@@ -577,8 +606,33 @@ function Install_NormalGunPlotShape()
                 CSPlotOrderWithProperties(Eftstar, P6, 43, Lairname, nil, 1, 20, Eftstar, 0, Attack , "HealZone", nil, 0, nil, P6, {CommandLeastAt(132, Lairname), Deaths(P10, AtLeast, LairTimeline[14] * SDspeed,Deathvar )},nil,0,TempProperties)
                 
                 end
-                ------ End of lair shape plot function 
-    
+                ------ End of lv1 lair shape plot function 
+
+            ------------- Start of Lair lv2 shape plot -------
+
+            function LairGunplotLv2(Lairname, Deathvar)    
+                local arrayLength = #LairLv2GenArray
+
+                TriggerX(P7, {CommandLeastAt(132, Lairname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
+                TriggerX(P7, {CommandLeastAt(132, Lairname), CDeaths(FP, AtLeast, 2, Deathvar)}, {SetSpriteImage(227, 503),SetImageScript(503, 131),SetImageColor(503, 16)})
+
+                CSPlot2(CS_SortR(Lairbaseshape1,0), P6, 84, Lairname, nil, 1, 32, P7, {CDeaths(FP, AtLeast, 10, Deathvar)})
+                CSPlot2(CS_SortR(Lairbaseshape1,0), P6, 92, Lairname, nil, 1, 32, P7, {CDeaths(FP, AtLeast, 10, Deathvar)})
+                for i = 1, 15 do
+                    local genIndex = ((i - 1) % arrayLength) + 1
+                    CSPlot2(Lairbaseshape1, P6, 84, Lairname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, LairLv2timeline[i] * SDspeed, Deathvar)})
+                    CSPlotOrder2(Lairbaseshape1, P6,LairLv2GenArray[genIndex] , Lairname, nil, 1, 32, LairbaseshapeArrival, nil, Attack, "HealZone", nil, 32, nil, FP,{CommandLeastAt(132, Lairname), CDeaths(FP, AtLeast, (LairLv2timeline[i] + 0.4) * SDspeed, Deathvar)})
+                end
+
+                for i = 16, 18 do
+                    local genIndex = ((i - 1) % arrayLength) + 1
+                    CSPlot2(Lairbaseshape1, P6, 84, Lairname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, LairLv2timeline[i] * SDspeed, Deathvar)})
+                    CSPlotOrder2(Lairbaseshape1, P6, LairLv2GenArray[genIndex], Lairname, nil, 1, 32, LairbaseshapeArrival, nil, Attack, "HealZone", nil, 32, nil, FP,{CDeaths(FP, AtLeast, (LairLv2timeline[i]) * SDspeed, Deathvar)})
+                end
+                TriggerX(FP, {CDeaths(FP, AtLeast, 27 * SDspeed, Deathvar)}, {KillUnitAt(All, 92, Lairname, P6),SetSpriteImage(227, 983), SetImageColor(503, 0),SetImageScript(503, 292)})
+            end
+
+            ------- End of Lair lv2 shape plot -------
     
             ----- Hive Shape Plot
             function HiveGunPlot1lv(Hivename, DeathVar)
@@ -740,6 +794,12 @@ function Install_NormalGunPlotShape()
                 Trigger2(P6,{CommandLeastAt(114, Starportname), Deaths(P10, Exactly, Starport_gen[12]* SDspeed + 1, Deathvar )},{SetScanImage(546)} )
             end
             ---------- end of starport shape functions
+
+            ---------- Start of starport Lv2 shape plot -------------
+            
+
+
+
     
             function StargateGunplot(stargatename , Deathvar)
                 Trigger2(P6, {CommandLeastAt(167, stargatename)}, {SetDeaths(P10, Add, 1, Deathvar )},preserved)
@@ -868,9 +928,14 @@ function Install_NormalGunPlotShape()
             for i = 7 , 10 do -- 7 ~ 10
                 HatcheryGunplot2("hat"..i,i);
             end
-            for i = 1 , 12 do -- 11 ~ 22
+            for i = 1 , 8 do -- 11 ~ 22
                 LairGunplot("lair"..i, i + 10);
             end
+
+            for i = 9, 12 do
+                LairGunplotLv2("lair"..i,LairDeathArray[i-8] );
+            end
+
             for i = 1 , 4 do -- 23 ~ 26
                 HiveGunPlot1lv("hive"..i, i + 22);
             end

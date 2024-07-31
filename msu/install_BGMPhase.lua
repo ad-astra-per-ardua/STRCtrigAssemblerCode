@@ -224,4 +224,16 @@ OB_BGMArray = CreateVar(FP)
             },preserved)
         CIfEnd(SetDeaths(P7, SetTo, 0, 148))
 
+        CIf(FP, {Deaths(P7, AtLeast, 1, 132)})
+            TriggerX(FP,{},{
+                CopyCpAction({DisplayTextX(StrDesignX("Lair Destroyed! + 40,000 Points"),4)},{Force1,Force5}, FP);
+                SetScore(Force1, Add, 40000,Kills);
+                SetNVar(BGMArray[1], SetTo, 15);
+                SetNVar(BGMArray[2], SetTo, 15);
+                SetNVar(BGMArray[3], SetTo, 15);
+                SetNVar(BGMArray[4], SetTo, 15);
+                SetNVar(OB_BGMArray, SetTo, 15);
+            },preserved)
+        CIfEnd(SetDeaths(P7, SetTo, 0, 132))
+
 end
