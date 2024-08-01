@@ -27,6 +27,7 @@ OB_BGMArray = CreateVar(FP)
         {13, "staredit\\wav\\overme.ogg", 64 * Fixedtime},
         {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
         {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
+        {16, "staredit\\wav\\betterworld.ogg", 37 * Fixedtime}
         })
     end
     IBGM_EPD(FP, {Force5}, OB_BGMArray, {
@@ -45,6 +46,7 @@ OB_BGMArray = CreateVar(FP)
         {13, "staredit\\wav\\overme.ogg", 64 * Fixedtime},
         {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
         {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
+        {16, "staredit\\wav\\betterworld.ogg", 37 * Fixedtime}
         })
     
     ----------- Hat BGM ----------
@@ -235,5 +237,17 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(OB_BGMArray, SetTo, 15);
             },preserved)
         CIfEnd(SetDeaths(P7, SetTo, 0, 132))
+
+        CIf(FP, {Deaths(P7, AtLeast, 1, 114)})
+            TriggerX(FP,{},{
+                CopyCpAction({DisplayTextX(StrDesignX("Starport Destroyed! + 75,000 Points"),4)},{Force1,Force5}, FP);
+                SetScore(Force1, Add, 75000,Kills);
+                SetNVar(BGMArray[1], SetTo, 16);
+                SetNVar(BGMArray[2], SetTo, 16);
+                SetNVar(BGMArray[3], SetTo, 16);
+                SetNVar(BGMArray[4], SetTo, 16);
+                SetNVar(OB_BGMArray, SetTo, 16);
+            },preserved)
+        CIfEnd(SetDeaths(P7, SetTo, 0, 114))
 
 end

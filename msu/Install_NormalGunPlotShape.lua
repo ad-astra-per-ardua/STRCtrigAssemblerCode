@@ -796,11 +796,28 @@ function Install_NormalGunPlotShape()
             ---------- end of starport shape functions
 
             ---------- Start of starport Lv2 shape plot -------------
+            function Starport_GunPlotlv2(Starportname, Deathvar)
+                TriggerX(P7, {CommandLeastAt(114, Starportname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
+
+                
+
+                for i = 1, 25 do
+                    if i % 4 == 0 then -- 6
+                        local arrayLength = #Starport_lv2_genID2
+                        local genIndex = ((i - 1) % arrayLength) + 1
+                        CSPlot2(CS_Rotate(Eftstar, 0 + (10 * i)), P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlotOrder2(CS_Rotate(Eftstar, 0 + (10 * i)), P6, Starport_lv2_genID2[genIndex], Starportname, nil, 1, 32, CS_Rotate(Eftstar, 0 + (10 * i)), nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                    end
+                    if i % 4 ~= 0 then
+                        local arrayLength = #Starport_lv2_genID
+                        local genIndex = ((i - 1) % arrayLength) + 1
+                        CSPlot2(CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlotOrder2(CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), P6, Starport_lv2_genID[genIndex], Starportname, nil, 1, 32, CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                    end
+                end
+            end
             
 
-
-
-    
             function StargateGunplot(stargatename , Deathvar)
                 Trigger2(P6, {CommandLeastAt(167, stargatename)}, {SetDeaths(P10, Add, 1, Deathvar )},preserved)
                 for i = 0, 3 do
@@ -942,8 +959,11 @@ function Install_NormalGunPlotShape()
             for i = 5, 10 do -- 27 ~ 32
                 HiveGunPlot2lv("hive"..i, i + 22);
             end
-            for i = 1 , 10 do -- 33 ~ 42
-                Starport_GunPlot("starp"..i, i + 32);
+            for i = 1 , 5 do -- 33 ~ 42
+                Starport_GunPlot(StarportSpotArr2[i], i + 32);
+            end
+            for i = 1 , 5 do -- 33 ~ 42
+                Starport_GunPlotlv2(StarportSpotArr[i], StarportDeathArray[i]);
             end
             for i = 1 , 10 do -- 43 ~ 52
                 StargateGunplot("starg"..i,  i + 42);

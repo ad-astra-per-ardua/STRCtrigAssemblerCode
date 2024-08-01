@@ -38,10 +38,12 @@ function check_shape()
 	-- Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 
 	
-	-- function HyperCycloidD(T) return {6*math.cos(T) - 2*math.cos(6*T), 6*math.sin(T) - 2*math.sin(6*T)} end 
-	-- HCD0 = CSMakeGraphT({24,24},"HyperCycloidD",0,0,1,1,90)
-	-- HCD = CS_RemoveStack(HCD0,20,0)
+	
+	-- Eftstar = CSMakeStarX(5,108,64,36,90,0)
+	-- temp2 = CS_RemoveStack(HCD0,20,0)
+	-- temp1 = CS_Overlap(Eftstar, temp2)
+
 	
 	
-    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

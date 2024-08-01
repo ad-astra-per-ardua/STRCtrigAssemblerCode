@@ -71,9 +71,10 @@ function Install_plotshape()
     Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4 = CreateCcodes(4)
     LairDeathArray = {Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4}
 
-    StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4 = CreateCcodes(4)
-    StarportDeathArray = {StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4}
-
+    StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4,StarportLv2_5 = CreateCcodes(5)
+    StarportDeathArray = {StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4,StarportLv2_5}
+    StarportSpotArr = {"starp7", "starp1", "starp4", "starp10", "starp3"}
+    StarportSpotArr2 = {"starp8", "starp6", "starp2", "starp5", "starp9"}
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}
@@ -111,9 +112,12 @@ function Install_plotshape()
     LSU5 = CSMakeLineX(6,64,40,30,0)
 
     LGU1 = CSMakePolygonX(6,64,30,6,0)
-    LGU2 = CSMakePolygonX(6,64,30,24,6)
-    LGU3 = CSMakePolygonX(6,64,30,54,24)
-    LGU4 = CSMakePolygonX(6,64,30,96,54)
+    LGU2 = CSMakePolygonX(6,64,30,24,6) -- 3
+    LGU3 = CSMakePolygonX(6,64,30,54,24) -- 5
+    LGU4 = CSMakePolygonX(6,64,30,96,54) -- 7
+	LGU5 = CSMakePolygonX(6,64,30,150,96) -- 9
+    CenterCallShape = CS_Overlap(LGU4, LGU5)
+    CenterCallShapeA = CSMakePolygonX(6,0,30,96,0)
 
     LGU1a = CSMakePolygonX(6,1,30,6,0)
     LGU2a = CSMakePolygonX(6,1,30,24,6)
@@ -165,6 +169,22 @@ function Install_plotshape()
     StargateEft = CS_RemoveStack(CS_OverlapX(Shape3, Cross, Cross1,SShape2), 16)
 
     -------- Plot Timeline
+
+    CenterCallGen1 = {
+        51, 16, 56, 46, 62
+    }
+    CenterCallGen2 = {
+        8, 25, 12, 66, 50
+    }
+    CenterCallGen3 = {
+        7, 76, 60, 64, 70
+    }
+    CenterCallGen4 = {
+        86, 104, 58, 21, 74
+    }
+    CenterCallGen5 = {
+        28, 102
+    }
     LairTimeline = {3.0, 5.7, 8.5, 14.1, 14.6, 15.3, 15.7, 16, 17, 19.7, 21.6, 22, 22.3, 22.5 }
 
     LairLv2timeline = {1.6, -- Create Effect shape Bass part
@@ -183,6 +203,21 @@ function Install_plotshape()
     HiveGenTime2 = {16.8, 18.7, 20.5, 22.4, 24.3, 26.1, 28, 29.9}
 
     Starport_gen = {4.1, 6, 8, 12, 14, 16, 19.8, 21.8, 23.8, 27.7, 29.7, 31.7}
+
+    Starport_lv2_gen = {
+        2.6, -- Start bass part effect part, + 0.5 Second bass part generate part
+        4.5, 5.4, 6.4 , 8.2, 9.2, 10.1,  
+        12,13, 13.8,  15.6, 16.6, 17.6,  19.5, 20.4, 
+        21.4,  23.2, 24.2, 25.1,  27, 28, 28.9, 
+        30.8, 31.7, 32.1
+    }
+
+    Starport_lv2_genID = {
+        62, 96, 86, 52, 62, 70, 58, 86, 88, 89
+    }
+    Starport_lv2_genID2 = {
+        69, 64, 76, 66, 62, 104
+    }
 
     StargateGenTime = {
         1.9, 2.4, 2.9, 3.4, 3.8, 4.3, 4.8, 5.2, 
@@ -218,8 +253,10 @@ function Install_plotshape()
     Shell_Arc3 = CS_RatioXY(CS_Rotate(ArcTemp, 180),7,7)
     Shell_Arc4 = CS_RatioXY(CS_Rotate(ArcTemp, 270),7,7)
 
-    SH_ICenterB = CS_RatioXY(CS_RemoveStack(CS_OverlapX(SH_Arc1,SH_Arc2,SH_Arc3,SH_Arc4),5),7,7)
-    
+    function HyperCycloidD(T) return {6*math.cos(T) - 2*math.cos(6*T), 6*math.sin(T) - 2*math.sin(6*T)} end 
+
+	Starportlv2Shape1 = CSMakeGraphT({24,24},"HyperCycloidD",0,0,1,1,90)
+
 
 
 
