@@ -1,34 +1,25 @@
 function Install_SpecialGunPlotShape()
+    
 
     CIfX(Force2, {CDeaths(FP, AtLeast, 1, Difficulty)})
+
+    Trigger2X(FP, {Deaths(P11, Exactly, 1, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Ally)}, Force2, FP),CopyCpAction({
+        RunAIScript('Turn ON Shared Vision for Player 5'),
+        RunAIScript('Turn ON Shared Vision for Player 6'),
+        RunAIScript('Turn OFF Shared Vision for Player 7'),
+        RunAIScript('Turn ON Shared Vision for Player 8')}, Force1, FP)}, preserved)
+        
     
+    Trigger2X(FP, {Deaths(P11, Exactly, 0, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP),CopyCpAction({
+        RunAIScript('Turn OFF Shared Vision for Player 5'),
+        RunAIScript('Turn OFF Shared Vision for Player 6'),
+        RunAIScript('Turn OFF Shared Vision for Player 7'),
+        RunAIScript('Turn ON Shared Vision for Player 8')}, Force1, FP)}, preserved)
 
     ------ End of Disable invincibility condition trigger -------
 
 
---     TriggerX(Force2, {Deaths(P11, Exactly, 1, 100)}, {
---         SetAllianceStatus(Force1, Ally)
--- },preserved)
---     TriggerX(Force1, {Deaths(P11, Exactly, 1, 100)},{
---             RunAIScript('Turn ON Shared Vision for Player 5'),
---             RunAIScript('Turn ON Shared Vision for Player 6'),
---             RunAIScript('Turn OFF Shared Vision for Player 7'),
---             RunAIScript('Turn ON Shared Vision for Player 8')
---     })
 
-    
-   
-
---     for i = 4 , 6 do
---         TriggerX(i, {Deaths(P11, Exactly, 0, 100)}, {SetAllianceStatus(Force1, Enemy)},preserved)
---     end
-
---     TriggerX(Force1, {Deaths(P11, Exactly, 0, 100)},{
---         RunAIScript('Turn OFF Shared Vision for Player 5'),
---         RunAIScript('Turn OFF Shared Vision for Player 6'),
---         RunAIScript('Turn OFF Shared Vision for Player 7'),
---         RunAIScript('Turn ON Shared Vision for Player 8')
---     })
 
 --     -- Cerebrate from palm1 
 --     function SHBF(Y) return Y end
@@ -36,13 +27,13 @@ function Install_SpecialGunPlotShape()
 
 --     for i = 1, 24 do
 --         Circular = CSMakeLineX(1,60,0+15*i,7,1) -- Circle
---         CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
---         CSPlot(Circular,P6,55,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
---         CSPlot(Circular,P6,56,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
---         CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
+--         CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,60)})
+--         CSPlot(Circular,P6,55,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,60)})
+--         CSPlot(Circular,P6,56,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,60)})
+--         CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,60)})
 --     end
---     CSPlot(CX2,P6,51,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,96+102,60)}) --외접원
---     CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,896+102,60)}) --외접원
+--     CSPlot(CX2,P6,51,"celebrate1",nil,1,32,P7,{Deaths(P10,Exactly,96+102,60)}) --외접원
+--     CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{Deaths(P10,Exactly,896+102,60)}) --외접원
 
 --     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 100+(3*SDspeed), 60)}, {
 --         Order(55, Force2, "celebrate1", Attack, "HealZone"),Order(51, Force2, "celebrate1", Attack, "HealZone")})
@@ -50,13 +41,13 @@ function Install_SpecialGunPlotShape()
 --         Order(56, Force2, "celebrate1", Attack, "HealZone"),Order(46, Force2, "celebrate1", Attack, "HealZone")})
 --     for j = 1, 24 do
 --         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
---         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
---         CSPlot(GLj,P6,8,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
---         CSPlot(GLj,P6,88,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
---         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
+--         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,60)})
+--         CSPlot(GLj,P6,8,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,60)})
+--         CSPlot(GLj,P6,88,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,60)})
+--         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,60)})
 --     end
---     CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,496+102,60)})
---     CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1296+102,60)})
+--     CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,496+102,60)})
+--     CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,1296+102,60)})
 --     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 500+(3*SDspeed), 60)}, {
 --         Order(8, Force2, "celebrate1", Attack, "HealZone"),Order(65, Force2, "celebrate1", Attack, "HealZone")})
 --     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 1300+(3*SDspeed), 60)}, {
@@ -64,9 +55,9 @@ function Install_SpecialGunPlotShape()
 
 --     GA1 = CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0) --A그라데이션
 --     GA1D = CS_RatioXY(CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0),0.1,0.1) --도착지 도형
---     CSPlotOrder(spiral1,P6,84,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
---     CSPlotOrder(spiral1,P6,30,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
---     CSPlotOrder(GA1,P7,96,"celebrate1",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+--     CSPlotOrder(spiral1,P6,84,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+--     CSPlotOrder(spiral1,P6,30,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+--     CSPlotOrder(GA1,P7,96,"celebrate1",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
 --     ----------- End of celebrate plot shape functions
 
 --     ----------- Start of Daggoth plot shape functions
@@ -74,26 +65,26 @@ function Install_SpecialGunPlotShape()
     
 --     for i = 1, 24 do
 --         Circular = CSMakeLineX(1,60,0+15*i,7,1) -- Circle
---         CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,4*i+102,61)})
---         CSPlot(Circular,P6,55,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,4*i+102,61)})
---         CSPlot(Circular,P6,56,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,800+4*i+102,61)})
---         CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,800+4*i+102,61)})
+--         CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,61)})
+--         CSPlot(Circular,P6,55,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,61)})
+--         CSPlot(Circular,P6,56,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,61)})
+--         CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,61)})
 --     end
---     CSPlot(CX2,P6,51,"celebrate2",nil,1,32,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,96+102,61)}) --외접원
---     CSPlot(CX2,P6,46,"celebrate2",nil,1,32,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,896+102,61)}) --외접원
+--     CSPlot(CX2,P6,51,"celebrate2",nil,1,32,P7,{Deaths(P10,Exactly,96+102,61)}) --외접원
+--     CSPlot(CX2,P6,46,"celebrate2",nil,1,32,P7,{Deaths(P10,Exactly,896+102,61)}) --외접원
 --     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 100+(3*SDspeed), 61)}, {
 --         Order(55, Force2, "celebrate2", Attack, "HealZone"),Order(51, Force2, "celebrate2", Attack, "HealZone")})
 --     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 900+(3*SDspeed), 61)}, {
 --         Order(56, Force2, "celebrate2", Attack, "HealZone"),Order(46, Force2, "celebrate2", Attack, "HealZone")})
 --     for j = 1, 24 do
 --         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
---         CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,400+4*j+102,61)})
---         CSPlot(GLj,P6,8,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,400+4*j+102,61)})
---         CSPlot(GLj,P6,88,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1200+4*j+102,61)})
---         CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1200+4*j+102,61)})
+--         CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,61)})
+--         CSPlot(GLj,P6,8,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,61)})
+--         CSPlot(GLj,P6,88,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,61)})
+--         CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,61)})
 --     end
---     CSPlot(CX2,P6,65,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,496+102,61)})
---     CSPlot(CX2,P6,17,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1296+102,61)})
+--     CSPlot(CX2,P6,65,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,496+102,61)})
+--     CSPlot(CX2,P6,17,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,1296+102,61)})
 --     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 500+(3*SDspeed), 61)}, {
 --         Order(8, Force2, "celebrate2", Attack, "HealZone"),Order(65, Force2, "celebrate2", Attack, "HealZone")})
 --     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 1300+(3*SDspeed), 61)}, {
@@ -101,61 +92,61 @@ function Install_SpecialGunPlotShape()
 
 --     GA1 = CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0) --A그라데이션
 --     GA1D = CS_RatioXY(CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0),0.1,0.1) --도착지 도형
---     CSPlotOrder(spiral1,P6,84,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
---     CSPlotOrder(spiral1,P6,30,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
---     CSPlotOrder(GA1,P7,96,"celebrate2",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+--     CSPlotOrder(spiral1,P6,84,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+--     CSPlotOrder(spiral1,P6,30,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+--     CSPlotOrder(GA1,P7,96,"celebrate2",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
 --     ----------- End of Daggoth plot shape functions
 
 --     ----------- Start of 12 Clock Infested Command Center functions 
     
---     Inf1timeline = {5.3, 21.8, 24.6, 27.3, 30.1, 44}
+    -- Inf1timeline = {5.3, 21.8, 24.6, 27.3, 30.1, 44}
     
---     TriggerX(P7, {CommandLeastAt(130, "nuke1")}, {SetDeaths(P10, Add, 1, 62)},preserved);
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
+    -- TriggerX(P7, {CommandLeastAt(130, "nuke1")}, {SetDeaths(P10, Add, 1, 62)},preserved);
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
 
---     CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(Shell_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(Shell_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(Shell_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(Shell_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
 
---     CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(SH_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
---     CAPlotWithProperties(SH_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(SH_Arc3, P5, 89,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    -- CAPlotWithProperties(SH_Arc4, P6, 58,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
 
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(89, P5, "Anywhere", Move, "hive3")})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(58, P6, "Anywhere", Move, "starg3")})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(89, P5, "Anywhere", Move, "hive3")})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(58, P6, "Anywhere", Move, "starg3")})
 
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 89, P5, "hive3", P6)})
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 58, P6, "starg3", P6)})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 89, P5, "hive3", P6)})
+    -- TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 58, P6, "starg3", P6)})
 
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 89, Force2, "Anywhere")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 58, Force2, "Anywhere")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 89, Force2, "Anywhere")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 58, Force2, "Anywhere")})
 
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[4] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg8")})
---     TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[4] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg8")})
+    -- TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
 
---     TriggerX(P5, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
---         Order(64, P6, "Anywhere", Attack, "HealZone"),
---         Order(70, P6, "Anywhere", Attack, "HealZone"),
---         Order(89, P6, "Anywhere", Attack, "HealZone"),
---         Order(58, P6, "Anywhere", Attack, "HealZone")
---     })
+    -- TriggerX(P5, {Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
+    --     Order(64, P6, "Anywhere", Attack, "HealZone"),
+    --     Order(70, P6, "Anywhere", Attack, "HealZone"),
+    --     Order(89, P6, "Anywhere", Attack, "HealZone"),
+    --     Order(58, P6, "Anywhere", Attack, "HealZone")
+    -- })
 
 --     ----- Turn on pulling trigger and call trigger
---     TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
+--     TriggerX(FP, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
 --     for i = 0, 3 do
---         TriggerX(P8, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
+--         TriggerX(P8, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
 --     end
---     TriggerX(Force1, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {
+--     TriggerX(Force1, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {
 --         RunAIScript("Turn OFF Shared Vision for Player 5"),
 --         RunAIScript("Turn OFF Shared Vision for Player 6"),
 --         RunAIScript("Turn OFF Shared Vision for Player 7")
@@ -253,46 +244,21 @@ function Install_SpecialGunPlotShape()
 --     end
     
     
-
-    TriggerX(Force2, {Deaths(P11, Exactly, 1, 100)}, {
-        SetAllianceStatus(Force1, Ally)
-},preserved)
-    TriggerX(Force1, {Deaths(P11, Exactly, 1, 100)},{
-            RunAIScript('Turn ON Shared Vision for Player 5'),
-            RunAIScript('Turn ON Shared Vision for Player 6'),
-            RunAIScript('Turn OFF Shared Vision for Player 7'),
-            RunAIScript('Turn ON Shared Vision for Player 8')
-    })
-
-    
-   
-
-    for i = 4 , 6 do
-        TriggerX(i, {Deaths(P11, Exactly, 0, 100)}, {SetAllianceStatus(Force1, Enemy)},preserved)
-    end
-
-    TriggerX(Force1, {Deaths(P11, Exactly, 0, 100)},{
-        RunAIScript('Turn OFF Shared Vision for Player 5'),
-        RunAIScript('Turn OFF Shared Vision for Player 6'),
-        RunAIScript('Turn OFF Shared Vision for Player 7'),
-        RunAIScript('Turn ON Shared Vision for Player 8')
-    })
-
     -- Cerebrate from palm1 
     function SHBF(Y) return Y end
     TriggerX(P7, {CommandLeastAt(151, "celebrate1")}, {SetDeaths(P10, Add, 1, 60)},preserved);
 
     for i = 1, 24 do
         Circular = CSMakeLineX(1,60,0+15*i,7,1) -- Circle
-        CSPlot(Circular,P6,62,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
-        CSPlot(Circular,P6,55,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
-        CSPlot(Circular,P6,56,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
-        CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
+        CSPlot(Circular,P6,62,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,60)})
+        CSPlot(Circular,P6,55,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,60)})
+        CSPlot(Circular,P6,56,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,60)})
+        CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,60)})
     end
     
-    CSPlot(Trdline,P6,62,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+102,60)})
-    CSPlot(CX2,P6,51,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,96+102,60)}) --외접원
-    CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,896+102,60)}) --외접원
+    CSPlot(Trdline,P6,62,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,800+102,60)})
+    CSPlot(CX2,P6,51,"celebrate1",nil,1,32,P7,{Deaths(P10,Exactly,96+102,60)}) --외접원
+    CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{Deaths(P10,Exactly,896+102,60)}) --외접원
 
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 100+(3*SDspeed), 60)}, {
         Order(55, Force2, "celebrate1", Attack, "HealZone"),Order(51, Force2, "celebrate1", Attack, "HealZone")})
@@ -300,16 +266,16 @@ function Install_SpecialGunPlotShape()
         Order(56, Force2, "celebrate1", Attack, "HealZone"),Order(46, Force2, "celebrate1", Attack, "HealZone")})
     for j = 1, 24 do
         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
-        CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
-        CSPlot(GLj,P6,8,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
-        CSPlot(GLj,P6,88,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
-        CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
+        CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,60)})
+        CSPlot(GLj,P6,8,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,60)})
+        CSPlot(GLj,P6,88,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,60)})
+        CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,60)})
         
     end
-    CSPlot(Trdline,P6,69,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+102,60)})
-    CSPlot(Trdline,P6,12,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,102,60)})
-    CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,496+102,60)})
-    CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1296+102,60)})
+    CSPlot(Trdline,P6,69,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,1200+102,60)})
+    CSPlot(Trdline,P6,12,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,102,60)})
+    CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,496+102,60)})
+    CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,1296+102,60)})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 500+(3*SDspeed), 60)}, {
         Order(8, Force2, "celebrate1", Attack, "HealZone"),Order(65, Force2, "celebrate1", Attack, "HealZone")})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 1300+(3*SDspeed), 60)}, {
@@ -317,9 +283,9 @@ function Install_SpecialGunPlotShape()
 
     GA1 = CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0) --A그라데이션
     GA1D = CS_RatioXY(CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0),0.1,0.1) --도착지 도형
-    CSPlotOrder(spiral1,P6,84,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
-    CSPlotOrder(spiral1,P6,30,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
-    CSPlotOrder(GA1,P7,96,"celebrate1",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+    CSPlotOrder(spiral1,P6,84,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+    CSPlotOrder(spiral1,P6,30,"celebrate1",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
+    CSPlotOrder(GA1,P7,96,"celebrate1",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{Deaths(P10,Exactly,1500+(3*SDspeed),60)})
     ----------- End of celebrate plot shape functions
 
     ----------- Start of Daggoth plot shape functions
@@ -327,26 +293,26 @@ function Install_SpecialGunPlotShape()
     
     for i = 1, 24 do
         Circular = CSMakeLineX(1,60,0+15*i,7,1) -- Circle
-        CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,4*i+102,61)})
-        CSPlot(Circular,P6,55,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,4*i+102,61)})
-        CSPlot(Circular,P6,56,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,800+4*i+102,61)})
-        CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,800+4*i+102,61)})
+        CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,61)})
+        CSPlot(Circular,P6,55,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,4*i+102,61)})
+        CSPlot(Circular,P6,56,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,61)})
+        CSPlot(Circular,P6,84,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,800+4*i+102,61)})
     end
-    CSPlot(CX2,P6,51,"celebrate2",nil,1,32,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,96+102,61)}) --외접원
-    CSPlot(CX2,P6,46,"celebrate2",nil,1,32,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,896+102,61)}) --외접원
+    CSPlot(CX2,P6,51,"celebrate2",nil,1,32,P7,{Deaths(P10,Exactly,96+102,61)}) --외접원
+    CSPlot(CX2,P6,46,"celebrate2",nil,1,32,P7,{Deaths(P10,Exactly,896+102,61)}) --외접원
     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 100+(3*SDspeed), 61)}, {
         Order(55, Force2, "celebrate2", Attack, "HealZone"),Order(51, Force2, "celebrate2", Attack, "HealZone")})
     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 900+(3*SDspeed), 61)}, {
         Order(56, Force2, "celebrate2", Attack, "HealZone"),Order(46, Force2, "celebrate2", Attack, "HealZone")})
     for j = 1, 24 do
         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
-        CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,400+4*j+102,61)})
-        CSPlot(GLj,P6,8,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,400+4*j+102,61)})
-        CSPlot(GLj,P6,88,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1200+4*j+102,61)})
-        CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1200+4*j+102,61)})
+        CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,61)})
+        CSPlot(GLj,P6,8,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,61)})
+        CSPlot(GLj,P6,88,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,61)})
+        CSPlot(GLj,P6,84,"celebrate2",nil,1,64,P7,{Deaths(P10,Exactly,1200+4*j+102,61)})
     end
-    CSPlot(CX2,P6,65,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,496+102,61)})
-    CSPlot(CX2,P6,17,"celebrate2",nil,1,48,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1296+102,61)})
+    CSPlot(CX2,P6,65,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,496+102,61)})
+    CSPlot(CX2,P6,17,"celebrate2",nil,1,48,P7,{Deaths(P10,Exactly,1296+102,61)})
     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 500+(3*SDspeed), 61)}, {
         Order(8, Force2, "celebrate2", Attack, "HealZone"),Order(65, Force2, "celebrate2", Attack, "HealZone")})
     TriggerX(P7, {CommandLeastAt(152, "celebrate2"),Deaths(P10, AtLeast, 1300+(3*SDspeed), 61)}, {
@@ -354,49 +320,51 @@ function Install_SpecialGunPlotShape()
 
     GA1 = CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0) --A그라데이션
     GA1D = CS_RatioXY(CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0),0.1,0.1) --도착지 도형
-    CSPlotOrder(spiral1,P6,84,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
-    CSPlotOrder(spiral1,P6,30,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
-    CSPlotOrder(GA1,P7,96,"celebrate2",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{CommandLeastAt(152,"celebrate2"),Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+    CSPlotOrder(spiral1,P6,84,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+    CSPlotOrder(spiral1,P6,30,"celebrate2",nil,1,64,CSMakeSpiral(4, 1, 1/1.2, 40, 0, 37, 5),0,Attack,"HealZone",nil,64,nil,P6,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
+    CSPlotOrder(GA1,P7,96,"celebrate2",nil,1,64,GA1D,0,Attack,"HealZone",nil,64,nil,P7,{Deaths(P10,Exactly,1500+(3*SDspeed),61)})
     ----------- End of Daggoth plot shape functions
+    
 
-    ----------- Start of 12 Clock Infested Command Center functions 
+
+    --------- Start of 12 Clock Infested Command Center functions 
     
     Inf1timeline = {5.3, 21.8, 24.6, 27.3, 30.1, 44}
     
     TriggerX(P7, {CommandLeastAt(130, "nuke1")}, {SetDeaths(P10, Add, 1, 62)},preserved);
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
+    TriggerX(P7, {Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
 
-    CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(Shell_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(Shell_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
 
-    CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(SH_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(SH_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
 
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(102, P5, "Anywhere", Move, "hive3")})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(60, P6, "Anywhere", Move, "starg3")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(102, P5, "Anywhere", Move, "hive3")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(60, P6, "Anywhere", Move, "starg3")})
 
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 102, P5, "hive3", P6)})
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 60, P6, "starg3", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 102, P5, "hive3", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 60, P6, "starg3", P6)})
 
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 102, Force2, "Anywhere")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 60, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 102, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 60, Force2, "Anywhere")})
 
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[4] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg8")})
-    TriggerX(Force2, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[4] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg8")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
 
-    TriggerX(P5, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
+    TriggerX(P5, {Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
         Order(64, P6, "Anywhere", Attack, "HealZone"),
         Order(70, P6, "Anywhere", Attack, "HealZone"),
         Order(102, P6, "Anywhere", Attack, "HealZone"),
@@ -404,17 +372,19 @@ function Install_SpecialGunPlotShape()
     })
 
     ----- Turn on pulling trigger and call trigger
-    TriggerX(FP, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
+
     for i = 0, 3 do
-        TriggerX(P8, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
+        TriggerX(P8, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
     end
-    TriggerX(Force1, {CommandLeastAt(130, "nuke1"),Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {
-        RunAIScript("Turn OFF Shared Vision for Player 5"),
-        RunAIScript("Turn OFF Shared Vision for Player 6"),
-        RunAIScript("Turn OFF Shared Vision for Player 7")
-    })
+
+    TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)})
+
+
 
     --------- End of 12 Clock Infested Command Center fuctions
+    
+
+    
 
     --------- Start of 6 Clock Infested Command Center functions
     --[[
@@ -483,7 +453,7 @@ function Install_SpecialGunPlotShape()
 
     function Generator(location, Deathvar)
         TriggerX(P7, {CommandLeastAt(200, location)}, SetCDeaths(FP, Add, 1, Deathvar),preserved)
-        TriggerX(P7, {CDeaths(FP, AtMost, gene_tl[55] * SDspeed, Deathvar)}, {
+        TriggerX(P7, {CDeaths(FP, AtLeast, 20, Deathvar), CDeaths(FP, AtMost, gene_tl[55] * SDspeed, Deathvar)}, {
             SetDeaths(P8, SetTo, 0, 131), -- small wave
             SetDeaths(P8, Subtract, 1, 132) -- big wave
         }, preserved)
