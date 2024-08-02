@@ -53,7 +53,7 @@ function FinalBossTrigger()
     Deaths(P6, AtLeast, 1, 205),
     Deaths(P7, AtLeast, 1, 168)},{
         RotatePlayer({
-        DisplayTextX(StrDesignX("\x04마린키우기 \x19U\x17niverse \x07Test [0.14v]\x04를 클리어 하셨습니다 ! .").."\n"..StrDesignX("\x04플레이 해주셔서 정말 \x19감사드립니다!").."\n"..StrDesignX("\x08To be Continued."),4);
+        DisplayTextX(StrDesignX("\x04마린키우기 \x19U\x17niverse \x07[0.1v]\x04를 클리어 하셨습니다 ! .").."\n"..StrDesignX("\x04플레이 해주셔서 정말 \x19감사드립니다!").."\n"..StrDesignX("\x08To be Continued."),4);
         },HumanPlayers,FP);
         })
     TriggerX(Force1, {

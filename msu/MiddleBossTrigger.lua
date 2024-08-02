@@ -52,17 +52,53 @@ function MiddleBossTrigger()
     92.6, 98, 
     103.4, 104, 104.6, 105.4, 106.1
 }
+MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
+    31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,
+    96.5, 100.5, 104.5, 108.5, 112.5, 116.5, 120.5, 124.5, 128.5, 132.5, 
+    136.5
+    }
+
+    MB7TL = {
+        16, -- 1 pattern
+        19.5, 21.5, 23.5, 25.5, 27.5, 29.5,
+        32,-- 2 pattern
+        33.5, 35.5, 37.5, 39.5, 41.5, 43.5, 45.5,
+        48, -- 3 pattern
+        49.5, 51.5, 53.5, 55.5, 57.5, 59.5, 61.5,
+        64, -- 4 pattern
+        65.5, 67.5, 69.5, 71.5, 73.5, 75.5, 77.5, 79.5, 80
+    }
+    
+    CreateLocation = {"patbat1","patbat2","patbat3","patbat4"}
+
+    SnowFlake1 = CS_Convert(SnowFlake, 80)
+    EnergyProp = {
+        clocked = false,
+        burrowed = false,
+        intransit = false,
+        hallucinated = false,
+        invincible = false,
+        hitpoint = 100,
+        shield = 100,
+        energy = 100,
+        resource = 0,
+        hanger = 0,
+        }
+
     RealB = {"starp1","starp2","starg1","starg2"}
     RealB2 = {"mutant5","wraith1","PNG1","PNG2"}
     HiveEtf2 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 71)
     HiveEtf2A = CSMakeSpiral(6, 16, 1/2, 0, 0, 130, 71)
     TSFL1 = CSMakeLine(1,48,0,10,1)
 
+    CIfX(FP, {CDeaths(FP, AtLeast, 1, Difficulty)})
+
     TriggerX(P7, {CommandLeastAt(174, "middle1")}, {SetDeaths(P11, Add, 1, 160)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetDeaths(P11, Subtract, 1, 225)}, preserved)
     TriggerX(FP, {Deaths(P11, Exactly, 0, 225)}, {SetInvincibility(Disable, 22, P6, "middle1")}, preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetSpriteImage(227, 983)})
 
     CIfOnce(FP,{Deaths(P11, Exactly, 10, 160)})
         f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
@@ -75,7 +111,7 @@ function MiddleBossTrigger()
                 TSetMemoryX(Vi(MBossPtr11[2], 55), SetTo, 0xA08000, 0xA08000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP11,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,4)})
+        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,20)})
         DoActions(FP,SetImageColor(237,0))
     CIfEnd()
     CTrigger(FP,{
@@ -176,17 +212,13 @@ function MiddleBossTrigger()
         DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
-        SetDeaths(P6, SetTo, 1, 205)
+        SetDeaths(P6, SetTo, 1, 205),
+        SetImageScript(227, 503)
     })
     ------ End of 11 Middle boss trigger -----
     
 
     ------ Start of 1 Middle boss trigger ----- + plot death value = 161 | skill death value = 162
-    MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
-    31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,
-    96.5, 100.5, 104.5, 108.5, 112.5, 116.5, 120.5, 124.5, 128.5, 132.5, 
-    136.5
-}
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
@@ -204,7 +236,7 @@ function MiddleBossTrigger()
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,20)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,40)})
     CIfEnd()
     CTrigger(FP,{
         TMemory(MBossHP1,AtMost,256*400000);
@@ -363,15 +395,15 @@ function MiddleBossTrigger()
 
     CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlotOrder(CS_Convert(Circulation1,15), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
+    CAPlotOrder(CS_Convert(Circulation1,17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
     
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
-    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),15), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
+    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
     for i = 1, 15 do
-        CSPlotOrder(M5GenPlot, P6, M5GenG[i], "middle4", nil, 1, 32, M5GenPlotA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})
-        CSPlotOrder(M5GenPlot, P6, M5GenS[i], "middle4", nil,1, 32, M5GenPlotA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)}, {SetDeaths(P11, SetTo, 0, 165)})
+        CSPlotOrder(Generator_shape, P6, M5GenG[i], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})
+        CSPlotOrder(Generator_shape, P6, M5GenS[i], "middle4", nil,1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)}, {SetDeaths(P11, SetTo, 0, 165)})
     end
     
     
@@ -387,7 +419,7 @@ function MiddleBossTrigger()
 
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,15)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,30)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -417,31 +449,9 @@ function MiddleBossTrigger()
 
     ------------- Start of 7 Middle Boss Trigger ------------------- Death vaule = 166 , vision death value = P11, 100
     -- + Timeline plot + 0.5
-    MB7TL = {
-    16, -- 1 pattern
-    19.5, 21.5, 23.5, 25.5, 27.5, 29.5,
-    32,-- 2 pattern
-    33.5, 35.5, 37.5, 39.5, 41.5, 43.5, 45.5,
-    48, -- 3 pattern
-    49.5, 51.5, 53.5, 55.5, 57.5, 59.5, 61.5,
-    64, -- 4 pattern
-    65.5, 67.5, 69.5, 71.5, 73.5, 75.5, 77.5, 79.5, 80
-}
+    
     -- 82 -- Last gen
 
-SnowFlake1 = CS_Convert(SnowFlake, 80)
-EnergyProp = {
-    clocked = false,
-    burrowed = false,
-    intransit = false,
-    hallucinated = false,
-    invincible = false,
-    hitpoint = 100,
-    shield = 100,
-    energy = 100,
-    resource = 0,
-    hanger = 0,
-    }
 
 GTL1 = {51,17,77,65,30,81,95,75,76,93,74}
 STL1 = {21,8,56,58,70,89,64,96,89,88,28}
@@ -450,7 +460,6 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetDeaths(P11, Subtract, 1, 167)}, preserved)
     TriggerX(FP, {Deaths(P11, Exactly, 0, 167)}, {SetInvincibility(Disable, 126, P6, "middle3")}, preserved)
 
-    CreateLocation = {"patbat1","patbat2","patbat3","patbat4"}
     function VerifingPattern1(deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
         TriggerX(FP, {CommandLeastAt(127, "middle3"), Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {CreateUnit(1, 98, "starg6", P8),CreateUnit(1, 9, "starg7", P8),CreateUnit(1, 9, "starp6", P8),CreateUnit(1, 9, "starp7", P8)})
@@ -515,11 +524,13 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Deaths(P8, AtLeast, 1, 9)
         },
         {
-            CreateUnitWithProperties(10, 49, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(10, 71, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
             SetDeaths(P8, SetTo, 0, 98),
+            Wait(1),
+            SetInvincibility(Disable, "Men", Force1, "Anywhere")
             -- DisplayText("Pattern2, Case1", 4)
         })
 
@@ -673,11 +684,11 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
     end
 
     for i = 1 , #MB7TL do --- Length == 32
-        CSPlotOrder(MB1CircleS, P6, GTL1[i % 11 + 1], "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-        CSPlotOrder(MB1CircleS, P6, STL1[i % 11 + 1], "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+        CSPlotOrder(Generator_shape, P6, GTL1[i % 11 + 1], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+        CSPlotOrder(Generator_shape, P6, STL1[i % 11 + 1], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
     end
-    CSPlotOrder(MB1CircleS, P6, 3, "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 82 * SDspeed, 166)})
-    CSPlotOrder(MB1CircleS, P6, 29, "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, (82 + 0.5) * SDspeed , 166)})
+    CSPlotOrder(Generator_shape, P6, 3, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 82 * SDspeed, 166)})
+    CSPlotOrder(Generator_shape, P6, 29, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, (82 + 0.5) * SDspeed , 166)})
 
     VerifingPattern3(MB7TL[1])
     VerifingPattern4((MB7TL[1] + 10))
@@ -712,7 +723,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,12)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,25)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -723,6 +734,8 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         SetNVar(MBossHP7_2,Subtract,1);
         SetDeaths(P11, SetTo, 102, 167);
     },{preserved})
+    
+    CIfXEnd()
     ------------ End of Boss HP Overflow Trigger ----------------------
 
     ------- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 

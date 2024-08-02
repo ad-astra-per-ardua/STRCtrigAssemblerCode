@@ -96,9 +96,9 @@ for k = 1, 2 do
     }
 end 
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。0.14】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。0.14】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。0.14】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.0】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.0】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.0】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})

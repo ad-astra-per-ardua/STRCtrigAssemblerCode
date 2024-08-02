@@ -75,6 +75,10 @@ function Install_plotshape()
     StarportDeathArray = {StarportLv2_1,StarportLv2_2,StarportLv2_3,StarportLv2_4,StarportLv2_5}
     StarportSpotArr = {"starp7", "starp1", "starp4", "starp10", "starp3"}
     StarportSpotArr2 = {"starp8", "starp6", "starp2", "starp5", "starp9"}
+
+    generator_dvar1,generator_dvar2,generator_dvar3,generator_dvar4 = CreateCcodes(4)
+    generator_dvarr = {generator_dvar1,generator_dvar2,generator_dvar3,generator_dvar4}
+    generator_spot = {"generator1","generator2","generator3","generator4"}
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}
@@ -137,6 +141,9 @@ function Install_plotshape()
     Triangle3 = CSMakePolygonX(3, 64, 0, 61, 0)
     Triangle4 = CSMakePolygonX(3, 32, 0, CS_Level("PolygonX", 3, 3), 0)
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
+
+    
+
     -- CAPlot(CS_SortR(HiveEtf1,1),P6,33,"Hive3",nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,"Hive3")})
 
     ------- Starport
@@ -168,6 +175,11 @@ function Install_plotshape()
     CX2 = CSMakeCircleX(6,80,30,30,0)
     StargateEft = CS_RemoveStack(CS_OverlapX(Shape3, Cross, Cross1,SShape2), 16)
 
+    function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
+	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
+	Generator_shape2 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
+    Generator_shape = CSMakePolygon(6,80,0,127,1)
+    Generator_shapeA = CSMakePolygon(6,0,0,127,1)
     -------- Plot Timeline
 
     CenterCallGen1 = {
@@ -231,6 +243,31 @@ function Install_plotshape()
         32, 32.4, -- reloading effect
         47.2, 47.6 -- 2nd effects
         }
+    gene_tl = { -- term : 0.9 sec
+        32.5, 36.3, 39.1, 41 , 44,
+        46, 47.7, 49.7, 51.6, 53.4, 55.4, 57.2, 
+        59, 61, 63, 71, 74.4, 78.6, 83.2, 85.7,
+        87.7, 89.6, 91.4, 93.3, 95.3, 97.2, 100.9,
+        102.9, 104.8, 106.7, 108.6, 110.5, 112.4,
+        114.2, 116.3, 118.1, 120, 122, 123.9, 125.7, 
+        127.7, 129.6, 131.4, 133.4, 135.3, 137.2, 
+        138.1, 138.7, 139.1, 141.1, 142.9, 143.9, 
+        144.9, 145.8, 146.3
+    }
+    gene_spawntb_gnd = {
+        52, 104, 3, 93, 95, 81, 78, 17, 25, 3, 75
+    }
+    gene_spawntb_air = {
+        12, 88, 89, 70, 96, 60, 64, 62, 58, 21, 96
+    }
+
+    gene_spawntb_gnd1 = {
+        46, 16, 3, 93, 95, 81, 66, 17, 25, 3, 76
+    }
+    gene_spawntb_air1 = {
+        12, 88, 89, 56, 96, 60, 8, 62, 58, 21, 96
+    }
+
     -- Lair Eft : 94 | Hive Eft : 84 | SP EFT : 42 | SG EFT : 202 | FT EFT : 11
 
     -- Cerebrate

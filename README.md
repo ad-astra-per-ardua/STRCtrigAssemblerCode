@@ -49,10 +49,12 @@ v0.14
 
 Hard level change log Todo list
 
-1. lair level 2 change bgm > change location order by Ascension
-2. lair level 2 change plot shape
-3.
-4.
-5. change cerebrate and daggoth shape differently
-6. Randomize delay of Call and recustomize spawn set table
-7. Add Center call
+1. ~~lair level 2 change bgm > change location order by Ascension~~
+2. ~~lair level 2 change plot shape~~
+3. ~~stargate level 2 change bgm~~
+4. ~~stargate level 2 remake shape plot~~
+5. ~~change cerebrate and daggoth shape differently~~
+6. ~~Randomize delay of Call and recustomize spawn set table~~
+7. ~~Add Center call~~
+8. ~~Add special plot each area spot~~
+9. ~~Reinforce each middle boss~~

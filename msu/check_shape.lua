@@ -35,15 +35,14 @@ function check_shape()
 	
 	-- function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
 	-- Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
-	-- Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
+	-- temp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 
-	
+	-- temp1 = CSMakeCircle(6,64,0,61,1)
 	
 	-- Eftstar = CSMakeStarX(5,108,64,36,90,0)
 	-- temp2 = CS_RemoveStack(HCD0,20,0)
-	-- temp1 = CS_Overlap(Eftstar, temp2)
+	-- temp1 = CSMakePolygon(6,80,0,127,1)
 
-	
 	
     -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

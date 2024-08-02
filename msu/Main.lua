@@ -41,7 +41,8 @@ ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
-
+-- TriggerX(FP, Always(), {SetResources(P1, SetTo, 1000000, Ore)}, preserved)
+-- TriggerX(FP, Always(), {CreateUnit(132, 1, "hive10", P1)})
 
 Install_function()
 Install_verifingPhase()
