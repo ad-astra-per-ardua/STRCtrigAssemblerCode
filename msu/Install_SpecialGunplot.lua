@@ -12,19 +12,19 @@ function Install_SpecialGunplot()
 }
 
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
-    TriggerX(P7, Always(), {Wait(100),
-    CreateUnit(1, 151, "celebrate1", P7),
-    CreateUnit(1, 152, "celebrate2", P7),
-    CreateUnit(1, 130,"nuke1", P7);
-    CreateUnit(1, 106,"nuke2", P7);
-    CreateUnit(1, 174,"middle1", P7);
-    CreateUnit(1, 175,"middle2", P7);
-    CreateUnit(1, 127,"middle3", P7);
-    CreateUnit(1, 148,"middle4", P7);
-    SetInvincibility(Enable, 127, P7, "Anywhere");
-    SetInvincibility(Enable, 148, P7, "Anywhere");
-    SetInvincibility(Enable, 174, P7, "Anywhere");
-    SetInvincibility(Enable, 175, P7, "Anywhere");
+    TriggerX(FP, Always(), {Wait(100),
+        CreateUnit(1, 151, "celebrate1", P7);
+        CreateUnit(1, 152, "celebrate2", P7);
+        CreateUnit(1, 130,"nuke1", P7);
+        CreateUnit(1, 106,"nuke2", P7);
+        CreateUnit(1, 174,"middle1", P7);
+        CreateUnit(1, 175,"middle2", P7);
+        CreateUnit(1, 127,"middle3", P7);
+        CreateUnit(1, 148,"middle4", P7);
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
 })
 
 ------ Start of Disable invincibility condition trigger -------
@@ -58,26 +58,26 @@ for i = 1 , 4 do
 end
 
 
-CElseX()
+CElseIfX({CDeaths(FP, Exactly, 2, Difficulty)})
 
-TriggerX(P7, Always(), {Wait(100),
-    CreateUnit(1, 151, "celebrate1", P7),
-    CreateUnit(1, 152, "celebrate2", P7),
-    CreateUnit(1, 130,"nuke1", P7);
-    CreateUnit(1, 106,"nuke2", P7);
-    CreateUnit(1, 174,"middle1", P7);
-    CreateUnit(1, 175,"middle2", P7);
-    CreateUnit(1, 127,"middle3", P7);
-    CreateUnit(1, 148,"middle4", P7);
-    CreateUnit(1, 200, "generator1", P7);
-    CreateUnit(1, 200, "generator2", P7);
-    CreateUnit(1, 200, "generator3", P7);
-    CreateUnit(1, 200, "generator4", P7);
-    SetInvincibility(Enable, 127, P7, "Anywhere");
-    SetInvincibility(Enable, 148, P7, "Anywhere");
-    SetInvincibility(Enable, 174, P7, "Anywhere");
-    SetInvincibility(Enable, 175, P7, "Anywhere");
-    SetInvincibility(Enable, 200, P7, "Anywhere");
+TriggerX(FP, Always(), {Wait(100),
+        CreateUnit(1, 151, "celebrate1", P7);
+        CreateUnit(1, 152, "celebrate2", P7);
+        CreateUnit(1, 130,"nuke1", P7);
+        CreateUnit(1, 106,"nuke2", P7);
+        CreateUnit(1, 174,"middle1", P7);
+        CreateUnit(1, 175,"middle2", P7);
+        CreateUnit(1, 127,"middle3", P7);
+        CreateUnit(1, 148,"middle4", P7);
+        CreateUnit(1, 200, "generator1", P7);
+        CreateUnit(1, 200, "generator2", P7);
+        CreateUnit(1, 200, "generator3", P7);
+        CreateUnit(1, 200, "generator4", P7);
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
+        SetInvincibility(Enable, 200, P7, "Anywhere");
 })
 
 for i = 1 , 4 do 

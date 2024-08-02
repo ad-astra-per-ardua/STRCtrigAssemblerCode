@@ -62,9 +62,10 @@ function Install_plotshape()
 
 
     JYD = "Set Unit Order To: Junk Yard Dog"
-    Gentime = SDspeed * 251
+    Gentime = SDspeed * 572
     ExRate = {18, 20, 22, 24}
     HDrate = {25,27,29,31}
+    Rate_c = {ExRate, HDrate}
     ScanInitSetting(Force2,0)
 
     Difficulty = CreateCcode()
@@ -225,7 +226,7 @@ function Install_plotshape()
     }
 
     Starport_lv2_genID = {
-        62, 96, 86, 52, 62, 70, 58, 86, 88, 89
+        62, 96, 12, 52, 62, 70, 58, 86, 88, 89
     }
     Starport_lv2_genID2 = {
         69, 64, 76, 66, 62, 104

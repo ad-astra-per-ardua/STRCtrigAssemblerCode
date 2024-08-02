@@ -24,10 +24,10 @@ function Install_ConvertMarineTrigger()
                 conditions = {
                     Bring(CurrentPlayer, AtLeast, 1, 20, "convertH"..e);
                     Bring(CurrentPlayer, AtLeast, 1, 128, "Anywhere");
-                    Accumulate(CurrentPlayer, AtLeast, 28000, Ore);
+                    Accumulate(CurrentPlayer, AtLeast, 18000, Ore);
                 },
                 actions = {
-                    SetResources(CurrentPlayer, Subtract, 28000, Ore);
+                    SetResources(CurrentPlayer, Subtract, 18000, Ore);
                     RemoveUnitAt(1, 20, "convertH"..e, CurrentPlayer);
                     CreateUnit(1, 1, "HealZone", CurrentPlayer);
                     DisplayText(StrDesignX(ConvertT2), 4);
@@ -41,8 +41,8 @@ function Install_ConvertMarineTrigger()
         Trigger{ -- 해금
             players = {i},
             conditions = {
-                Deaths(P7, Exactly, 1, 152);
-                Deaths(P7, Exactly, 1, 151);
+                Deaths(P7, AtLeast, 1, 152);
+                Deaths(P7, AtLeast, 1, 151);
             },
             actions = {
                 DisplayText("\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08ＮＯＴＩＣＥ\x04 ● ● ●\n\x14\n\x14\n", 4);

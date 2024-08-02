@@ -285,13 +285,13 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
 
     for i = 1, 24 do
         Circular = CSMakeLineX(1,60,0+15*i,7,1) -- Circle
-        CSPlot(Trdline,P6,84,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
         CSPlot(Circular,P6,62,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
         CSPlot(Circular,P6,55,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
         CSPlot(Circular,P6,56,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
-        CSPlot(Trdline,P6,62,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*i+102,60)})
         CSPlot(Circular,P6,84,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+4*i+102,60)})
     end
+    
+    CSPlot(Trdline,P6,62,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,800+102,60)})
     CSPlot(CX2,P6,51,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,96+102,60)}) --외접원
     CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,896+102,60)}) --외접원
 
@@ -303,11 +303,12 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
         CSPlot(GLj,P6,8,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,400+4*j+102,60)})
-        CSPlot(Trdline,P6,12,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*j+102,60)})
         CSPlot(GLj,P6,88,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+4*j+102,60)})
-        CSPlot(Trdline,P6,69,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,4*j+102,60)})
+        
     end
+    CSPlot(Trdline,P6,69,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1200+102,60)})
+    CSPlot(Trdline,P6,12,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,102,60)})
     CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,496+102,60)})
     CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{CommandLeastAt(151,"celebrate1"),Deaths(P10,Exactly,1296+102,60)})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 500+(3*SDspeed), 60)}, {
@@ -483,6 +484,7 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
 
     function Generator(location, Deathvar)
         TriggerX(P7, {CommandLeastAt(200, location)}, SetCDeaths(FP, Add, 1, Deathvar),preserved)
+        TriggerX(P7, {CDeaths(FP, AtMost, gene_tl[55] * SDspeed, Deathvar)}, {SetDeaths(P8, SetTo, 0, 131),SetDeaths(P8, Subtract, 1, 132)}, preserved)
         -- TriggerX(P7, {CommandLeastAt(127, "middle3"),CDeaths(FP, Exactly, Value, Deathvar)}, Actions, Flags, Index)
         
         -- function verifingpatgen1(Deathvar)

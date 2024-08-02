@@ -475,7 +475,7 @@ function Install_NormalGunPlotShape()
 
     --     CSPlot(Triangle4, P6, 64, "fcky1", nil, 1, 32, P6, {CommandLeastAt(146, "fcky1")}, {RunAIScriptAt(JYD, "fcky1")})
 
-        CElseX()
+        CElseIfX({CDeaths(FP, Exactly, 2, Difficulty)})
 ----------------------------------------------- Start of hard level plot -------------------------------------------------------------------------------
         function HatcheryGunplot1( Hatname, Deathvar)
             Trigger{
@@ -798,20 +798,21 @@ function Install_NormalGunPlotShape()
             function Starport_GunPlotlv2(Starportname, Deathvar)
                 TriggerX(P7, {CommandLeastAt(114, Starportname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
 
-                
+                local converted = CS_Convert(Starportlv2Shape1, 30)
+                local converted2 = CS_Convert(Eftstar, 45)
 
                 for i = 1, 25 do
                     if i % 4 == 0 then -- 6
                         local arrayLength = #Starport_lv2_genID2
                         local genIndex = ((i - 1) % arrayLength) + 1
-                        CSPlot2(CS_Rotate(Eftstar, 0 + (10 * i)), P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
-                        CSPlotOrder2(CS_Rotate(Eftstar, 0 + (10 * i)), P6, Starport_lv2_genID2[genIndex], Starportname, nil, 1, 32, CS_Rotate(Eftstar, 0 + (10 * i)), nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlot2((Eftstar), P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlotOrder2((converted2), P6, Starport_lv2_genID2[genIndex], Starportname, nil, 1, 32,converted2 , nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
                     end
                     if i % 4 ~= 0 then
                         local arrayLength = #Starport_lv2_genID
                         local genIndex = ((i - 1) % arrayLength) + 1
-                        CSPlot2(CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
-                        CSPlotOrder2(CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), P6, Starport_lv2_genID[genIndex], Starportname, nil, 1, 32, CS_Rotate(Starportlv2Shape1, 0 + (10 * i)), nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlot2(Starportlv2Shape1, P6, 84, Starportname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
+                        CSPlotOrder2(converted, P6, Starport_lv2_genID[genIndex], Starportname, nil, 1, 32, converted, nil, Attack, "HealZone", nil, 32, nil, FP, {CDeaths(FP, AtLeast, Starport_lv2_gen[i] * SDspeed, Deathvar)})
                     end
                 end
             end
