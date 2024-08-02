@@ -198,7 +198,7 @@ for i = 1 , 5 do
 end
 
 for i = 1 , 5 do
-	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i, 132), {PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("celebrate2")})
+	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i, 132), {MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("celebrate2")})
 	CSPlotOrder(Bigwave1, P6, 54, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 53, "celebrate2", nil, 1, 32, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 46, "celebrate2", nil, 1, 32, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
@@ -220,7 +220,7 @@ for i = 6, 10 do
 end
 
 for i = 6, 10 do
-	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i, 132), {PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
+	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i, 132), {MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
 	CSPlotOrder(Bigwave1, P6, 46, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 56, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 93, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i, 132)},nil,1)
@@ -242,7 +242,7 @@ for i = 11, 15 do
 end
 
 for i = 11, 15 do
-	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 120, 132), {PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
+	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 120, 132), {MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
 	CSPlotOrder(Bigwave1, P6, 65, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 120, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 66, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 120, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 16, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 120, 132)},nil,1)
@@ -265,7 +265,7 @@ for i = 16, 20 do
 end
 
 for i = 16, 20 do
-	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 180, 132), {PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
+	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 180, 132), {MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
 	CSPlotOrder(Bigwave1, P6, 77, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 180, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 78, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 180, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 104, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 180, 132)},nil,1)
@@ -288,7 +288,7 @@ for i = 21, 30 do
 end
 
 for i = 21, 30 do
-	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 240, 132), {PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),PlayWAV("staredit\\wav\\bigwave.ogg"),MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
+	Trigger2(Force1, Deaths(P8, Exactly, Gentime * i + 240, 132), {MinimapPing("celebrate2"),MinimapPing("celebrate2"),MinimapPing("HealZone")})
 	CSPlotOrder(Bigwave1, P6, 76, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 240, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 58, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 240, 132)},nil,1)
 	CSPlotOrder(Bigwave1, P6, 104, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 240, 132)},nil,1)
