@@ -229,9 +229,9 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
 
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, Subtract, 1, 163)}, preserved)
-    TriggerX(FP, {Deaths(P11, Exactly, 0, 163)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
+    -- TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
+    -- TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, Subtract, 1, 163)}, preserved)
+    -- TriggerX(FP, {Deaths(P11, Exactly, 0, 163)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
 
 
     CIfOnce(FP,{CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, 10, 161)})
@@ -251,7 +251,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     },{
         TSetMemory(MBossHP1,SetTo,256*7000000);
         SetNVar(MBossHP1_2,Subtract,1);
-        SetDeaths(P11, SetTo, 102, 164);
+        -- SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
 
     ------- Start of Bullet function ------
@@ -399,9 +399,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetDeaths(P11, Subtract, 1, 164)}, preserved)
     TriggerX(FP, {Deaths(P11, Exactly, 0, 164)}, {SetInvincibility(Disable, 116, P6, "middle4")}, preserved)
 
-    TriggerX(FP, {Deaths(P6, AtLeast, 1, 116)}, {RemoveUnit(179, P6)})
     TriggerX(FP, {Bring(P6, AtLeast, 50, 150, "Anywhere")}, {KillUnitAt(All, 50, "middle4", P6)}, preserved)
-    TriggerX(Force1, {Deaths(P11, Exactly, 900, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
+    TriggerX(Force1, {Deaths(P11, Exactly, 798, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
 
     CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
@@ -412,9 +411,10 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
     for i = 1, 30 do
-        CSPlotOrder(Generator_shape, P6, M5GenG[i], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
-        CSPlotOrder(Generator_shape, P6, M5GenS[i], "middle4", nil,1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
-        TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, SetTo, 0, 163)}, preserved)
+        local arrayLength = #M5GenG
+        local genIndex = ((i - 1) % arrayLength) + 1
+        CSPlotOrder2(Generator_shape, P6, M5GenG[genIndex], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
+        CSPlotOrder2(Generator_shape, P6, M5GenS[genIndex], "middle4", nil,1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)},{SetDeaths(P11, SetTo, 0, 165)})
     end
     
     
