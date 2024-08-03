@@ -177,8 +177,8 @@ OB_BGMArray = CreateVar(FP)
     CIfEnd(SetDeaths(P6, SetTo, 0, 146))
 
         -------- 11 middle boss bgm
-        CIf(FP, {Deaths(P7, AtLeast, 1, 174)})
-            TriggerX(FP,{},{
+        
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 174)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 전송된 기억의 세계선").."\n"..StrDesignX("\x07B\x04orderline \x11O\x04f \x19M\x04emory Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
                 SetScore(Force1, Add, 2000000,Kills);
                 SetNVar(BGMArray[1], SetTo, 9);
@@ -186,12 +186,12 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(BGMArray[3], SetTo, 9);
                 SetNVar(BGMArray[4], SetTo, 9);
                 SetNVar(OB_BGMArray, SetTo, 9);
-            },preserved)
-        CIfEnd(SetDeaths(P7, SetTo, 0, 174))
+            })
+        
 
     -------- 1 middle boss bgm
-        CIf(FP, {Deaths(P7, AtLeast, 1, 175)})
-            TriggerX(FP,{},{
+        
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 175)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 남아있는 희미한 추억").."\n"..StrDesignX("\x0fR\x04eminiscence \x11O\x04f \x1cI\x04sland Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
                 SetScore(Force1, Add, 2000000,Kills);
                 SetNVar(BGMArray[1], SetTo, 10);
@@ -199,12 +199,12 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(BGMArray[3], SetTo, 10);
                 SetNVar(BGMArray[4], SetTo, 10);
                 SetNVar(OB_BGMArray, SetTo, 10);
-            },preserved)
-        CIfEnd(SetDeaths(P7, SetTo, 0, 175))
+            })
+
     
         ------- 7 middle boss bgm
-        CIf(FP, {Deaths(P7, AtLeast, 1, 127)})
-            TriggerX(FP,{},{
+        
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 127)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 느껴지는 황홀한 공포감").."\n"..StrDesignX("\x10M\x04agnificent \x11O\x04f \x08F\x04rightness Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
                 SetScore(Force1, Add, 2000000,Kills);
                 SetNVar(BGMArray[1], SetTo, 12);
@@ -212,12 +212,12 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(BGMArray[3], SetTo, 12);
                 SetNVar(BGMArray[4], SetTo, 12);
                 SetNVar(OB_BGMArray, SetTo, 12);
-            },preserved)
-        CIfEnd(SetDeaths(P7, SetTo, 0, 127))
+            })
+        
 
         --------- 5 middle boss bgm
-        CIf(FP, {Deaths(P7, AtLeast, 1, 148)})
-            TriggerX(FP,{},{
+        
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 148)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 느껴지는 감정의 해일").."\n"..StrDesignX("\x0ET\x04idal \x11O\x04f \x18E\x04motions Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
                 SetScore(Force1, Add, 2000000,Kills);
                 SetNVar(BGMArray[1], SetTo, 11);
@@ -225,8 +225,8 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(BGMArray[3], SetTo, 11);
                 SetNVar(BGMArray[4], SetTo, 11);
                 SetNVar(OB_BGMArray, SetTo, 11);
-            },preserved)
-        CIfEnd(SetDeaths(P7, SetTo, 0, 148))
+            })
+        
 
         CIf(FP, {Deaths(P7, AtLeast, 1, 132)})
             TriggerX(FP,{},{

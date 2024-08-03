@@ -333,4 +333,6 @@ CopyCpAction등으로 CP를 복구하거나 등의 방법으로 정상화 시켜
 
 8. CSPlotOrder To CAPlotOrder 분석해서 CSPlot to CAPlot 만드삼 당장.
 
+9. CommandLeastAt == Standard Player : **CurrentPlayer** 이라서 잘생각하고 써야함. 초반검증용으로만 쓰고 나머지는 데스값으로 확인.
+
 ]]

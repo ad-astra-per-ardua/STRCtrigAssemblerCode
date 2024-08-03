@@ -94,7 +94,9 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CIfX(FP, {CDeaths(FP, AtLeast, 1, Difficulty)})
 
     TriggerX(P7, {CommandLeastAt(174, "middle1")}, {SetDeaths(P11, Add, 1, 160)}, preserved)
+
     CIf(Force2, {Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160)})
+
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetDeaths(P11, Subtract, 1, 225)}, preserved)
@@ -223,7 +225,9 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     ------ Start of 1 Middle boss trigger ----- + plot death value = 161 | skill death value = 162
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
+
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
+
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, Subtract, 1, 163)}, preserved)
@@ -372,6 +376,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetDeaths(P6, SetTo, 1, 204)
     })
     CIfEnd()
+
     -------- End of 1 Middle Boss trigger -------
 
     --[[
@@ -379,7 +384,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     일정 데스값마다 안밖 스킬사용
     ]]
     -------- Start of 5 Middle Boss Trigger ------ DeathValue = 163 | BossGenerate Trigger = 165
-    
+    TriggerX(P7, {Deaths(P7, AtLeast, 1, 148)}, {SetDeaths(P11, Add, 1, 163)}, preserved)
+    CIf(Force2, {Deaths(P11, AtLeast, 10, 163),Deaths(P6, AtMost, 0, 116)})
     CLX = CAPlotOrderForward()
     Circulation1 = CSMakeCircleX(6,115,30,54,24)
     TempPerAction = {9,10,13,15,16,17}
@@ -387,35 +393,34 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     M5GenPlotA = CSMakeCircle(6,0,0,61,1)
     M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74, 25, 76, 81, 3}
     M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70, 7, 21, 69, 28}
-    TriggerX(P7, {CommandLeastAt(148, "middle4")}, {SetDeaths(P11, Add, 1, 163)}, preserved)
+    
     TriggerX(FP, {Deaths(P11, AtLeast, 2060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
-
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetInvincibility(Enable, 116, P6, "middle4")}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetDeaths(P11, Subtract, 1, 164)}, preserved)
     TriggerX(FP, {Deaths(P11, Exactly, 0, 164)}, {SetInvincibility(Disable, 116, P6, "middle4")}, preserved)
 
     TriggerX(FP, {Deaths(P6, AtLeast, 1, 116)}, {RemoveUnit(179, P6)})
     TriggerX(FP, {Bring(P6, AtLeast, 50, 150, "Anywhere")}, {KillUnitAt(All, 50, "middle4", P6)}, preserved)
-    TriggerX(Force1, {CommandLeastAt(148, "middle4"),Deaths(P11, Exactly, 900, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
+    TriggerX(Force1, {Deaths(P11, Exactly, 900, 163),Deaths(P6, Exactly, 0, 116)}, {PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav"),PlayWAV("sound\\Zerg\\BUGGUY\\ZBGRdy00.wav")},{Preserved})
 
-    CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlotOrder(CS_Convert(Circulation1,17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
+    CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
+    CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
+    CAPlotOrder(CS_Convert(Circulation1,17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
     
-    CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
-    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
+    CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
+    CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
+    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
     for i = 1, 30 do
-        CSPlotOrder(Generator_shape, P6, M5GenG[i], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})
-        CSPlotOrder(Generator_shape, P6, M5GenS[i], "middle4", nil,1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 1, 165)})
+        CSPlotOrder(Generator_shape, P6, M5GenG[i], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
+        CSPlotOrder(Generator_shape, P6, M5GenS[i], "middle4", nil,1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
         TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, SetTo, 0, 163)}, preserved)
     end
     
     
     ----- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
     MBossPtr5, MBossHP5, MBossHP5_2, MBoss5_EPD = CreateVars(4,FP)
-    CIfOnce(FP,{CommandLeastAt(148, "middle4"),Deaths(P11, AtLeast, 10, 163)})
+    CIfOnce(FP,{Deaths(P11, AtLeast, 10, 163)})
         f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
         CMov(FP,MBossPtr5,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
@@ -438,8 +443,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {CommandLeastAt(148, "middle4"),Deaths(P6, Exactly, 1, 116)})
-    TriggerX(Force1, {CommandLeastAt(148, "middle4"), Deaths(P6, Exactly, 1, 116)}, {
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
+    TriggerX(Force1, {Deaths(P6, Exactly, 1, 116)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -447,8 +452,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         DisplayText(StrDesignX("+ \x1f300,000 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
-
     })
+    CIfEnd()
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
 
