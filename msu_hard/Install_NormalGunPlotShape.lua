@@ -615,7 +615,7 @@ function Install_NormalGunPlotShape()
             ------------- Start of Lair lv2 shape plot -------
 
             function LairGunplotLv2(Lairname, Deathvar)    
-                CIf(Force2, {CDeaths(FP, AtMost, LairLv2timeline[#LairLv2timeline] * SDspeed, Deathvar), CommandLeastAt(132, Lairname)})
+                CIf(Force2, {CDeaths(FP, AtMost, 28 * SDspeed, Deathvar), CommandLeastAt(132, Lairname)})
                 local arrayLength = #LairLv2GenArray
 
                 TriggerX(P7, {CommandLeastAt(132, Lairname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
@@ -634,7 +634,8 @@ function Install_NormalGunPlotShape()
                     CSPlot2(Lairbaseshape1, P6, 84, Lairname, nil, 1, 32, FP, {CDeaths(FP, AtLeast, LairLv2timeline[i] * SDspeed, Deathvar)})
                     CSPlotOrder2(Lairbaseshape1, P6, LairLv2GenArray[genIndex], Lairname, nil, 1, 32, LairbaseshapeArrival, nil, Attack, "HealZone", nil, 32, nil, FP,{CDeaths(FP, AtLeast, (LairLv2timeline[i]) * SDspeed, Deathvar)})
                 end
-                TriggerX(FP, {CDeaths(FP, AtLeast, 27 * SDspeed, Deathvar)}, {KillUnitAt(All, 92, Lairname, P6),SetSpriteImage(227, 983), SetImageColor(503, 0),SetImageScript(503, 292)})
+                Trigger2X(FP, {CDeaths(FP, AtLeast, 27 * SDspeed, Deathvar)}, {KillUnitAt(All, 92, Lairname, P6),SetSpriteImage(227, 983), SetImageColor(503, 0),SetImageScript(503, 292)})
+                
                 CIfEnd()
             end
 
