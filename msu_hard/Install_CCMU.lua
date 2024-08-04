@@ -51,10 +51,12 @@ function Install_CCMU()
     DisplayText(CanText11, 4),
     DisplayText(CanText22, 4),
     DisplayText(CanText33, 4),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV"),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV"),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV")}
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+}
     )
+
     
     TriggerX(Force1, {FMemory(0x58F450, Exactly, 2)}, { -- 2캔
     KillUnit(16, Force2),
@@ -72,9 +74,10 @@ function Install_CCMU()
     DisplayText(CanText111, 4),
     DisplayText(CanText222, 4),
     DisplayText(CanText333, 4),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV"),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV"),
-    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss01.WAV")}
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+    PlayWAV("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+}
     )
     
     
@@ -84,4 +87,77 @@ function Install_CCMU()
     DisplayText(CanText3333, 4),
     Defeat();
     })
+
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 1)}, {
+        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+    })
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 1),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
+    {
+        SetCDeaths(FP, Subtract, 1, CannotPenalty)
+    },preserved)
+
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 1),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
+        CopyCpAction(
+            {
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav")
+        }, Force1, FP),
+        CreateUnit(10, 191, "mainLocation", P6),
+        CreateUnit(10, 192, "mainLocation", P6),
+        Wait(10),
+        SetCp(P6),
+        RunAIScriptAt(JYD, "mainLocation"),
+        SetCp(FP)
+    })
+
+    --------------------2
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 2)}, {
+        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+    })
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 2),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
+    {
+        SetCDeaths(FP, Subtract, 1, CannotPenalty)
+    },preserved)
+
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 2),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
+        CopyCpAction(
+            {
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav")
+        }, Force1, FP),
+        CreateUnit(10, 191, "mainLocation", P6),
+        CreateUnit(10, 192, "mainLocation", P6),
+        Wait(10),
+        SetCp(P6),
+        RunAIScriptAt(JYD, "mainLocation"),
+        SetCp(FP)
+    })
+
+    ---------------------3
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 3)}, {
+        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+    })
+    TriggerX(FP, {FMemory(0x58F450, Exactly, 3),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
+    {
+        SetCDeaths(FP, Subtract, 1, CannotPenalty)
+    },preserved)
+
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
+        CopyCpAction(
+            {
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
+        PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav")
+        }, Force1, FP),
+        CreateUnit(10, 191, "mainLocation", P6),
+        CreateUnit(10, 192, "mainLocation", P6),
+        Wait(10),
+        SetCp(P6),
+        RunAIScriptAt(JYD, "mainLocation"),
+        SetCp(FP)
+    })
+    
+
     end

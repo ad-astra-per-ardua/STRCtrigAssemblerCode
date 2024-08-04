@@ -48,7 +48,7 @@ function MiddleBossTrigger()
     71, 71.6, 72.1, 72.5, 73, 73.4, 73.7, 74.2,
     74.5, 75.2, 76.1,
     76.5, 77.9, -- eft2
-    79.2,
+    79.2, 
     92.6, 98, 
     103.4, 104, 104.6, 105.4, 106.1
 }
@@ -58,15 +58,12 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     136.5
     }
 
-    MB7TL = {
-        16, -- 1 pattern
-        19.5, 21.5, 23.5, 25.5, 27.5, 29.5,
-        32,-- 2 pattern
-        33.5, 35.5, 37.5, 39.5, 41.5, 43.5, 45.5,
-        48, -- 3 pattern
-        49.5, 51.5, 53.5, 55.5, 57.5, 59.5, 61.5,
-        64, -- 4 pattern
-        65.5, 67.5, 69.5, 71.5, 73.5, 75.5, 77.5, 79.5, 80
+    MB7TL = { -- gap == 0.6, 0.55, 0.55, 0.6 == 1 plot
+    2.2, 4.5, 6.78, 9, 11.35, 13.64, 15.94, 18.22, 20.44, 22.79, 
+    25.08, 27.38, 29.66, 31.88, 34.23, 36.52, 38.82, 41.1, 43.32, 45.67,
+    47.96, 50.26, 52.54, 54.76
+
+
     }
     
     CreateLocation = {"patbat1","patbat2","patbat3","patbat4"}
@@ -215,8 +212,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
-        SetDeaths(P6, SetTo, 1, 205),
-        SetImageScript(227, 503)
+        SetDeaths(P6, SetTo, 1, 205)
     })
     CIfEnd()
     ------ End of 11 Middle boss trigger -----
@@ -229,9 +225,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
 
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
-    -- TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetInvincibility(Enable, 68, P6, "middle2")}, preserved)
-    -- TriggerX(FP, {Deaths(P11, AtLeast, 1, 163)}, {SetDeaths(P11, Subtract, 1, 163)}, preserved)
-    -- TriggerX(FP, {Deaths(P11, Exactly, 0, 163)}, {SetInvincibility(Disable, 68, P6, "middle2")}, preserved)
 
 
     CIfOnce(FP,{CommandLeastAt(175, "middle2"),Deaths(P11, AtLeast, 10, 161)})
@@ -251,7 +244,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     },{
         TSetMemory(MBossHP1,SetTo,256*7000000);
         SetNVar(MBossHP1_2,Subtract,1);
-        -- SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
 
     ------- Start of Bullet function ------
@@ -313,8 +305,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     
 
     
-    MB1CircleS = CSMakeCircle(6,64,0,61,1)
-    MB1CircleA = CSMakeCircle(6,0,0,61,1)
+    PE = CSMakeCircle(6,64,0,61,1)
+    PEA = CSMakeCircle(6,0,0,61,1)
     -- CS_BMPGraph(Triangle4, {"0xFF0000"}, "1", nil, nil, 1, nil, nil, nil, 3, 1, 1, 1)
     -- CDoActions(FP, f_Rand(FP,GenerateRandomIndex), preserved)
     -- CDoActions(FP,CMov(FP, RandomIndex, GenerateRandomIndex),preserved)
@@ -334,36 +326,36 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     
 
-    Tier1G = {8, 51 ,65, 66, 16,30, 52, 81, 102, 88, 89, 95, 104, 3, 16}
-    Tier2H = {3, 25, 23, 75, 76, 77, 78, 93, 104, 96, 75, 78, 81, 23, 7}
-    Tier3H = {7, 21, 58, 60, 62, 64, 69, 70, 86, 60, 64, 69, 89, 88, 21}
+    Tier1G = {8, 17 ,77, 78, 16, 25, 52, 3, 102, 104, 89, 95, 74, 3, 23}
+    Tier2H = {3, 25, 23, 75, 76, 77, 78, 93, 104, 96, 75, 78, 29, 23, 7}
+    Tier3H = {7, 21, 58, 60, 62, 64, 69, 28, 86, 60, 64, 69, 89, 88, 102}
     TriggerX(FP, {Deaths(P11, Exactly, (MB1TL[1]-1) * SDspeed , 161)},{SetScanImage(214)})
 
-    CSPlot(MB1CircleS, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[1]) * SDspeed , 161)})
-    CSPlot(MB1CircleS, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[2]) * SDspeed , 161)},{SetScanImage(928)})
-    CSPlot(MB1CircleS, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[3]) * SDspeed , 161)},{SetScanImage(546)})
+    CSPlot(PE, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[1]) * SDspeed , 161)})
+    CSPlot(PE, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[2]) * SDspeed , 161)},{SetScanImage(928)})
+    CSPlot(PE, P6, 33, LocM1, nil, 1, 32, FP,{Deaths(P11, Exactly, (MB1TL[3]) * SDspeed , 161)},{SetScanImage(546)})
 
-    CSPlotOrder(MB1CircleS, P6, 77, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[4]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 8, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[5]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 104, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[6]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 77, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[4]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 8, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[5]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 104, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[6]) * SDspeed , 161)})
 
-    CSPlotOrder(MB1CircleS, P6, 16, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[7]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 96, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[8]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 76, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[9]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 16, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[7]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 96, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[8]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 76, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[9]) * SDspeed , 161)})
 
-    CSPlotOrder(MB1CircleS, P6, 52, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[10]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 58, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[11]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 76, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[12]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 52, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[10]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 58, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[11]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 76, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[12]) * SDspeed , 161)})
 
 
     for i = 13, 37 do
-        CSPlotOrder(MB1CircleS, P6, Tier1G[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
-        CSPlotOrder(MB1CircleS, P6, Tier2H[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
-        CSPlotOrder(MB1CircleS, P5, Tier3H[((i-12) % 15) + 1], LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
+        CSPlotOrder(PE, P6, Tier1G[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
+        CSPlotOrder(PE, P6, Tier2H[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
+        CSPlotOrder(PE, P5, Tier3H[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
     end
-    CSPlotOrder(MB1CircleS, P6, 3, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 7, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
-    CSPlotOrder(MB1CircleS, P6, 28, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 3, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 7, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 28, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, MB1TL[38] * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[38] * SDspeed,161)}, {
@@ -425,7 +417,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         CMov(FP,MBossPtr5,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
                 CreateUnit(1,116,"middle4",P6);
-                TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
+                TSetMemory(Vi(MBossPtr5[2],2),SetTo,256*8300000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr5[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
 
             })
@@ -434,10 +426,10 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CIfEnd()
 
     CTrigger(FP,{
-        TMemory(MBossHP5,AtMost,256*400000);
+        TMemory(MBossHP5,AtMost,256*500000);
         NVar(MBossHP5_2,AtLeast,1);
     },{
-        TSetMemory(MBossHP5,SetTo,256*8000000);
+        TSetMemory(MBossHP5,SetTo,256*8300000);
         SetNVar(MBossHP5_2,Subtract,1);
         SetDeaths(P11, SetTo, 1, 165);
         SetDeaths(P11, SetTo, 102, 164);
@@ -464,12 +456,9 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     -- 82 -- Last gen
 
 
-GTL1 = {51,17,77,65,30,81,95,75,76,93,74}
-STL1 = {21,8,56,58,70,89,64,96,89,88,28}
+GTL1 = {104,17,77,78,25,81,95,74,76,3,74}
+STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     TriggerX(P7, {CommandLeastAt(127, "middle3")}, {SetDeaths(P11, Add, 1, 166)}, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetInvincibility(Enable, 126, P6, "middle3")}, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 1, 167)}, {SetDeaths(P11, Subtract, 1, 167)}, preserved)
-    TriggerX(FP, {Deaths(P11, Exactly, 0, 167)}, {SetInvincibility(Disable, 126, P6, "middle3")}, preserved)
 
     function VerifingPattern1(deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
@@ -482,7 +471,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Deaths(P8, AtLeast, 1, 9)
         },
         {
-            CreateUnitWithProperties(10, 45, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 45, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
@@ -496,7 +485,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Bring(P8, Exactly, 1, 98, "middle3")
         },
         {
-            CreateUnitWithProperties(10, 45, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 45, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
@@ -535,7 +524,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Deaths(P8, AtLeast, 1, 9)
         },
         {
-            CreateUnitWithProperties(10, 71, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 71, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
@@ -551,11 +540,12 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Bring(P8, Exactly, 1, 98, "middle3")
         },
         {
-            CreateUnitWithProperties(10, 49, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 71, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
             SetDeaths(P8, SetTo, 0, 98),
+            SetInvincibility(Disable, "Men", Force1, "Anywhere")
             -- DisplayText("Pattern2, Case2", 4)
         })
 
@@ -649,7 +639,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Deaths(P8, AtLeast, 1, 9)
         },
         {
-            CreateUnitWithProperties(10, 99, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 99, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
@@ -663,7 +653,7 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         Bring(P8, Exactly, 1, 98, "middle3")
         },
         {
-            CreateUnitWithProperties(10, 99, "middle3", P6, EnergyProp),
+            CreateUnitWithProperties(15, 99, "middle3", P6, EnergyProp),
             RemoveUnitAt(All, 9, "middle3", P8),
             RemoveUnitAt(All, 98, "middle3", P8),
             SetDeaths(P8, SetTo, 0, 9),
@@ -730,20 +720,19 @@ STL1 = {21,8,56,58,70,89,64,96,89,88,28}
         CMov(FP,MBossPtr7,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
                 CreateUnit(1,126,"middle3",P6);
-                TSetMemory(Vi(MBossPtr7[2],2),SetTo,256*7000000); -- Next unit pointer offset's HP set
+                TSetMemory(Vi(MBossPtr7[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,25)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,30)})
     CIfEnd()
 
     CTrigger(FP,{
-        TMemory(MBossHP7,AtMost,256*400000);
+        TMemory(MBossHP7,AtMost,256*450000);
         NVar(MBossHP7_2,AtLeast,1);
     },{
-        TSetMemory(MBossHP7,SetTo,256*6500000);
+        TSetMemory(MBossHP7,SetTo,256*8000000);
         SetNVar(MBossHP7_2,Subtract,1);
-        SetDeaths(P11, SetTo, 102, 167);
     },{preserved})
     
     CIfXEnd()

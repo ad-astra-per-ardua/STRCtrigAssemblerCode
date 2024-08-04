@@ -80,6 +80,9 @@ function Install_plotshape()
     generator_dvar1,generator_dvar2,generator_dvar3,generator_dvar4 = CreateCcodes(4)
     generator_dvarr = {generator_dvar1,generator_dvar2,generator_dvar3,generator_dvar4}
     generator_spot = {"generator1","generator2","generator3","generator4"}
+    
+    CannotPenalty = CreateCcode()
+
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}
