@@ -190,7 +190,7 @@ function Install_plotshape()
         51, 16, 56, 46, 62
     }
     CenterCallGen2 = {
-        8, 25, 12, 66, 50
+        8, 25, 12, 66, 17
     }
     CenterCallGen3 = {
         7, 76, 60, 64, 70

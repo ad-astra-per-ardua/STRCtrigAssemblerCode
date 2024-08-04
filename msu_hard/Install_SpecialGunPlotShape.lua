@@ -335,29 +335,29 @@ function Install_SpecialGunPlotShape()
     TriggerX(P7, {CommandLeastAt(130, "nuke1")}, {SetDeaths(P10, Add, 1, 62)},preserved);
     TriggerX(P7, {Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
 
-    CAPlotWithProperties(Shell_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc1, P5, 96,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(Shell_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(Shell_Arc3, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(Shell_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
 
-    CAPlotWithProperties(SH_Arc1, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc1, P5, 96,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(SH_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
-    CAPlotWithProperties(SH_Arc3, P5, 102,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
+    CAPlotWithProperties(SH_Arc3, P5, 64,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(SH_Arc4, P6, 60,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 70, 62)},nil, nil, StargateProperties)
 
-    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive4")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(96, P5, "Anywhere", Move, "hive4")})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(70, P6, "Anywhere", Move, "starg8")})
-    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(102, P5, "Anywhere", Move, "hive3")})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(64, P5, "Anywhere", Move, "hive3")})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[1] * SDspeed, 62)}, {Order(60, P6, "Anywhere", Move, "starg3")})
 
-    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive4", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 96, P5, "hive4", P6)})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 70, P6, "starg8", P6)})
-    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 102, P5, "hive3", P6)})
+    TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive3", P6)})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 60, P6, "starg3", P6)})
 
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 96, Force2, "Anywhere")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 102, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 60, Force2, "Anywhere")})
 
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
@@ -366,9 +366,9 @@ function Install_SpecialGunPlotShape()
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
 
     TriggerX(P5, {Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
-        Order(64, P6, "Anywhere", Attack, "HealZone"),
+        Order(96, P6, "Anywhere", Attack, "HealZone"),
         Order(70, P6, "Anywhere", Attack, "HealZone"),
-        Order(102, P6, "Anywhere", Attack, "HealZone"),
+        Order(64, P6, "Anywhere", Attack, "HealZone"),
         Order(60, P6, "Anywhere", Attack, "HealZone")
     })
 
@@ -412,9 +412,9 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
 
     TriggerX(P7, {CommandLeastAt(106, "nuke2")}, {SetDeaths(P10, Add, 1, 63)},preserved)
     CIf(Force2, {Deaths(P10, AtMost, (InfcomTimeline[#InfcomTimeline] * SDspeed) + SDspeed, 63)})
-    TriggerX(Force1, {Deaths(P10, AtLeast, 10, 63)}, {
+    TriggerX(Force1, {Deaths(P10, AtLeast, 10, 63), Deaths(P10, AtMost, 80*SDspeed, 63)}, {
         RunAIScript("Turn ON Shared Vision for Player 6")
-    })
+    },preserved)
 
     function Inf12(unitid, timeplot)
         CSPlot(Width, P6, 72, Locinf[1], nil, 1, 96, P6, {Deaths(P10, AtLeast, InfcomTimeline[timeplot] * SDspeed, 63)})

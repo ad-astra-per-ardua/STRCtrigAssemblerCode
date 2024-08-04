@@ -107,29 +107,29 @@ for i = 1 , 4 do
     })
 end
 
-for i = 1 , 4 do 
-    Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
-    Unlock2 = StrDesignX(Utext3[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
-    Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
-    TriggerX(Force1, {
-        Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
-    }, {
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        SetInvincibility(Disable, 200, P7, "generator"..i),
-        DisplayText(Unlock1, 4),
-        DisplayText(Unlock2, 4),
-        DisplayText(Unlock3, 4),
-        MinimapPing("generator"..i),
-        Wait(50),
-        MinimapPing("generator"..i),
-        Wait(50),
-        MinimapPing("generator"..i),
-        Wait(50),
-        MinimapPing("generator"..i)
-    })
-end
+-- for i = 1 , 4 do 
+--     Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+--     Unlock2 = StrDesignX(Utext3[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
+--     Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+--     TriggerX(Force1, {
+--         Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
+--     }, {
+--         PlayWAV("staredit\\wav\\CAUTION.wav"),
+--         PlayWAV("staredit\\wav\\CAUTION.wav"),
+--         PlayWAV("staredit\\wav\\CAUTION.wav"),
+--         SetInvincibility(Disable, 200, P7, "generator"..i),
+--         DisplayText(Unlock1, 4),
+--         DisplayText(Unlock2, 4),
+--         DisplayText(Unlock3, 4),
+--         MinimapPing("generator"..i),
+--         Wait(50),
+--         MinimapPing("generator"..i),
+--         Wait(50),
+--         MinimapPing("generator"..i),
+--         Wait(50),
+--         MinimapPing("generator"..i)
+--     })
+-- end
 
 CIfXEnd()
 end

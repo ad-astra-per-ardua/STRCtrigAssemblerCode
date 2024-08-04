@@ -21,8 +21,8 @@ SnowFlake =
 FP = P8
 SetForces({P1,P2,P3,P4},{P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
-StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
--- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 
 Include_DataTransfer()
@@ -46,6 +46,8 @@ function CallTriggerFPX(Player,Index,Condition,AddonTrigger,Flags) -- CtrigAsm 5
 	table.insert(X,SetCtrig1X(FP,Index+1,0x164,0,SetTo,0x0,0x2))
 	TriggerX(Player,Condition,{AddonTrigger,X},Y)
 end
+
+
 
 function CSPlotOrder(Shape,Owner,UnitId,Location,CenterXY,PerUnit,PlotSize,OrderShape,Direction,OrderType,OrderLocation,DestXY,SizeofLoc,PerAction,PlayerID,Condition,Action,Preserve)
     --    CA : (=CAPlotDataArr) : 1st CAPlot전용내부변수총14개
@@ -153,8 +155,6 @@ ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
--- TriggerX(FP, Always(), {SetResources(P1, SetTo, 1000000, Ore)}, preserved)
--- TriggerX(FP, Always(), {CreateUnit(132, 1, "hive10", P1)})
 
 Install_function()
 Install_verifingPhase()

@@ -397,11 +397,11 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     CAPlot(Circulation1, P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(Circulation1, P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
-    CAPlotOrder(CS_Convert(Circulation1,17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
+    CAPlotOrder(CS_Convert(Circulation1,12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil,CSMakeCircleX(6,0,30,54,24) , Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 2040, 163),Deaths(P6, Exactly, 0, 116)},nil,{})
     
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 84, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtMost, 900, 163),Deaths(P6, Exactly, 0, 116)}, nil,1)
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
-    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),17), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
+    CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
     for i = 1, 30 do
         local arrayLength = #M5GenG
@@ -694,22 +694,22 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
     CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
-    VerifingPattern3(MB7TL[1])
-    VerifingPattern4((MB7TL[1] + 10))
-    VerifingPattern1(MB7TL[8])
-    VerifingPattern2((MB7TL[8] + 10))
-    VerifingPattern1(MB7TL[16])
-    VerifingPattern3((MB7TL[16] + 10))
-    VerifingPattern4(MB7TL[24])
-    VerifingPattern2((MB7TL[24] + 10))
-    VerifingPattern1(MB7TL[32])
-    VerifingPattern4((MB7TL[32] + 10))
-    VerifingPattern1(MB7TL[40])
-    VerifingPattern2(MB7TL[40] + 10)
-    VerifingPattern1(MB7TL[48])
-    VerifingPattern3(MB7TL[48] + 10)
-    VerifingPattern2(MB7TL[48])
-    VerifingPattern4(MB7TL[48] + 10)
+    -- VerifingPattern3(MB7TL[1])
+    -- VerifingPattern4((MB7TL[1] + 10))
+    -- VerifingPattern1(MB7TL[8])
+    -- VerifingPattern2((MB7TL[8] + 10))
+    -- VerifingPattern1(MB7TL[16])
+    -- VerifingPattern3((MB7TL[16] + 10))
+    -- VerifingPattern4(MB7TL[24])
+    -- VerifingPattern2((MB7TL[24] + 10))
+    -- VerifingPattern1(MB7TL[32])
+    -- VerifingPattern4((MB7TL[32] + 10))
+    -- VerifingPattern1(MB7TL[40])
+    -- VerifingPattern2(MB7TL[40] + 10)
+    -- VerifingPattern1(MB7TL[48])
+    -- VerifingPattern3(MB7TL[48] + 10)
+    -- VerifingPattern2(MB7TL[48])
+    -- VerifingPattern4(MB7TL[48] + 10)
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
