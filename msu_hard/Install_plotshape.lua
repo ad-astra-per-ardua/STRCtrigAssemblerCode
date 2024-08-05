@@ -81,7 +81,7 @@ function Install_plotshape()
     generator_dvarr = {generator_dvar1,generator_dvar2,generator_dvar3,generator_dvar4}
     generator_spot = {"generator1","generator2","generator3","generator4"}
     
-    CannotPenalty = CreateCcode()
+    CannotPenalty,Waveswitch  = CreateCcodes(2)
 
     --------- Plot shape
 

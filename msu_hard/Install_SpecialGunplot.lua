@@ -12,7 +12,10 @@ function Install_SpecialGunplot()
 }
 
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
-    TriggerX(FP, Always(), {Wait(100),
+
+    ----------- Normal plot
+
+    TriggerX(FP, Always(), {
         CreateUnit(1, 151, "celebrate1", P7);
         CreateUnit(1, 152, "celebrate2", P7);
         CreateUnit(1, 130,"nuke1", P7);
@@ -21,6 +24,10 @@ function Install_SpecialGunplot()
         CreateUnit(1, 175,"middle2", P7);
         CreateUnit(1, 127,"middle3", P7);
         CreateUnit(1, 148,"middle4", P7);
+        CreateUnit(1, 200, "generator1", P7);
+        CreateUnit(1, 200, "generator2", P7);
+        CreateUnit(1, 200, "generator3", P7);
+        CreateUnit(1, 200, "generator4", P7);
         SetInvincibility(Enable, 127, P7, "Anywhere");
         SetInvincibility(Enable, 148, P7, "Anywhere");
         SetInvincibility(Enable, 174, P7, "Anywhere");
@@ -29,38 +36,54 @@ function Install_SpecialGunplot()
 
 ------ Start of Disable invincibility condition trigger -------
 
-
+for i = 1 , 4 do 
+    Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+    Unlock2 = StrDesignX(Utext3[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
+    Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+    TriggerX(FP, {
+        Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
+    }, {
+        RotatePlayer({
+            PlayWAVX("staredit\\wav\\CAUTION.wav"),
+            PlayWAVX("staredit\\wav\\CAUTION.wav"),
+            DisplayTextX(Unlock1, 4),
+            DisplayTextX(Unlock2, 4),
+            DisplayTextX(Unlock3, 4),
+            MinimapPing("generator"..i)
+        
+        }, {Force1, Force5}, FP),
+        SetInvincibility(Disable, 200, P7, "generator"..i)
+    })
+end
 
 for i = 1 , 4 do 
     Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
     Unlock2 = StrDesignX(Utext1[i]).."\n"..StrDesignX(Utext2[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
     Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
-    TriggerX(Force1, {
+    TriggerX(FP, {
         Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
         Deaths(P1, AtLeast, 1, 106),
-        Deaths(P1, AtLeast, 1, 130)
+        Deaths(P1, AtLeast, 1, 130),
+        Bring(P7, Exactly, 0, 200, "generator"..i)
     }, {
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        SetInvincibility(Disable, MBBuildingArray[i], P7, "middle"..i),
-        DisplayText(Unlock1, 4),
-        DisplayText(Unlock2, 4),
-        DisplayText(Unlock3, 4),
+        RotatePlayer({
+        DisplayTextX(Unlock1, 4),
+        DisplayTextX(Unlock2, 4),
+        DisplayTextX(Unlock3, 4),
         MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i)
+        PlayWAVX("staredit\\wav\\CAUTION.wav"),
+        PlayWAVX("staredit\\wav\\CAUTION.wav")
+        }, {Force1,Force5}, FP),
+        SetInvincibility(Disable, MBBuildingArray[i], P7, "middle"..i)
     })
 end
 
 
 CElseX()
 
-TriggerX(FP, Always(), {Wait(100),
+------------ Hard plot 
+
+TriggerX(FP, Always(), {
         CreateUnit(1, 151, "celebrate1", P7);
         CreateUnit(1, 152, "celebrate2", P7);
         CreateUnit(1, 130,"nuke1", P7);
@@ -80,56 +103,49 @@ TriggerX(FP, Always(), {Wait(100),
         SetInvincibility(Enable, 200, P7, "Anywhere");
 })
 
+
+for i = 1 , 4 do 
+    Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+    Unlock2 = StrDesignX(Utext3[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
+    Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
+    TriggerX(FP, {
+        Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
+    }, {
+        RotatePlayer({
+            PlayWAVX("staredit\\wav\\CAUTION.wav"),
+            PlayWAVX("staredit\\wav\\CAUTION.wav"),
+            DisplayTextX(Unlock1, 4),
+            DisplayTextX(Unlock2, 4),
+            DisplayTextX(Unlock3, 4),
+            MinimapPing("generator"..i)
+        }, {Force1, Force5}, FP),
+        SetInvincibility(Disable, 200, P7, "generator"..i)
+    })
+end
+
 for i = 1 , 4 do 
     Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
     Unlock2 = StrDesignX(Utext1[i]).."\n"..StrDesignX(Utext2[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
     Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
-    TriggerX(Force1, {
+    TriggerX(FP, {
         Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
-        Bring(P7, Exactly, 0, 200, "generator"..i),
         Deaths(P1, AtLeast, 1, 106),
         Deaths(P1, AtLeast, 1, 130),
+        Bring(P7, Exactly, 0, 200, "generator"..i)
     }, {
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        PlayWAV("staredit\\wav\\CAUTION.wav"),
-        SetInvincibility(Disable, MBBuildingArray[i], P7, "middle"..i),
-        DisplayText(Unlock1, 4),
-        DisplayText(Unlock2, 4),
-        DisplayText(Unlock3, 4),
+        RotatePlayer({
+        DisplayTextX(Unlock1, 4),
+        DisplayTextX(Unlock2, 4),
+        DisplayTextX(Unlock3, 4),
         MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i),
-        Wait(50),
-        MinimapPing("middle"..i)
+        PlayWAVX("staredit\\wav\\CAUTION.wav"),
+        PlayWAVX("staredit\\wav\\CAUTION.wav")
+        }, {Force1,Force5}, FP),
+        SetInvincibility(Disable, MBBuildingArray[i], P7, "middle"..i)
     })
 end
+    
 
--- for i = 1 , 4 do 
---     Unlock1 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
---     Unlock2 = StrDesignX(Utext3[i].."의 무적이 \x07해제\x04되었습니다 !").."\n\n"
---     Unlock3 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08 ＮＯＴＩＣＥ \x04 ● ● ●\n\x14\n\x14\n"
---     TriggerX(Force1, {
---         Bring(Force2, AtMost, 1, "Any unit", "middle"..i),
---     }, {
---         PlayWAV("staredit\\wav\\CAUTION.wav"),
---         PlayWAV("staredit\\wav\\CAUTION.wav"),
---         PlayWAV("staredit\\wav\\CAUTION.wav"),
---         SetInvincibility(Disable, 200, P7, "generator"..i),
---         DisplayText(Unlock1, 4),
---         DisplayText(Unlock2, 4),
---         DisplayText(Unlock3, 4),
---         MinimapPing("generator"..i),
---         Wait(50),
---         MinimapPing("generator"..i),
---         Wait(50),
---         MinimapPing("generator"..i),
---         Wait(50),
---         MinimapPing("generator"..i)
---     })
--- end
 
 CIfXEnd()
 end

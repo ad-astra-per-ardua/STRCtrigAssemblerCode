@@ -62,9 +62,9 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     2.2, 4.5, 6.78, 9, 11.35, 13.64, 15.94, 18.22, 20.44, 22.79, 
     25.08, 27.38, 29.66, 31.88, 34.23, 36.52, 38.82, 41.1, 43.32, 45.67,
     47.96, 50.26, 52.54, 54.76,59.93, 62.23, 64.51, 66.73, 69.08, 71.37,
-     73.67, 75.95, 78.17, 80.52, 82.81, 85.11, 87.39, 89.61, 91.96, 94.25,
-      96.55, 98.83, 101.05, 103.4, 105.69, 107.99, 110.27, 112.49, 114.84, 117.13,
-       119.43, 121.71, 123.93, 126.28, 128.57, 130.87
+    73.67, 75.95, 78.17, 80.52, 82.81, 85.11, 87.39, 89.61, 91.96, 94.25,
+    96.55, 98.83, 101.05, 103.4, 105.69, 107.99, 110.27, 112.49, 114.84, 117.13,
+    119.43, 121.71, 123.93, 126.28, 128.57, 130.87
     }
     
     CreateLocation = {"patbat1","patbat2","patbat3","patbat4"}
@@ -93,7 +93,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     TriggerX(P7, {CommandLeastAt(174, "middle1")}, {SetDeaths(P11, Add, 1, 160)}, preserved)
 
-    CIf(Force2, {Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160)})
+    CIf(Force2, {Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
 
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
@@ -215,7 +215,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
     })
-    CIfEnd()
+    CIfEnd(SetCDeaths(FP, SetTo, 1, Waveswitch))
     ------ End of 11 Middle boss trigger -----
     
 
@@ -223,7 +223,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
 
-    CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
+    CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
 
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
 
@@ -237,7 +237,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,40)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,28)})
     CIfEnd()
     CTrigger(FP,{
         TMemory(MBossHP1,AtMost,256*400000);
@@ -368,7 +368,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 204)
     })
-    CIfEnd()
+    CIfEnd({{SetCDeaths(FP, SetTo, 1, Waveswitch)}})
 
     -------- End of 1 Middle Boss trigger -------
 
@@ -378,7 +378,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     ]]
     -------- Start of 5 Middle Boss Trigger ------ DeathValue = 163 | BossGenerate Trigger = 165
     TriggerX(P7, {Deaths(P7, AtLeast, 1, 148)}, {SetDeaths(P11, Add, 1, 163)}, preserved)
-    CIf(Force2, {Deaths(P11, AtLeast, 10, 163),Deaths(P6, AtMost, 0, 116)})
+
+    CIf(Force2, {Deaths(P11, AtLeast, 10, 163),Deaths(P6, AtMost, 0, 116)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
     CLX = CAPlotOrderForward()
     Circulation1 = CSMakeCircleX(6,115,30,54,24)
     TempPerAction = {9,10,13,15,16,17}
@@ -403,7 +404,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
     CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
-    for i = 1, 30 do
+    for i = 1, 20 do
         local arrayLength = #M5GenG
         local genIndex = ((i - 1) % arrayLength) + 1
         CSPlotOrder2(Generator_shape, P6, M5GenG[genIndex], "middle4", nil, 1, 32, Generator_shapeA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
@@ -423,7 +424,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,30)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,20)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -446,7 +447,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
     })
-    CIfEnd()
+    CIfEnd({SetCDeaths(FP, SetTo, 1, Waveswitch)})
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
 
@@ -460,256 +461,51 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 GTL1 = {104,17,77,78,25,81,95,74,76,3,74}
 STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     TriggerX(P7, {CommandLeastAt(127, "middle3")}, {SetDeaths(P11, Add, 1, 166)}, preserved)
-    CIf(Force2, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)})
-    function VerifingPattern1(deathvar) -- Fatal = 9, Safe = 98
+    VerifLoc = {"patbat1","patbat2","patbat3","patbat4"}
+    CIf(Force2, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)},{SetCDeaths(FP, SetTo, 0, Waveswitch)},preserved)
+    function VerifingPattern1(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
-        TriggerX(FP, { Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {CreateUnit(1, 98, "starg6", P8),CreateUnit(1, 9, "starg7", P8),CreateUnit(1, 9, "starp6", P8),CreateUnit(1, 9, "starp7", P8)})
-
-        ---- Verifing Pattern phase section ----
-        TriggerX(Force1, {  -- Case1 - Failed : fatal pattern1 = Insnare | subtract 1 9 preserved
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 9)
-        },
-        {
-            CreateUnitWithProperties(15, 45, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern1, Case1", 4)
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
+            CreateUnit(1, 91, location, P8),
+            Order(91, P8, location, Attack, "unrevealer1")
         })
 
-        TriggerX(Force1, {  -- Case2 - Doing nothing. Means 98 : Safe Vessel is Still Alive. -> Bring : fatal pattern1 = Insnare
-        Deaths(P11, Exactly, (deathvar + 5.5) * SDspeed, 166),
-        Bring(P8, AtLeast, 3, 9, "middle3"),
-        Bring(P8, Exactly, 1, 98, "middle3")
-        },
-        {
-            CreateUnitWithProperties(15, 45, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern1, Case2", 4)
+        Trigger2X(FP, {
+            Deaths(P11, AtLeast, deathvar * SDspeed, 166), 
+            Deaths(P11, AtMost, (deathvar + 10) + SDspeed, 166),
+            Bring(P8, AtLeast, 1, 91, "unrevealer1")
+        }, {
+            RotatePlayer({
+            PlayWAVX("staredit\\wav\\7effects.ogg"),
+            PlayWAVX("staredit\\wav\\7effects.ogg"),
+            }, {Force1, force5}, FP),
+            RemoveUnitAt(All, 91, "unrevealer1", P8),
+            CreateUnit(1, 72, "unrevealer1", P8),
+            CreateUnit(15, 99, "unrevealer1", P6)
         })
+    end 
+    VerifingPattern1(VerifLoc[1], MB7TL[1])
+    VerifingPattern1(VerifLoc[2], MB7TL[2])
+    VerifingPattern1(VerifLoc[3], MB7TL[3])
+    VerifingPattern1(VerifLoc[4], MB7TL[4])
+    VerifingPattern1(VerifLoc[1], MB7TL[1])
+    VerifingPattern1(VerifLoc[2], MB7TL[2])
+    VerifingPattern1(VerifLoc[3], MB7TL[3])
+    VerifingPattern1(VerifLoc[4], MB7TL[4])
 
-        TriggerX(Force1, {  -- Else : Passed the patterns
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 98)
-        },
-        {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern1, Passed", 4)
-        })
-        TriggerX(Force1, {Deaths(P11, Exactly, (deathvar + 6) * SDspeed, 166)}, {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern1, End of phase", 4)
-        })
-        ----- End of Pattern phase section --- 
-    end
-    function VerifingPattern2(deathvar)
-        TriggerX(FP, { Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {CreateUnit(1, 9, "starg6", P8),CreateUnit(1, 98, "starg7", P8),CreateUnit(1, 9, "starp6", P8),CreateUnit(1, 9, "starp7", P8)})
 
-        ---- Verifing Pattern phase section ----
-        TriggerX(Force1, { -- Case1 - Failed : fatal pattern2 = Broodling | subtract 1 9 preserved
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 9)
-        },
-        {
-            CreateUnitWithProperties(15, 71, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            Wait(1),
-            SetInvincibility(Disable, "Men", Force1, "Anywhere")
-            -- DisplayText("Pattern2, Case1", 4)
-        })
 
-        TriggerX(Force1, { -- Case2 - Doing nothing. Means 98 : Safe Vessel is Still Alive. -> Bring : fatal pattern2 = Broodling
-        Deaths(P11, Exactly, (deathvar + 5.5) * SDspeed, 166),
-        Bring(P8, AtLeast, 3, 9, "middle3"),
-        Bring(P8, Exactly, 1, 98, "middle3")
-        },
-        {
-            CreateUnitWithProperties(15, 71, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            SetInvincibility(Disable, "Men", Force1, "Anywhere")
-            -- DisplayText("Pattern2, Case2", 4)
-        })
 
-        TriggerX(Force1, {  -- Else : Passed the patterns
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 98)
-        },
-        {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern2, Passed", 4)
-        })
-        TriggerX(Force1, {Deaths(P11, Exactly, (deathvar + 6) * SDspeed, 166)}, {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern2, End of phase", 4)
-        })
-        ----- End of Pattern phase section --- 
-    end
-    function VerifingPattern3(deathvar)
-        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {CreateUnit(1, 9, "starg6", P8),CreateUnit(1, 9, "starg7", P8),CreateUnit(1, 98, "starp6", P8),CreateUnit(1, 9, "starp7", P8)})
+    -- for i = 1 , #MB7TL do --- Length == 32
+    --     local arrayLength = #GTL1
+    --     local genIndex = ((i - 1) % arrayLength) + 1
+    --     CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+    --     CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+    -- end
+    -- CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
+    -- CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
-        ---- Verifing Pattern phase section ----
-        TriggerX(Force1, { -- Case1 - Failed : fatal pattern3 = Nuke Battle 4 pic | subtract 1 9 preserved
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 9)
-        },
-        {
-            CreateUnit(1, 27, CreateLocation[1], P6),
-            CreateUnit(1, 27, CreateLocation[2], P6),
-            CreateUnit(1, 27, CreateLocation[3], P6),
-            CreateUnit(1, 27, CreateLocation[4], P6),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern3, Case1", 4)
-        })
 
-        TriggerX(Force1, { -- Case2 - Doing nothing. Means 98 : Safe Vessel is Still Alive. -> Bring : fatal pattern3 = Nuke Battle 4 pic
-        Deaths(P11, Exactly, (deathvar + 5.5) * SDspeed, 166),
-        Bring(P8, AtLeast, 3, 9, "middle3"),
-        Bring(P8, Exactly, 1, 98, "middle3")
-        },
-        {
-            CreateUnit(1, 27, CreateLocation[1], P6),
-            CreateUnit(1, 27, CreateLocation[2], P6),
-            CreateUnit(1, 27, CreateLocation[3], P6),
-            CreateUnit(1, 27, CreateLocation[4], P6),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern3, Case2", 4)
-        })
-
-        TriggerX(Force1, {-- Else : Passed the patterns
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 98)
-        },
-        {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern3, Passed", 4)
-        })
-        TriggerX(Force1, {Deaths(P11, Exactly, (deathvar + 6) * SDspeed, 166)}, {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern3, End of phase", 4)
-        })
-        ----- End of Pattern phase section --- 
-    end
-    function VerifingPattern4(deathvar)
-        TriggerX(FP, { Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {CreateUnit(1, 9, "starg6", P8),CreateUnit(1, 9, "starg7", P8),CreateUnit(1, 9, "starp6", P8),CreateUnit(1, 98, "starp7", P8)})
-
-        ---- Verifing Pattern phase section ----
-        TriggerX(FP, {-- Case1 - Failed : fatal pattern4 = Lockdown | subtract 1 9 preserved
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 9)
-        },
-        {
-            CreateUnitWithProperties(15, 99, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern4, Case1", 4)
-        })
-
-        TriggerX(FP, {-- Case2 - Doing nothing. Means 98 : Safe Vessel is Still Alive. -> Bring : fatal pattern4 = Lockdown
-        Deaths(P11, Exactly, (deathvar + 5.5) * SDspeed, 166),
-        Bring(P8, AtLeast, 3, 9, "middle3"),
-        Bring(P8, Exactly, 1, 98, "middle3")
-        },
-        {
-            CreateUnitWithProperties(15, 99, "middle3", P6, EnergyProp),
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern4, Case2", 4)
-            
-        })
-
-        TriggerX(FP, {-- Else : Passed the patterns
-        Deaths(P11, AtLeast, (deathvar) * SDspeed, 166),
-        Deaths(P11, AtMost, (deathvar + 6) * SDspeed, 166),
-        Deaths(P8, AtLeast, 1, 98)
-        },
-        {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern4, Passed", 4)
-        })
-        TriggerX(FP, {Deaths(P11, Exactly, (deathvar + 6) * SDspeed, 166)}, {
-            RemoveUnitAt(All, 9, "middle3", P8),
-            RemoveUnitAt(All, 98, "middle3", P8),
-            SetDeaths(P8, SetTo, 0, 9),
-            SetDeaths(P8, SetTo, 0, 98),
-            -- DisplayText("Pattern4, End of phase", 4)
-        })
-        ----- End of Pattern phase section --- 
-    end
-
-    for i = 1 , #MB7TL do --- Length == 32
-        local arrayLength = #GTL1
-        local genIndex = ((i - 1) % arrayLength) + 1
-        CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-        CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
-    end
-    CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
-
-    -- VerifingPattern3(MB7TL[1])
-    -- VerifingPattern4((MB7TL[1] + 10))
-    -- VerifingPattern1(MB7TL[8])
-    -- VerifingPattern2((MB7TL[8] + 10))
-    -- VerifingPattern1(MB7TL[16])
-    -- VerifingPattern3((MB7TL[16] + 10))
-    -- VerifingPattern4(MB7TL[24])
-    -- VerifingPattern2((MB7TL[24] + 10))
-    -- VerifingPattern1(MB7TL[32])
-    -- VerifingPattern4((MB7TL[32] + 10))
-    -- VerifingPattern1(MB7TL[40])
-    -- VerifingPattern2(MB7TL[40] + 10)
-    -- VerifingPattern1(MB7TL[48])
-    -- VerifingPattern3(MB7TL[48] + 10)
-    -- VerifingPattern2(MB7TL[48])
-    -- VerifingPattern4(MB7TL[48] + 10)
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
@@ -734,7 +530,7 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,30)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,15)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -745,7 +541,11 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
         SetNVar(MBossHP7_2,Subtract,1);
     },{preserved})
     
+
+    CIfEnd({SetCDeaths(FP, SetTo, 1, Waveswitch)})
+    
     CIfXEnd()
+    
     ------------ End of Boss HP Overflow Trigger ----------------------
 
     ------- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
@@ -770,5 +570,5 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     --     SetNVar(FBossHP2,Subtract,1);
     -- },{preserved})
     -------------- End of Boss HP Overflow Trigger ----------------------
-    CIfEnd()
+    
 end

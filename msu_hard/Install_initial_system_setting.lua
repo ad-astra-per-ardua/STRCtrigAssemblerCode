@@ -3,8 +3,9 @@ function Install_initial_system_setting()
     -- TriggerX(FP, Always(), {CreateUnit(36, 1, "HealZone", P1)})
     TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)});
     DoActions(FP, SetInvincibility(Enable, "Buildings", P12, "Anywhere"),preserved)
-    DoActions(FP, {KillUnit(94, Force2),KillUnit(84, Force2),KillUnit(42, Force2),KillUnit(72, Force2),KillUnit(35, Force2)}, preserved)
-    
+    DoActions(FP, {KillUnit(94, Force2),KillUnit(84, Force2),KillUnit(42, Force2),KillUnit(72, Force2),RemoveUnit(35, Force2)}, preserved)
+    TriggerX(FP, Always(), {SetCDeaths(FP, SetTo, 1, Waveswitch)})
+
     ------ Color Setting ----- 
     DoActions(FP, SetDeaths(P11, Add, 1, 1), preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 17, 1), {SetDeaths(P11, SetTo, 1, 1)}, preserved)

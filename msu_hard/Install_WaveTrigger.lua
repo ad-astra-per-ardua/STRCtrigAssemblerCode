@@ -1,28 +1,11 @@
 function Install_WaveTrigger()
     ----------- 30 sec period --------
-Trigger{
-    players = {P6},
-    conditions = {
-        Always();
-    },
-    actions = {
-        SetDeaths(P8, Add, 1, 131);
-        PreserveTrigger();
-    }
-}
 
-Trigger{
-	players = {P6},
-	conditions = {
-		Always();
-	},
-	actions = {
-		SetDeaths(P8, Add, 1, 132);
-		PreserveTrigger()
-	}
-}
+TriggerX(FP, {CDeaths(FP, AtLeast, 1, Waveswitch)}, {SetDeaths(P8, Add, 1, 131)}, preserved)
+TriggerX(FP, {CDeaths(FP, AtLeast, 1, Waveswitch)}, {SetDeaths(P8, Add, 1, 132)}, preserved)
 
-Trigger2(P6, {Deaths(P8, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
+
+TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
 
 CIfX(Force2, {CDeaths(FP, AtLeast, 1, Difficulty)})
 

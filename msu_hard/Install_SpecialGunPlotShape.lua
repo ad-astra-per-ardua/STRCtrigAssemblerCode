@@ -262,9 +262,9 @@ function Install_SpecialGunPlotShape()
     CSPlot(CX2,P6,46,"celebrate1",nil,1,32,P7,{Deaths(P10,Exactly,896+102,60)}) --외접원
 
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 100+(3*SDspeed), 60)}, {
-        Order(55, Force2, "celebrate1", Attack, "HealZone"),Order(51, Force2, "celebrate1", Attack, "HealZone")})
+        Order("Men", Force2, "celebrate1", Attack, "HealZone"),Order("Men", Force2, "celebrate1", Attack, "HealZone")})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 900+(3*SDspeed), 60)}, {
-        Order(56, Force2, "celebrate1", Attack, "HealZone"),Order(46, Force2, "celebrate1", Attack, "HealZone")})
+        Order("Men", Force2, "celebrate1", Attack, "HealZone"),Order("Men", Force2, "celebrate1", Attack, "HealZone")})
     for j = 1, 24 do
         GLj = CSMakeLineX(1,60,360-15*j,11,1) -- 원그리기 2
         CSPlot(GLj,P6,84,"celebrate1",nil,1,64,P7,{Deaths(P10,Exactly,400+4*j+102,60)})
@@ -278,9 +278,9 @@ function Install_SpecialGunPlotShape()
     CSPlot(CX2,P6,65,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,496+102,60)})
     CSPlot(CX2,P6,17,"celebrate1",nil,1,48,P7,{Deaths(P10,Exactly,1296+102,60)})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 500+(3*SDspeed), 60)}, {
-        Order(8, Force2, "celebrate1", Attack, "HealZone"),Order(65, Force2, "celebrate1", Attack, "HealZone")})
+        Order("Men", Force2, "celebrate1", Attack, "HealZone"),Order("Men", Force2, "celebrate1", Attack, "HealZone")})
     TriggerX(P7, {CommandLeastAt(151, "celebrate1"),Deaths(P10, AtLeast, 1300+(3*SDspeed), 60)}, {
-        Order(88, Force2, "celebrate1", Attack, "HealZone"),Order(17, Force2, "celebrate1", Attack, "HealZone")})
+        Order("Men", Force2, "celebrate1", Attack, "HealZone"),Order("Men", Force2, "celebrate1", Attack, "HealZone")})
 
     GA1 = CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0) --A그라데이션
     GA1D = CS_RatioXY(CS_MoveXY(CS_InvertXY(CS_FillGradA(0,{0,512},270,18,"SHBF",0),270),-500,0),0.1,0.1) --도착지 도형

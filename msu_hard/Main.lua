@@ -128,8 +128,8 @@ function CSPlotOrder(Shape,Owner,UnitId,Location,CenterXY,PerUnit,PlotSize,Order
 
     }
     CallTriggerFPX(PlayerID, Call_CSPlotToCAPlot, Condition, Act, Preserve)
-
 end
+
 CRecoverCP = CreateVar(FP)
 CCX,CCY= CreateVars(2, FP)
 DCCX,DCCY = CreateVars(2, FP)
@@ -141,6 +141,7 @@ CLSize = CreateVar(FP)
 Call_CSPlotToCAPlot = CreateCallIndex()
 CSPlotShapeArr = {}
 CSPlotOShapeArr = {}
+TestOn = CreateCcode()
 
 -- Include_MatheMatics(360)
 ---- Calculating death variable ----
@@ -155,7 +156,7 @@ ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
-
+Enable_TestMode(true)
 Install_function()
 Install_verifingPhase()
 Install_plotshape()
@@ -172,7 +173,7 @@ CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
 Install_APMcounter()
-Install_normalGunplot()
+-- Install_normalGunplot()
 Install_SpecialGunplot()
 Install_ExchangeTrigger()
 Install_WaveTrigger()
@@ -183,8 +184,8 @@ Install_ConvertMarineTrigger()
 Install_CCMU()
 Install_BGMPhase()
 Install_HerounitTrigger()
-Install_NormalGunPlotShape()
-Install_SpecialGunPlotShape()
+-- Install_NormalGunPlotShape()
+-- Install_SpecialGunPlotShape()
 MiddleBossTrigger()
 FinalBossTrigger()
 
@@ -334,5 +335,9 @@ CopyCpAction등으로 CP를 복구하거나 등의 방법으로 정상화 시켜
 8. CSPlotOrder To CAPlotOrder 분석해서 CSPlot to CAPlot 만드삼 당장.
 
 9. CommandLeastAt == Standard Player : **CurrentPlayer** 이라서 잘생각하고 써야함. 초반검증용으로만 쓰고 나머지는 데스값으로 확인.
+
+10. RotatePlayer ==  compabilty with Trigger2X but RotatePlayer place with upper place in action parse. 
++) Trigger2X = if Action parse has more than 64, split with 2
+
 
 ]]
