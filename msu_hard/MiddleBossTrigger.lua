@@ -112,11 +112,11 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossPtr11[2], 55), SetTo, 0xA08000, 0xA08000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP11,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,20)})
+        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,10)})
         DoActions(FP,SetImageColor(237,0))
     CIfEnd()
     CTrigger(FP,{
-        TMemory(MBossHP11,AtMost,256*300000);
+        TMemory(MBossHP11,AtMost,256*500000);
         NVar(MBossHP11_2,AtLeast,1);
     },{
         TSetMemory(MBossHP11,SetTo,256*6500000);
@@ -237,10 +237,10 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,28)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,10)})
     CIfEnd()
     CTrigger(FP,{
-        TMemory(MBossHP1,AtMost,256*400000);
+        TMemory(MBossHP1,AtMost,256*500000);
         NVar(MBossHP1_2,AtLeast,1);
     },{
         TSetMemory(MBossHP1,SetTo,256*7000000);
@@ -424,7 +424,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,20)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,13)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -530,11 +530,11 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,15)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,10)})
     CIfEnd()
 
     CTrigger(FP,{
-        TMemory(MBossHP7,AtMost,256*450000);
+        TMemory(MBossHP7,AtMost,256*500000);
         NVar(MBossHP7_2,AtLeast,1);
     },{
         TSetMemory(MBossHP7,SetTo,256*8000000);
