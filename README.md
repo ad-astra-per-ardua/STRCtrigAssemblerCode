@@ -58,9 +58,12 @@ Hard level change log Todo list
 7. ~~Add Center call~~
 8. ~~Add special plot each area spot~~
 9. ~~Reinforce each middle boss~~
-
-10. change division, arbitor tbl text
-11. Optimization aka. CommandLeastAt and CIF
-12. Middle boss trigger double-check
+10. ~~change division, arbitor tbl text~~
+11. ~~Optimization aka. CommandLeastAt and CIF~~
+12. ~~Middle boss trigger double-check~~
 13. place trap plot, +1 each area?
-14. check invinsibility trigger
+14. ~~check invinsibility trigger~~
+15. Balance prob
+16. 7's middle boss pattern prob
+17. Reoptimization Through All codes.
+18. Infested T Damage? or AI Prob.
