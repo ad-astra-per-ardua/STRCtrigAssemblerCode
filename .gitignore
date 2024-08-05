@@ -1,0 +1,6 @@
+*.mp3
+/csextract/
+/Ctemp/
+*.ogg
+*.tmp
+*.txt
