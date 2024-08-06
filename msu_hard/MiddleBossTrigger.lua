@@ -55,7 +55,7 @@ function MiddleBossTrigger()
 MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,
     96.5, 100.5, 104.5, 108.5, 112.5, 116.5, 120.5, 124.5, 128.5, 132.5, 
-    136.5
+    136.5, 140.5, 144.5, 148.5, 152.5, 156.5, 160.6, 161.1
     }
 
     MB7TL = { -- gap == 0.6, 0.55, 0.55, 0.6 == 1 plot
@@ -93,7 +93,16 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     TriggerX(P7, {CommandLeastAt(174, "middle1")}, {SetDeaths(P11, Add, 1, 160)}, preserved)
 
-    CIf(Force2, {Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
+    CIf(Force2, {Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160)})
+
+    TriggerX(FP, {
+        Deaths(P11, AtLeast, 15, 160),
+        Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160),
+        Deaths(P6, Exactly, 0, 22)
+    }, {
+        SetDeaths(P8, SetTo, 0, 131), -- small wave
+        SetDeaths(P8, Subtract, 1, 132) -- big wave
+    }, preserved)
 
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
@@ -112,7 +121,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossPtr11[2], 55), SetTo, 0xA08000, 0xA08000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP11,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,10)})
+        DoActionsX(FP,{SetNVar(MBossHP11_2,SetTo,15)})
         DoActions(FP,SetImageColor(237,0))
     CIfEnd()
     CTrigger(FP,{
@@ -215,7 +224,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
     })
-    CIfEnd(SetCDeaths(FP, SetTo, 1, Waveswitch))
+    CIfEnd()
     ------ End of 11 Middle boss trigger -----
     
 
@@ -223,8 +232,15 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     MBossPtr1, MBossHP1, MBossHP1_2 = CreateVars(3,FP)
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
 
-    CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
-
+    CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
+    TriggerX(FP, {
+        Deaths(P11, AtLeast, 15, 161),
+        Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161),
+        Deaths(P6, AtLeast, 0, 68)
+    }, {
+        SetDeaths(P8, SetTo, 0, 131), -- small wave
+        SetDeaths(P8, Subtract, 1, 132) -- big wave
+    }, preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
 
 
@@ -237,7 +253,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,10)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,15)})
     CIfEnd()
     CTrigger(FP,{
         TMemory(MBossHP1,AtMost,256*500000);
@@ -348,15 +364,20 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CSPlotOrder(PE, P6, 58, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[11]) * SDspeed , 161)})
     CSPlotOrder(PE, P6, 76, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[12]) * SDspeed , 161)})
 
+    local len1 = #Tier1G
+    local len2 = #Tier2H
+    local len3 = #Tier3H
 
-    for i = 13, 37 do
-        CSPlotOrder(PE, P6, Tier1G[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
-        CSPlotOrder(PE, P6, Tier2H[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
-        CSPlotOrder(PE, P5, Tier3H[((i-12) % 15) + 1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
+    for i = 13, 43 do
+        local idx1 = ((i - 13) % len1) + 1
+        local idx2 = ((i - 13) % len2) + 1
+        local idx3 = ((i - 13) % len3) + 1
+        CSPlotOrder(PE, P6, Tier1G[idx1], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i]) * SDspeed , 161)})
+        CSPlotOrder(PE, P6, Tier2H[idx2], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A1) * SDspeed , 161)})
+        CSPlotOrder(PE, P5, Tier3H[idx3], LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil,32, nil, FP, {Deaths(P11, Exactly, (MB1TL[i] + A2) * SDspeed , 161)})
     end
-    CSPlotOrder(PE, P6, 3, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
-    CSPlotOrder(PE, P6, 7, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
-    CSPlotOrder(PE, P6, 28, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[38]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 3, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[44]) * SDspeed , 161)})
+    CSPlotOrder(PE, P6, 7, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[45]) * SDspeed , 161)})
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, MB1TL[38] * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[38] * SDspeed,161)}, {
@@ -368,7 +389,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 204)
     })
-    CIfEnd({{SetCDeaths(FP, SetTo, 1, Waveswitch)}})
+    CIfEnd()
 
     -------- End of 1 Middle Boss trigger -------
 
@@ -379,7 +400,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     -------- Start of 5 Middle Boss Trigger ------ DeathValue = 163 | BossGenerate Trigger = 165
     TriggerX(P7, {Deaths(P7, AtLeast, 1, 148)}, {SetDeaths(P11, Add, 1, 163)}, preserved)
 
-    CIf(Force2, {Deaths(P11, AtLeast, 10, 163),Deaths(P6, AtMost, 0, 116)},{SetCDeaths(FP, SetTo, 0, Waveswitch)})
+    CIf(Force2, {Deaths(P11, AtLeast, 10, 163),Deaths(P6, AtMost, 0, 116)})
     CLX = CAPlotOrderForward()
     Circulation1 = CSMakeCircleX(6,115,30,54,24)
     TempPerAction = {9,10,13,15,16,17}
@@ -387,6 +408,13 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     M5GenPlotA = CSMakeCircle(6,0,0,61,1)
     M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74, 25, 76, 81, 3}
     M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70, 7, 21, 69, 28}
+
+    TriggerX(FP, {
+        Deaths(P11, AtLeast, 0, 116)
+    }, {
+        SetDeaths(P8, SetTo, 0, 131), -- small wave
+        SetDeaths(P8, Subtract, 1, 132) -- big wave
+    }, preserved)
     
     TriggerX(FP, {Deaths(P11, AtLeast, 2060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetInvincibility(Enable, 116, P6, "middle4")}, preserved)
@@ -447,7 +475,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
     })
-    CIfEnd({SetCDeaths(FP, SetTo, 1, Waveswitch)})
+    CIfEnd()
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
 
@@ -462,10 +490,22 @@ GTL1 = {104,17,77,78,25,81,95,74,76,3,74}
 STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     TriggerX(P7, {CommandLeastAt(127, "middle3")}, {SetDeaths(P11, Add, 1, 166)}, preserved)
     VerifLoc = {"patbat1","patbat2","patbat3","patbat4"}
-    CIf(Force2, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)},{SetCDeaths(FP, SetTo, 0, Waveswitch)},preserved)
+    CIf(Force2, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)})
+    TriggerX(Force1, {Deaths(P11, AtLeast, 10, 166), Deaths(P6, AtLeast, 0, 126)},{
+        SetAllianceStatus(P8, Ally)
+    })
+    TriggerX(FP, {
+        Deaths(P11, AtLeast, 15, 166),
+        Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166),
+        Deaths(P6, Exactly, 0, 126)
+
+    }, {
+        SetDeaths(P8, SetTo, 0, 131), -- small wave
+        SetDeaths(P8, Subtract, 1, 132) -- big wave
+    }, preserved)
     function VerifingPatternL(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
-        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {
             CreateUnit(1, 47, location, P8),
             Order(47, P8, location, Move, "unrevealer1")
         })
@@ -484,37 +524,39 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
 
     function VerifingPatternS(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
-        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
-            CreateUnit(1, 191, location, P8),
-            Order(191, P8, location, Move, "unrevealer1")
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {
+            CreateUnit(1, 179, location, P8),
+            Order(179, P8, location, Move, "unrevealer1")
         })
 
         Trigger2X(FP, {
-            Bring(P8, AtLeast, 1, 191, "unrevealer1")
+            Bring(P8, AtLeast, 1, 179, "unrevealer1")
         }, {
             RotatePlayer({
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
-            KillUnitAt(All, 191, "unrevealer1", P8),
+            KillUnitAt(All, 179, "unrevealer1", P8),
             CreateUnit(1, 72, "unrevealer1", P8),
-            CreateUnit(7, 71, "unrevealer1", P6)
+            CreateUnit(7, 71, "unrevealer1", P6),
+            Wait(10),
+            SetInvincibility(Disable, "Men", Force1, "middle3")
         },preserved)
     end 
 
     function VerifingPatternI(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
-        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
-            CreateUnit(1, 192, location, P8),
-            Order(192, P8, location, Move, "unrevealer1")
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {
+            CreateUnit(1, 180, location, P8),
+            Order(180, P8, location, Move, "unrevealer1")
         })
 
         Trigger2X(FP, {
-            Bring(P8, AtLeast, 1, 192, "unrevealer1")
+            Bring(P8, AtLeast, 1, 180, "unrevealer1")
         }, {
             RotatePlayer({
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
-            KillUnitAt(All, 192, "unrevealer1", P8),
+            KillUnitAt(All, 180, "unrevealer1", P8),
             CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 50, "unrevealer1", P6)
         },preserved)
@@ -522,18 +564,18 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
 
     function VerifingPatternE(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
-        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
-            CreateUnit(1, 193, location, P8),
-            Order(193, P8, location, Move, "unrevealer1")
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {
+            CreateUnit(1, 181, location, P8),
+            Order(181, P8, location, Move, "unrevealer1")
         })
 
         Trigger2X(FP, {
-            Bring(P8, AtLeast, 1, 193, "unrevealer1")
+            Bring(P8, AtLeast, 1, 181, "unrevealer1")
         }, {
             RotatePlayer({
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
-            KillUnitAt(All, 193, "unrevealer1", P8),
+            KillUnitAt(All, 181, "unrevealer1", P8),
             CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 45, "unrevealer1", P6)
         },preserved)
@@ -559,14 +601,14 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
 
 
 
-    -- for i = 1 , #MB7TL do --- Length == 32
-    --     local arrayLength = #GTL1
-    --     local genIndex = ((i - 1) % arrayLength) + 1
-    --     CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-    --     CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
-    -- end
-    -- CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    -- CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
+    for i = 1 , #MB7TL do --- Length == 32
+        local arrayLength = #GTL1
+        local genIndex = ((i - 1) % arrayLength) + 1
+        CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+        CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+    end
+    CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
+    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
 
 
@@ -588,12 +630,16 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
         f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
         CMov(FP,MBossPtr7,Nextptr) -- Save FBossPtr from Nextptr's 
             CDoActions(FP,{
+                RotatePlayer({
+                    PlayWAVX("staredit\\wav\\7Start\\ogg");
+                    MinimapPing("middle3"),
+                }, {Force1,Force5}, FP),
                 CreateUnit(1,126,"middle3",P6);
                 TSetMemory(Vi(MBossPtr7[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,10)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,12)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -605,7 +651,7 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     },{preserved})
     
 
-    CIfEnd({SetCDeaths(FP, SetTo, 1, Waveswitch)})
+    CIfEnd()
     
     CIfXEnd()
     

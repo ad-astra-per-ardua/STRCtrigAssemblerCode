@@ -48,13 +48,18 @@ function Install_verifingPhase()
     Trigger {
         players = {Force1},
         conditions = {
-            Always();
+            Deaths(P11, AtMost, 10, 166)
         },
         actions = {
             SetAllianceStatus(Force1, Ally),
             PreserveTrigger();
         },
     }
+
+    TriggerX(Force1, {Deaths(P6, AtLeast, 1, 126)}, {
+        SetAllianceStatus(Force1, Ally)
+    }, preserved)
+
     Trigger {
         players = {FP},
         conditions = {

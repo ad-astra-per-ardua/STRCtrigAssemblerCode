@@ -106,22 +106,28 @@ end
 
     ColorArray = {"\x08","\x0E","\x0F","\x10"};
     for i = 0 , 3 do
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 0)}, {
+        TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
+            RotatePlayer({
+                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1,Force5}, FP),
             SetScore(i, Add, 1, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
         },preserved); -- 일마
 
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 20)}, {
+        TriggerX(FP, {Deaths(i, AtLeast, 1, 20)}, {
+            RotatePlayer({
+                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x07Hero \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1, Force5}, FP),
             SetScore(i, Add, 2, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x07Hero \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
         }, preserved); -- 영마
 
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 1)}, {
+        TriggerX(FP, {Deaths(i, AtLeast, 1, 1)}, {
+            RotatePlayer({
+                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x11Special \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가  \x06사망\x04하였습니다.\x1F】", 4);
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1,Force5}, FP),
             SetScore(i, Add, 3, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x11Special \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가  \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
         }, preserved); -- 스마
     end
 
@@ -160,7 +166,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용합니다. 메딕 가격이 350 Ore로 조정됩니다."));
+                DisplayText(StrDesign2X("\x172Tic \x04예약메딕을 사용합니다. 메딕 가격이 \x07350 Ore\x04로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,1);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,0);
                 SetDeaths(i,SetTo,1,"Map Revealer");
@@ -176,7 +182,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용하지 않습니다. 메딕 가격이 300 Ore로 조정됩니다."));
+                DisplayText(StrDesign2X("\x172Tic \x04예약메딕을 사용하지 않습니다. 메딕 가격이 \x07300 Ore\x04로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,0);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,1);
                 SetDeaths(i,SetTo,0,"Map Revealer");
@@ -213,7 +219,7 @@ end
         
         
         Trigger { -- 일마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 0, "mainLocation");
             },
@@ -226,7 +232,7 @@ end
         }
         
         Trigger { -- 영마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 20, "mainLocation");
             },
@@ -239,7 +245,7 @@ end
         }
         
         Trigger { -- 스마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 1, "mainLocation");
             },
@@ -313,5 +319,4 @@ end
         PreserveTrigger();
     },
     }
-    DoActions2(P8, SetAllianceStatus(Force1, Ally), preserved)
 end

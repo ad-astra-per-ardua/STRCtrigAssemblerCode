@@ -333,7 +333,10 @@ function Install_SpecialGunPlotShape()
     Inf1timeline = {5.3, 21.8, 24.6, 27.3, 30.1, 44}
     
     TriggerX(P7, {CommandLeastAt(130, "nuke1")}, {SetDeaths(P10, Add, 1, 62)},preserved);
-    TriggerX(P7, {Deaths(P10, AtLeast, 5, 62)}, {SetDeaths(P11, SetTo, 1, 100)})
+    TriggerX(P7, {Deaths(P10, AtLeast, 5, 62), Deaths(P10, AtMost, 80 * SDspeed - 1, 62)}, {SetDeaths(P11, SetTo, 1, 100),
+    SetDeaths(P8, SetTo, 0, 131), -- small wave
+    SetDeaths(P8, Subtract, 1, 132) -- big wave
+}, preserved)
 
     CAPlotWithProperties(Shell_Arc1, P5, 96,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
     CAPlotWithProperties(Shell_Arc2, P6, 70,"HealZone", nil, 1, 32, {1,0,0,0,2,0}, nil, FP, {Deaths(P10, AtLeast, 10, 62)},nil, nil, StargateProperties)
@@ -380,7 +383,9 @@ function Install_SpecialGunPlotShape()
     TriggerX(P6, Deaths(P10, AtLeast, 30 * SDspeed, 62), {
         SetAllianceStatus(Force1, Enemy)
     })
-    TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)})
+    TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)
+    
+})
 
 
 
@@ -412,7 +417,9 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
 
     TriggerX(P7, {CommandLeastAt(106, "nuke2")}, {SetDeaths(P10, Add, 1, 63)},preserved)
     CIf(Force2, {Deaths(P10, AtMost, (InfcomTimeline[#InfcomTimeline] * SDspeed) + SDspeed, 63)})
-    TriggerX(Force1, {Deaths(P10, AtLeast, 10, 63), Deaths(P10, AtMost, 80*SDspeed, 63)}, {
+    TriggerX(Force1, {Deaths(P10, AtLeast, 10, 63), Deaths(P10, AtMost, 80 * SDspeed, 63)}, {
+        SetDeaths(P8, SetTo, 0, 131), -- small wave
+        SetDeaths(P8, Subtract, 1, 132), -- big wave
         RunAIScript("Turn ON Shared Vision for Player 6")
     },preserved)
 

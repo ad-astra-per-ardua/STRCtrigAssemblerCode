@@ -1,8 +1,8 @@
 function Install_WaveTrigger()
     ----------- 30 sec period --------
 
-TriggerX(FP, {CDeaths(FP, AtLeast, 1, Waveswitch)}, {SetDeaths(P8, Add, 1, 131)}, preserved)
-TriggerX(FP, {CDeaths(FP, AtLeast, 1, Waveswitch)}, {SetDeaths(P8, Add, 1, 132)}, preserved)
+	TriggerX(FP, {Always()}, {SetDeaths(P8, Add, 1, 131)}, preserved)
+	TriggerX(FP, {Always()}, {SetDeaths(P8, Add, 1, 132)}, preserved)
 
 
 TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})

@@ -59,6 +59,9 @@ function Install_322Lib()
 	function StrDesignX(Str)
 		return "\x13\x07『 "..Str.." \x07』"
 	end
+	function StrDesign2X(Str)
+		return "\x12\x07『 "..Str.." \x07』"
+	end
 	function RotatePlayer(Print,Players,RecoverCP)
 		return CopyCpAction(Print,Players,RecoverCP)
 	end
