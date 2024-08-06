@@ -529,19 +529,19 @@ function Install_NormalGunPlotShape()
             CSPlotOrder(square1, P7, 66, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 85, Deathvar )})
             CSPlotOrder(square1, P6, 65, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 115, Deathvar )})
             CSPlotOrder(spiral1, P6, 16, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar )})
-            CSPlotOrder(square1, P7, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar )})
+            CSPlotOrder(square1, P7, 93, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar )})
             
             CSPlotOrder(spiral1, P7, 88, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar )})
             CSPlotOrder(spiral2, P6, 89, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar )})
-            CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar )})
-            CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar )})
+            CSPlotOrder(spiral1, P7, 81, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar )})
+            CSPlotOrder(spiral2, P6, 95, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar )})
             
             -- -- Hat1 hatchery phase 2
             CSPlotOrder(square2, P7, 51, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar )})
             CSPlotOrder(square2, P6, 52, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar )})
-            CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
-            CSPlotOrder(spiral2, P6, 56, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
-            CSPlotOrder(square2, P6, 65, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+            CSPlotOrder(spiral1, P7, 95, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
+            CSPlotOrder(spiral2, P6, 96, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+            CSPlotOrder(square2, P6, 76, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
             CIfEnd()
             end
             ------ End of hatchery shape plot function 

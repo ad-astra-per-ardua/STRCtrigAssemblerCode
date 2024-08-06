@@ -160,7 +160,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("2Tic 예약메딕을 사용합니다. 메딕 가격이 350 Ore로 조정됩니다."));
+                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용합니다. 메딕 가격이 350 Ore로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,1);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,0);
                 SetDeaths(i,SetTo,1,"Map Revealer");
@@ -176,7 +176,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("2Tic 예약메딕을 사용하지 않습니다. 메딕 가격이 300 Ore로 조정됩니다."));
+                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용하지 않습니다. 메딕 가격이 300 Ore로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,0);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,1);
                 SetDeaths(i,SetTo,0,"Map Revealer");
@@ -251,17 +251,6 @@ end
             },
         }
         -------------- CPU AI Script
-    Trigger { -- No comment (866B4FC4)
-        players = {P6},
-        conditions = {
-            Always();
-        },
-        actions = {
-            RunAIScriptAt("Expansion Zerg Campaign Insane", "hive10");
-            RunAIScriptAt("Value This Area Higher", "HealZone");
-        },
-    }
-
         
     Trigger { -- 나간플레이어 유닛삭제
     players = {P8},

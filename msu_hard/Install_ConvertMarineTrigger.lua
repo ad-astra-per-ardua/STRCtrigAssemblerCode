@@ -1,6 +1,6 @@
 function Install_ConvertMarineTrigger()
-    ConvertT1 = "\x04약해빠진 \x1dPrivate \x1fGuardians of \x19Galaxy\x04가 전투를 통해 조금 더 강해졌습니다 !"
-    ConvertT2 = "\x07Hero \x1fGuardians of \x19Galaxy\x04가 세계선을 지키기 위해 각성했습니다 !"
+    ConvertT1 = "\x12\x04약해빠진 \x1dPrivate \x1fGuardians of \x19Galaxy\x04가 전투를 통해 조금 더 강해졌습니다 !"
+    ConvertT2 = "\x12\x07Hero \x1fGuardians of \x19Galaxy\x04가 세계선을 지키기 위해 각성했습니다 !"
     for e = 1, 2 do    
         for i = 0, 3 do    
             Trigger { -- 일마  > 영마 변환
