@@ -234,7 +234,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
     TriggerX(FP, {
-        Deaths(P11, AtLeast, 15, 161),
+        Deaths(P11, AtLeast, 10, 161),
         Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161),
         Deaths(P6, AtLeast, 0, 68)
     }, {
@@ -495,9 +495,8 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
         SetAllianceStatus(P8, Ally)
     })
     TriggerX(FP, {
-        Deaths(P11, AtLeast, 15, 166),
+        Deaths(P11, AtLeast, 10, 166),
         Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166),
-        Deaths(P6, Exactly, 0, 126)
 
     }, {
         SetDeaths(P8, SetTo, 0, 131), -- small wave
@@ -538,7 +537,6 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
             KillUnitAt(All, 179, "unrevealer1", P8),
             CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 71, "unrevealer1", P6),
-            Wait(10),
             SetInvincibility(Disable, "Men", Force1, "middle3")
         },preserved)
     end 
@@ -604,11 +602,11 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     for i = 1 , #MB7TL do --- Length == 32
         local arrayLength = #GTL1
         local genIndex = ((i - 1) % arrayLength) + 1
-        CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-        CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+        CSPlotOrder(PE, P6, GTL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+        CSPlotOrder(PE, P6, STL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
     end
-    CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
+    CSPlotOrder(PE, P6, 28, "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
+    CSPlotOrder(PE, P6, 102, "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
 
 

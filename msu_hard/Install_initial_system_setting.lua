@@ -106,13 +106,13 @@ end
 
     ColorArray = {"\x08","\x0E","\x0F","\x10"};
     for i = 0 , 3 do
-        TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
-            RotatePlayer({
-                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-                PlayWAVX("staredit\\wav\\DEAD.wav");
-            }, {Force1,Force5}, FP),
-            SetScore(i, Add, 1, Custom),
-        },preserved); -- 일마
+        -- TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
+        --     RotatePlayer({
+        --         DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
+        --         PlayWAVX("staredit\\wav\\DEAD.wav");
+        --     }, {Force1,Force5}, FP),
+        --     SetScore(i, Add, 1, Custom),
+        -- },preserved); -- 일마
 
         TriggerX(FP, {Deaths(i, AtLeast, 1, 20)}, {
             RotatePlayer({

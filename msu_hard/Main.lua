@@ -156,7 +156,7 @@ ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
-Enable_TestMode(true)
+
 Install_function()
 Install_verifingPhase()
 Install_plotshape()
@@ -188,6 +188,7 @@ Install_NormalGunPlotShape()
 Install_SpecialGunPlotShape()
 MiddleBossTrigger()
 FinalBossTrigger()
+Enable_TestMode(true)
 
 CIfEnd()
 

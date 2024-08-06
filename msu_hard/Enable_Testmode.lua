@@ -12,4 +12,12 @@ function Enable_TestMode(f)
         SetResources(P1,SetTo,0xFFFFFF,Ore);
         SetCDeaths("X",SetTo,X,TestOn);
     })
+
+    -- TriggerX(P1,{isname(P1,"marine_T_T")},{ -- Verifing name
+    --     CreateUnit(12,80,"HealZone",CurrentPlayer);
+    --     Wait(100);
+    --     SetResources(P1,SetTo,0xFFFFFF,Ore);
+    --     Order("Men", P7, "Anywhere", Move, "callArrival");
+    --     SetCDeaths("X",SetTo,X,TestOn);
+    -- })
     end
