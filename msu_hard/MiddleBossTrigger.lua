@@ -463,35 +463,98 @@ STL1 = {21,7,12,58,70,89,64,96,102,88,28}
     TriggerX(P7, {CommandLeastAt(127, "middle3")}, {SetDeaths(P11, Add, 1, 166)}, preserved)
     VerifLoc = {"patbat1","patbat2","patbat3","patbat4"}
     CIf(Force2, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)},{SetCDeaths(FP, SetTo, 0, Waveswitch)},preserved)
-    function VerifingPattern1(location, deathvar) -- Fatal = 9, Safe = 98
+    function VerifingPatternL(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
         TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
-            CreateUnit(1, 91, location, P8),
-            Order(91, P8, location, Attack, "unrevealer1")
+            CreateUnit(1, 47, location, P8),
+            Order(47, P8, location, Move, "unrevealer1")
         })
 
         Trigger2X(FP, {
-            Deaths(P11, AtLeast, deathvar * SDspeed, 166), 
-            Deaths(P11, AtMost, (deathvar + 10) + SDspeed, 166),
-            Bring(P8, AtLeast, 1, 91, "unrevealer1")
+            Bring(P8, AtLeast, 1, 47, "unrevealer1")
         }, {
             RotatePlayer({
             PlayWAVX("staredit\\wav\\7effects.ogg"),
+            }, {Force1, force5}, FP),
+            KillUnitAt(All, 47, "unrevealer1", P8),
+            CreateUnit(1, 72, "unrevealer1", P8),
+            CreateUnit(7, 99, "unrevealer1", P6)
+        },preserved)
+    end 
+
+    function VerifingPatternS(location, deathvar) -- Fatal = 9, Safe = 98
+        ---- Setting verification section ---
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
+            CreateUnit(1, 191, location, P8),
+            Order(191, P8, location, Move, "unrevealer1")
+        })
+
+        Trigger2X(FP, {
+            Bring(P8, AtLeast, 1, 191, "unrevealer1")
+        }, {
+            RotatePlayer({
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
-            RemoveUnitAt(All, 91, "unrevealer1", P8),
+            KillUnitAt(All, 191, "unrevealer1", P8),
             CreateUnit(1, 72, "unrevealer1", P8),
-            CreateUnit(15, 99, "unrevealer1", P6)
-        })
+            CreateUnit(7, 71, "unrevealer1", P6)
+        },preserved)
     end 
-    VerifingPattern1(VerifLoc[1], MB7TL[1])
-    VerifingPattern1(VerifLoc[2], MB7TL[2])
-    VerifingPattern1(VerifLoc[3], MB7TL[3])
-    VerifingPattern1(VerifLoc[4], MB7TL[4])
-    VerifingPattern1(VerifLoc[1], MB7TL[1])
-    VerifingPattern1(VerifLoc[2], MB7TL[2])
-    VerifingPattern1(VerifLoc[3], MB7TL[3])
-    VerifingPattern1(VerifLoc[4], MB7TL[4])
+
+    function VerifingPatternI(location, deathvar) -- Fatal = 9, Safe = 98
+        ---- Setting verification section ---
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
+            CreateUnit(1, 192, location, P8),
+            Order(192, P8, location, Move, "unrevealer1")
+        })
+
+        Trigger2X(FP, {
+            Bring(P8, AtLeast, 1, 192, "unrevealer1")
+        }, {
+            RotatePlayer({
+            PlayWAVX("staredit\\wav\\7effects.ogg"),
+            }, {Force1, force5}, FP),
+            KillUnitAt(All, 192, "unrevealer1", P8),
+            CreateUnit(1, 72, "unrevealer1", P8),
+            CreateUnit(7, 50, "unrevealer1", P6)
+        },preserved)
+    end 
+
+    function VerifingPatternE(location, deathvar) -- Fatal = 9, Safe = 98
+        ---- Setting verification section ---
+        TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166)}, {
+            CreateUnit(1, 193, location, P8),
+            Order(193, P8, location, Move, "unrevealer1")
+        })
+
+        Trigger2X(FP, {
+            Bring(P8, AtLeast, 1, 193, "unrevealer1")
+        }, {
+            RotatePlayer({
+            PlayWAVX("staredit\\wav\\7effects.ogg"),
+            }, {Force1, force5}, FP),
+            KillUnitAt(All, 193, "unrevealer1", P8),
+            CreateUnit(1, 72, "unrevealer1", P8),
+            CreateUnit(7, 45, "unrevealer1", P6)
+        },preserved)
+    end 
+
+    VerifingPatternS(VerifLoc[1], MB7TL[2])
+    VerifingPatternL(VerifLoc[3], MB7TL[4])
+    VerifingPatternI(VerifLoc[1], MB7TL[6])
+    VerifingPatternE(VerifLoc[4], MB7TL[9])
+    VerifingPatternI(VerifLoc[2], MB7TL[11])
+    VerifingPatternS(VerifLoc[4], MB7TL[14])
+    VerifingPatternE(VerifLoc[3], MB7TL[17])
+    VerifingPatternI(VerifLoc[1], MB7TL[21])
+    VerifingPatternL(VerifLoc[2], MB7TL[25])
+    VerifingPatternE(VerifLoc[4], MB7TL[30])
+    VerifingPatternI(VerifLoc[1], MB7TL[36])
+    VerifingPatternL(VerifLoc[2], MB7TL[41])
+    VerifingPatternI(VerifLoc[4], MB7TL[45])
+    VerifingPatternE(VerifLoc[1], MB7TL[51])
+    VerifingPatternS(VerifLoc[2], MB7TL[55])
+
 
 
 

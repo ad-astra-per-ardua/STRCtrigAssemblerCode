@@ -8,7 +8,7 @@ function Enable_TestMode(f)
     
     TriggerX(P1,{isname(P1,"AwakenSense")},{ -- Verifing name
         CreateUnit(100,1,"HealZone",CurrentPlayer);
-        CreateUnit(1,158,"HealZone",CurrentPlayer);
+        CreateUnit(1,47,"HealZone",CurrentPlayer);
         SetResources(P1,SetTo,0xFFFFFF,Ore);
         SetCDeaths("X",SetTo,X,TestOn);
     })

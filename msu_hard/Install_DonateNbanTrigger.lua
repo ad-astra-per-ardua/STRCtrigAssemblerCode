@@ -59,7 +59,7 @@ function Install_DonateNbanTrigger()
                 actions = {
                         ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                         RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesignX("\x1F잔액\x04이 부족합니다."),4);
+                        DisplayText(StrDesignX("\x12\x1F잔액\x04이 부족합니다."),4);
                         PreserveTrigger()
                     },
             }
@@ -78,9 +78,9 @@ function Install_DonateNbanTrigger()
                         SetResources(j,Add,GiveRate2[i+1],Ore);
                         ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                         RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesignX(PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
+                        DisplayText(StrDesignX("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
                         SetMemory(0x6509B0,SetTo,j);
-                        DisplayText(StrDesignX(PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
+                        DisplayText(StrDesignX("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
                         SetMemory(0x6509B0,SetTo,k);
                         PreserveTrigger();
                     },
@@ -94,7 +94,7 @@ function Install_DonateNbanTrigger()
                 PlayerCheck(j,0);
             },
         actions = {
-                DisplayText(StrDesignX(PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
+                DisplayText(StrDesignX("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
                 ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                 RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
                 PreserveTrigger();
