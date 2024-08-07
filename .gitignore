@@ -1,6 +1,7 @@
 *.mp3
 /csextract/
 /Ctemp/
+/msu_hard/map/Ctemp/
 *.ogg
 *.tmp
 *.txt
