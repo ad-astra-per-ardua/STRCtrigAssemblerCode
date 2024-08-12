@@ -63,8 +63,8 @@ function Install_plotshape()
 
     JYD = "Set Unit Order To: Junk Yard Dog"
     Gentime = SDspeed * 572
-    ExRate = {18, 20, 22, 24}
-    HDrate = {25,27,29,31}
+    ExRate = {20, 22, 24, 26}
+    HDrate = {23, 25, 28, 31}
     Rate_c = {ExRate, HDrate}
     ScanInitSetting(Force2,0)
 
@@ -82,6 +82,7 @@ function Install_plotshape()
     generator_spot = {"generator1","generator2","generator3","generator4"}
     
     CannotPenalty,Waveswitch  = CreateCcodes(2)
+    Endingtimer = CreateCcode()
 
     --------- Plot shape
 
@@ -210,9 +211,7 @@ function Install_plotshape()
                 24.4, 25.2, 25.6 -- End phase
             }
 
-        LairLv2GenArray = { -- length == 33
-        55, 53, 56, 46, 16, 93, 8, 30, 56, 65, 8
-        }
+        
 
     HiveGenTime = { 1.79, 2.7, 3.60, 4.57, 5.5, 6.5, 7.5, 8.4, 9.3, 10.2, 11.1, 12, 12.9, 13.8, 14.7, 15.8, 16.8, 18.7, 20.5, 22.4, 24.3, 26.1, 28, 29.9}
     HiveEftTime = {2.22, 3.18, 4.15, 5.07, 6, 7, 7.9 ,8.8 ,9.7,10.6, 11.5, 12.4, 13.3, 14.2, 15.1}
@@ -228,12 +227,7 @@ function Install_plotshape()
         30.8, 31.7, 32.1
     }
 
-    Starport_lv2_genID = {
-        62, 96, 12, 52, 62, 70, 58, 86, 88, 89
-    }
-    Starport_lv2_genID2 = {
-        69, 64, 76, 66, 62, 104
-    }
+    
 
     StargateGenTime = {
         1.9, 2.4, 2.9, 3.4, 3.8, 4.3, 4.8, 5.2, 
@@ -311,9 +305,12 @@ function Install_plotshape()
     Shape7003 = {8   ,{3174, 865},{3194, 1138},{933, 1099},{3693, 669},{1244, 3976},{941, 862},{2670, 3461},{1184, 3424}}
     Shape7086 = {5   ,{416, 672},{2720, 3168},{1100, 3217},{2890, 366},{2054, 1082}}
     Shape7104 = {8   ,{2916, 3759},{2852, 3759},{2852, 3823},{2916, 3823},{1344, 3712},{1408, 3712},{1408, 3648},{1344, 3648}}
-    
+    Shape6150 = {4   ,{608, 992},{2528, 864},{2464, 3232},{3264, 448}}
     function Heroinitfunc(shape, unitnum)
         CSPlot(shape, P7, unitnum, "heroinit", {0,0}, 1, 32, FP, Always())
+    end
+    function Heroinitfunc2(shape, unitnum)
+        CSPlot(shape, P6, unitnum, "heroinit", {0,0}, 1, 32, FP, Always())
     end
 
     Heroinitfunc(Shape7077,77)
@@ -326,6 +323,7 @@ function Install_plotshape()
     Heroinitfunc(Shape7003,03)
     Heroinitfunc(Shape7086,86)
     Heroinitfunc(Shape7104,104)
+    Heroinitfunc2(Shape6150, 150)
 
 
 

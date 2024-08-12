@@ -21,8 +21,8 @@ SnowFlake =
 FP = P8
 SetForces({P1,P2,P3,P4},{P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
-StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
--- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 
 Include_DataTransfer()
@@ -154,14 +154,15 @@ CJumpEnd(AllPlayers,0)
 Enable_PlayerCheck()
 ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
-DoActions(FP,{SetSpeed(SetTo, "#X2")})
+DoActions(FP,{SetSpeed(SetTo, "#X5")})
 
-Enable_TestMode(true)
+
 Install_function()
 Install_verifingPhase()
 Install_plotshape()
 Install_opening()
 check_shape()
+
 for i = 4, 7 do
     TriggerX(Force2, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})
 end
@@ -173,7 +174,7 @@ CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
 Install_APMcounter()
--- Install_normalGunplot()
+Install_normalGunplot()
 Install_SpecialGunplot()
 Install_ExchangeTrigger()
 Install_WaveTrigger()
@@ -184,10 +185,11 @@ Install_ConvertMarineTrigger()
 Install_CCMU()
 Install_BGMPhase()
 Install_HerounitTrigger()
--- Install_NormalGunPlotShape()
--- Install_SpecialGunPlotShape()
+Install_NormalGunPlotShape()
+Install_SpecialGunPlotShape()
 MiddleBossTrigger()
 FinalBossTrigger()
+Enable_TestMode(true)
 
 CIfEnd()
 
@@ -241,9 +243,9 @@ function CSPlotToCAPlot()
         Simple_SetLocX(FP, 251, DCCX, DCCY, DCCX, DCCY)
         Simple_SetLoc2X(FP, 251, V(CA[8]), V(CA[9]), V(CA[8]), V(CA[9]))
         Simple_SetLoc2X(FP, 251, _Neg(CLSize), _Neg(CLSize), CLSize, CLSize)
-        CTrigger(FP, {CVar(FP, COrder[2], Exactly, Attack)}, {TOrder(CCA[8], CCA[9], 251, Attack, 252)}, {preserved})
         CTrigger(FP, {CVar(FP, COrder[2], Exactly, Move)}, {TOrder(CCA[8], CCA[9], 251, Move, 252)}, {preserved})
         CTrigger(FP, {CVar(FP, COrder[2], Exactly, Patrol)}, {TOrder(CCA[8], CCA[9], 251, Patrol, 252)}, {preserved})
+        CTrigger(FP, {CVar(FP, COrder[2], Exactly, Attack)}, {TOrder(CCA[8], CCA[9], 251, Attack, 252)}, {preserved})
     end
     CAPlotOrder(Z, FP, 184, 249, {0,0}, 1, 32, {CCA[1],0,0,0,0,1}, "CAFunc1", Y, Attack, 249, {0,0}, {CCA[10],1}, "CBFunc1", {1,1}, FP, {}, {}, {})
     CMov(FP, 0x6509B0, CRecoverCP)

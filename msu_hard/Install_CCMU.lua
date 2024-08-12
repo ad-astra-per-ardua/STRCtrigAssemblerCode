@@ -121,6 +121,7 @@ function Install_CCMU()
         Defeat();
     }, {Force1}, FP))
 
+    CIfX(FP, {CDeaths(FP, Exactly, 2, Difficulty)})
     TriggerX(FP, {FMemory(0x58F450, Exactly, 1)}, {
         SetCDeaths(FP, SetTo, 339, CannotPenalty)
     })
@@ -130,14 +131,14 @@ function Install_CCMU()
     },preserved)
 
     Trigger2X(FP, {FMemory(0x58F450, Exactly, 1),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
-        CopyCpAction(
+        RotatePlayer(
             {
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
-        }, Force1, FP),
+        }, {Force1, Force5}, FP),
         CreateUnit(20, 191, "mainLocation", P6),
         CreateUnit(20, 192, "mainLocation", P6),
         SetCp(P6),
@@ -155,14 +156,14 @@ function Install_CCMU()
     },preserved)
 
     Trigger2X(FP, {FMemory(0x58F450, Exactly, 2),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
-        CopyCpAction(
+        RotatePlayer(
             {
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
-        }, Force1, FP),
+        }, {Force1, Force5}, FP),
         CreateUnit(30, 191, "mainLocation", P6),
         CreateUnit(30, 192, "mainLocation", P6),
         SetCp(P6),
@@ -180,20 +181,20 @@ function Install_CCMU()
     },preserved)
 
     Trigger2X(FP, {FMemory(0x58F450, Exactly, 3),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
-        CopyCpAction(
+        RotatePlayer(
             {
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
-        }, Force1, FP),
+        }, {Force1, Force5}, FP),
         CreateUnit(40, 191, "mainLocation", P6),
         CreateUnit(40, 192, "mainLocation", P6),
         SetCp(P6),
         RunAIScriptAt(JYD, "mainLocation"),
         SetCp(FP)
     })
-    
+    CIfXEnd()
 
     end

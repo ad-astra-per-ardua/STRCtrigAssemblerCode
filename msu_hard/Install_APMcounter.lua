@@ -1,13 +1,25 @@
 function Install_APMcounter()
 
     for i = 0, 3 do
-        TriggerX(i, {Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 0, 209)}, {
-            DisplayText("Macro Warn 1 Stack", 4),
-            SetDeaths(i, SetTo, 340, 187),
-            SetDeaths(i, SetTo, 1, 209)
-        })
-
-        TriggerX(i, {Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 1, 209),Deaths(i, Exactly, 0, 187),LocalPlayerID(i)}, {
+        Trigger2X(i, {Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 0, 209),Deaths(i, Exactly, 0, 187),LocalPlayerID(i)}, {
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
+            DisplayText("MOM BOOM", 4),
             DisplayText("MOM BOOM", 4),
             SetCp(P12);
             RunAIScript("Turn ON Shared Vision for Player 1");
@@ -20,7 +32,7 @@ function Install_APMcounter()
             RunAIScript("Turn ON Shared Vision for Player 8");
         })
 
-        TriggerX(i, {Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 1, 209),Deaths(i, Exactly, 0, 187)}, {
+        TriggerX(i, {Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 0, 209),Deaths(i, Exactly, 0, 187)}, {
             RotatePlayer({DisplayTextX(StrDesignX("누군가가 \x08천인공노할 짓\x04을 하여 \x11드랍\x04되었습니다."), 4)},Force1,i)
         })
         
