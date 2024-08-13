@@ -63,7 +63,17 @@ Hard level change log Todo list
 12. ~~Middle boss trigger double-check~~
 13. place trap plot, +1 each area?
 14. ~~check invinsibility trigger~~
-15. Balance prob
+
+### 8/5
+
+15. ~~Balance prob == Nerf Arbitor, Division. ~~
 16. 7's middle boss pattern prob
-17. Reoptimization Through All codes.
-18. Infested T Damage? or AI Prob.
+17. ~~Reoptimization Through All codes.~~
+18. ~~Infested T Damage? or AI Prob.~~
+19. Reduce exrate and increase S.marine
+20. ~~Rebalance first tier unit points~~
+
+            SetDeaths(P8, SetTo, 0, 131), -- small wave
+            SetDeaths(P8, Subtract, 1, 132) -- big wave
+
+            preserved

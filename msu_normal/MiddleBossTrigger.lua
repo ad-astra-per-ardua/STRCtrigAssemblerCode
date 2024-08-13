@@ -12,6 +12,8 @@ function MiddleBossTrigger()
     MiddleGen = CSMakeLine(3,32,0,22,1)
     MiddleGen2 = CSMakeLine(3,32,0,22,1)
     EFT11_1 = CSMakeCircleX(6,64,30,54,6)
+    MB1CircleS = CSMakeCircle(6,64,0,61,1)
+    MB1CircleA = CSMakeCircle(6,0,0,61,1)
 
     MBoss11_1T = {21,81,8,12,88,96}
     MBoss11_2P = {58,62,64,104,70,7,21,75}

@@ -180,7 +180,7 @@ OB_BGMArray = CreateVar(FP)
         
             TriggerX(FP,{Deaths(P7, AtLeast, 1, 174)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 전송된 기억의 세계선").."\n"..StrDesignX("\x07B\x04orderline \x11O\x04f \x19M\x04emory Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
-                SetScore(Force1, Add, 2000000,Kills);
+                SetScore(Force1, Add, 200000,Kills);
                 SetNVar(BGMArray[1], SetTo, 9);
                 SetNVar(BGMArray[2], SetTo, 9);
                 SetNVar(BGMArray[3], SetTo, 9);
@@ -193,7 +193,7 @@ OB_BGMArray = CreateVar(FP)
         
             TriggerX(FP,{Deaths(P7, AtLeast, 1, 175)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 남아있는 희미한 추억").."\n"..StrDesignX("\x0fR\x04eminiscence \x11O\x04f \x1cI\x04sland Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
-                SetScore(Force1, Add, 2000000,Kills);
+                SetScore(Force1, Add, 200000,Kills);
                 SetNVar(BGMArray[1], SetTo, 10);
                 SetNVar(BGMArray[2], SetTo, 10);
                 SetNVar(BGMArray[3], SetTo, 10);
@@ -206,26 +206,41 @@ OB_BGMArray = CreateVar(FP)
         
             TriggerX(FP,{Deaths(P7, AtLeast, 1, 127)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 느껴지는 황홀한 공포감").."\n"..StrDesignX("\x10M\x04agnificent \x11O\x04f \x08F\x04rightness Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
-                SetScore(Force1, Add, 2000000,Kills);
+                SetScore(Force1, Add, 200000,Kills);
                 SetNVar(BGMArray[1], SetTo, 12);
                 SetNVar(BGMArray[2], SetTo, 12);
                 SetNVar(BGMArray[3], SetTo, 12);
                 SetNVar(BGMArray[4], SetTo, 12);
                 SetNVar(OB_BGMArray, SetTo, 12);
             })
+
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 127), Deaths(P11, AtLeast, 152 * SDspeed, 166), Deaths(P6, Exactly, 0, 126)},{
+                SetNVar(BGMArray[1], SetTo, 12);
+                SetNVar(BGMArray[2], SetTo, 12);
+                SetNVar(BGMArray[3], SetTo, 12);
+                SetNVar(BGMArray[4], SetTo, 12);
+                SetNVar(OB_BGMArray, SetTo, 12);
+            },preserved)
         
 
         --------- 5 middle boss bgm
         
             TriggerX(FP,{Deaths(P7, AtLeast, 1, 148)},{
                 CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 느껴지는 감정의 해일").."\n"..StrDesignX("\x0ET\x04idal \x11O\x04f \x18E\x04motions Destroyed ! + 200,000 Points"),4)},{Force1,Force5}, FP);
-                SetScore(Force1, Add, 2000000,Kills);
+                SetScore(Force1, Add, 200000,Kills);
                 SetNVar(BGMArray[1], SetTo, 11);
                 SetNVar(BGMArray[2], SetTo, 11);
                 SetNVar(BGMArray[3], SetTo, 11);
                 SetNVar(BGMArray[4], SetTo, 11);
                 SetNVar(OB_BGMArray, SetTo, 11);
             })
+            TriggerX(FP,{Deaths(P7, AtLeast, 1, 148),Deaths(P6, Exactly, 0, 116)},{
+                SetNVar(BGMArray[1], SetTo, 11);
+                SetNVar(BGMArray[2], SetTo, 11);
+                SetNVar(BGMArray[3], SetTo, 11);
+                SetNVar(BGMArray[4], SetTo, 11);
+                SetNVar(OB_BGMArray, SetTo, 11);
+            },preserved)
         
 
         CIf(FP, {Deaths(P7, AtLeast, 1, 132)})
@@ -263,5 +278,19 @@ OB_BGMArray = CreateVar(FP)
                 SetNVar(OB_BGMArray, SetTo, 17);
             },preserved)
         CIfEnd(SetDeaths(P7, SetTo, 0, 200))
+        
+        for i = 2 , 5 do
+        CIf(FP, {CommandLeastAt(150, "fcky"..i),Deaths(P6, AtLeast, 1, 150)})
+        TriggerX(FP,{},{
+            CopyCpAction({DisplayTextX(StrDesignX("어느 평행세계에서 \x08잘못 \x04찾아온 파티의 현장, \x1DOver Me \x04Destroyed! + 16,974 Points"), 4)}, {Force1,Force5}, FP);
+            SetScore(Force1, Add, 16974,Kills);
+            SetNVar(BGMArray[1], SetTo, 13);
+            SetNVar(BGMArray[2], SetTo, 13);
+            SetNVar(BGMArray[3], SetTo, 13);
+            SetNVar(BGMArray[4], SetTo, 13);
+            SetNVar(OB_BGMArray, SetTo, 13);
+        },preserved)
+    CIfEnd(SetDeaths(P6, SetTo, 0, 150))
+    end
 
 end

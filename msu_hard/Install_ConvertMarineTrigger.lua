@@ -13,7 +13,7 @@ function Install_ConvertMarineTrigger()
                     SetResources(CurrentPlayer, Subtract, 13000, Ore);
                     RemoveUnitAt(1, 0, "convertH"..e, CurrentPlayer);
                     CreateUnit(1, 20, "HealZone", CurrentPlayer);
-                    DisplayText(StrDesignX(ConvertT1), 4);
+                    DisplayText(StrDesign2X(ConvertT1), 4);
                     PlayWAV("staredit\\wav\\ghost_living.ogg");
                     PreserveTrigger();
                 },
@@ -24,13 +24,13 @@ function Install_ConvertMarineTrigger()
                 conditions = {
                     Bring(CurrentPlayer, AtLeast, 1, 20, "convertH"..e);
                     Bring(CurrentPlayer, AtLeast, 1, 128, "Anywhere");
-                    Accumulate(CurrentPlayer, AtLeast, 18000, Ore);
+                    Accumulate(CurrentPlayer, AtLeast, 28000, Ore);
                 },
                 actions = {
-                    SetResources(CurrentPlayer, Subtract, 18000, Ore);
+                    SetResources(CurrentPlayer, Subtract, 28000, Ore);
                     RemoveUnitAt(1, 20, "convertH"..e, CurrentPlayer);
                     CreateUnit(1, 1, "HealZone", CurrentPlayer);
-                    DisplayText(StrDesignX(ConvertT2), 4);
+                    DisplayText(StrDesign2X(ConvertT2), 4);
                     PlayWAV("staredit\\wav\\ghost_nevergiveup.ogg");
                     PreserveTrigger();
                 },
@@ -45,17 +45,25 @@ function Install_ConvertMarineTrigger()
                 Deaths(P7, AtLeast, 1, 151);
             },
             actions = {
-                DisplayText("\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08ＮＯＴＩＣＥ\x04 ● ● ●\n\x14\n\x14\n", 4);
-                DisplayText("\x13\x19｡˙+ﾟ\x11Special \x1fGuardians of \x19Galaxy\x19 ｡+ﾟ. 가 전장에 합류했습니다 !", 4);
-                DisplayText("\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08ＮＯＴＩＣＥ\x04 ● ● ●\n\x14\n\x14\n", 4);
-                MinimapPing("unlock"..(i+1));
-                MinimapPing("unlock"..(i+1));
-                MinimapPing("unlock"..(i+1));
-                PlayWAV("staredit\\wav\\unlock.ogg");
-                PlayWAV("staredit\\wav\\unlock.ogg");
-                PlayWAV("staredit\\wav\\unlock.ogg");
                 CreateUnit(1, 128, "unlock"..(i+1), CurrentPlayer);
             }
         }
     end
+        Trigger2X(FP, {
+            Deaths(P7, AtLeast, 1, 152);
+            Deaths(P7, AtLeast, 1, 151);
+        }, {
+            RotatePlayer({
+                DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08ＮＯＴＩＣＥ\x04 ● ● ●\n\x14\n\x14\n", 4);
+                DisplayTextX("\x13\x19｡˙+ﾟ\x11Special \x1fGuardians of \x19Galaxy\x19 ｡+ﾟ. 가 전장에 합류했습니다 !\n", 4);
+                DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08ＮＯＴＩＣＥ\x04 ● ● ●\n\x14\n\x14\n", 4);
+                MinimapPing("mainLocation");
+                MinimapPing("mainLocation");
+                MinimapPing("mainLocation");
+                PlayWAVX("staredit\\wav\\unlock.ogg");
+                PlayWAVX("staredit\\wav\\unlock.ogg");
+                PlayWAVX("staredit\\wav\\unlock.ogg");
+            }, {Force1, Force5}, FP),
+        })
+    
 end

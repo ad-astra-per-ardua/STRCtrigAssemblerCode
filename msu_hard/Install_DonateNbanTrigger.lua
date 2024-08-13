@@ -1,11 +1,11 @@
 function Install_DonateNbanTrigger()
     ------<  기부 트리거  >--------------------------------------------- [ GiveRateUnit = 8  ]
-    GText1 = StrDesignX("\x04기부금액 단위가 \x1F5,000 Ore \x04로 \x11변경\x04되었습니다.")
-    GText2 = StrDesignX("\x04기부금액 단위가 \x1F10,000 Ore \x04로 \x11변경\x04되었습니다.")
-    GText3 = StrDesignX("\x04기부금액 단위가 \x1F50,000 Ore \x04로 \x11변경\x04되었습니다.")
-    GText4 = StrDesignX("\x04기부금액 단위가 \x1F100,000 Ore \x04로 \x11변경\x04되었습니다.")
-    GText5 = StrDesignX("\x04기부금액 단위가 \x1F500,000 Ore \x04로 \x11변경\x04되었습니다.")
-    GText6 = StrDesignX("\x04기부금액 단위가 \x1F1,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText1 = StrDesign2X("\x04기부금액 단위가 \x1F5,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText2 = StrDesign2X("\x04기부금액 단위가 \x1F10,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText3 = StrDesign2X("\x04기부금액 단위가 \x1F50,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText4 = StrDesign2X("\x04기부금액 단위가 \x1F100,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText5 = StrDesign2X("\x04기부금액 단위가 \x1F500,000 Ore \x04로 \x11변경\x04되었습니다.")
+    GText6 = StrDesign2X("\x04기부금액 단위가 \x1F1,000 Ore \x04로 \x11변경\x04되었습니다.")
     -- 1000 = 0 // 5000 = 1 // 10000 = 2 // 50000 = 3 // 100000 = 4 // 500000 = 5
     GTable = {{0,1,GText1},{1,2,GText2},{2,3,GText3},{3,4,GText4},{4,5,GText5},{5,0,GText6}}
     --Give Trig -- [ GiveUnit (58,60,69,71,72) ]
@@ -37,8 +37,8 @@ function Install_DonateNbanTrigger()
                 PreserveTrigger();
             }
     }
-    
-    end end
+        end
+    end 
     
     CIfEnd()
     
@@ -59,7 +59,7 @@ function Install_DonateNbanTrigger()
                 actions = {
                         ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                         RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesignX("\x12\x1F잔액\x04이 부족합니다."),4);
+                        DisplayText(StrDesign2X("\x12\x1F잔액\x04이 부족합니다."),4);
                         PreserveTrigger()
                     },
             }
@@ -78,9 +78,9 @@ function Install_DonateNbanTrigger()
                         SetResources(j,Add,GiveRate2[i+1],Ore);
                         ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                         RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesignX("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
+                        DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
                         SetMemory(0x6509B0,SetTo,j);
-                        DisplayText(StrDesignX("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
+                        DisplayText(StrDesign2X("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
                         SetMemory(0x6509B0,SetTo,k);
                         PreserveTrigger();
                     },
@@ -94,7 +94,7 @@ function Install_DonateNbanTrigger()
                 PlayerCheck(j,0);
             },
         actions = {
-                DisplayText(StrDesignX("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
+                DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
                 ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                 RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
                 PreserveTrigger();

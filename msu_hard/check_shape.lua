@@ -41,9 +41,9 @@ function check_shape()
 	
 	-- Eftstar = CSMakeStarX(5,108,64,36,90,0)
 	-- temp2 = CS_RemoveStack(HCD0,20,0)
-	-- temp1 = CSMakePolygon(6,80,0,127,1)
+	temp1 = CS_RemoveStack(CS_MoveXY(CS_Distortion(E_Base,{3,0},{3,0},nil,nil),550,0),20)
 	
 
 	
-    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

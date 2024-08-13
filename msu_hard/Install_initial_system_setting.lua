@@ -1,6 +1,4 @@
 function Install_initial_system_setting()
-    -- TriggerX(P7,{Always()},{{Order("Men", P7, "Anywhere", Move, "HealZone")}}) -- For debugging
-    -- TriggerX(FP, Always(), {CreateUnit(36, 1, "HealZone", P1)})
     TriggerX(FP, Always(), {SetMemoryBA(0x657A9C, SetTo, 31)});
     DoActions(FP, SetInvincibility(Enable, "Buildings", P12, "Anywhere"),preserved)
     DoActions(FP, {KillUnit(94, Force2),KillUnit(84, Force2),KillUnit(42, Force2),KillUnit(72, Force2),RemoveUnit(35, Force2)}, preserved)
@@ -48,7 +46,7 @@ for k = 1, 2 do
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.0 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x111.\x04 RGVzdHJveSBEYWdnb3Ro").."\n"..StrDesignX("\x112.\x04 RGVzdHJveSBDZXJlYnJhdGU=").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.0 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x13\x04양쪽 \x08적진의 수뇌부에서 \x10희망의 빛\x04이 \x19희미하게 \x04보이는 것 같다...?").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
             },
         }
         end
@@ -76,7 +74,7 @@ for k = 1, 2 do
         },
         actions = {
             RemoveUnitAt(1,12,"mainLocation",CurrentPlayer);
-            DisplayText(StrDesignX("BGM을 듣지 않습니다 (ㅠ_ㅠ)"));
+            DisplayText(StrDesign2X("BGM을 듣지 않습니다 (ㅠ_ㅠ)"));
             SetVoid(i+1,SetTo,1);
             PreserveTrigger()
         },
@@ -90,38 +88,56 @@ for k = 1, 2 do
         },
         actions = {
             RemoveUnitAt(1,12,"mainLocation",CurrentPlayer);
-            DisplayText(StrDesignX("BGM을 다시 듣습니다 (^_^)"));
+            DisplayText(StrDesign2X("BGM을 다시 듣습니다 (^_^)"));
             SetVoid(i+1,SetTo,0);
             PreserveTrigger()
         },
     }
 end 
+    CIfX(FP, {CDeaths(FP, Exactly, 1, Difficulty)})
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.0】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.0】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.0】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
 
+    CElseX()
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.1 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.1 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.1 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
+    TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
+    TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
+
+    CIfXEnd()
+
     ColorArray = {"\x08","\x0E","\x0F","\x10"};
     for i = 0 , 3 do
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 0)}, {
-            SetScore(i, Add, 1, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
-        },preserved); -- 일마
+        -- TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
+        --     RotatePlayer({
+        --         DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x1DPrivate \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
+        --         PlayWAVX("staredit\\wav\\DEAD.wav");
+        --     }, {Force1,Force5}, FP),
+        --     SetScore(i, Add, 1, Custom),
+        -- },preserved); -- 일마
 
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 20)}, {
+        TriggerX(FP, {Deaths(i, AtLeast, 1, 20)}, {
+            RotatePlayer({
+                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x07Hero \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1, Force5}, FP),
             SetScore(i, Add, 2, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x07Hero \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
         }, preserved); -- 영마
 
-        TriggerX(Force1, {Deaths(i, AtLeast, 1, 1)}, {
+        TriggerX(FP, {Deaths(i, AtLeast, 1, 1)}, {
+            RotatePlayer({
+                DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x11Special \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가  \x06사망\x04하였습니다.\x1F】", 4);
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1,Force5}, FP),
             SetScore(i, Add, 3, Custom),
-            DisplayText("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x11Special \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가  \x06사망\x04하였습니다.\x1F】", 4);
-            PlayWAV("staredit\\wav\\DEAD.wav")
         }, preserved); -- 스마
     end
 
@@ -160,7 +176,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용합니다. 메딕 가격이 350 Ore로 조정됩니다."));
+                DisplayText(StrDesign2X("\x172Tic \x04예약메딕을 사용합니다. 메딕 가격이 \x07350 Ore\x04로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,1);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,0);
                 SetDeaths(i,SetTo,1,"Map Revealer");
@@ -176,7 +192,7 @@ end
             },
             actions = {
                 RemoveUnit(17,i);
-                DisplayText(StrDesignX("\x122Tic 예약메딕을 사용하지 않습니다. 메딕 가격이 300 Ore로 조정됩니다."));
+                DisplayText(StrDesign2X("\x172Tic \x04예약메딕을 사용하지 않습니다. 메딕 가격이 \x07300 Ore\x04로 조정됩니다."));
                 SetMemoryBA(0x57F27C+(228*i)+2,SetTo,0);
                 SetMemoryBA(0x57F27C+(228*i)+34,SetTo,1);
                 SetDeaths(i,SetTo,0,"Map Revealer");
@@ -213,7 +229,7 @@ end
         
         
         Trigger { -- 일마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 0, "mainLocation");
             },
@@ -226,7 +242,7 @@ end
         }
         
         Trigger { -- 영마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 20, "mainLocation");
             },
@@ -239,7 +255,7 @@ end
         }
         
         Trigger { -- 스마 생산
-            players = {AllPlayers},
+            players = {Force1},
             conditions = {
                 Bring(CurrentPlayer, AtLeast, 1, 1, "mainLocation");
             },
@@ -313,5 +329,9 @@ end
         PreserveTrigger();
     },
     }
-    DoActions2(P8, SetAllianceStatus(Force1, Ally), preserved)
+    DoActions(FP, {
+        SetCp(FP),
+        SetAllianceStatus(Force1, Ally),
+        SetCp(FP)
+    }, preserved)
 end
