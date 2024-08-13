@@ -67,3 +67,6 @@ Hard level change log Todo list
 16. 7's middle boss pattern prob
 17. Reoptimization Through All codes.
 18. ~~Infested T Damage? or AI Prob.~~
+
+1. Disable Personnel Cloacking
+2. Increase Max HP By x1.5

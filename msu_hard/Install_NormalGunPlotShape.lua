@@ -10,8 +10,7 @@ function Install_NormalGunPlotShape()
     ------ Hat 1 tier
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
-    SetMemoryB(0x657258+103,SetTo,1)
-    SetMemoryB(0x657258+100,SetTo,1)
+    TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,1),SetMemoryB(0x657258+100,SetTo,1)})
     
     function HatcheryGunplot1( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
@@ -32,17 +31,17 @@ function Install_NormalGunPlotShape()
     CSPlotOrder(spiral1, P6, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar) })
     CSPlotOrder(square1, P7, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar) })
     
-    CSPlotOrder(spiral1, P7, 55, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar) })
-    CSPlotOrder(spiral2, P6, 56, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar) })
-    CSPlotOrder(spiral1, P7, 55, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar) })
-    CSPlotOrder(spiral2, P6, 56, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar) })
+    CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar) })
+    CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar) })
+    CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar) })
+    CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar) })
     
     -- -- Hat1 hatchery phase 2
     CSPlotOrder(square2, P7, 54, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar) })
     CSPlotOrder(square2, P6, 53, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar) })
     CSPlotOrder(spiral1, P7, 56, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
     CSPlotOrder(spiral2, P6, 55, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
-    CSPlotOrder(square2, P6, 39, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+    CSPlotOrder(square2, P6, 40, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
     CIfEnd()    
     end
 ------ Hat 1 tier
@@ -96,22 +95,22 @@ function HatcheryGunplot2( Hatname, Deathvar)
             }
         }
         ---- 1젠 ----
-        CSPlotOrder(LGU1, P6, 39, Lairname, nil, 1, 32, LGU1a, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
+        CSPlotOrder(LGU1, P6, 54, Lairname, nil, 1, 32, LGU1a, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
         CSPlotOrder(LGU2, P6, 51, Lairname, nil, 1, 32, LGU2a, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
-        CSPlotOrder(LGU3, P6, 46, Lairname, nil, 1, 32, LGU3a, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
-        CSPlotOrder(LSU, P6, 55, Lairname, nil, 1, 32, LSU, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
+        CSPlotOrder(LGU3, P6, 38, Lairname, nil, 1, 32, LGU3a, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
+        CSPlotOrder(LSU, P6, 43, Lairname, nil, 1, 32, LSU, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
         CSPlotOrder(LSU2, P6, 44, Lairname, nil, 1, 32, LSU2, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[1] * SDspeed,Deathvar )})
         
         ---2젠
-        CSPlotOrder(LGU1, P6, 39, Lairname, nil, 1, 32, LGU1, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
+        CSPlotOrder(LGU1, P6, 54, Lairname, nil, 1, 32, LGU1, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
         CSPlotOrder(LGU2, P7, 51, Lairname, nil, 1, 32, LGU2, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
-        CSPlotOrder(LGU3, P6, 46, Lairname, nil, 1, 32, LGU3, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
-        CSPlotOrder(LSU, P7, 55, Lairname, nil, 1, 32, LSU, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
+        CSPlotOrder(LGU3, P6, 38, Lairname, nil, 1, 32, LGU3, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
+        CSPlotOrder(LSU, P7, 43, Lairname, nil, 1, 32, LSU, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
         CSPlotOrder(LSU2, P6, 56, Lairname, nil, 1, 32, LSU2, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[2] * SDspeed,Deathvar )})
         --- 3젠
         CSPlotOrder(LGU1, P7, 16, Lairname, nil, 1, 32, LGU1, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
         CSPlotOrder(LGU2, P6, 51, Lairname, nil, 1, 32, LGU2, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
-        CSPlotOrder(LGU3, P7, 46, Lairname, nil, 1, 32, LGU3, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
+        CSPlotOrder(LGU3, P7, 38, Lairname, nil, 1, 32, LGU3, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
         CSPlotOrder(LSU, P6, 55, Lairname, nil, 1, 32, LSU, 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
         CSPlotOrder(LSU2, P7, 16, Lairname, nil, 1, 32, LSU2, 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, LairTimeline[3] * SDspeed,Deathvar )})
         
@@ -152,7 +151,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
     function LairGunplotLv2(Lairname, Deathvar)   
         LairLv2GenArray = { -- length == 33
-        55, 53, 56, 46, 16, 93, 8, 30, 56, 65, 8
+        43, 53, 44, 46, 51, 40, 56, 30, 55, 65, 8
         }
         
         CIf(Force2, {CDeaths(FP, AtMost, 28 * SDspeed, Deathvar), CommandLeastAt(132, Lairname)})
@@ -199,7 +198,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
         for i = 1 ,16 do
         Line1 = CSMakeLineX(2,64,90+11*i,17,1)
-        CSPlotOrder(Line1,P6,56,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, HiveGenTime[i] * SDspeed, DeathVar )} )
+        CSPlotOrder(Line1,P6,44,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, HiveGenTime[i] * SDspeed, DeathVar )} )
         end
 
         for i = 1 ,15 do
@@ -297,9 +296,9 @@ function HatcheryGunplot2( Hatname, Deathvar)
         CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P7, 84, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
 
         CSPlotOrder(CS_Rotate(LGU1,10*(e-1)), P6, 51, Hivename, nil, 1, 20, CS_Rotate(LGU1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 17, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P6, 95, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(spiral1,10*(e-1)), P6, 88, Hivename, nil, 1, 20, CS_Rotate(spiral1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
+        CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 30, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
+        CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P6, 16, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
+        CSPlotOrder(CS_Rotate(spiral1,10*(e-1)), P6, 8, Hivename, nil, 1, 20, CS_Rotate(spiral1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
         end
         Trigger2(P6, {Deaths(P10, AtLeast, (HiveGenTime2[8] * SDspeed) + 5, DeathVar )})
         CIfEnd()
@@ -330,18 +329,18 @@ function HatcheryGunplot2( Hatname, Deathvar)
         Trigger2(P6, {Deaths(P10, Exactly, Starport_gen[i] * SDspeed, Deathvar )})
         CSPlot(PA, P6, 33, Starportname, nil, 1, 64, P5, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
         CSPlotOrder(PB, P6, 3, Starportname, nil, 1, 64, PBA, 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
-        CSPlotOrder(PB, P6, 77, Starportname, nil, 1, 64, PBA, 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
-        CSPlotOrder(PC, P6, 78, Starportname, nil, 1, 64, PCA, 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
+        CSPlotOrder(PB, P6, 65, Starportname, nil, 1, 64, PBA, 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
+        CSPlotOrder(PC, P6, 66, Starportname, nil, 1, 64, PCA, 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[i] * SDspeed, Deathvar )})
         end
         for e = 2, 12, 4 do
         Trigger2(P6, {Deaths(P10, Exactly, Starport_gen[e] * SDspeed, Deathvar )})
         CSPlot(PE, P6, 33, Starportname, nil, 1, 64, P5, {Deaths(P10, Exactly, Starport_gen[e] * SDspeed, Deathvar )})
-        CSPlotOrder(PE, P6, 96, Starportname, nil, 1, 32, CSMakePolygon(6,1,0,91,1), 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[e] * SDspeed, Deathvar )})
+        CSPlotOrder(PE, P6, 88, Starportname, nil, 1, 32, CSMakePolygon(6,1,0,91,1), 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[e] * SDspeed, Deathvar )})
         end
         
         for r = 4, 12, 4 do
         CSPlot(PE, P6, 33, Starportname, nil, 1, 32, P6, Deaths(P10, AtLeast, Starport_gen[r] * SDspeed,Deathvar ))
-        CSPlotOrder(PE, P6, 70, Starportname, nil, 1, 32, CSMakePolygon(6,1,0,91,1), 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[r] * SDspeed, Deathvar )})
+        CSPlotOrder(PE, P6, 88, Starportname, nil, 1, 32, CSMakePolygon(6,1,0,91,1), 0, Attack, "HealZone",nil , 0, nil, P6, {Deaths(P10, AtLeast, Starport_gen[r] * SDspeed, Deathvar )})
         end
         Trigger2(P6,{Deaths(P10, Exactly, Starport_gen[12]* SDspeed + 1, Deathvar )},{SetScanImage(546)})
         CIfEnd()
@@ -352,10 +351,10 @@ function HatcheryGunplot2( Hatname, Deathvar)
     function Starport_GunPlotlv2(Starportname, Deathvar)
         TriggerX(P7, {CommandLeastAt(114, Starportname)}, {SetCDeaths(FP, Add, 1, Deathvar)}, preserved)
         Starport_lv2_genID = {
-            62, 96, 12, 52, 62, 70, 58, 21, 88, 89
+            62, 96, 12, 52, 16, 52, 46, 21, 88, 89
         }
         Starport_lv2_genID2 = {
-            69, 64, 76, 66, 62, 104
+            81, 64, 76, 66, 62, 104
         }
 
         local converted = CS_Convert(Starportlv2Shape1, 27)
@@ -386,14 +385,14 @@ function HatcheryGunplot2( Hatname, Deathvar)
         end
     -- Trigger2(P6, {Deaths(P10, AtLeast, (StargateGenTime[1] * SDspeed) - 2), Deathvar })
     for i = 1,8,8 do
-    CSPlotWithProperties(LGU1, P8, 77, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed, Deathvar )},nil,nil,StargateProperties)
+    CSPlotWithProperties(LGU1, P8, 65, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(LGU2, P8, 93, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+1] * SDspeed, Deathvar )},nil,nil,StargateProperties)
-    CSPlotWithProperties(LGU3, P8, 78, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+2] * SDspeed, Deathvar )},nil,nil,StargateProperties)
+    CSPlotWithProperties(LGU3, P8, 66, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+2] * SDspeed, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(LGU4, P8, 3, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+3] * SDspeed, Deathvar )},nil,nil,StargateProperties)
 
     CSPlotWithProperties(SShape1, P8, 89, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+4] * SDspeed, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(SShape2, P8, 88, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+5] * SDspeed, Deathvar )},nil,nil,StargateProperties)
-    CSPlotWithProperties(SShape3, P8, 60, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+6] * SDspeed, Deathvar )},nil,nil,StargatePropertiesHero)
+    CSPlotWithProperties(SShape3, P8, 64, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+6] * SDspeed, Deathvar )},nil,nil,StargatePropertiesHero)
     CSPlotOrder(PA, P5, 89, stargatename, nil, 1, 32, CSMakePolygon(6,1,0,61,1), 0, Attack, "HealZone",nil , 0, nil, P5, {Deaths(P10, AtLeast, StargateGenTime[i+7] * SDspeed, Deathvar )}, {SetScanImage(972)})	
     CSPlotWithProperties(PA, P8, 33, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i+7] * SDspeed, Deathvar )},nil,nil,StargateProperties)
 
@@ -454,14 +453,14 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
     ---- after effects ---
 
-    CSPlotWithProperties(LGU1, P8, 77, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
+    CSPlotWithProperties(LGU1, P8, 65, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(LGU2, P8, 93, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
-    CSPlotWithProperties(LGU3, P8, 78, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
+    CSPlotWithProperties(LGU3, P8, 66, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(LGU4, P8, 81, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
 
     CSPlotWithProperties(SShape1, P8, 89, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(SShape2, P8, 88, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
-    CSPlotWithProperties(SShape3, P8, 60, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargatePropertiesHero)
+    CSPlotWithProperties(SShape3, P8, 57, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargatePropertiesHero)
     CSPlotOrder(PB, P5, 89, stargatename, nil, 1, 32, CSMakePolygon(6,1,0,37,1), 0, Attack, "HealZone",nil , 0, nil, P5, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed, Deathvar )})	
     CSPlotWithProperties(PB, P8, 33, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed, Deathvar )},nil,nil,StargateProperties)
     Trigger2(P6,{Deaths(P10, Exactly, StargateGenTime[25] * SDspeed,Deathvar ) }, {GiveUnits(All,"Men" , P8, "Anywhere", P5),SetInvincibility(Disable, "Men", P5, "Anywhere"),Order("Men", P5, "Anywhere", Attack, stargatename)})
@@ -479,7 +478,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
     Trigger2(P6, {Deaths(P10, AtLeast, (StargateGenTime[27] * SDspeed) - 2, Deathvar)}, {SetScanImage(971)})
     CSPlot(Eftstar, P6, 33, stargatename, nil, 1, 32, P6,{Deaths(P10, AtLeast, StargateEftTime[4] * SDspeed, Deathvar )})
-    CSPlot(Eftstar, P6, 64, stargatename, nil, 1, 32, P7,{Deaths(P10, AtLeast, StargateGenTime[26] * SDspeed, Deathvar )})
+    CSPlot(Eftstar, P6, 96, stargatename, nil, 1, 32, P7,{Deaths(P10, AtLeast, StargateGenTime[26] * SDspeed, Deathvar )})
     for i = 27,27 do
         CSPlotWithProperties(EllipseArr[1], P8, 65, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
         CSPlotWithProperties(EllipseArr[2], P8, 66, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
@@ -488,7 +487,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
         CSPlotWithProperties(EllipseArr[5], P8, 96, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
         CSPlotWithProperties(EllipseArr[6], P8, 12, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
-        CSPlotWithProperties(EllipseArr[7], P8, 84, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
+        CSPlotWithProperties(EllipseArr[7], P8, 88, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
         CSPlotWithProperties(EllipseArr[8], P8, 81, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed - 1, Deathvar )},nil,nil,StargateProperties)
         CSPlot(SH_Flower, P6, 33, stargatename, nil, 1, 32, P6,{Deaths(P10, AtLeast, StargateGenTime[i] * SDspeed, Deathvar )})
 
@@ -531,16 +530,16 @@ function HatcheryGunplot2( Hatname, Deathvar)
         StargateGunplot("starg"..i,  i + 42);
     end
 
-    CSPlot(Triangle4, P6, 64, "fcky1", nil, 1, 32, P6, {CommandLeastAt(146, "fcky1")}, {RunAIScriptAt(JYD, "fcky1")})
-    CSPlot(Triangle4, P6, 70, "fcky2", nil, 1, 32, P6, {CommandLeastAt(150, "fcky2")}, {RunAIScriptAt(JYD, "fcky2")})
-    CSPlot(Triangle4, P6, 21, "fcky3", nil, 1, 32, P6, {CommandLeastAt(150, "fcky3")}, {RunAIScriptAt(JYD, "fcky3")})
-    CSPlot(Triangle4, P6, 25, "fcky4", nil, 1, 32, P6, {CommandLeastAt(150, "fcky4")}, {RunAIScriptAt(JYD, "fcky4")})
-    CSPlot(Triangle4, P6, 62, "fcky5", nil, 1, 32, P6, {CommandLeastAt(150, "fcky5")}, {RunAIScriptAt(JYD, "fcky5")})
+    CSPlot(Triangle4, P6, 43, "fcky1", nil, 1, 32, P6, {CommandLeastAt(146, "fcky1")}, {RunAIScriptAt(JYD, "fcky1")})
+    CSPlot(Triangle4, P6, 44, "fcky2", nil, 1, 32, P6, {CommandLeastAt(150, "fcky2")}, {RunAIScriptAt(JYD, "fcky2")})
+    CSPlot(Triangle4, P6, 8, "fcky3", nil, 1, 32, P6, {CommandLeastAt(150, "fcky3")}, {RunAIScriptAt(JYD, "fcky3")})
+    CSPlot(Triangle4, P6, 30, "fcky4", nil, 1, 32, P6, {CommandLeastAt(150, "fcky4")}, {RunAIScriptAt(JYD, "fcky4")})
+    CSPlot(Triangle4, P6, 96, "fcky5", nil, 1, 32, P6, {CommandLeastAt(150, "fcky5")}, {RunAIScriptAt(JYD, "fcky5")})
 
         CElseIfX({CDeaths(FP, Exactly, 2, Difficulty)})
 
-        SetMemoryB(0x657258+103,SetTo,2)
-        SetMemoryB(0x657258+100,SetTo,2)
+        TriggerX(Force2, {CDeaths(FP, Exactly, 2, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,2),SetMemoryB(0x657258+100,SetTo,2)})
+        
 ----------------------------------------------- Start of hard level plot -------------------------------------------------------------------------------
         function HatcheryGunplot1( Hatname, Deathvar)
             CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
