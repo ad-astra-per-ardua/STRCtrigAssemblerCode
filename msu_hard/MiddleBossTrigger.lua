@@ -648,7 +648,7 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,10)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,25)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -1078,7 +1078,8 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
     VerifLoc = {"patbat1","patbat2","patbat3","patbat4"}
     CIf(AllPlayers, {Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166)})
     DoActions(FP, {
-        SetInvincibility(Disable, "Men", Force1, "middle3")
+        SetInvincibility(Disable, "Men", Force1, "Anywhere"),
+        ModifyUnitShields(1, 126, P6, "middle3", 100)
     }, preserved)
     TriggerX(Force1, {Deaths(P11, AtLeast, 10, 166), Deaths(P6, AtLeast, 0, 126)},{
         SetAllianceStatus(P8, Ally)
@@ -1098,6 +1099,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
                 MinimapPing(location);
             }, {Force1, Force5}, FP),
             CreateUnit(1, 47, location, P8),
+            CreateUnit(1, 72, location, P8),
             Order(47, P8, location, Move, "unrevealer1")
         })
 
@@ -1108,7 +1110,6 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
             KillUnitAt(All, 47, "unrevealer1", P8),
-            CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 99, "unrevealer1", P6)
         },preserved)
     end 
@@ -1120,6 +1121,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
                 MinimapPing(location);
             }, {Force1, Force5}, FP),
             CreateUnit(1, 179, location, P8),
+            CreateUnit(1, 72, location, P8),
             Order(179, P8, location, Move, "unrevealer1")
         })
 
@@ -1130,7 +1132,6 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
             PlayWAVX("staredit\\wav\\7effects.ogg"),            
             }, {Force1, force5}, FP),
             KillUnitAt(All, 179, "unrevealer1", P8),
-            CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 71, "unrevealer1", P6),
             SetInvincibility(Disable, "Men", Force1, "middle3")
         },preserved)
@@ -1143,6 +1144,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
                 MinimapPing(location);
             }, {Force1, Force5}, FP),
             CreateUnit(1, 180, location, P8),
+            CreateUnit(1, 72, location, P8),
             Order(180, P8, location, Move, "unrevealer1")
         })
 
@@ -1153,7 +1155,6 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
             KillUnitAt(All, 180, "unrevealer1", P8),
-            CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 50, "unrevealer1", P6)
         },preserved)
     end 
@@ -1165,6 +1166,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
                 MinimapPing(location);
             }, {Force1, Force5}, FP),
             CreateUnit(1, 181, location, P8),
+            CreateUnit(1, 72, location, P8),
             Order(181, P8, location, Move, "unrevealer1")
         })
 
@@ -1175,7 +1177,6 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
             PlayWAVX("staredit\\wav\\7effects.ogg"),
             }, {Force1, force5}, FP),
             KillUnitAt(All, 181, "unrevealer1", P8),
-            CreateUnit(1, 72, "unrevealer1", P8),
             CreateUnit(7, 45, "unrevealer1", P6)
         },preserved)
     end 
@@ -1203,11 +1204,11 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
     for i = 1 , #MB7TL do --- Length == 32
         local arrayLength = #GTL1
         local genIndex = ((i - 1) % arrayLength) + 1
-        CSPlotOrder(PE, P6, GTL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-        CSPlotOrder(PE, P6, STL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+        CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+        CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
     end
-    CSPlotOrder(PE, P6, 28, "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    CSPlotOrder(PE, P6, 102, "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
+    CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
+    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1,32, Generator_shapeA,  nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
 
 
@@ -1240,7 +1241,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,45)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,50)})
     CIfEnd()
 
     CTrigger(FP,{
