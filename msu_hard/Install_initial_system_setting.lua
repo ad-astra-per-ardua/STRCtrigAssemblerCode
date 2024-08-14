@@ -94,20 +94,27 @@ for k = 1, 2 do
         },
     }
 end 
-    CIfX(FP, {CDeaths(FP, Exactly, 1, Difficulty)})
+    CIfX(AllPlayers, {CDeaths(FP, Exactly, 1, Difficulty)})
+    TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,1),SetMemoryB(0x657258+100,SetTo,1)})
+    for i = 4,7 do
+        TriggerX(i, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x58CE24 + (24 * i) + 10, SetTo, 0)})
+    end
+    
+    -- TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x662350 + (), modtype, number)}, Flags, Index) -- max hp
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.1 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
 
     CElseX()
+    TriggerX(Force2, {CDeaths(FP, Exactly, 2, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,2),SetMemoryB(0x657258+100,SetTo,2)})
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.1 \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.1 \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.1 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.2 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})

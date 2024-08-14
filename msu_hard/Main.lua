@@ -67,7 +67,7 @@ CJumpEnd(AllPlayers,0)
 Enable_PlayerCheck()
 ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollisionX(FP)
-DoActions(FP,{SetSpeed(SetTo, "#X5")})
+DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 
 Install_function()
@@ -77,10 +77,10 @@ Install_opening()
 check_shape()
 
 for i = 4, 7 do
-    TriggerX(Force2, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})
+    TriggerX(FP, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})
 end
 for i = 0, 3 do
-    TriggerX(Force1, Always(), {SetMemoryB(0x58D088 + (i * 46) + 15, SetTo, 255)})
+    TriggerX(FP, Always(), {SetMemoryB(0x58D088 + (i * 46) + 15, SetTo, 255)})
 end
 TriggerX(FP, {Switch("Switch 249", Set)}, {SetMemoryBA(0x657A9C, SetTo, 31)})
 CIf(AllPlayers,{Switch("Switch 248", Set)})

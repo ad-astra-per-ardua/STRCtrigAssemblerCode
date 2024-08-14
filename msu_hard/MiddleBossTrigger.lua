@@ -1208,7 +1208,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
         CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
     end
     CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1, Generator_shapeA, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
+    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1,32, Generator_shapeA,  nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
 
 

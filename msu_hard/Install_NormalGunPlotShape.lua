@@ -10,7 +10,7 @@ function Install_NormalGunPlotShape()
     ------ Hat 1 tier
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
-    TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,1),SetMemoryB(0x657258+100,SetTo,1)})
+    
     
     function HatcheryGunplot1( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
@@ -538,7 +538,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
         CElseIfX({CDeaths(FP, Exactly, 2, Difficulty)})
 
-        TriggerX(Force2, {CDeaths(FP, Exactly, 2, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,2),SetMemoryB(0x657258+100,SetTo,2)})
+        
         
 ----------------------------------------------- Start of hard level plot -------------------------------------------------------------------------------
         function HatcheryGunplot1( Hatname, Deathvar)
