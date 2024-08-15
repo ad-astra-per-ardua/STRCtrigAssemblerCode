@@ -68,9 +68,8 @@ Hard level change log Todo list
 17. Reoptimization Through All codes.
 18. ~~Infested T Damage? or AI Prob.~~
 
-1. Disable Personnel Cloacking
-2. Dmg x 1.2, Hp x 1.2 
-
+19. Disable Personnel Cloacking
+20. Dmg x 1.2, Hp x 1.2
 
 노말 대격변패치
 
@@ -80,12 +79,16 @@ Hard level change log Todo list
 4. 전체 유닛 Personnel Cloacking 비활성화(다크같은 영구 클로킹 제외)
 
 벤치달구는중)
-1. Dmg x 1.2, Hp x 1.2 
+
+1. Dmg x 1.2, Hp x 1.2
 2. 환전률 21, 23, 25, 27
 3. 벙커 피통 상향
 4. 마린 상시 쉴드 리젠
 
 일반 패치
+
 1. 노말 난이도에서 5 ~ 10 번째 콜이 왼쪽에 몰려서 씹히는 현상 해결
-2. 1시 브금, 젠길이 (해야함)
-3. 7시 클리어 조건 (해야함)
+2. 1시 브금, 젠길이 맞춤 (브금을 줄였다는것 젠길이를 늘렸다는게 아님.)
+3. 7시 클리어 조건 세밀화
+4. 노말 12시 감커 비전타이머 조정
+5. 0틱연산때문에 엔딩건물이 생성되자마자 사라져버리는 문제해결
