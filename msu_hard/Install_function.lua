@@ -5,6 +5,10 @@ function Install_function()
         return CopyCpAction(Print,Players,RecoverCP)
     end
 
+	function LeaderBoardGreed(Goal)
+    return Action(0, 0, 0, 0, 0, Goal, 0, 40, 0, 4)
+	end
+
     function ElapsedTime(Comparison, Time)
         Comparison = ParseComparison(Comparison)
         return Condition(0, 0, Time, 0, Comparison, 12, 0, 0)
@@ -26,6 +30,26 @@ function Install_function()
         end
         return SetMemoryX(Offset-ret,Type,Value,Mask)
     end
+
+function Install_BackupCP(Player)
+	BackupCp = CreateVar(Player)
+	SaveCp_CallIndex = SetCallForward()
+	SetCall(Player)
+		SaveCp(Player,BackupCp)
+	SetCallEnd()
+
+	LoadCp_CallIndex = SetCallForward()
+	SetCall(Player)
+		LoadCp(Player,BackupCp)
+		SetRecoverCp()
+	SetCallEnd()
+	function f_SaveCp()
+		CallTrigger(Player,SaveCp_CallIndex,nil)
+	end
+	function f_LoadCp()
+		CallTrigger(Player,LoadCp_CallIndex,nil)
+	end
+end
 
     function StrDesignX(Str)
         return "\x13\x07。\x18˙\x0F☆\x1C˚ \x04"..Str.." \x1C。\x0F☆\x18.\x07˚"

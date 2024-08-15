@@ -69,4 +69,15 @@ Hard level change log Todo list
 18. ~~Infested T Damage? or AI Prob.~~
 
 1. Disable Personnel Cloacking
-2. Increase Max HP By x1.5
+2. Dmg x 1.2, Hp x 1.2 
+
+1. 1시중보) 본체 데미지 33% -> 25%
+2. 원격 스팀, 스탑, 홀드 추가 (구현하느라 개고생함)
+3. 전체 건작, 특건, 중보 유닛 테이블 세부 조정
+4. 전체 유닛 Personnel Cloacking 비활성화(다크같은 영구 클로킹 제외)
+
+벤치달구는중)
+1. Dmg x 1.2, Hp x 1.2 
+2. 환전률 21, 23, 25, 27
+3. 벙커 피통 상향
+4. 마린 상시 쉴드 리젠
