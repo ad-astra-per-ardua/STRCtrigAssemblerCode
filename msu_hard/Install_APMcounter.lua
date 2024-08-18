@@ -28,9 +28,10 @@ function Install_APMcounter()
             SetResources(i, SetTo, 0, Ore),
             KillUnit("Men", i),
             RemoveUnit("Buildings", i),
-        })
+            SetMemory(0x968B968B,SetTo,1),
+        },preserved)
         CIfX(FP,{Deaths(i, AtLeast, 1, 140),Deaths(i, Exactly, 1, 209),Deaths(i, Exactly, 0, 187),LocalPlayerID(i)})
-        FastDrop(FP, i)
+        ExitDrop(FP, i)
         CIfXEnd()
 
 

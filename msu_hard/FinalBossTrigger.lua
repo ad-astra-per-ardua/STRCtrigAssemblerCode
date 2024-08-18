@@ -19,20 +19,11 @@ function FinalBossTrigger()
         PlayWAVX("staredit\\wav\\CAUTION.wav"),
         PlayWAVX("staredit\\wav\\CAUTION.wav")
     }, {Force1, Force5}, FP),
+        CreateUnit(1, 168, "HealZone", P7),
         KillUnitAt(All, 125, "Anywhere", Force1),
         KillUnitAt(All, 125, "Anywhere", P12),
         KillUnitAt(All, "Men", "Anywhere", Force2),
     })
-    TriggerX(FP, {
-        Deaths(P6, AtLeast, 1, 202),
-        Deaths(P6, AtLeast, 1, 203),
-        Deaths(P6, AtLeast, 1, 204),
-        Deaths(P6, AtLeast, 1, 205),
-    }, {
-        Wait(100),
-        CreateUnit(1, 168, "HealZone", P7),
-    })
-
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
     Trigger2X(FP,{
     Deaths(P6, AtLeast, 1, 202),
@@ -55,9 +46,7 @@ function FinalBossTrigger()
             Victory();
         }, {Force1, Force5}, FP)
     })
-
     CElseX()
-
     Trigger2X(FP,{
         Deaths(P6, AtLeast, 1, 202),
         Deaths(P6, AtLeast, 1, 203),

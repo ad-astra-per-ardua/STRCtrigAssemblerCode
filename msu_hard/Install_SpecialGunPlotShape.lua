@@ -143,15 +143,15 @@ function Install_SpecialGunPlotShape()
     })
 
     ----- Turn on pulling trigger and call trigger
+    TriggerX(FP, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100),RunAIScript("Turn ON Shared Vision for Player 6")})
     for i = 0, 3 do
         TriggerX(P8, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
     end
-    TriggerX(P6, Deaths(P10, AtLeast, 30 * SDspeed, 62), {
-        SetAllianceStatus(Force1, Enemy)
+    TriggerX(Force1, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {
+        RunAIScript("Turn OFF Shared Vision for Player 5"),
+        RunAIScript("Turn OFF Shared Vision for Player 6"),
+        RunAIScript("Turn OFF Shared Vision for Player 7")
     })
-    TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)
-    
-})
 
     --------- End of 12 Clock Infested Command Center fuctions
 
@@ -171,9 +171,9 @@ function Install_SpecialGunPlotShape()
 
 InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15.1, 16.2, 17.3, 18.4, 
         19.5, 20.6, 21.7, 22.8, 23.9, 25, 26.1, 27.2, 28.3, 29.4, 30.5, 31.6, 32.7,
-        --- Phase 1
-        37, 41.2, 46.1, 50, 54.3, 58.6, 63, 
-        71.7
+          --- Phase 1
+          37, 41.2, 46.1, 50, 54.3, 58.6, 63, 
+          71.7
         }
 
     TriggerX(P7, {CommandLeastAt(106, "nuke2")}, {SetDeaths(P10, Add, 1, 63)},preserved)
