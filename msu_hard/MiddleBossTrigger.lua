@@ -100,14 +100,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         hanger = 0,
     }
     MiddleGen = CSMakeLine(3,32,0,13,1)
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 15, 160),
-        Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160),
-        Deaths(P6, Exactly, 0, 22)
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
 
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
@@ -238,14 +230,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
 
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 10, 161),
-        Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161),
-        Deaths(P6, AtLeast, 0, 68)
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
 
 
@@ -417,12 +401,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     M5GenG = {30, 52, 17, 95, 93, 78, 81, 75, 23, 104, 74, 25, 76, 81, 3}
     M5GenS = {44, 8, 88, 89, 96, 62, 60, 58, 29, 64, 70, 7, 21, 69, 28}
 
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 0, 116)
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
     
     TriggerX(FP, {Deaths(P11, AtLeast, 2060, 163)}, {SetDeaths(P11, SetTo, 1, 163)}, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 164)}, {SetInvincibility(Enable, 116, P6, "middle4")}, preserved)
@@ -512,14 +490,6 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
     TriggerX(Force1, {Deaths(P11, AtLeast, 10, 166), Deaths(P6, AtLeast, 0, 126)},{
         SetAllianceStatus(P8, Ally)
     })
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 10, 166),
-        Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166),
-
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
     function VerifingPatternL(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
         TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {
@@ -680,14 +650,6 @@ CElseX()
     MiddleGen = CSMakeLine(3,32,0,22,1)
 
 
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 15, 160),
-        Deaths(P11, AtMost, (M11tl[#M11tl] * SDspeed) + SDspeed, 160),
-        Deaths(P6, Exactly, 0, 22)
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
 
     TriggerX(FP, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)}, {SetInvincibility(Enable, 22, P6, "middle1")})
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 225)}, {SetInvincibility(Enable, 22, P6, "middle1")}, preserved)
@@ -732,7 +694,7 @@ CElseX()
     local n = #MBoss11_1T
     for i = 1 ,32 do
         local index = (i - 1) % n + 1
-        CSPlotWithProperties(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, FP, {Deaths(P11, AtLeast, (M11tl[1]*SDspeed) + (12 + i*11),160)}, nil, nil, MemoryProp)
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[1]*SDspeed) + (12 + i*11),160)})
     end
     CAPlot(Shape11_1, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)})
     CAPlot(CS_Reverse(Shape11_1), P6, 89, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[2] * SDspeed, 160)})
@@ -757,7 +719,7 @@ CElseX()
 
     for i = 1 ,64 do
         local index = (i - 1) % n + 1
-        CSPlotWithProperties(CS_Rotate3D(MiddleGen2,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, FP, {Deaths(P11, AtLeast, (M11tl[7]*SDspeed) + (12 + i*11),160)}, nil, nil, MemoryProp)
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[7]*SDspeed) + (12 + i*11),160)})
     end
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)}, {KillUnitAt(All, 11, "Anywhere", P5)})
     CSPlotOrder(HiveEtf2, P6, 72, M11, {495,351}, 1, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
@@ -778,7 +740,7 @@ CElseX()
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[26] * SDspeed, 160)})
     for i = 1 ,64 do
         local index = (i - 1) % n + 1
-        CSPlotWithProperties(CS_Rotate3D(MiddleGen2,(360-11.25*i),(11.25*i),(360-11.25*i)), P6, MBoss11_1T[index], "middle1", {495,351}, 1, 32, FP, {Deaths(P11, AtLeast, (M11tl[26]*SDspeed) + (12 + i*11),160)}, nil, nil, MemoryProp)
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[26]*SDspeed) + (12 + i*11),160)})
     end
     CSPlotOrder(Shape11_1, P6, 16, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[27] * SDspeed, 160)})
     CSPlotOrder(Shape11_1, P6, 25, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[28] * SDspeed, 160)})
@@ -818,14 +780,6 @@ CElseX()
     TriggerX(P7, {CommandLeastAt(175, "middle2")}, {SetDeaths(P11, Add, 1, 161),SetDeaths(P11, Add, 1, 162)}, preserved)
 
     CIf(Force2, {Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161)})
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 10, 161),
-        Deaths(P11, AtMost, (MB1TL[#MB1TL] * SDspeed) + SDspeed, 161),
-        Deaths(P6, AtLeast, 0, 68)
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
     TriggerX(FP, Deaths(P11, AtLeast, 1500, 162), {SetDeaths(P11, SetTo, 1, 162)}, preserved)
 
 
@@ -1084,14 +1038,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
     TriggerX(Force1, {Deaths(P11, AtLeast, 10, 166), Deaths(P6, AtLeast, 0, 126)},{
         SetAllianceStatus(P8, Ally)
     })
-    TriggerX(FP, {
-        Deaths(P11, AtLeast, 10, 166),
-        Deaths(P11, AtMost, (MB7TL[#MB7TL] * SDspeed) + SDspeed, 166),
 
-    }, {
-        SetDeaths(P8, SetTo, 0, 131), -- small wave
-        SetDeaths(P8, Subtract, 1, 132) -- big wave
-    }, preserved)
     function VerifingPatternL(location, deathvar) -- Fatal = 9, Safe = 98
         ---- Setting verification section ---
         TriggerX(FP, {Deaths(P11, AtLeast, deathvar * SDspeed, 166),Deaths(P6, Exactly, 0, 126)}, {

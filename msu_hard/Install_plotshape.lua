@@ -83,7 +83,11 @@ function Install_plotshape()
     
     CannotPenalty,Waveswitch  = CreateCcodes(2)
     Endingtimer = CreateCcode()
+    CUnitFlag,CUnitRefresh = CreateCcodes(2)
 
+    BGMdeathVar,BGMtimedeath = CreateCcodes(2)
+
+    TempPos = CreateVar(FP)
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}

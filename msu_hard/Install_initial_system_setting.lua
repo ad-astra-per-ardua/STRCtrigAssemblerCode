@@ -93,26 +93,131 @@ for k = 1, 2 do
             PreserveTrigger()
         },
     }
+
+
+    Trigger { -- 스팀팩 / 21
+	players = {i},
+	conditions = {
+		Label(0);
+		Command(i,AtLeast,1,21);
+	},
+	actions = {
+		SetCD(CUnitFlag,1);
+		SetDeaths(i,Add,1,21);
+		ModifyUnitEnergy(1,21,i,64,0);
+		RemoveUnitAt(1,21,"Anywhere",i);
+		DisplayText(StrDesign("\x04멀티 \x1B스팀팩\x04기능을 사용합니다."),4);
+		SetCDeaths(FP,Add,1,CUnitRefresh);
+		PreserveTrigger();
+	},
+	}
+	Trigger { -- 스탑 order 1 / 7
+	players = {i},
+	conditions = {
+		Label(0);
+		Command(i,AtLeast,1,7);
+	},
+	actions = {
+		SetCD(CUnitFlag,1);
+		SetDeaths(i,Add,1,7);
+		ModifyUnitEnergy(1,7,i,64,0);
+		RemoveUnitAt(1,7,"Anywhere",i);
+		DisplayText(StrDesign("\x04멀티 \x07스탑\x04기능을 사용합니다."),4);
+		SetCDeaths(FP,Add,1,CUnitRefresh);
+		PreserveTrigger();
+	},
+	}
+	Trigger { -- 홀드 order 107 / 30
+	players = {i},
+	conditions = {
+		Label(0);
+		Command(i,AtLeast,1,30);
+	},
+	actions = {
+		SetCD(CUnitFlag,1);
+		SetDeaths(i,Add,1,30);
+		ModifyUnitEnergy(1,30,i,64,0);
+		RemoveUnitAt(1,30,"Anywhere",i);
+		DisplayText(StrDesign("\x04멀티 \x11홀드\x04기능을 사용합니다."),4);
+		SetCDeaths(FP,Add,1,CUnitRefresh);
+		PreserveTrigger();
+	},
+	}
+    ------------------ 
+    CIf(FP,CDeaths(FP,AtLeast,1,CUnitFlag))
+		CMov(FP,0x6509B0,19025+19)
+		CWhile(FP,Memory(0x6509B0,AtMost,19025+19 + (84*1699)))
+			CIf(FP,{DeathsX(CurrentPlayer,AtMost,3,0,0xFF),DeathsX(CurrentPlayer,AtLeast,256,0,0xFF00)})
+			DoActions(FP,MoveCp(Add,6*4))
+
+			CIf(FP,{TTOR({
+				DeathsX(CurrentPlayer,Exactly,0,0,0xFF),
+				DeathsX(CurrentPlayer,Exactly,1,0,0xFF),
+				DeathsX(CurrentPlayer,Exactly,20,0,0xFF)})})
+				DoActions(FP,MoveCp(Subtract,6*4))
+
+			for i = 0, 3 do
+			CTrigger(FP,{Deaths(i,AtLeast,1,21),DeathsX(CurrentPlayer,Exactly,i,0,0xFF)},{
+				MoveCp(Add,50*4);
+				SetDeathsX(CurrentPlayer,SetTo,30*256,0,0xFF00);
+				MoveCp(Subtract,50*4);},{preserved})
+
+			CTrigger(FP,{Deaths(i,AtLeast,1,7),DeathsX(CurrentPlayer,Exactly,i,0,0xFF),TTDeathsX(CurrentPlayer,NotSame,5*256,0,0xFF00)},{ -- Stop
+				SetDeathsX(CurrentPlayer,SetTo,1*256,0,0xFF00),},{preserved})
+				
+			CIf(FP,{Deaths(i,AtLeast,1,30),DeathsX(CurrentPlayer,Exactly,i,0,0xFF),TTDeathsX(CurrentPlayer,NotSame,5*256,0,0xFF00)}) -- Hold
+                f_SaveCp()
+				f_Read(FP,_Sub(BackupCp,9),TempPos)
+				CDoActions(FP,{
+					TSetDeaths(_Add(BackupCp,4),SetTo,0,0),
+					TSetDeathsX(BackupCp,SetTo,107*256,0,0xFF00),
+					TSetDeaths(_Sub(BackupCp,13),SetTo,TempPos,0),
+					TSetDeaths(_Add(BackupCp,3),SetTo,TempPos,0),
+					TSetDeaths(_Sub(BackupCp,15),SetTo,TempPos,0)})
+				f_LoadCp()
+			CIfEnd()
+                end
+                DoActions(FP,MoveCp(Add,6*4))
+                CIfEnd()
+                DoActions(FP,MoveCp(Subtract,6*4))
+                CIfEnd()
+            CAdd(FP,0x6509B0,84)
+        CWhileEnd()
+    CIfEnd()
+DoActionsX(FP,{SetCp(FP),SetDeaths(Force1,SetTo,0,21),SetDeaths(Force1,SetTo,0,7),SetDeaths(Force1,SetTo,0,30),SetCDeaths(FP,SetTo,0,CUnitFlag)})
+
 end 
     CIfX(AllPlayers, {CDeaths(FP, Exactly, 1, Difficulty)})
+    -- 업그레이드 관련 -- 
     TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,1),SetMemoryB(0x657258+100,SetTo,1)})
     for i = 4,7 do
         TriggerX(i, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x58CE24 + (24 * i) + 10, SetTo, 0)})
     end
+    ---- 1시 보스 데미지 ----
+    TriggerX(P6, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemoryW(0x656EB0 + 127 * 2, SetTo, 11000)})
     
     -- TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x662350 + (), modtype, number)}, Flags, Index) -- max hp
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
 
-    CElseX()
-    TriggerX(Force2, {CDeaths(FP, Exactly, 2, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,2),SetMemoryB(0x657258+100,SetTo,2)})
+    CElseX() -------------------------- 하드모드 분기점
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardScore(Kills, "\x1fP\x04oints -- 【Ver。1.2 \x08H\x04ard】")},preserved);
+    TriggerX(Force2, {CDeaths(FP, Exactly, 2, Difficulty)}, {SetMemoryB(0x657258+103,SetTo,2),SetMemoryB(0x657258+100,SetTo,2)})
+    for i = 0, 3 do -- 원격 스팀, 스탑, 홀드 비활성화 | cp * 288 + unit
+        TriggerX(FP, {CDeaths(FP, Exactly, 2, Difficulty)}, {
+            SetMemoryB(0x57F27C+(228*i)+21,SetTo,0),
+            SetMemoryB(0x57F27C+(228*i)+7,SetTo,0),
+            SetMemoryB(0x57F27C+(228*i)+30,SetTo,0),
+        })
+    end
+    
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
@@ -120,7 +225,8 @@ end
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
 
     CIfXEnd()
-
+    TriggerX(FP, CDeaths(FP, AtLeast, 1, BGMdeathVar), {SetCDeaths(FP, Subtract, 1,BGMdeathVar)}, preserved)
+    TriggerX(FP, CDeaths(FP, AtLeast, 1, BGMtimedeath), {SetCDeaths(FP, Subtract, 1,BGMtimedeath)}, preserved)
     ColorArray = {"\x08","\x0E","\x0F","\x10"};
     for i = 0 , 3 do
         -- TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
@@ -130,19 +236,33 @@ end
         --     }, {Force1,Force5}, FP),
         --     SetScore(i, Add, 1, Custom),
         -- },preserved); -- 일마
+        TriggerX(FP, {Deaths(i, Exactly, 1, 20),CDeaths(FP, AtMost, 10, BGMdeathVar),CDeaths(FP, Exactly, 0, BGMtimedeath)}, {
+            RotatePlayer({
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1, Force5}, FP),
+            SetCDeaths(FP, Add, 1, BGMdeathVar),
+            SetCD(BGMtimedeath, 34),
+        }, preserved)
 
-        TriggerX(FP, {Deaths(i, AtLeast, 1, 20)}, {
+        Trigger2X(FP, {Deaths(i, AtLeast, 1, 20)}, {
             RotatePlayer({
                 DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x07Hero \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가 \x06사망\x04하였습니다.\x1F】", 4);
-                PlayWAVX("staredit\\wav\\DEAD.wav");
             }, {Force1, Force5}, FP),
             SetScore(i, Add, 2, Custom),
         }, preserved); -- 영마
 
-        TriggerX(FP, {Deaths(i, AtLeast, 1, 1)}, {
+        
+        TriggerX(FP, {Deaths(i, Exactly, 1, 20),CDeaths(FP, AtMost, 10, BGMdeathVar),CDeaths(FP, Exactly, 0, BGMtimedeath)}, {
+            RotatePlayer({
+                PlayWAVX("staredit\\wav\\DEAD.wav");
+            }, {Force1, Force5}, FP),
+            SetCDeaths(FP, Add, 1, BGMdeathVar),
+            SetCD(BGMtimedeath, 34),
+        }, preserved)
+
+        Trigger2X(FP, {Deaths(i, AtLeast, 1, 1)}, {
             RotatePlayer({
                 DisplayTextX("\x12\x1F【"..ColorArray[i+1].." ["..(i+1).." Player]\x04의 \x19｡˙+ﾟ \x11Special \x1FGuardians of \x19Galaxy ﾟ.+｡\x04가  \x06사망\x04하였습니다.\x1F】", 4);
-                PlayWAVX("staredit\\wav\\DEAD.wav");
             }, {Force1,Force5}, FP),
             SetScore(i, Add, 3, Custom),
         }, preserved); -- 스마
