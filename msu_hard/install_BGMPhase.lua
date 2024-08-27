@@ -28,7 +28,8 @@ OB_BGMArray = CreateVar(FP)
         {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
         {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
         {16, "staredit\\wav\\betterworld.ogg", 37 * Fixedtime},
-        {17, "staredit\\wav\\spPlot1.ogg", 145 * Fixedtime}
+        {17, "staredit\\wav\\spPlot1.ogg", 145 * Fixedtime},
+        {18, "staredit\\wav\\hat2.ogg", 145 * Fixedtime}
         })
     end
     IBGM_EPD(FP, {Force5}, OB_BGMArray, {
@@ -48,7 +49,8 @@ OB_BGMArray = CreateVar(FP)
         {14, "staredit\\wav\\envyofthedead.ogg", 33 * Fixedtime},
         {15, "staredit\\wav\\foolme.ogg", 27 * Fixedtime},
         {16, "staredit\\wav\\betterworld.ogg", 37 * Fixedtime},
-        {17, "staredit\\wav\\spPlot1.ogg", 145 * Fixedtime}
+        {17, "staredit\\wav\\spPlot1.ogg", 145 * Fixedtime},
+        {18, "staredit\\wav\\hat2.ogg", 145 * Fixedtime}
         })
     
     ----------- Hat BGM ----------
@@ -63,6 +65,19 @@ OB_BGMArray = CreateVar(FP)
             SetNVar(OB_BGMArray, SetTo, 1);
         },preserved)
     CIfEnd({SetDeaths(P6, SetTo, 0, 131)})
+
+    CIf(FP, {Deaths(P7, AtLeast, 1, 131)})
+        TriggerX(FP,{},{
+            CopyCpAction({DisplayTextX(StrDesignX("Hatchery Destroyed! + 30,000 Points"), 4)}, {Force1,Force5}, FP);
+            SetScore(Force1, Add, 30000,Kills);
+            SetNVar(BGMArray[1], SetTo, 18);
+            SetNVar(BGMArray[2], SetTo, 18);
+            SetNVar(BGMArray[3], SetTo, 18);
+            SetNVar(BGMArray[4], SetTo, 18);
+            SetNVar(OB_BGMArray, SetTo, 18);
+        },preserved)
+    CIfEnd({SetDeaths(P7, SetTo, 0, 131)})
+
     ---------- Lair BGM ----------
     CIf(FP, {Deaths(P6, AtLeast, 1, 132)})
         TriggerX(FP,{},{
@@ -123,7 +138,7 @@ OB_BGMArray = CreateVar(FP)
             SetNVar(OB_BGMArray, SetTo, 6);
             SetDeaths(P1, SetTo, 1, 130);
         },preserved)
-    CIfEnd({SetDeaths(P7, SetTo, 0, 130)})
+    CIfEnd({SetCD(Wavebreak, 1)})
     ---------- Inf2 BGM ----------
     CIf(FP, {Deaths(P7, AtLeast, 1, 106)})
         TriggerX(FP,{},{
@@ -136,7 +151,7 @@ OB_BGMArray = CreateVar(FP)
             SetNVar(OB_BGMArray, SetTo, 7);
             SetDeaths(P1, SetTo, 1, 106);
         },preserved)
-    CIfEnd({SetDeaths(P7, SetTo, 0, 106)})
+    CIfEnd({SetCD(Wavebreak, 1)})
 
     -------- psychopathy BGM ---- 
     CIfOnce(FP, {CommandLeastAt(114, "celebrate1"),Deaths(P7, AtLeast, 1, 151)})

@@ -46,7 +46,7 @@ for k = 1, 2 do
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.0 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x13\x04양쪽 \x08적진의 수뇌부에서 \x10희망의 빛\x04이 \x19희미하게 \x04보이는 것 같다...?").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.2 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x13\x04양쪽 \x08적진의 수뇌부에서 \x10희망의 빛\x04이 \x19희미하게 \x04보이는 것 같다...?").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
             },
         }
         end
@@ -144,7 +144,7 @@ for k = 1, 2 do
 	},
 	}
     ------------------ 
-    CIf(FP,CDeaths(FP,AtLeast,1,CUnitFlag))
+    CIf(FP,CDeaths(FP,AtLeast,1,CUnitFlag)) -- 원격
 		CMov(FP,0x6509B0,19025+19)
 		CWhile(FP,Memory(0x6509B0,AtMost,19025+19 + (84*1699)))
 			CIf(FP,{DeathsX(CurrentPlayer,AtMost,3,0,0xFF),DeathsX(CurrentPlayer,AtLeast,256,0,0xFF00)})
@@ -198,7 +198,7 @@ end
     
     -- TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x662350 + (), modtype, number)}, Flags, Index) -- max hp
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals 【Ver。1.2 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
@@ -217,7 +217,7 @@ end
     end
     
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals 【Ver。1.2 \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
@@ -226,7 +226,6 @@ end
 
     CIfXEnd()
     TriggerX(FP, CDeaths(FP, AtLeast, 1, BGMdeathVar), {SetCDeaths(FP, Subtract, 1,BGMdeathVar)}, preserved)
-    TriggerX(FP, CDeaths(FP, AtLeast, 1, BGMtimedeath), {SetCDeaths(FP, Subtract, 1,BGMtimedeath)}, preserved)
     ColorArray = {"\x08","\x0E","\x0F","\x10"};
     for i = 0 , 3 do
         -- TriggerX(FP, {Deaths(i, AtLeast, 1, 0)}, {
@@ -236,12 +235,11 @@ end
         --     }, {Force1,Force5}, FP),
         --     SetScore(i, Add, 1, Custom),
         -- },preserved); -- 일마
-        TriggerX(FP, {Deaths(i, Exactly, 1, 20),CDeaths(FP, AtMost, 10, BGMdeathVar),CDeaths(FP, Exactly, 0, BGMtimedeath)}, {
+        Trigger2X(FP, {Deaths(i, Exactly, 1, 20),CDeaths(FP, AtMost, 10, BGMdeathVar)}, {
             RotatePlayer({
                 PlayWAVX("staredit\\wav\\DEAD.wav");
             }, {Force1, Force5}, FP),
-            SetCDeaths(FP, Add, 1, BGMdeathVar),
-            SetCD(BGMtimedeath, 34),
+            SetCDeaths(FP, Add, 1, BGMdeathVar)
         }, preserved)
 
         Trigger2X(FP, {Deaths(i, AtLeast, 1, 20)}, {
@@ -252,12 +250,11 @@ end
         }, preserved); -- 영마
 
         
-        TriggerX(FP, {Deaths(i, Exactly, 1, 20),CDeaths(FP, AtMost, 10, BGMdeathVar),CDeaths(FP, Exactly, 0, BGMtimedeath)}, {
+        Trigger2X(FP, {Deaths(i, Exactly, 1, 1),CDeaths(FP, AtMost, 10, BGMdeathVar)}, {
             RotatePlayer({
                 PlayWAVX("staredit\\wav\\DEAD.wav");
             }, {Force1, Force5}, FP),
-            SetCDeaths(FP, Add, 1, BGMdeathVar),
-            SetCD(BGMtimedeath, 34),
+            SetCDeaths(FP, Add, 1, BGMdeathVar)
         }, preserved)
 
         Trigger2X(FP, {Deaths(i, AtLeast, 1, 1)}, {
