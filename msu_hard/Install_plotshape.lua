@@ -63,7 +63,7 @@ function Install_plotshape()
 
     JYD = "Set Unit Order To: Junk Yard Dog"
     Gentime = SDspeed * 572
-    ExRate = {21, 23, 25, 27}
+    ExRate = {20, 22, 24, 26}
     HDrate = {23, 25, 28, 31}
     Rate_c = {ExRate, HDrate}
     ScanInitSetting(Force2,0)
@@ -86,7 +86,7 @@ function Install_plotshape()
     CUnitFlag,CUnitRefresh = CreateCcodes(2)
 
     BGMdeathVar,BGMtimedeath = CreateCcodes(2)
-    Wavebreak = CreateCcode()
+
     TempPos = CreateVar(FP)
     --------- Plot shape
 

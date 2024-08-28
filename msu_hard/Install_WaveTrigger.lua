@@ -4,7 +4,7 @@ function Install_WaveTrigger()
 
 
 CIfX(AllPlayers, {CDeaths(FP, Exactly, 1, Difficulty)})
-TriggerX(FP, {CDeaths(FP, AtLeast, 1, Wavebreak)}, {SetDeaths(P8, SetTo, 0, 131),SetDeaths(P8, SetTo, 0, 132)}, preserved)
+
 TriggerX(FP, {
 	Bring(P7, AtLeast, 1, 130, "nuke1"),
 	Bring(P7, AtLeast, 1, 106, "nuke2")
@@ -12,7 +12,7 @@ TriggerX(FP, {
 
 
 
-
+TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
 
 CSPlotOrder(WAVE1, P7, 40, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 44, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
@@ -24,21 +24,21 @@ CSPlotOrder(WAVE3, P7, 51, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5),
 
 -------- 1 Cerebrate Terran ---------
 
-CSPlotOrder(WAVE1, P7, 17, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 16, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
-CSPlotOrder(WAVE1, P7, 17, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 16, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 ---------- 1 Daggoth Terran --------
 
-CSPlotOrder(WAVE1, P7, 17, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 16, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 
-CSPlotOrder(WAVE1, P7, 17, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 16, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 
@@ -47,11 +47,11 @@ CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5),
 
 CSPlotOrder(WAVE1, P7, 65, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 88, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
-CSPlotOrder(WAVE3, P7, 81, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE3, P7, 66, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 CSPlotOrder(WAVE1, P7, 65, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 88, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
-CSPlotOrder(WAVE3, P7, 81, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE3, P7, 66, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 
 ------------------ Big Wave Trigger 132 -----------------
@@ -128,10 +128,8 @@ for i = 16, 20 do
 	CSPlotOrder(Bigwave1, P6, 88, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 180, 132)})
 	CSPlotOrder(Bigwave2, P6, 64, "celebrate2", nil, 1, 48, CSMakeLine(6,1,0,15,0), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 180, 132)})
 end
-TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
-CElseX()
 
-TriggerX(FP, {CDeaths(FP, AtLeast, 1, Wavebreak)}, {SetDeaths(P8, SetTo, 0, 131),SetDeaths(P8, SetTo, 0, 132)}, preserved)
+CElseX()
 
 TriggerX(FP, {
 	Bring(P7, AtLeast, 1, 130, "nuke1"),
@@ -139,6 +137,7 @@ TriggerX(FP, {
 }, {SetDeaths(P8, Add, 1, 131),SetDeaths(P8, Add, 1, 132)}, preserved)
 
 
+TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
 
 CSPlotOrder(WAVE1, P7, 54, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 53, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
@@ -150,21 +149,21 @@ CSPlotOrder(WAVE3, P7, 55, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5),
 
 -------- 1 Cerebrate Terran ---------
 
-CSPlotOrder(WAVE1, P7, 16, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 17, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
-CSPlotOrder(WAVE1, P7, 16, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 17, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 0, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 ---------- 1 Daggoth Terran --------
 
-CSPlotOrder(WAVE1, P7, 16, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 17, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 
-CSPlotOrder(WAVE1, P7, 16, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
+CSPlotOrder(WAVE1, P7, 17, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 8, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 0, 152)},nil,1)
 
@@ -173,11 +172,11 @@ CSPlotOrder(WAVE3, P7, 46, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5),
 
 CSPlotOrder(WAVE1, P7, 65, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131), Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 88, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
-CSPlotOrder(WAVE3, P7, 66, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE3, P7, 81, "celebrate1", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 CSPlotOrder(WAVE1, P7, 65, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,35,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 CSPlotOrder(WAVE2, P7, 88, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,0,20,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
-CSPlotOrder(WAVE3, P7, 66, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
+CSPlotOrder(WAVE3, P7, 81, "celebrate2", nil, 1, 32, CSMakePolygon(4,1,45,13,5), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, AtLeast, 1019, 131),Deaths(P7, Exactly, 1, 151),Deaths(P7, Exactly, 1, 152)},nil,1)
 
 
 ------------------ Big Wave Trigger 132 -----------------
@@ -292,7 +291,7 @@ for i = 21, 30 do
 	CSPlotOrder(Bigwave1, P6, 70, "celebrate2", nil, 1, 48, CSMakePolygon(6,1,0,50,1), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 240, 132)})
 	CSPlotOrder(Bigwave2, P6, 28, "celebrate2", nil, 1, 48, CSMakeLine(6,1,0,15,0), 0, Attack, "HealZone", nil, 64, nil, P6,{Deaths(P8, Exactly, Gentime * i + 240, 132)})
 end
-TriggerX(FP, {Deaths(FP, AtLeast, 1020, 131)}, SetDeaths(P8, SetTo, 0, 131),{preserved})
+
 CIfXEnd()
 
 end

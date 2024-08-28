@@ -130,15 +130,14 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetDeaths(P12, SetTo, 102, 225);
     },{preserved})
 
-    Trigger2X(FP, {Deaths(P11, Exactly, 20, 160)}, {
-    RotatePlayer({MinimapPing("middle1");
-    MinimapPing("middle1");
-    MinimapPing("middle1");
-    PlayWAVX("sound\\Terran\\KERRIGAN\\UKePss04.wav");
-    PlayWAVX("sound\\Terran\\KERRIGAN\\UKePss04.wav");
-    PlayWAVX("sound\\Terran\\KERRIGAN\\UKePss04.wav");
-    TalkingPortrait(16, 1000);
-}, {Force1,Force5}, FP)
+    TriggerX(Force1, {Deaths(P11, Exactly, 20, 160)}, {
+        MinimapPing("middle1"),
+        MinimapPing("middle1"),
+        MinimapPing("middle1"),
+        PlayWAV("sound\\Terran\\KERRIGAN\\UKePss04.wav"),
+        PlayWAV("sound\\Terran\\KERRIGAN\\UKePss04.wav"),
+        PlayWAV("sound\\Terran\\KERRIGAN\\UKePss04.wav"),
+        TalkingPortrait(16, 1000)
     })
 
     TriggerX(Force1, {Deaths(P11, Exactly, 22, 160)},{MoveUnit(1, 22, P6, "nuke3", "middle1")})
@@ -212,9 +211,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CSPlotOrder(Shape11_1, P6, 28, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
 
-    
-    CIfEnd()
-
     CAPlot(CS_SortR(PE,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
     TriggerX(Force1, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -225,6 +221,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
     })
+    CIfEnd()
     ------ End of 11 Middle boss trigger -----
     
 
@@ -321,8 +318,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     -- CDoActions(FP,CMov(FP, RandomIndex, GenerateRandomIndex),preserved)
 
     LocM1 = "middle2"
-    local A1 = 0.3
-    local A2 = 0.6
+    local A1 = 0.5
+    local A2 = 1
     TriggerX(Force1, {Deaths(P11, Exactly, 20, 161)}, {
         MinimapPing("middle2"),
         MinimapPing("middle2"),
@@ -371,11 +368,8 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CSPlotOrder(MB1CircleS, P6, 3, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[44]) * SDspeed , 161)})
     CSPlotOrder(MB1CircleS, P6, 7, LocM1, nil, 1, 32, MB1CircleA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[45]) * SDspeed , 161)})
 
-    
-    CIfEnd()
-
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
-    TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed,161)}, {
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45] + 3) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
+    TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, (MB1TL[45] + 3) * SDspeed,161)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -384,6 +378,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 204)
     })
+    CIfEnd()
 
     -------- End of 1 Middle Boss trigger -------
 
@@ -466,9 +461,6 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
 
-    
-    CIfEnd()
-
     CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
     TriggerX(Force1, {Deaths(P6, Exactly, 1, 116)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -479,6 +471,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
     })
+    CIfEnd()
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
 
@@ -596,6 +589,20 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
     CSPlotOrder(MB1CircleS, P6, 28, "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
     CSPlotOrder(MB1CircleS, P6, 102, "middle3", nil, 1, 32, MB1CircleA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
+
+
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
+    TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
+        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
+        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
+        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
+        DisplayText(StrDesignX("\x07절경\x04과 \x08공포\x04의 세계선의 주인, \x08Φ ό β ο ς\x04를 격파하였습니다 ! "), 4),
+        DisplayText(StrDesignX("+ \x1f 300,000 Ore 획득 !"), 4),
+        SetResources(CurrentPlayer, Add, 300000, Ore),
+        SetDeaths(P6, SetTo, 1, 202)
+    })
+    
+
     ----- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 5746
     MBossPtr7, MBossHP7, MBossHP7_2 = CreateVars(3,FP)
     CIfOnce(FP,{CommandLeastAt(127, "middle3"), Deaths(P11, AtLeast, 10, 166)})
@@ -622,18 +629,6 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
         SetNVar(MBossHP7_2,Subtract,1);
     },{preserved})
     CIfEnd()
-
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
-    TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
-        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        DisplayText(StrDesignX("\x07절경\x04과 \x08공포\x04의 세계선의 주인, \x08Φ ό β ο ς\x04를 격파하였습니다 ! "), 4),
-        DisplayText(StrDesignX("+ \x1f 300,000 Ore 획득 !"), 4),
-        SetResources(CurrentPlayer, Add, 300000, Ore),
-        SetDeaths(P6, SetTo, 1, 202)
-    })
-
 ----------------------------------------------------------------------------------------------------
 CElseX()
 ----------------------------------------------------------------------------------------------------
@@ -699,13 +694,13 @@ CElseX()
     local n = #MBoss11_1T
     for i = 1 ,32 do
         local index = (i - 1) % n + 1
-        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1",nil,32,nil,FP, {Deaths(P11, AtLeast, (M11tl[1]*SDspeed) + (12 + i*11),160)})
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[1]*SDspeed) + (12 + i*11),160)})
     end
     CAPlot(Shape11_1, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[1] * SDspeed, 160)})
     CAPlot(CS_Reverse(Shape11_1), P6, 89, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[2] * SDspeed, 160)})
     CAPlot(CS_Shuffle(Shape11_1), P6, 88, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[3] * SDspeed, 160)})
     CAPlot(CS_Shuffle(Shape11_1), P6, 77, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[4] * SDspeed, 160)})
-    CSPlotWithProperties(Generator_shape, P5, 27, M11, {495,351}, 1, 32, P6, {Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)}, nil,nil, Onlyhallucinated)
+    CSPlotWithProperties(Shape11_1, P5, 27, M11, {495,351}, 1, 32, P6, {Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)}, nil,nil, Onlyhallucinated)
     for i = 1, 4 do 
         TriggerX(FP, {Deaths(P11, AtLeast, M11tl[5] * SDspeed, 160)}, CreateUnit(1, 27, RealB[i], P5))
     end
@@ -720,54 +715,51 @@ CElseX()
     
     CAPlotWithProperties(CS_Reverse(CS_SortR(HiveEtf2,1)), P5, 11, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, nil, nil, StargateProperties)
     -- CSPlotOrderWithProperties(CSMakeSpiral(6, 16, 1/2, 0, 0, 130, 71), P5, 11, "nuke3", nil, 1, 32, HiveEtf2, nil, Attack, "middle1", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[6] * SDspeed, 160)}, nil, nil,StargateProperties)
-    -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[12] * SDspeed, 160)})
+    TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[12] * SDspeed, 160)})
 
     for i = 1 ,64 do
         local index = (i - 1) % n + 1
-        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1",nil ,32,nil,FP, {Deaths(P11, AtLeast, (M11tl[7]*SDspeed) + (12 + i*11),160)})
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[7]*SDspeed) + (12 + i*11),160)})
     end
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)}, {KillUnitAt(All, 11, "Anywhere", P5)})
-    CSPlotOrder(HiveEtf2, P6, 72, M11, {495,351}, 2, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
-    CSPlotOrder(HiveEtf2, P6, 76, M11, {495,351}, 2, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
-    CSPlotOrder(HiveEtf2, P6, 93, M11, {495,351}, 2, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
-    CSPlotOrder(HiveEtf2, P6, 64, M11, {495,351}, 2, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
+    CSPlotOrder(HiveEtf2, P6, 72, M11, {495,351}, 1, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
+    CSPlotOrder(HiveEtf2, P6, 76, M11, {495,351}, 1, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
+    CSPlotOrder(HiveEtf2, P6, 93, M11, {495,351}, 1, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
+    CSPlotOrder(HiveEtf2, P6, 64, M11, {495,351}, 1, 32, HiveEtf2A, nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[8] * SDspeed, 160)})
     for i = 1, 8 do
-        CSPlotOrder(CS_Rotate(TSFL1, 51.4*(i-1)), P6, MBoss11_2P[i], M11, {495,351}, 3, 32, CSMakeLine(1,0,0,10,1), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[i+8] * SDspeed, 160)})
+        CSPlotOrder(CS_Rotate(TSFL1, 51.4*(i-1)), P6, MBoss11_2P[i], M11, {495,351}, 1, 32, CSMakeLine(1,0,0,10,1), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[i+8] * SDspeed, 160)})
     end
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[17] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 58, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[17] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[18] + 0.6) * SDspeed, 160)})
+    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[17] * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[17] + 0.6) * SDspeed, 160)})
+    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[18] + 0.6) * SDspeed, 160)})
 
     for i = 1, 8 do
-        CSPlotOrder(CS_Rotate(TSFL1, 360-51.4*(i-1)), P6, MBoss11_2P[i], M11, {495,351}, 3, 32, CSMakeLine(1,0,0,10,1), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[i+18] * SDspeed, 160)})
+        CSPlotOrder(CS_Rotate(TSFL1, 360-51.4*(i-1)), P6, MBoss11_2P[i], M11, {495,351}, 1, 32, CSMakeLine(1,0,0,10,1), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[i+18] * SDspeed, 160)})
     end
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[26] * SDspeed, 160)})
     for i = 1 ,64 do
         local index = (i - 1) % n + 1
-        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1",nil,32,nil,FP, {Deaths(P11, AtLeast, (M11tl[26]*SDspeed) + (12 + i*11),160)})
+        CSPlotOrder(CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)), P5, MBoss11_1T[index], "middle1", {495,351}, 1, 32, CS_Rotate3D(MiddleGen,(360-11.25*i),(11.25*i),(360-11.25*i)),nil,Attack,"middle1","nil",32,nil,FP, {Deaths(P11, AtLeast, (M11tl[26]*SDspeed) + (12 + i*11),160)})
     end
     CSPlotOrder(Shape11_1, P6, 16, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[27] * SDspeed, 160)})
     CSPlotOrder(Shape11_1, P6, 25, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[28] * SDspeed, 160)})
     CSPlotOrder(Shape11_1, P6, 60, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[29] * SDspeed, 160)})
 
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
-    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
-    -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
-    CAPlot(Generator_shape, P6, 60, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[33] * SDspeed, 160)})
-    CAPlot(Generator_shape, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[34] * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 3, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[35] * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 21, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[36] * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 102, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[37] * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 76, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[38] * SDspeed, 160)})
-    CSPlotOrder(Generator_shape, P6, 28, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
-    -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
-
-    
-    CIfEnd()
+    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
+    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
+    CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
+    TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
+    CAPlot(Shape11_1, P6, 60, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[33] * SDspeed, 160)})
+    CAPlot(Shape11_1, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[34] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 3, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[35] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 21, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[36] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 102, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[37] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 76, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[38] * SDspeed, 160)})
+    CSPlotOrder(Shape11_1, P6, 28, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
+    TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160)})
 
     CAPlot(CS_SortR(PE,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
     TriggerX(Force1, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)}, {
@@ -779,7 +771,7 @@ CElseX()
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
     })
-
+    CIfEnd()
     ------ End of 11 Middle boss trigger -----
     
 
@@ -876,8 +868,8 @@ CElseX()
     -- CDoActions(FP,CMov(FP, RandomIndex, GenerateRandomIndex),preserved)
 
     LocM1 = "middle2"
-    local A1 = 0.3
-    local A2 = 0.6
+    local A1 = 0.5
+    local A2 = 1
     TriggerX(Force1, {Deaths(P11, Exactly, 20, 161)}, {
         MinimapPing("middle2"),
         MinimapPing("middle2"),
@@ -926,10 +918,7 @@ CElseX()
     CSPlotOrder(PE, P6, 3, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[44]) * SDspeed , 161)})
     CSPlotOrder(PE, P6, 7, LocM1, nil, 1, 32, PEA, nil, Attack, "emp3", nil, 32, nil, FP, {Deaths(P11, Exactly, (MB1TL[45]) * SDspeed , 161)})
 
-
-    CIfEnd()
-
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45] + 3) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[45] * SDspeed,161)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -939,6 +928,7 @@ CElseX()
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 204)
     })
+    CIfEnd()
 
     -------- End of 1 Middle Boss trigger -------
 
@@ -1015,8 +1005,6 @@ CElseX()
         SetDeaths(P11, SetTo, 102, 164);
     },{preserved})
 
-    CIfEnd()
-
     CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
     TriggerX(Force1, {Deaths(P6, Exactly, 1, 116)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -1027,7 +1015,7 @@ CElseX()
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 203)
     })
-
+    CIfEnd()
     ------------ End of Boss HP Overflow Trigger ----------------------
     ------------ End of 5 Middle Boss Trigger  -------------------
 
@@ -1163,45 +1151,16 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
     for i = 1 , #MB7TL do --- Length == 32
         local arrayLength = #GTL1
         local genIndex = ((i - 1) % arrayLength) + 1
-        CSPlotOrder(PE, P6, GTL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
-        CSPlotOrder(PE, P6, STL1[genIndex], "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
+        CSPlotOrder(Generator_shape, P6, GTL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, MB7TL[i] * SDspeed, 166)})
+        CSPlotOrder(Generator_shape, P6, STL1[genIndex], "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, (MB7TL[i] + 0.5) * SDspeed , 166)})
     end
-    CSPlotOrder(PE, P6, 28, "middle3", nil, 1, 32, PEA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
-    CSPlotOrder(PE, P6, 102, "middle3", nil, 1,32, PEA,  nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
-
------ Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 5746
-MBossPtr7, MBossHP7, MBossHP7_2 = CreateVars(3,FP)
-CIfOnce(FP,{CommandLeastAt(127, "middle3"), Deaths(P11, AtLeast, 10, 166)})
-    f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
-    CMov(FP,MBossPtr7,Nextptr) -- Save FBossPtr from Nextptr's 
-        CDoActions(FP,{
-            RotatePlayer({
-                PlayWAVX("staredit\\wav\\7Start.ogg"),
-                MinimapPing("middle3"),
-                MinimapPing("middle3"),
-                TalkingPortrait(89, 1000)
-            }, {Force1,Force5}, FP),
-            CreateUnit(1,126,"middle3",P6);
-            TSetMemory(Vi(MBossPtr7[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
-            TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
-        })
-    CMov(FP,MBossHP7,Nextptr,2) 
-    DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,50)})
-CIfEnd()
-
-CTrigger(FP,{
-    TMemory(MBossHP7,AtMost,256*2500000);
-    NVar(MBossHP7_2,AtLeast,1);
-},{
-    TSetMemory(MBossHP7,SetTo,256*8000000);
-    SetNVar(MBossHP7_2,Subtract,1);
-},{preserved})
+    CSPlotOrder(Generator_shape, P6, 28, "middle3", nil, 1, 32, Generator_shapeA, nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166)})
+    CSPlotOrder(Generator_shape, P6, 102, "middle3", nil, 1,32, Generator_shapeA,  nil, Attack, "unrevealer1", nil, 32, nil, FP, {Deaths(P11, AtLeast, 131.9 * SDspeed , 166)})
 
 
-    CIfEnd()
 
     CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
-    TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.3 * SDspeed, 166),Deaths(P6, AtLeast, 1, 126)}, {
+    TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.3 * SDspeed, 166),Deaths(P6, Exactly, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -1210,6 +1169,38 @@ CTrigger(FP,{
         SetResources(CurrentPlayer, Add, 300000, Ore),
         SetDeaths(P6, SetTo, 1, 202)
     })
+    
+
+    ----- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 5746
+    MBossPtr7, MBossHP7, MBossHP7_2 = CreateVars(3,FP)
+    CIfOnce(FP,{CommandLeastAt(127, "middle3"), Deaths(P11, AtLeast, 10, 166)})
+        f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
+        CMov(FP,MBossPtr7,Nextptr) -- Save FBossPtr from Nextptr's 
+            CDoActions(FP,{
+                RotatePlayer({
+                    PlayWAVX("staredit\\wav\\7Start.ogg"),
+                    MinimapPing("middle3"),
+                    MinimapPing("middle3"),
+                    TalkingPortrait(89, 1000)
+                }, {Force1,Force5}, FP),
+                CreateUnit(1,126,"middle3",P6);
+                TSetMemory(Vi(MBossPtr7[2],2),SetTo,256*8000000); -- Next unit pointer offset's HP set
+                TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
+            })
+        CMov(FP,MBossHP7,Nextptr,2) 
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,50)})
+    CIfEnd()
+
+    CTrigger(FP,{
+        TMemory(MBossHP7,AtMost,256*2500000);
+        NVar(MBossHP7_2,AtLeast,1);
+    },{
+        TSetMemory(MBossHP7,SetTo,256*8000000);
+        SetNVar(MBossHP7_2,Subtract,1);
+    },{preserved})
+    
+
+    CIfEnd()
     
     CIfXEnd()
     

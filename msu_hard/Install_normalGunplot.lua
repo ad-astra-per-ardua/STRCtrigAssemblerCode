@@ -1,9 +1,6 @@
 function Install_normalGunplot()
-    for i = 1, 10,2 do
+    for i = 1, 10 do
         TriggerX(FP, Always(), CreateUnit(1, 131, "hat"..i, P6))
-    end
-    for i = 2, 10, 2 do
-        TriggerX(FP, Always(), CreateUnit(1, 131, "hat"..i, P7))
     end
     for i = 1, 8 do
         TriggerX(FP, Always(), CreateUnit(1, 132, "lair"..i, P6))

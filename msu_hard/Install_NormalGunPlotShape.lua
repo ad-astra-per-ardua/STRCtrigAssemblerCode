@@ -15,7 +15,7 @@ function Install_NormalGunPlotShape()
     function HatcheryGunplot1( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
     Trigger{
-        players = {Force2},
+        players = {P6},
         conditions = {
             CommandLeastAt(131, Hatname);
         },
@@ -50,7 +50,7 @@ function Install_NormalGunPlotShape()
 function HatcheryGunplot2( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
     Trigger{
-        players = {Force2},
+        players = {P6},
         conditions = {
             CommandLeastAt(131, Hatname);
         },
@@ -460,7 +460,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
     CSPlotWithProperties(SShape1, P8, 89, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
     CSPlotWithProperties(SShape2, P8, 88, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargateProperties)
-    CSPlotWithProperties(SShape3, P8, 58, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargatePropertiesHero)
+    CSPlotWithProperties(SShape3, P8, 57, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed-1, Deathvar )},nil,nil,StargatePropertiesHero)
     CSPlotOrder(PB, P5, 89, stargatename, nil, 1, 32, CSMakePolygon(6,1,0,37,1), 0, Attack, "HealZone",nil , 0, nil, P5, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed, Deathvar )})	
     CSPlotWithProperties(PB, P8, 33, stargatename, nil, 1, 64, P8, {Deaths(P10, AtLeast, StargateGenTime[25] * SDspeed, Deathvar )},nil,nil,StargateProperties)
     Trigger2(P6,{Deaths(P10, Exactly, StargateGenTime[25] * SDspeed,Deathvar ) }, {GiveUnits(All,"Men" , P8, "Anywhere", P5),SetInvincibility(Disable, "Men", P5, "Anywhere"),Order("Men", P5, "Anywhere", Attack, stargatename)})
@@ -544,7 +544,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
         function HatcheryGunplot1( Hatname, Deathvar)
             CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
             Trigger{
-                players = {Force2},
+                players = {P6},
                 conditions = {
                     CommandLeastAt(131, Hatname);
                 },
@@ -579,7 +579,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
         function HatcheryGunplot2( Hatname, Deathvar)
             CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
             Trigger{
-                players = {Force2},
+                players = {P6},
                 conditions = {
                     CommandLeastAt(131, Hatname);
                 },
