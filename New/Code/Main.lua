@@ -58,13 +58,17 @@ ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollision(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 Install_function()
-
-Opening()
-CIf(AllPlayers, , Actions, UnPack)
-
 InitVar()
 
+Opening()
+----------- 분할 lua 선언 -------
+CIf(AllPlayers,{CDeaths(FP, AtLeast, 1, Difficulty)}) -- 난이도 상관없이 전체 실행
+
+
+
+
 CIfEnd()
+----------- 분할 lua 선언 End ---------
 CSPlotToCAPlot()
 
 
