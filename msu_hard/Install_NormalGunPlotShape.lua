@@ -15,7 +15,7 @@ function Install_NormalGunPlotShape()
     function HatcheryGunplot1( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
     Trigger{
-        players = {Force2},
+        players = {P6},
         conditions = {
             CommandLeastAt(131, Hatname);
         },
@@ -44,13 +44,46 @@ function Install_NormalGunPlotShape()
     CSPlotOrder(square2, P6, 40, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
     CIfEnd()    
     end
+
+    function HatcheryGunplot11( Hatname, Deathvar)
+        CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
+        Trigger{
+            players = {P7},
+            conditions = {
+                CommandLeastAt(131, Hatname);
+            },
+            actions = {
+                SetDeaths(P10,Add,1,Deathvar);
+                PreserveTrigger();
+            }
+        }
+        -- Hat1 hatchery phase 1
+        CSPlotOrder(square1, P6, 54, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, FP,{Deaths(P10, AtLeast, 50,Deathvar) })
+        CSPlotOrder(square1, P7, 53, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 85, Deathvar) })
+        CSPlotOrder(square1, P6, 40, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 115, Deathvar) })
+        CSPlotOrder(spiral1, P6, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar) })
+        CSPlotOrder(square1, P7, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar) })
+        
+        CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar) })
+        CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar) })
+        CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar) })
+        CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar) })
+        
+        -- -- Hat1 hatchery phase 2
+        CSPlotOrder(square2, P7, 54, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar) })
+        CSPlotOrder(square2, P6, 53, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar) })
+        CSPlotOrder(spiral1, P7, 56, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
+        CSPlotOrder(spiral2, P6, 55, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+        CSPlotOrder(square2, P6, 40, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+        CIfEnd()    
+        end
 ------ Hat 1 tier
 
 ------ Hat 2 tier
 function HatcheryGunplot2( Hatname, Deathvar)
     CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
     Trigger{
-        players = {Force2},
+        players = {P6},
         conditions = {
             CommandLeastAt(131, Hatname);
         },
@@ -79,6 +112,39 @@ function HatcheryGunplot2( Hatname, Deathvar)
     CSPlotOrder(square2, P6, 65, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
     CIfEnd()
     end
+
+    function HatcheryGunplot22( Hatname, Deathvar)
+        CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
+        Trigger{
+            players = {P7},
+            conditions = {
+                CommandLeastAt(131, Hatname);
+            },
+            actions = {
+                SetDeaths(P10,Add,1,Deathvar);
+                PreserveTrigger();
+            }
+        }
+        -- Hat1 hatchery phase 1
+        CSPlotOrder(square1, P6, 65, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 50,Deathvar )})
+        CSPlotOrder(square1, P7, 66, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 85, Deathvar )})
+        CSPlotOrder(square1, P6, 65, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 115, Deathvar )})
+        CSPlotOrder(spiral1, P6, 16, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar )})
+        CSPlotOrder(square1, P6, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar )})
+        
+        CSPlotOrder(spiral1, P7, 88, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar )})
+        CSPlotOrder(spiral2, P6, 89, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar )})
+        CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar )})
+        CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar )})
+        
+        -- -- Hat1 hatchery phase 2
+        CSPlotOrder(square2, P7, 51, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar )})
+        CSPlotOrder(square2, P6, 52, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar )})
+        CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
+        CSPlotOrder(spiral2, P6, 56, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+        CSPlotOrder(square2, P6, 65, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+        CIfEnd()
+        end
     ------ End of hatchery shape plot function 
 
     --- Lair Plot
@@ -246,7 +312,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
     function HiveGunPlot2lv(Hivename, DeathVar)
         CIf(Force2, {Deaths(P10, AtMost, (HiveGenTime[#HiveGenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
         Trigger {
-            players = {P6},
+            players = {P7},
             conditions = {
                 CommandLeastAt(133, Hivename);
             },
@@ -500,11 +566,19 @@ function HatcheryGunplot2( Hatname, Deathvar)
     TriggerX(P6, {Deaths(P10, Exactly, StargateGenTime[27] * SDspeed + 100, Deathvar )},{Order("Men", P5, stargatename, Attack, "HealZone")})
     CIfEnd()
     end
-    for i = 1, 6 do -- 1 ~ 6
+    for i = 1, 6, 2 do -- 1 ~ 6 P6 1 3 5 
         HatcheryGunplot1("hat"..i,i);
     end
-    for i = 7 , 10 do -- 7 ~ 10
+
+    for i = 2 ,6 , 2 do -- P7 2 4 6
+        HatcheryGunplot11("hat"..i,i);
+    end
+    for i = 7 , 10, 2 do -- 7 ~ 10 P6 7 9
         HatcheryGunplot2("hat"..i,i);
+    end
+
+    for i = 8 , 10 , 2 do -- P7 8 10
+        HatcheryGunplot22("hat"..i,i);
     end
     for i = 1 , 8 do -- 11 ~ 22
         LairGunplot("lair"..i, i + 10);
@@ -514,12 +588,20 @@ function HatcheryGunplot2( Hatname, Deathvar)
         LairGunplotLv2("lair"..i,LairDeathArray[i-8] );
     end
 
-    for i = 1 , 4 do -- 23 ~ 26
-        HiveGunPlot1lv("hive"..i, i + 22);
-    end
-    for i = 5, 10 do -- 27 ~ 32
-        HiveGunPlot2lv("hive"..i, i + 22);
-    end
+
+    
+    HiveGunPlot1lv("hive1", 23);
+    HiveGunPlot1lv("hive2", 24);
+    HiveGunPlot1lv("hive3", 25);
+    HiveGunPlot1lv("hive4", 26);
+    HiveGunPlot1lv("hive6", 27);
+    HiveGunPlot1lv("hive9", 28);
+
+    HiveGunPlot2lv("hive5", 29);
+    HiveGunPlot2lv("hive7", 30);
+    HiveGunPlot2lv("hive8", 31);
+    HiveGunPlot2lv("hive10", 32);
+
     for i = 1 , 5 do -- 33 ~ 42
         Starport_GunPlot(StarportSpotArr2[i], i + 32);
     end
@@ -774,7 +856,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
             function HiveGunPlot2lv(Hivename, DeathVar)
                 CIf(Force2, {Deaths(P10, AtMost, (HiveGenTime[#HiveGenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
                 Trigger {
-                    players = {P6},
+                    players = {P7},
                     conditions = {
                         CommandLeastAt(133, Hivename);
                     },
@@ -1063,7 +1145,6 @@ function HatcheryGunplot2( Hatname, Deathvar)
             CSPlot(Triangle4, P6, 21, "fcky3", nil, 1, 32, P6, {CommandLeastAt(150, "fcky3")}, {RunAIScriptAt(JYD, "fcky3")})
             CSPlot(Triangle4, P6, 25, "fcky4", nil, 1, 32, P6, {CommandLeastAt(150, "fcky4")}, {RunAIScriptAt(JYD, "fcky4")})
             CSPlot(Triangle4, P6, 62, "fcky5", nil, 1, 32, P6, {CommandLeastAt(150, "fcky5")}, {RunAIScriptAt(JYD, "fcky5")})
-
 
             CIfXEnd()
 
