@@ -1,6 +1,6 @@
 function Install_BGMPhase()
     Fixedtime = 1000
-    BGMArray = CreateVarArr(4,FP)
+    BGMArray = CreateVarArr(5,FP)
     OB_BGMArray = CreateVar(FP)
         for i = 0, 4 do
     

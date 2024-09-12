@@ -1,5 +1,5 @@
 function InitVar()
-    Difficulty = CreateVar(FP)
-    OpeningBGM, OpeningEft = CreateVars(2,FP)
+    Difficulty = CreateCcode()
+    OpeningBGM, OpeningEft = CreateCcodes(2)
 
 end

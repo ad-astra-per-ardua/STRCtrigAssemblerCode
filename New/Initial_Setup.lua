@@ -12,7 +12,7 @@ function Initial_Setup()
     }, preserved)
 
 
-    CIfX(Force2, CDeathsX(FP, Exactly, 1, Difficulty)) -- Normal diff case
+    CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}) -- Normal diff case
     TriggerX(FP, Always(), {SetCD(OpeningBGM, 1)})
 
 
@@ -20,7 +20,7 @@ function Initial_Setup()
 
     CElseX() -- Hell diff case
     TriggerX(FP, Always(), {SetCD(OpeningBGM, 1), AddCD(OpeningEft, 1)},preserved)
-    TriggerX(FP, {CDeaths(FP, AtLeast, (49 * SDspeed) - 10, OpeningEft), CDeaths(FP, AtMost, 50 * SDspeed, OpeningEft), Memory(0x657A9C, AtMost, 2)}, {SetMemoryBA(0x657A9C, Subtract, 1)}, preserved)
+    TriggerX(FP, {CDeaths(FP, AtLeast, (49 * SDspeed) - 10, OpeningEft), CDeaths(FP, AtMost, 50 * SDspeed, OpeningEft)}, {SetMemoryBA(0x657A9C, Subtract, 1)}, preserved)
 
     TriggerX(FP, {CDeaths(FP, AtLeast, 50 * SDspeed + 1, OpeningEft)}, {
         SetMemoryBA(0x657A9C, SetTo, 31);

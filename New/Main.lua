@@ -1,7 +1,7 @@
 -- Copy from here
 -- Laptop
 -- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\New"
--- __MapDirSetting(__encode_cp949(Curdir.."Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
+-- __MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
 -- __SubDirSetting(__encode_cp949(Curdir)) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
 
 -- --- Desktop
@@ -64,14 +64,15 @@ InitVar()
 
 Opening()
 ----------- 분할 lua 선언 -------
-CIf(AllPlayers,{CDeaths(FP, AtLeast, 1, Difficulty)}) -- 난이도 상관없이 전체 실행
+CIfX(AllPlayers,{CDeaths(FP, AtLeast, 1, Difficulty)}) -- 난이도 상관없이 전체 실행
 
 
 Initial_Setup()
+Install_BGMPhase()
 
 Normalgunplot()
 
-CIfEnd()
+CIfXEnd()
 ----------- 분할 lua 선언 End ---------
 
 CSPlotToCAPlot()
