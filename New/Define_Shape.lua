@@ -8,5 +8,7 @@ function Define_Shape()
     square2 = CS_Rotate(square1, 45)
     square1a = CSMakePolygonX(4, 1, 0, CS_Level("PolygonX", 4, 5), CS_Level("PolygonX", 4, 4))
     sixline = CSMakeLine(6,80,0,15,0)
+    CircleB = CSMakeCircle(4,40,0,PlotSizeCalc(4, 1),PlotSizeCalc(4, 0)) ---- 큰 원
+	EllipseB = CS_Distortion(CircleB,{3,1.5},{3,1.5},{3,1.5},{3,1.5}) ---- 큰 타원
 
 end

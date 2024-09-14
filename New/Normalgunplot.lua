@@ -7,7 +7,7 @@ function Normalgunplot()
         20.5, -- 5times rotate
         21.9 -- last gen
     }
-    CSPlotOrder(upperTri, P1, 1, "home", nil, 1, 32, upperTri, nil, Attack, "home", nil, 32, nil, FP, {Always()})
+    CSPlotOrder(temp1, P1, 1, "home", nil, 1, 32, upperTri, nil, Attack, "home", nil, 32, nil, FP, {Always()})
 
     CIfX(Force2, CDeaths(FP, AtLeast, 1, Difficulty)) -- Case of normal difficulty
 
