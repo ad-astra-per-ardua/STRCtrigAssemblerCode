@@ -59,6 +59,8 @@ NoAirCollision(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 Install_function()
 InitVar()
+Define_Shape()
+check_shape()
 
 
 
