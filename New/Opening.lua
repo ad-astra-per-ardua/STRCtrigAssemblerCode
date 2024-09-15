@@ -3,7 +3,7 @@ function Opening()
     Trigger2X(FP, {Always()}, {
         RotatePlayer({
             CenterView("hellselect");
-            DisplayTextX("\x13\x08 ――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x08 마\t린 \x07\t\t키\t우\t기 \t\x04 \n\x13\x05 \tR\tE\tV\tE\t\tR\tS\tE\n\x13\x08――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x17\n\n\n\x12[Create By : rhegb] ", 4);
+            DisplayTextX("\x13\x08 ――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x08 마\t린 \x07\t키\t우\t기 \t\x04 \n\x13\x05 \tR\tE\tV\tE\tR\tS\tE\n\x13\x08――――――――――――――――――――――――――――――――――――――――――――――――――\n\x13\x17\n\n\n\x12[Create By : rhegb] ", 4);
         }, {Force1, Force5}, FP)
     })
 
