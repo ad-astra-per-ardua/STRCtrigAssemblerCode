@@ -75,7 +75,8 @@ function Install_opening()
     TriggerX(FP, {Switch("Switch 249",Set)}, {
         CreateUnit(1, 15, "selectlocation", P1),
         CreateUnit(1, 195, "hardlocation",P7),
-        CreateUnit(1, 196, "normallocation", P7) 
+        CreateUnit(1, 196, "normallocation", P7),
+        CreateUnit(1, 194, "evflocation", P7)
     })
     TriggerX(FP, {Switch("Switch 249",Set)}, {
         CopyCpAction({CenterView("selectlocation")}, {P1,P2,P3,P4}, FP)
@@ -95,6 +96,17 @@ function Install_opening()
         RemoveUnitAt(All, 195, "selectlocation", Force2),
         RemoveUnitAt(All, 196, "selectlocation", Force2)
     })  
+
+    TriggerX(FP, {Bring(P1, Exactly, 1, 15, "evflocation")}, {
+        RotatePlayer({
+            PlayWAVX("staredit\\wav\\sound.wav"),
+            PlayWAVX("staredit\\wav\\sound.wav"),
+            DisplayTextX(StrDesignX("\x07EVF MODE\x04가 활성화 되었습니다."), 4),
+            DisplayTextX(StrDesignX("\x07체력\x04과 \x06공격력\x04이 \x171.3배, \x04모든 건물 \x1b투명화\x04가 적용되었습니다."), 4),
+        }, {Force1, Force5}, FP),
+        MoveUnit(1, 15, P1, "evflocation", "selectlocation"),
+        SetCDeaths(FP, SetTo, 1, Evfmode)
+    })
 
     TriggerX(Force1, {Switch("Switch 248", Set), Bring(P1, Exactly, 0, 15, "admin1")}, 
     {MoveUnit(1, 15, P1, "Anywhere", "admin1")},preserved)

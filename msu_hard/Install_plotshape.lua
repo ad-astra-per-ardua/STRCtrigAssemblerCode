@@ -68,6 +68,8 @@ function Install_plotshape()
     Rate_c = {ExRate, HDrate}
     ScanInitSetting(Force2,0)
 
+    Evfmode = CreateCcode()
+
     Difficulty = CreateCcode()
     Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4 = CreateCcodes(4)
     LairDeathArray = {Lairlv2_1,Lairlv2_2, Lairlv2_3, Lairlv2_4}
