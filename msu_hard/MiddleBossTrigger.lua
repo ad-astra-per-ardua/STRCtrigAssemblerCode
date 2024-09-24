@@ -623,7 +623,7 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
     },{preserved})
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
