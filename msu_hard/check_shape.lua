@@ -41,7 +41,7 @@ function check_shape()
 	
 	-- Eftstar = CSMakeStarX(5,108,64,36,90,0)
 	-- temp2 = CS_RemoveStack(HCD0,20,0)
-	temp1 = CS_RemoveStack(CS_MoveXY(CS_Distortion(E_Base,{3,0},{3,0},nil,nil),550,0),20)
+	temp1 = {10, {128,128}, {114,-62},{65,168}, {-32,118},{26,158},{-81,148},{-135,149}, {-256,-256},{-64,-68},{32,-32}}
 	
 
 	
