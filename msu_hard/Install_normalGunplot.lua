@@ -1,4 +1,5 @@
 function Install_normalGunplot()
+    CIf(FP, {CDeaths(FP, Exactly, 0, Evfmode)})
     for i = 1, 10,2 do
         TriggerX(FP, Always(), CreateUnit(1, 131, "hat"..i, P6))
     end
@@ -34,6 +35,6 @@ function Install_normalGunplot()
         TriggerX(FP, Always(), CreateUnit(1, 167, "starg"..i, P6))
     end
 
-    
+    CIfEnd()
     
 end

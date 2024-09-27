@@ -34,12 +34,12 @@ function MiddleBossTrigger()
     12,14.7, 17.4, 20, 22.4,37.7, 41.5, 60, 
     61.7, 62.2, 62.6, 63.1, 63.6, 64.1, 64.4, 64.8,
     67,68.3, -- eft1
-    71, 71.6, 72.1, 72.5, 73, 73.4, 73.7, 74.2,
-    74.5, 75.2, 76.1,
-    76.5, 77.9, -- eft2
-    79.2, 
-    92.6, 98, 
-    103.4, 104, 104.6, 105.4, 106.1
+    71+1, 71.6+1, 72.1+1, 72.5+1, 73+1, 73.4+1, 73.7+1, 74.2+1,
+    74.5+1, 75.2+1, 76.1+1,
+    76.5+1, 77.9+1, -- eft2
+    79.2+1, 
+    92.6+1, 98+1, 
+    103.4+1, 104+1, 104.6+1, 105.4+1, 106.1+1
 }
 MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     31,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,
@@ -623,7 +623,7 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
     },{preserved})
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 82 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
+    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -757,8 +757,10 @@ CElseX()
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
     CSPlotOrder(Generator_shape, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
-    CAPlot(Generator_shape, P6, 60, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[33] * SDspeed, 160)})
-    CAPlot(Generator_shape, P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[34] * SDspeed, 160)})
+    CAPlot(CS_SortR(Generator_shape,1), P6, 104, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[33] * SDspeed, 160)})
+    CAPlot(CS_SortR(Generator_shape,1), P6, 60, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[33] * SDspeed + 34, 160)})
+    CAPlot(CS_SortR(Generator_shape,1), P6, 3, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[34] * SDspeed, 160)})
+    CAPlot(CS_SortR(Generator_shape,1), P6, 58, M11, {495,351}, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[34] * SDspeed + 34, 160)})
     CSPlotOrder(Generator_shape, P6, 3, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[35] * SDspeed, 160)})
     CSPlotOrder(Generator_shape, P6, 21, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[36] * SDspeed, 160)})
     CSPlotOrder(Generator_shape, P6, 102, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[37] * SDspeed, 160)})

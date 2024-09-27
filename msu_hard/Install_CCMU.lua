@@ -27,10 +27,10 @@ function Install_CCMU()
             PlayWAVX("sound\\Terran\\RAYNORM\\URaPss02.WAV"),
             PlayWAVX("sound\\Terran\\RAYNORM\\URaPss02.WAV"),
         }, {Force1, Force5}, FP),
-        SetDeaths(P11, Add, 1, 157)
+        SetDeaths(P11, SetTo, 170, 157)
     }, preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 1, 157)}, {SetDeaths(FP, Subtract, 1, 157)},preserved)
 
-    TriggerX(FP, Deaths(P11, AtLeast, 170, 157), SetDeaths(P11, SetTo, 1, 157),preserved)
     for i = 1 , 3 do
         TriggerX(Force2, {FMemory(0x58F450, Exactly, i)},{RunAIScriptAt(JYD, "Anywhere")})
     end
@@ -122,6 +122,7 @@ function Install_CCMU()
     }, {Force1}, FP))
 
     CIfX(FP, {CDeaths(FP, Exactly, 2, Difficulty)})
+    
     TriggerX(FP, {FMemory(0x58F450, Exactly, 1)}, {
         SetCDeaths(FP, SetTo, 339, CannotPenalty)
     })

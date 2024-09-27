@@ -82,28 +82,28 @@ TriggerX(FP, {Switch("Switch 249", Set)}, {SetMemoryBA(0x657A9C, SetTo, 31)})
 CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
+
 Install_APMcounter()
-Install_normalGunplot()
-Install_SpecialGunplot()
 Install_ExchangeTrigger()
 Install_WaveTrigger()
 Install_HealZoneTrigger()
 Install_Neutral_bunkerTrigger()
 Install_DonateNbanTrigger()
 Install_ConvertMarineTrigger()
+Install_HerounitTrigger()
 Install_CCMU()
 Install_BGMPhase()
-Install_HerounitTrigger()
-Install_NormalGunPlotShape()
-Install_SpecialGunPlotShape()
-MiddleBossTrigger()
+EVF_initialsetting()
+-- Install_normalGunplot()
+-- Install_SpecialGunplot()
+-- Install_NormalGunPlotShape()
+-- Install_SpecialGunPlotShape()
+-- MiddleBossTrigger()
+
 FinalBossTrigger()
 Enable_TestMode(true)
 
 CIfEnd()
-
-
-
 CSPlotToCAPlot()
 
 
