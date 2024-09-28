@@ -91,14 +91,14 @@ function Install_plotshape()
     Wavebreak = CreateCcode()
     TempPos = CreateVar(FP)
 
-    FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM = CreateCcodes(4)
+    FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM, Start_var1 = CreateCcodes(5)
 
 
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}
     HeroShape2 = {1, {0,0}}
-    CellScattered = {10, {128,128}, {114,-62},{65,168}, {-32,118},{26,158},{-81,148},{-135,149}, {-256,-256},{-64,-68},{32,-32}}
+    CellScattered = {10, {128,128}, {114,-62},{65,168}, {-168,118},{100,158},{-81,148},{-135,149}, {-256,-256},{-64,-68},{32,-128}}
     -- CSPlot(HeroShape1,P1,54,"Location 1",nil,1,32,P1)
     -- CSPlot(HeroShape2,P1,54,"Location 1",nil,1,32,P1)
     WAVE1 = CSMakePolygon(4,50,0,35,5)
@@ -186,8 +186,9 @@ function Install_plotshape()
     EllipseArr = {EllipseN,CS_Rotate(EllipseN,45),CS_Rotate(EllipseN,90),CS_Rotate(EllipseN,135),CS_Rotate(EllipseN,180),CS_Rotate(EllipseN,225),CS_Rotate(EllipseN,270),CS_Rotate(EllipseN,315)}
     SH_Flower = CS_OverlapX(EllipseArr[1],EllipseArr[2],EllipseArr[3],EllipseArr[4],EllipseArr[5],EllipseArr[6],EllipseArr[7],EllipseArr[8])
     
-    EllipseB = CS_Distortion(E_Base, {5,0}, {5,0}, nil, nil)
-    EliipseN = CS_RemoveStack(CS_MoveXY(EllipseB, 1600, 0), 20)
+    CircleA = CSMakeCircle(6,60,0,91,61)
+    EllipseB = CS_Distortion(CircleA,{5,0},{5,0},nil,nil)
+    EllipseN = CS_RemoveStack(CS_MoveXY(EllipseB,1600,0),20)
     Ellipse1 = CS_Rotate(EllipseN,30)
     Ellipse2 = CS_Rotate(EllipseN,60)
     Ellipse3 = CS_Rotate(EllipseN,90)
@@ -212,6 +213,10 @@ function Install_plotshape()
 	Generator_shape2 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
     Generator_shape = CSMakePolygon(6,80,0,127,1)
     Generator_shapeA = CSMakePolygon(6,0,0,127,1)
+
+    FBossMainplot = CS_Rotate3D(CSMakePolygon(6,80,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
+    FBossMainplotA = CS_Rotate3D(CSMakePolygon(6,1,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
+
     -------- Plot Timeline
 
     CenterCallGen1 = {

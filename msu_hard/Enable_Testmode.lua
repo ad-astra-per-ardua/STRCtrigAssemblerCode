@@ -7,8 +7,7 @@ function Enable_TestMode(f)
     end
     
     TriggerX(P1,{isname(P1,"AwakenSense")},{ -- Verifing name
-        CreateUnit(12,80,"HealZone",CurrentPlayer);
-        Wait(20000);
+        -- CreateUnit(12,80,"HealZone",CurrentPlayer);
         ModifyUnitHitPoints(All, "Men", P7, "Anywhere", 10),
         ModifyUnitShields(All, "Men", P7, "Anywhere", 1),
         Order("Men", P7, "Anywhere", Move, "callArrival");
