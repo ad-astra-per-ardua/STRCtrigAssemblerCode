@@ -14,6 +14,9 @@ function FinalBossTrigger()
     DoActions(FP, {
         ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100)
     }, preserved)
+
+    
+
     Trigger2X(FP, {
         Deaths(P6, AtLeast, 1, 202),
         Deaths(P6, AtLeast, 1, 203),
@@ -98,11 +101,11 @@ function FinalBossTrigger()
     ------------ End of Boss HP Overflow Trigger ----------------------
     TriggerX(FP, {CDeaths(FP, AtLeast, 198, FBOSS_Initvar)}, {
         RotatePlayer({
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
             DisplayTextX(StrDesignX("\x11모든 세계관의 지식\x04을 가진 \x08재앙이 \x04깨어났습니다."), 4);
             DisplayTextX(StrDesignX("\x04여기서 막지않으면, 이곳도 \x19다른 세계관처럼 \x08그\x04에게 \x10한낱 지식으로 \x08흡수\x04되어질 것 입니다."), 4);
             DisplayTextX(StrDesignX("\x04。 。 。 \x08최후의 전투를 \x1f준비하십시길 바랍니다.\x04"), 4);
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04● ● ●┠──── \x04 \n\x14\n\x14\n",4),
+            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04● ● ●┠──── \x04 \n\x14\n\x14\n",4),
             MinimapPing("HealZone"),
         }, {Force1,Force5}, FP),
         SetInvincibility(Disable, 122, P8, "Anywhere"),  
@@ -124,6 +127,9 @@ function FinalBossTrigger()
     })
     end
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 170, Start_var1)}, {
+        RotatePlayer({
+            DisplayTextX("AddCD flag", 4)
+        }, {Force1, Force5}, FP),
         AddCD(FBOSS_BGM, 1),
     }, preserved)
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)}, {SetMemoryB(0x657A9C, SetTo, 31)})
@@ -156,23 +162,25 @@ function FinalBossTrigger()
     CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[1] * SDspeed, FBOSS_BGM)})
     CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[1] * SDspeed, FBOSS_BGM)})
 
-    CAPlot(Ellipse12, P8, 70, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[2] * SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse6, P8, 23, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[2] * SDspeed, FBOSS_BGM)})
 
-    CAPlot(Ellipse1, P8, 58, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+1) * SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse7, P8, 7, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +1)* SDspeed, FBOSS_BGM)})
+    CAPlotWithProperties(Ellipse12, P8, 70, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[2] * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse6, P8, 70, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[2] * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
 
-    CAPlot(Ellipse2, P8, 60, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+2) * SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse8, P8, 3, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+2) * SDspeed, FBOSS_BGM)})
+    CAPlotWithProperties(Ellipse1, P8, 58, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+1) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse7, P8, 7, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+1) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
 
-    CAPlot(Ellipse3, P8, 86, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +3)* SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse9, P8, 64, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+3) * SDspeed, FBOSS_BGM)})
+    CAPlotWithProperties(Ellipse2, P8, 60, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+2) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse8, P8, 3, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+2) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
 
-    CAPlot(Ellipse4, P8, 28, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +4)* SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse10, P8, 69, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +4)* SDspeed, FBOSS_BGM)})
+    CAPlotWithProperties(Ellipse3, P8, 86, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+3) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse9, P8, 64, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+3) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
 
-    CAPlot(Ellipse5, P8, 29, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+5) * SDspeed, FBOSS_BGM)})
-    CAPlot(Ellipse11, P8, 74, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +5)* SDspeed, FBOSS_BGM)})
+    CAPlotWithProperties(Ellipse4, P8, 28, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+4) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse10, P8, 69, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+4) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+
+    CAPlotWithProperties(Ellipse5, P8, 29, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+5) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+    CAPlotWithProperties(Ellipse11, P8, 74, "HealZone", nil, 1, 32, {1,0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, (BGM_Gentimeplot[2]+5) * SDspeed, FBOSS_BGM)},nil,{}, StargateProperties)
+
 
 
 
