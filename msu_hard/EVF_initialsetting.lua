@@ -82,14 +82,14 @@ function EVF_initialsetting()
     -- end
 
     TriggerX(FP, Always(), {
-        SetMemoryW(0x656EB0+(0 *2),SetTo,117),
-        SetMemoryW(0x657678+(0 *2),SetTo,33),
+        SetMemoryW(0x656EB0+(0 *2),SetTo,90*1.5),
+        SetMemoryW(0x657678+(0 *2),SetTo,25*1.5),
 
-        SetMemoryW(0x656EB0+(1 *2),SetTo,156),
-        SetMemoryW(0x657678+(1 *2),SetTo,46),
+        SetMemoryW(0x656EB0+(1 *2),SetTo,120*1.5),
+        SetMemoryW(0x657678+(1 *2),SetTo,35*1.5),
 
-        SetMemoryW(0x656EB0+(2 *2),SetTo,358),
-        SetMemoryW(0x657678+(2 *2),SetTo,78)
+        SetMemoryW(0x656EB0+(2 *2),SetTo,275*1.5),
+        SetMemoryW(0x657678+(2 *2),SetTo,60*1.5)
     })
 
 
