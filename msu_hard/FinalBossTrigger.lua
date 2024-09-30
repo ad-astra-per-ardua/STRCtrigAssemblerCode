@@ -67,11 +67,11 @@ function FinalBossTrigger()
     Trigger {
         players = {Force1},
         conditions = {
-            Always();
+            Deaths(P7, AtLeast, 1, 168)
         },
         actions = {
             RunAIScript("Turn OFF Shared Vision for Player 8");
-            PreserveTrigger();
+            
         },
         }
 
@@ -219,11 +219,23 @@ function FinalBossTrigger()
         })
     end
 
-    TriggerX(FP, {CDeaths(FP, AtLeast, 17, BattleGen)}, {SetCD(BattleGen, 1)},preserved)
-    DoActions(FP, {AddCD(BattleGen, 1)}, preserved)
+    TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[2] +5)* SDspeed, FBOSS_BGM)}, {
+        SetCDeaths(FP, Add, 1, BattleGen)
+    }, preserved)
+
+    TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 17, BattleGen)}, {
+        SetCDeaths(FP, SetTo, 1, BattleGen)
+    },preserved)
 
     function PalmBattlegen(StartVar, EndVar, Unitid)
-        Trigger2X(FP, {CDeaths(FP, AtLeast, 16, BattleGen), CDeaths(FP, AtLeast, StartVar * SDspeed, FBOSS_BGM), CDeaths(FP, AtMost, (EndVar - 1) * SDspeed, FBOSS_BGM)}, {
+        Trigger2X(P6, {
+        CDeaths(FP, AtLeast, 16, BattleGen), 
+        CDeaths(FP, AtLeast, StartVar * SDspeed, FBOSS_BGM), 
+        CDeaths(FP, AtMost, (EndVar - 1) * SDspeed, FBOSS_BGM)
+    }, {
+            RotatePlayer({
+                DisplayTextX("\x04Battle Gen Initiated.", 4)
+            }, {Force1,Force5}, FP),
             CreateUnit(1, 72, "battlegen1", P6),
             CreateUnit(1, Unitid, "battlegen1", P6),
             CreateUnit(1, 72, "battlegen2", P6),
@@ -240,8 +252,7 @@ function FinalBossTrigger()
             CreateUnit(1, Unitid, "battlegen7", P6),
             CreateUnit(1, 72, "battlegen8", P6),
             CreateUnit(1, Unitid, "battlegen8", P6),
-            RunAIScriptAt(JYD,"Anywhere")
-        })
+        },preserved)
     end
 
     PalmBattlegen(BGM_Gentimeplot[3], BGM_Gentimeplot[4], 12)
@@ -261,6 +272,29 @@ function FinalBossTrigger()
     PalmPhase(PalmGenTime[10], 64, "mainLocation")
     PalmPhase(PalmGenTime[11], 69, "starg3")
     PalmPhase(PalmGenTime[12], 74, "hive8")
+
+    Palm_gen_tier1 = {51,93,3,52,3,46,95}
+    Palm_gen_tier2 = {78,104,23,60,23,104,25}
+    Palm_gen_tier3 = {88,58,64,7,86,28,102}
+    
+    local j = 1
+    for i = 1, 12, 2 do
+        if PalmGenTime[i] then
+            if Palm_gen_tier1[j] and Palm_gen_tier2[j] and Palm_gen_tier3[j] then
+                CSPlotOrder(FBossMainplot, P5, Palm_gen_tier1[j], "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, PalmGenTime[i] * SDspeed, FBOSS_BGM)})
+                CSPlotOrder(FBossMainplot, P5, Palm_gen_tier2[j], "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, PalmGenTime[i] * SDspeed, FBOSS_BGM)})
+                CSPlotOrder(FBossMainplot, P5, Palm_gen_tier3[j], "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, PalmGenTime[i] * SDspeed, FBOSS_BGM)})
+            end
+        end
+        j = j + 1
+    end
+
+    ------------------- Start of rhegb part -----------------------
+    
+
+    
+
+
 
 
 
