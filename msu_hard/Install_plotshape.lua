@@ -91,6 +91,7 @@ function Install_plotshape()
     Wavebreak = CreateCcode()
     TempPos = CreateVar(FP)
 
+    P8minimap,BattleGen = CreateCcodes(2)
     FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM, Start_var1 = CreateCcodes(5)
 
 
@@ -188,7 +189,7 @@ function Install_plotshape()
     
     CircleA = CSMakeCircle(6,60,0,91,61)
     EllipseB = CS_Distortion(CircleA,{5,0},{5,0},nil,nil)
-    EllipseN = CS_RemoveStack(CS_MoveXY(EllipseB,1600,0),20)
+    EllipseN = CS_RemoveStack(CS_MoveXY(EllipseB,1600,0),32)
     Ellipse1 = CS_Rotate(EllipseN,30)
     Ellipse2 = CS_Rotate(EllipseN,60)
     Ellipse3 = CS_Rotate(EllipseN,90)
