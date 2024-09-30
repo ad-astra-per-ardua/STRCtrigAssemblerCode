@@ -3,6 +3,7 @@ function FinalBossTrigger()
     BGM_SplitTL = {0.03, 16.238, 32.161, 33.865, 89.304, 92.109, 123.352, 125.331, 156.213, 158.496}
     BGM_Gentimeplot = {
         23.8, 27.6, 37.4, 47.8, 61.8, 75.8, 88.9, -- End of palm island
+        92.14, 92.63, 
     }
     PalmGenTime = {
         40.5, 42.6, 47.8, 51.3, 54.6, 61.8, 64.6, 68.5, 72.3, 75.8, 78.6, 82.5
@@ -258,7 +259,7 @@ function FinalBossTrigger()
     PalmBattlegen(BGM_Gentimeplot[3], BGM_Gentimeplot[4], 12)
     PalmBattlegen(BGM_Gentimeplot[4], BGM_Gentimeplot[5], 89)
     PalmBattlegen(BGM_Gentimeplot[5], BGM_Gentimeplot[6], 96)
-    PalmBattlegen(BGM_Gentimeplot[6], BGM_Gentimeplot[7], 102)
+    PalmBattlegen(BGM_Gentimeplot[6], BGM_Gentimeplot[7], 89)
 
     PalmPhase(PalmGenTime[1], 70, "celebrate2")
     PalmPhase(PalmGenTime[2], 58, "hive7")
@@ -275,7 +276,7 @@ function FinalBossTrigger()
 
     Palm_gen_tier1 = {51,93,3,52,3,46,95}
     Palm_gen_tier2 = {78,104,23,60,23,104,25}
-    Palm_gen_tier3 = {88,58,64,7,86,28,102}
+    Palm_gen_tier3 = {88,58,89,7,86,28,58}
     
     local j = 1
     for i = 1, 12, 2 do
@@ -291,14 +292,73 @@ function FinalBossTrigger()
 
     ------------------- Start of rhegb part -----------------------
     
-
-    
-
+    TriggerX(FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[9], FBOSS_BGM)}, {CreateUnit(1, 32, "callArrival", P5)})
 
 
+    -----------------------기본건작------------------
+function Simple_TSetLoc(Player,LocID,LeftValue,UpValue,RightValue,DownValue,AddonTrigger) -- 변수삽입 로케위치 변경함수
+	CDoActions(Player,{
+		TSetLoc(LocID,0,SetTo,LeftValue);
+		TSetLoc(LocID,4,SetTo,UpValue);
+		TSetLoc(LocID,8,SetTo,RightValue);
+		TSetLoc(LocID,12,SetTo,DownValue);
+		AddonTrigger
+	})
+end
+
+SpellcasterPatch = {}
+
+function SetUnitAdvFlag(UnitID,Value,Mask) -- 마나유닛으로 변경하는 액션들을 SpellcasterPatch 배열에 삽입하는 함수 정의
+	table.insert(SpellcasterPatch,SetMemoryX(0x664080 + (UnitID*4),SetTo,Value,Mask))
+end
+for i = 0, 227 do
+	SetUnitAdvFlag(i,0x200000,0x200000) -- 마나유닛으로 변경하는 액션들을 SpellcasterPatch 배열에 삽입
+end
+
+Trigger2(FP,{},SpellcasterPatch) -- 마나유닛으로 변경 ( 유닛ID 0 ~ 227 )
 
 
 
+BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
+LocSize = 128 -- 옮길 로케이션의크기
+
+CunitCtrig_Part1(FP)
+MoveCp("X",25*4) -- UnitID 0x64 (EPD 25) 기본 cp값으로함
+
+NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,32,0,0xFF)) --파벳
+
+ClearCalc() -- 위 UnitID들이 아닐때 계산단락종료 ( 아래트리거들은 읽지않음... 다음인덱스를 검사함)
+
+NJumpXEnd(FP,0x1) -- NJumpX에서 조건만족시 도착지점 ( NJumpX ~ NJumpXEnd 사이의 트리거들은 읽지않음)
+
+DoActions(FP,MoveCp(Subtract,15*4)) -- (25-15)*4 = 10*4 0x28 ( 위치좌표.... 앞2바이트 x좌표 // 뒤2바이트 y좌표 )
+SaveCp(FP,BackupCp) -- Cp저장 ( 0x28 로 저장됨 )
+CMov(FP,BPosXY,_Read(BackupCp)) -- 저장된 Cp의 값을 BPosXY로 복사
+CMov(FP,BPosX,_Mov(BPosXY,0xFFFF)) -- BPosXY의 0xFFFF의 값을 BPosX에 복사 (앞2바이트 x좌표)
+CMov(FP,BPosY,_Div(_Mov(BPosXY,0xFFFF0000),65536)) -- BPosXY의 0xFFFF0000의 값을 BPosY에 복사 (뒤2바이트 x좌표) 
+													-- 0xFFFF0000이므로 65536이 곱해진상태다. y좌표를 얻으려면 65536을 나눈값이어야된다.
+Simple_TSetLoc(FP,"emp2",_Sub(BPosX,LocSize),_Sub(BPosY,LocSize),_Add(BPosX,LocSize),_Add(BPosY,LocSize)) -- BPosX, BPosY의 좌표로 로케이션이동
+LoadCp(FP,BackupCp)
+DoActions(FP,MoveCp(Add,15*4))
+
+TriggerX(FP,{DeathsX(CurrentPlayer,Exactly,32,0,0xFF)},{
+	CreateUnit(2,32,"emp2",P7);
+	CreateUnit(1,84,"emp2",P6);
+},{Preserved})
+
+ClearCalc() -- 계산단락종료
+CJumpEnd(FP,0x2)
+CunitCtrig_Part2()
+CunitCtrig_Part3X()
+for i = 0, 1699 do
+CunitCtrig_Part4X(i,{
+	DeathsX(EPDF(0x628298-0x150*i+(40*4)),AtLeast,1*16777216,0,0xFF000000), -- 에너지 1 이상일때
+	DeathsX(EPDF(0x628298-0x150*i+(19*4)),Exactly,0*256,0,0xFF00), -- MainOrderID 0x4C ( 뒤졋을때 )
+},
+{	SetDeathsX(EPDF(0x628298-0x150*i+(40*4)),SetTo,0*16777216,0,0xFF000000); -- 에너지 0으로 고정
+	MoveCp(Add,25*4);}) -- cp값 0x64 (EPD 25)로 변경
+end
+CunitCtrig_End()
 
 -- Todo : PerAction == SetInvincibility Enable to Spawn tables | SetPlayerColor and SetMinimapColor of P8 and plotting
 
