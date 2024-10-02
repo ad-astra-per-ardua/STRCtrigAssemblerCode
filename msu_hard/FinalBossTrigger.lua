@@ -10,6 +10,10 @@ function FinalBossTrigger()
         40.5, 42.6, 47.8, 51.3, 54.6, 61.8, 64.6, 68.5, 72.3, 75.8, 78.6, 82.5
     }
 
+    MemGenTime2 = {
+        156.28, 158.5
+    }
+
     TriggerX(FP, Always(), {
         CreateUnit(100, 1, "neutralbunker1", P1),
         CreateUnit(100, 1, "neutralbunker2", P1),
@@ -118,11 +122,11 @@ function FinalBossTrigger()
     ------------ End of Boss HP Overflow Trigger ----------------------
     TriggerX(FP, {CDeaths(FP, AtLeast, 198, FBOSS_Initvar)}, {
         RotatePlayer({
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
             DisplayTextX(StrDesignX("\x11모든 세계관의 지식\x04을 가진 \x08재앙이 \x04깨어났습니다."), 4);
             DisplayTextX(StrDesignX("\x04여기서 막지않으면, 이곳도 \x19다른 세계관처럼 \x08그\x04에게 \x10한낱 지식으로 \x08흡수\x04되어질 것 입니다."), 4);
             DisplayTextX(StrDesignX("\x04。 。 。 \x08최후의 전투를 \x1f준비하십시길 바랍니다.\x04"), 4);
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04────┫● ● ● \x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04● ● ●┠──── \x04 \n\x14\n\x14\n",4),
+            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
             MinimapPing("HealZone"),
         }, {Force1,Force5}, FP),
         SetInvincibility(Disable, 122, P8, "Anywhere"),  
@@ -183,7 +187,7 @@ function FinalBossTrigger()
 
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
-    CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
+    CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)},{MoveUnit(1, 122, P8, "HealZone", "battlegen7")})
     CSPlotOrder(FBossMainplot, P5, 78, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
     CSPlotOrder(FBossMainplot, P5, 88, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
 
@@ -380,8 +384,8 @@ SHBbI = SHB26b
 CA1, CA6, CB2, TAngle = CreateVars(4,FP)
 NID = CreateNcode()
 CMov(FP,TAngle,_Mul(_Mod(_Div(_Mul(_ReadF(0x57F23C),42),1000),60),6))
-SHLX = 592 -- 소환위치 X
-SHLY = 3312 -- 소환위치 Y
+SHLX = 2048 -- 소환위치 X
+SHLY = 2048 -- 소환위치 Y
 SHLZ = 320
 
 CAMAX = 300
@@ -471,7 +475,7 @@ function L14func()
     CA_Rotate(TAngle)
 end
 
-NIf(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)}) -- 추가 조건 삽입 필요 : OFF -> ON 형식
+NIf(FP,{NVar(FnBossHP2, Exactly, 1)}) -- 추가 조건 삽입 필요 : OFF -> ON 형식
 
 	Trigger {
 		players = {FP},
@@ -639,7 +643,7 @@ NIf(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * S
 	}
 
 	
-	CAPlot({SHBaI,SHBbI},P5,0,"HealZone",{SHLX,SHLY},1,32,{CA1 ,0,0,0,CAMAX,CA6,nil,CB2,nil},"L14func",FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)},nil,nil)
+	CAPlot({SHBaI,SHBbI},P5,0,"HealZone",{SHLX,SHLY},1,32,{CA1,0,0,0,CAMAX,CA6,nil,CB2,nil},"L14func",FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)},nil,nil)
 
 	-- Trigger { -- Attack 트리거
 	-- 	players = {FP},
@@ -677,6 +681,11 @@ NIf(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * S
 	}
 
 NIfEnd()
+
+------------- Start of Final Memory2 Part ----------------
+
+
+
 
 -------------------------- Start of Hard Plot --------------------
     CElseX()
