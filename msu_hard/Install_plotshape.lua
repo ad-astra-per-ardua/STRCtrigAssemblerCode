@@ -218,6 +218,12 @@ function Install_plotshape()
     FBossMainplot = CS_Rotate3D(CSMakePolygon(6,80,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
     FBossMainplotA = CS_Rotate3D(CSMakePolygon(6,1,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
 
+    Mem_shape1 = CS_CompassA({0,0}, {2048,0}, {0,2048}, 0, 30)
+    Mem_shape2 = CS_MirrorX(CS_SymmetryX(Mem_shape1, 1, 2048, 4096),0,1,0)
+    Mem_shape3 = CS_MirrorY(CS_SymmetryY(Mem_shape1, 1, 2048, 4096),0,1,0)
+    Mem_shape4 = CS_MirrorY(CS_SymmetryY(Mem_shape2, 1, 2048, 4096),0,1,0)
+
+
     -------- Plot Timeline
 
     CenterCallGen1 = {

@@ -64,13 +64,20 @@ function check_shape()
 		local a = CSMakePath({-Range,-Range},{Range,-Range},{Range,Range},{-Range,Range})
 		return CS_FillPathXY(a,0,Radius,Radius)
 	end
+
+	temp1 = CSMakeTornado(4, 96, 75, 4)
+
+
 	-- temp1 = CSMakeCircle(6,30,0,PlotSizeCalc(6, 10),0)
-	
+	Mem_shape1 = CS_CompassA({0,0}, {2048,0}, {0,2048}, 0, 30)
+    Mem_shape2 = CS_CompassA({4096,0}, {2048,0}, {4096,2048}, 0, 30)
+    Mem_shape3 = CS_CompassA({0,4096}, {0,2048}, {2048,4096}, 0, 30)
+    Mem_shape4 = CS_CompassA({4096,4096}, {4096,2048}, {2048,4096}, 0, 30)
 	
 	
 	function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 	temp = CS_RatioXY(Hp1,4,2)
-    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

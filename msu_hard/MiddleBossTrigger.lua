@@ -1219,16 +1219,16 @@ CTrigger(FP,{
 
     ------- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
 
-    -- CIfOnce(FP,Always(),{Wait(10000)})
+    -- CIfOnce(FP,{},{})
     --     f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
     --     CMov(FP,FBossPtr,Nextptr) -- Save FBossPtr from Nextptr's 
     --         CDoActions(FP,{
     --             CreateUnit(1,68,"HealZone",P7);
-    --             TSetMemory(Vi(Nextptr[2],2),SetTo,256*6500000); -- Next unit pointer offset's HP set
-    --             TSetMemoryX(Vi(Nextptr[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
+    --             TSetMemory(Vi(Nextptr[2],2),SetTo,256*200); -- Next unit pointer offset's HP set
+    --             -- TSetMemoryX(Vi(Nextptr[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
     --         })
     --     CMov(FP,FBossHP,Nextptr,2) 
-    --     DoActionsX(FP,{SetNVar(FBossHP2,SetTo,4)})
+    --     -- DoActionsX(FP,{SetNVar(FBossHP2,SetTo,1)})
     -- CIfEnd()
 
     -- CTrigger(FP,{

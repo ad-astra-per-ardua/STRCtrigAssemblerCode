@@ -12,7 +12,7 @@ function FinalBossTrigger()
 
 
     MemGenTime2 = {
-        158.5, 
+        158.5, 172.6
     }
 
     TriggerX(FP, Always(), {
@@ -404,7 +404,7 @@ CSPlotOrder(CS_Rotate(SHB26a,90,90,90), P5, 104, "callArrival", nil, 1, 32, SHB2
 
 TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[1] * SDspeed) - 1, FBOSS_BGM)}, {SetImageScript(148, 165)})
 CAPlot(CS_SortR(Finale_mem,0), P5, 84, "callArrival", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[1] * SDspeed), FBOSS_BGM)})
-
+-- CAPlot(Shape, Owner, UnitId, Location, CenterXY, PerUnit, PlotSize, Preset, CAfunc, PlayerID, Condition, PerAction, Preserve)
 
 
 -------------------------- Start of Hard Plot --------------------
