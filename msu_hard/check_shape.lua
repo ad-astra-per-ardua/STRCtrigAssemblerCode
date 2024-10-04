@@ -36,17 +36,41 @@ function check_shape()
 	EllipseRAD = CS_MoveXY(EllipseRA,0,500) ---- 큰 타원 평행이동
 	EllipseShape = CS_Merge(EllipseRB,EllipseRAD,64,1) ---- 작은타원 큰타원 합
 	EllipseMirror = CS_MirrorX(EllipseShape,500,1,1) --나비	
-
-
-	function HyperCycloidD(T) return {6*math.cos(T) - 2*math.cos(6*T), 6*math.sin(T) - 2*math.sin(6*T)} end 
-	HCD0 = CSMakeGraphT({24,24},"HyperCycloidD",0,0,1,1,90)
-	HCD = CS_RemoveStack(HCD0,20,0)
-	temp1 = CS_Rotate3D(CSMakePolygon(6,80,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
+	function CSMakeTornado(Point,Radius,Angle,Numner,Outside,StartNumber)
+		local Shape = {0}
+		if StartNumber == nil then StartNumber = 1 end
+		for i = StartNumber, Numner do
+			CS_OverlapShape(Shape,CSMakePolygon(Point,i*Radius,i*Angle,Point+1,0))
+		end
+		if Outside~=nil then
+			return CS_Rotate((CS_OverlapShape(Shape,CSMakePolygon(Point,Radius,Numner*Angle,PlotSizeCalc(Point,Numner),PlotSizeCalc(Point,Numner-1)))),-Numner*Angle)
+		else
+			return Shape
+		end
+	end
+	function CS_OverlapShape(Shape,...)
+		local RetShape = Shape
+	
+		local arg = table.pack(...)
+		for k = 1, arg.n do
+			RetShape[1] = RetShape[1] + arg[k][1]
+			for i = 1, arg[k][1] do
+				table.insert(RetShape,{arg[k][i+1][1],arg[k][i+1][2]})
+			end
+		end
+		return RetShape	
+	end
+	function CSMakeFillPathXY(Range,Radius)
+		local a = CSMakePath({-Range,-Range},{Range,-Range},{Range,Range},{-Range,Range})
+		return CS_FillPathXY(a,0,Radius,Radius)
+	end
+	-- temp1 = CSMakeCircle(6,30,0,PlotSizeCalc(6, 10),0)
+	
+	
 	
 	function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 	temp = CS_RatioXY(Hp1,4,2)
-	-- PushValueMsg(temp1[1])
-    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

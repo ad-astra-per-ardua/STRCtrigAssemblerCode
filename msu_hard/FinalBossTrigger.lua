@@ -4,14 +4,15 @@ function FinalBossTrigger()
     BGM_Gentimeplot = {
         23.8, 27.6, 37.4, 47.8, 61.8, 75.8, 88.9, -- End of palm island
         92.14, 92.63, 123.3, -- End of rhegb 
-        125.33, 
+        125.33, 129.8, 133.6, 141.2, 148.9
     }
     PalmGenTime = {
         40.5, 42.6, 47.8, 51.3, 54.6, 61.8, 64.6, 68.5, 72.3, 75.8, 78.6, 82.5
     }
 
+
     MemGenTime2 = {
-        156.28, 158.5
+        158.5, 
     }
 
     TriggerX(FP, Always(), {
@@ -294,9 +295,9 @@ function FinalBossTrigger()
         end
         j = j + 1
     end
-
     ------------------- Start of rhegb part -----------------------
     
+CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[9] * SDspeed) - 1, FBOSS_BGM)})
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[9] * SDspeed, FBOSS_BGM)}, {CreateUnit(1, 32, "callArrival", P5)})
 
 
@@ -364,10 +365,8 @@ end
 CunitCtrig_End()
 
 TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[10] * SDspeed, FBOSS_BGM)}, {KillUnit(32, Force2)})
-
+CIfEnd()
 -- Todo : PerAction == SetInvincibility Enable to Spawn tables | SetPlayerColor and SetMinimapColor of P8 and plotting
-
-
 
 ------------ Start of 4vs4 -------------
 
@@ -378,312 +377,33 @@ SHB26a =
 SHB26b =
 {44,{405.14338087064,-197.18207998183},{228.81386183441,-323.39376582676},{294.63629040584,-209.38597526347},{360.45871897727,-95.378184700185},{77.167753512465,-406.85253021046},{134.76237851247,-307.09571346758},{192.35700351247,-207.3388967247},{249.95162851247,-107.58207998183},{307.54625351247,-7.8252632389517},{365.14087851247,91.931553503925},{44.367696777824,-284.463894966},{95.562919000046,-195.79116897233},{146.75814122227,-107.11844297866},{197.95336344449,-18.445716984994},{249.14858566671,70.227009008674},{300.34380788894,158.89973500234},{2.6084761542939,-177.59298677043},{48.684176154294,-97.78753337613},{94.759876154294,-17.982079981828},{140.83557615429,61.823373412473},{186.91127615429,141.62882680677},{232.98697615429,221.43428020108},{279.06267615429,301.23973359538},{38.107499975208,63.09312610649},{79.994499975208,135.64353828313},{121.88149997521,208.19395045977},{163.76849997521,280.7443626364},{-332.96340622912,-221.22053665003},{-297.52056007527,-159.83172634672},{-155.74917545989,85.723514866517},{-120.30632930604,147.11232516983},{-84.863483152194,208.50113547313},{-49.420636998348,269.88994577644},{-13.977790844502,331.27875607975},{-413.09091427633,-180.80545167169},{-380.17969999062,-123.80155639005},{-347.26848570491,-66.797661108403},{-314.35727141919,-9.7937658267597},{-281.44605713348,47.210129454884},{-248.53484284776,104.21402473653},{-215.62362856205,161.21792001817},{-182.71241427633,218.22181529982},{-149.80119999062,275.22571058146},{-339.29520474113,126.21246662387}}
 
-SHBaI = SHB26a
-SHBbI = SHB26b
 
-CA1, CA6, CB2, TAngle = CreateVars(4,FP)
-NID = CreateNcode()
-CMov(FP,TAngle,_Mul(_Mod(_Div(_Mul(_ReadF(0x57F23C),42),1000),60),6))
-SHLX = 2048 -- 소환위치 X
-SHLY = 2048 -- 소환위치 Y
-SHLZ = 320
+CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26b,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26a,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
 
-CAMAX = 300
+CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26b,30,30,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26a,45,45,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+
+CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26b,45,45,45), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26a,60,60,60), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+
+CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26b,60,60,60), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26a,75,75,75), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+
+CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26b,75,75,75), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26a,90,90,90), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
 
 
-
-function L14func()
-	local CA = CAPlotDataArr
-    local CB = CAPlotCreateArr
-
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,193,0xFFFF);
-        NVar(CB2,Exactly,1*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,0*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,56);
-    }, {preserved}
-)
-
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,193,0xFFFF);
-        NVar(CB2,Exactly,2*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,0*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,44);
-    }, {preserved}
-)
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,192,0xFFFF);
-        NVar(CB2,Exactly,0,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,1*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,54);
-    },  {preserved}
-)
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,192,0xFFFF);
-        NVar(CB2,Exactly,1*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,2*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,53);
-    }, {preserved}
-)
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,192,0xFFFF);
-        NVar(CB2,Exactly,2*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,3*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,48);
-    }, {preserved}
-)
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,192,0xFFFF);
-        NVar(CB2,Exactly,3*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,4*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,104);
-    }, {preserved}
-)
-    TriggerX(FP, {
-        NVar(CB2,Exactly,0,0xFF000000);
-        NVar(CB2,Exactly,192,0xFFFF);
-        NVar(CB2,Exactly,4*65536,0xFF0000);
-    }, {
-        SetNVar(CB2,SetTo,16777216,0xFF000000);
-        SetNVar(CB2,SetTo,0*65536,0xFF0000);
-        SetCVar("X",CB[2],SetTo,51);
-    },  {preserved}
-)
-    TriggerX(FP, {NVar(CB2,AtLeast,16777216,0xFF000000);}, {
-        SetNVar(CB2,SetTo,0,0xFF000000);
-    },  {preserved}
-)
-
-    CA_Rotate(TAngle)
-end
-
-NIf(FP,{NVar(FnBossHP2, Exactly, 1)}) -- 추가 조건 삽입 필요 : OFF -> ON 형식
-
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,SHBaI[1]+1);
-			SetNVar(CA1,SetTo,1);
-			PreserveTrigger();
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,0,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNDeaths(0,SetTo,1,NID);
-			SetNDeaths(1,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,1,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,192);
-			SetNVar(CA1,SetTo,1);
-			SetNDeaths(0,SetTo,2,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,2,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,193);
-			SetNVar(CA1,SetTo,1);
-			SetNDeaths(0,SetTo,3,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,3,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,3);
-			SetNVar(CA1,SetTo,2);
-			SetNDeaths(0,SetTo,4,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,4,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,28);
-			SetNVar(CA1,SetTo,2);
-			SetNDeaths(0,SetTo,5,NID);
-			SetNDeaths(1,SetTo,30*12,NID);
-			SetNDeaths(2,SetTo,1,NID);
-			
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,5,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,192);
-			SetNVar(CA1,SetTo,1);
-			SetNDeaths(0,SetTo,6,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,6,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,193);
-			SetNVar(CA1,SetTo,1);
-			SetNDeaths(0,SetTo,7,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,7,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,3);
-			SetNVar(CA1,SetTo,2);
-			SetNDeaths(0,SetTo,8,NID);
-			SetNDeaths(1,SetTo,1,NID);
-			SetNDeaths(2,SetTo,1,NID);
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,8,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNVar(CA6,SetTo,1);
-			SetNVar(CB2,SetTo,58);
-			SetNVar(CA1,SetTo,2);
-			SetNDeaths(0,SetTo,9,NID);
-			SetNDeaths(1,SetTo,30*12,NID);
-			SetNDeaths(2,SetTo,1,NID);
-			
-		}
-	}
-	Trigger {
-		players = {FP},
-		conditions = {
-			Label(0);
-			NDeaths(0,Exactly,9,NID);
-			NDeaths(1,Exactly,0,NID);
-		},
-		actions = {
-			SetNDeaths(0,SetTo,10,NID);
-		}
-	}
-
-	
-	CAPlot({SHBaI,SHBbI},P5,0,"HealZone",{SHLX,SHLY},1,32,{CA1,0,0,0,CAMAX,CA6,nil,CB2,nil},"L14func",FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)},nil,nil)
-
-	-- Trigger { -- Attack 트리거
-	-- 	players = {FP},
-	-- 	conditions = {
-	-- 		Label(0);
-	-- 		NDeaths(2,Exactly,1,NID);
-	-- 	},
-	-- 	actions = {
-	-- 		SetNDeaths(2,SetTo,0,NID);
-	-- 		SetLoc("CLoc165",0x0,SetTo,SHLX-1024);
-	-- 		SetLoc("CLoc165",0x4,SetTo,SHLY-1024);
-	-- 		SetLoc("CLoc165",0x8,SetTo,SHLX+1024);
-	-- 		SetLoc("CLoc165",0xC,SetTo,SHLY+1024);
-	-- 		SetLoc("CLoc166",0x0,SetTo,2128);
-	-- 		SetLoc("CLoc166",0x4,SetTo,5280);
-	-- 		SetLoc("CLoc166",0x8,SetTo,2432);
-	-- 		SetLoc("CLoc166",0xC,SetTo,5472);
-	-- 		Order(3,P5,"CLoc165",Attack,"CLoc166");
-	-- 		Order(28,P5,"CLoc165",Attack,"CLoc166");
-	-- 		Order(58,P5,"CLoc165",Attack,"CLoc166");
-	-- 		Order("Factories",P5,"CLoc165",Attack,"CLoc166");
-	-- 		GiveUnits(All,51,P5,"Field1",P8);
-	-- 		GiveUnits(All,104,P5,"Field1",P8);
-	-- 		Order("Factories",P8,"CLoc165",Attack,"CLoc166");
-	-- 		PreserveTrigger();
-	-- 	}
-	-- }
-
-	Trigger {
-		players = {FP},
-		actions = {
-			SetNDeaths(1,Subtract,1,NID);
-			PreserveTrigger();
-		}
-	}
-
-NIfEnd()
 
 ------------- Start of Final Memory2 Part ----------------
 
+TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[1] * SDspeed) - 1, FBOSS_BGM)}, {SetImageScript(148, 165)})
+CAPlot(CS_SortR(Finale_mem,0), P5, 84, "callArrival", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[1] * SDspeed), FBOSS_BGM)})
 
 
 

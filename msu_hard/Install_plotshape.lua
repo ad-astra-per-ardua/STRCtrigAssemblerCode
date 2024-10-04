@@ -159,7 +159,7 @@ function Install_plotshape()
     Triangle4 = CSMakePolygonX(3, 32, 0, CS_Level("PolygonX", 3, 3), 0)
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
 
-    
+    Finale_mem = CSMakeCircle(6,64,0,PlotSizeCalc(6, 10),1)
 
     -- CAPlot(CS_SortR(HiveEtf1,1),P6,33,"Hive3",nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,"Hive3")})
 
