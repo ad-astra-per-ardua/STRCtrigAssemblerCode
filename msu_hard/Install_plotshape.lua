@@ -158,6 +158,7 @@ function Install_plotshape()
     Triangle3 = CSMakePolygonX(3, 64, 0, 61, 0)
     Triangle4 = CSMakePolygonX(3, 32, 0, CS_Level("PolygonX", 3, 3), 0)
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
+    MemEft = CSMakeSpiral(8, 16, 1/2, 40, 0, 260, 0)
 
     Finale_mem = CSMakeCircle(6,64,0,PlotSizeCalc(6, 10),1)
 
@@ -208,7 +209,34 @@ function Install_plotshape()
     Cross1 = CSMakeLineX(2,32,90, 46,0)
     CX2 = CSMakeCircleX(6,80,30,30,0)
     StargateEft = CS_RemoveStack(CS_OverlapX(Shape3, Cross, Cross1,SShape2), 16)
-
+    function CSMakeTornado(Point,Radius,Angle,Numner,Outside,StartNumber)
+		local Shape = {0}
+		if StartNumber == nil then StartNumber = 1 end
+		for i = StartNumber, Numner do
+			CS_OverlapShape(Shape,CSMakePolygon(Point,i*Radius,i*Angle,Point+1,0))
+		end
+		if Outside~=nil then
+			return CS_Rotate((CS_OverlapShape(Shape,CSMakePolygon(Point,Radius,Numner*Angle,PlotSizeCalc(Point,Numner),PlotSizeCalc(Point,Numner-1)))),-Numner*Angle)
+		else
+			return Shape
+		end
+	end
+	function CS_OverlapShape(Shape,...)
+		local RetShape = Shape
+	
+		local arg = table.pack(...)
+		for k = 1, arg.n do
+			RetShape[1] = RetShape[1] + arg[k][1]
+			for i = 1, arg[k][1] do
+				table.insert(RetShape,{arg[k][i+1][1],arg[k][i+1][2]})
+			end
+		end
+		return RetShape	
+	end
+	function CSMakeFillPathXY(Range,Radius)
+		local a = CSMakePath({-Range,-Range},{Range,-Range},{Range,Range},{-Range,Range})
+		return CS_FillPathXY(a,0,Radius,Radius)
+	end
     function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Generator_shape2 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
@@ -223,7 +251,23 @@ function Install_plotshape()
     Mem_shape3 = CS_MirrorY(CS_SymmetryY(Mem_shape1, 1, 2048, 4096),0,1,0)
     Mem_shape4 = CS_MirrorY(CS_SymmetryY(Mem_shape2, 1, 2048, 4096),0,1,0)
 
-
+    Mem_CAplot1 = CSMakeTornado(4, 32, 75, 6)
+    Mem_CAplot2 = CS_Rotate(Mem_CAplot1, 10)
+    Mem_CAplot3 = CS_Rotate(Mem_CAplot1, 20)
+    Mem_CAplot4 = CS_Rotate(Mem_CAplot1, 30)
+    Mem_CAplot5 = CS_Rotate(Mem_CAplot1, 40)
+    Mem_CAplot6 = CS_Rotate(Mem_CAplot1, 50)
+    Mem_CAplot7 = CS_Rotate(Mem_CAplot1, 60)
+    Mem_CAplot8 = CS_Rotate(Mem_CAplot1, 70)
+    Circulation1 = CSMakeCircleX(6,115,30,54,24)
+    Circulation2 = CS_Rotate(Circulation1,90)
+    Circulation3 = CS_Rotate(Circulation1,180)
+    Circulation4 = CS_Rotate(Circulation1,270)
+    Mem_Flnale1 = CS_SortA(CSMakePolygon(4,64,45,PlotSizeCalc(4,20),PlotSizeCalc(4,19)),0)
+    Mem_Flnale2 = CS_SortA(CSMakePolygon(5,64,45,PlotSizeCalc(5,20),PlotSizeCalc(5,19)),0)
+    Mem_Flnale3 = CS_SortA(CSMakePolygon(6,64,45,PlotSizeCalc(6,20),PlotSizeCalc(6,19)),0)
+    Mem_Flnale4 = CS_SortA(CSMakeStar(5,108,64,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
+    
     -------- Plot Timeline
 
     CenterCallGen1 = {
