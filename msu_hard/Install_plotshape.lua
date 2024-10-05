@@ -263,11 +263,18 @@ function Install_plotshape()
     Circulation2 = CS_Rotate(Circulation1,90)
     Circulation3 = CS_Rotate(Circulation1,180)
     Circulation4 = CS_Rotate(Circulation1,270)
-    Mem_Flnale1 = CS_SortA(CSMakePolygon(4,64,45,PlotSizeCalc(4,20),PlotSizeCalc(4,19)),0)
-    Mem_Flnale2 = CS_SortA(CSMakePolygon(5,64,45,PlotSizeCalc(5,20),PlotSizeCalc(5,19)),0)
-    Mem_Flnale3 = CS_SortA(CSMakePolygon(6,64,45,PlotSizeCalc(6,20),PlotSizeCalc(6,19)),0)
+    Mem_Flnale1 = CS_SortA(CSMakePolygon(4,64,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
+    Mem_Flnale2 = CS_SortA(CSMakePolygon(5,64,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)
+    Mem_Flnale3 = CS_SortA(CSMakePolygon(6,64,45,PlotSizeCalc(6,19),PlotSizeCalc(6,18)),0)
     Mem_Flnale4 = CS_SortA(CSMakeStar(5,108,64,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
+
+    Mem_Flnale1A = CS_SortA(CSMakePolygon(4,1,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
+    Mem_Flnale2A = CS_SortA(CSMakePolygon(5,1,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)
+    Mem_Flnale3A = CS_SortA(CSMakePolygon(6,1,45,PlotSizeCalc(6,19),PlotSizeCalc(6,18)),0)
+    Mem_Flnale4A = CS_SortA(CSMakeStar(5,136,1,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
     
+    Middle_Mem_Eft = CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2)
+    Final_rhegb_Eft = CS_RatioXY(CS_Rotate3D(sixline,45,60,80),2,2)
     -------- Plot Timeline
 
     CenterCallGen1 = {

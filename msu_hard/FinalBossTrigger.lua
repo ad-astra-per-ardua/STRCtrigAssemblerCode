@@ -14,7 +14,7 @@ function FinalBossTrigger()
     MemGenTime2 = {
         158.5, 172.5, 173.8, -- Circulation gen and palm gen
         187.8, 188.8,
-        204,
+        204, 218.3, 219.2, 220, 230.3
     }
 
     TriggerX(FP, Always(), {
@@ -25,10 +25,15 @@ function FinalBossTrigger()
     })
     CDoActions(FP, {
         ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
-        SetCDeaths(FP, Add, 1, P8minimap),
-        SetMinimapColor(P8, SetTo, P8minimap)
+        SetMinimapColor(P5, SetTo, 47),
+        SetMinimapColor(P6, SetTo, 47),
+        SetMinimapColor(P7, SetTo, 47),
+        SetMinimapColor(P8, SetTo, 47),
+        SetPlayerColor(P5, SetTo, 47),
+        SetPlayerColor(P6, SetTo, 47),
+        SetPlayerColor(P7, SetTo, 47),
+        SetPlayerColor(P8, SetTo, 47),
     }, preserved)
-    TriggerX(FP, {CDeaths(FP, AtLeast, 255, P8minimap)}, {SetCDeaths(FP, SetTo, 1, P8minimap)}, preserved)
     Trigger2X(FP, {
         Deaths(P6, AtLeast, 1, 202),
         Deaths(P6, AtLeast, 1, 203),
@@ -296,9 +301,10 @@ function FinalBossTrigger()
         j = j + 1
     end
     ------------------- Start of rhegb part -----------------------
+    CSPlot(Final_rhegb_Eft, P5, 72, 'battlegen7', nil, 1, 32, FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)})
+CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[8] * SDspeed) - 1, FBOSS_BGM)})
     
-CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[9] * SDspeed) - 1, FBOSS_BGM)})
-    TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[9] * SDspeed, FBOSS_BGM)}, {CreateUnit(1, 32, "callArrival", P5)})
+    TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[9] * SDspeed, FBOSS_BGM)}, {CreateUnit(1, 32, "battlegen7", P5)})
 
 
 function Simple_TSetLoc(Player,LocID,LeftValue,UpValue,RightValue,DownValue,AddonTrigger)
@@ -382,32 +388,48 @@ SHB26b =
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate(SHB26b,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26a,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, RotatePlayer({
-    DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-}, {Force1,Force5}, FP), FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate(SHB26a,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)} , {
+    RotatePlayer({
+        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
+    }, {Force1,Force5}, FP)
+})
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate3D(SHB26b,30,30,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26a,45,45,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, RotatePlayer({
-    DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-}, {Force1,Force5}, FP), FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26a,45,45,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)} , {
+    RotatePlayer({
+        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
+    }, {Force1,Force5}, FP)
+})
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate3D(SHB26b,45,45,45), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26a,60,60,60), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, RotatePlayer({
-    DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-}, {Force1,Force5}, FP), FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_Rotate3D(SHB26a,60,60,60), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)} , {
+    RotatePlayer({
+        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
+    }, {Force1,Force5}, FP)
+})
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate(SHB26b,60,60,60), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate(SHB26a,75,75,75), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)} , {
+    RotatePlayer({
+        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
+    }, {Force1,Force5}, FP)
+})
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_Rotate(SHB26b,75,75,75), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26a,90,90,90), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, RotatePlayer({
-    DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.\nEnd of 4vs4 Part.\nStart of H-light memory2 Part.", 4)
-}, {Force1,Force5}, FP), FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
-
+CSPlotOrder(CS_Rotate(SHB26a,90,90,90), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
+TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)} , {
+    RotatePlayer({
+        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
+    }, {Force1,Force5}, FP)
+})
 
 
 ------------- Start of Final Memory2 Part ----------------
@@ -436,21 +458,45 @@ CAPlot(CS_SortR(MemEft,1),P6,33,"callArrival",nil,1,32,{1,0,0,0,MemEft[1]/8,0},n
 
 CAPlot(CS_SortR(Finale_mem,0), P5, 84, "callArrival", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM)})
 
-CAPlotOrder(Circulation1, P6, 62, "callArrival", nil, 1, 32, {1,9,0,0,9,0}, nil,CSMakeCircleX(6,0,30,54,24) , Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM),CDeaths(FP, AtMost, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
+-- CAPlotOrder(Circulation1, P6, 62, "callArrival", nil, 1, 32, {1,9,0,0,9,0}, nil,CSMakeCircleX(6,0,30,54,24) , Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM),CDeaths(FP, AtMost, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
 -- CAPlotOrder(Circulation2, P6, 64, "callArrival", nil, 1, 32, {1,9,0,0,3,0}, nil,CSMakeCircleX(6,0,30,54,24) , Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM),CDeaths(FP, AtMost, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
 CAPlotOrder(Circulation3, P6, 8, "callArrival", nil, 1, 32, {1,9,0,0,9,0}, nil,CSMakeCircleX(6,0,30,54,24) , Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM), CDeaths(FP, AtMost, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
 -- CAPlotOrder(Circulation4, P6, 56, "callArrival", nil, 1, 32, {1,9,0,0,3,0}, nil,CSMakeCircleX(6,0,30,54,24) , Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[5] * SDspeed), FBOSS_BGM), CDeaths(FP, AtMost, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
 
-CAPlotOrder(Mem_Flnale1, P5, 60, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale1, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale2, P5, 64, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale2, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6]+2) * SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale3, P5, 62, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale3, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +4)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale1, P5, 58, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale1, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +6)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale2, P5, 70, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale2, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +8)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale3, P5, 86, "callArrival", nil, 1, 32, {1,0,0,0,68,0}, nil, Mem_Flnale3, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +10)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale4, P5, 28, "callArrival", nil, 1, 32, {1,0,0,0,34,0}, nil, Mem_Flnale4, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +12)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale4, P5, 102, "callArrival", nil, 1, 32, {1,0,0,0,34,0}, nil, Mem_Flnale4, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +14)* SDspeed), FBOSS_BGM)},nil,{})
-CAPlotOrder(Mem_Flnale4, P5, 69, "callArrival", nil, 1, 32, {1,0,0,0,34,0}, nil, Mem_Flnale4, Attack, "HealZone", nil, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +16)* SDspeed), FBOSS_BGM)},nil,{})
+CAPlotOrder(Mem_Flnale1, P5, 60, "callArrival", {2048,2048}, 1, 32, {1,0,0,0,1,0}, nil, Mem_Flnale1A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[6] * SDspeed), FBOSS_BGM)},nil,nil)
+CAPlotOrder(Mem_Flnale2, P5, 64, "callArrival", {2048,2048}, 1, 32, {1,0,0,0,1,0}, nil, Mem_Flnale2A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6]+2) * SDspeed), FBOSS_BGM)},nil,nil)
+CAPlotOrder(Mem_Flnale3, P5, 62, "callArrival", {2048,2048}, 1, 32, {1,0,0,0,1,0}, nil, Mem_Flnale3A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6] +5)* SDspeed), FBOSS_BGM)},nil,nil)
+CAPlotOrder(Mem_Flnale4, P5, 28, "callArrival", {2048,2048}, 1, 64, {Mem_Flnale4[1],0,0,0,2,0}, nil, Mem_Flnale4A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6]+9)* SDspeed), FBOSS_BGM)},nil,nil)
+CAPlotOrder(CS_Rotate(Mem_Flnale4,20), P5, 96, "callArrival", {2048,2048}, 1, 64, {Mem_Flnale4[1],0,0,0,2,0}, nil, Mem_Flnale4A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6]+13)* SDspeed), FBOSS_BGM)},nil,nil)
+CAPlotOrder(CS_Rotate(Mem_Flnale4,40), P5, 69, "callArrival", {2048,2048}, 1, 64, {Mem_Flnale4[1],0,0,0,2,0}, nil, Mem_Flnale4A, Attack, "HealZone", {2048,2048}, {1,0}, nil, {0,32}, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[6]+17)* SDspeed), FBOSS_BGM)},nil,nil)
 
+TriggerX(FP, {
+    NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[7] * SDspeed) - 2, FBOSS_BGM)
+}, {
+    SetScanImage(391)
+})
+TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[8] * SDspeed), FBOSS_BGM)}, {
+    SetScanImage(546)
+})
+CAPlot(CS_SortR(MemEft,1),P6,33,"HealZone",nil,1,32,{1,0,0,0,MemEft[1]/8,0},nil,P6,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[7] * SDspeed), FBOSS_BGM)})
+
+CAPlot(CS_SortR(Finale_mem,0), P5, 84, "HealZone", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[8] * SDspeed), FBOSS_BGM)})
+
+CSPlotOrder(FBossMainplot, P6, 25, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
+CSPlotOrder(FBossMainplot, P6, 102, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
+CSPlotOrder(FBossMainplot, P6, 104, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
+
+TriggerX(FP, {
+    {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[10] * SDspeed), FBOSS_BGM)}
+}, {
+    RotatePlayer({
+        MinimapPing("callArrival");
+        MinimapPing("callArrival");
+        MinimapPing("callArrival");
+        DisplayTextX("\x04Invincibility Disable flag", 4);
+    }, {Force1,Force5}, FP),
+    SetInvincibility(Disable, 122, Force2, "Anywhere")
+})
 
 -------------------------- Start of Hard Plot --------------------
     CElseX()

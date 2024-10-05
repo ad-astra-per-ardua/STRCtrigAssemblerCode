@@ -65,7 +65,7 @@ function check_shape()
 		return CS_FillPathXY(a,0,Radius,Radius)
 	end
 
-	temp1 = CSMakePolygon(6,64,45,PlotSizeCalc(6,20),PlotSizeCalc(6,19))
+	temp1 = CS_RatioXY(CS_Rotate3D(sixline,45,60,80),2,2)
 
 
 	-- temp1 = CSMakeCircle(6,30,0,PlotSizeCalc(6, 10),0)
@@ -79,5 +79,5 @@ function check_shape()
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 	temp = CS_RatioXY(Hp1,4,2)
-    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end
