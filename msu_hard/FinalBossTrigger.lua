@@ -25,14 +25,14 @@ function FinalBossTrigger()
     })
     CDoActions(FP, {
         ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
-        SetMinimapColor(P5, SetTo, 47),
-        SetMinimapColor(P6, SetTo, 47),
-        SetMinimapColor(P7, SetTo, 47),
-        SetMinimapColor(P8, SetTo, 47),
-        SetPlayerColor(P5, SetTo, 47),
-        SetPlayerColor(P6, SetTo, 47),
-        SetPlayerColor(P7, SetTo, 47),
-        SetPlayerColor(P8, SetTo, 47),
+        SetMinimapColor(P5, SetTo, 151),
+        SetMinimapColor(P6, SetTo, 151),
+        SetMinimapColor(P7, SetTo, 151),
+        SetMinimapColor(P8, SetTo, 214),
+        SetPlayerColor(P5, SetTo, 151),
+        SetPlayerColor(P6, SetTo, 151),
+        SetPlayerColor(P7, SetTo, 151),
+        SetPlayerColor(P8, SetTo, 214),
     }, preserved)
     Trigger2X(FP, {
         Deaths(P6, AtLeast, 1, 202),

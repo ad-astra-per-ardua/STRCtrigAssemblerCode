@@ -433,7 +433,7 @@ end
     Trigger {
     players = {Force1},
     conditions = {
-        Always();
+        Deaths(P7, Exactly, 0, 168)
     },
     actions = {
         RunAIScript("Turn ON Shared Vision for Player 8");
