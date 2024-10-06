@@ -10,7 +10,7 @@ function Install_SpecialGunplot()
     "좌측 하단, \x08평행우주의 \x03동력원, \x11｡˙+ﾟ\x08Parallel's \x03Generator \x11 ﾟ.+｡",
     "우측 하단, \x08평행우주의 \x03동력원, \x11｡˙+ﾟ\x08Parallel's \x03Generator \x11 ﾟ.+｡"
 }
-
+    CIfX(Force2, {CDeaths(FP, AtLeast, 0, Evfmode)})
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
     ----------- Normal plot
@@ -79,10 +79,6 @@ CElseX()
 
 ------------ Hard plot 
 
-CTrigger({FP}, {_TP(_TOR(Deaths(P7, AtLeast, 1, 130),Deaths(P7, AtLeast, 1, 106)))}, {
-    SetDeaths(P8, SetTo, 1, 131),
-    SetDeaths(P8, SetTo, 1, 132);
-}, 1)
 
 TriggerX(FP, Always(), {
         CreateUnit(1, 151, "celebrate1", P7);
@@ -147,6 +143,6 @@ for i = 1 , 4 do
 end
     
 
-
+CIfXEnd()
 CIfXEnd()
 end

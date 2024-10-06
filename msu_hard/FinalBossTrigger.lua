@@ -17,23 +17,17 @@ function FinalBossTrigger()
         204, 218.3, 219.2, 220, 230.3
     }
 
-    TriggerX(FP, Always(), {
-        CreateUnit(100, 1, "neutralbunker1", P1),
-        CreateUnit(100, 1, "neutralbunker2", P1),
-        CreateUnit(100, 1, "neutralbunker3", P1),
-        CreateUnit(100, 1, "neutralbunker4", P1),
-    })
-    CDoActions(FP, {
-        ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
-        SetMinimapColor(P5, SetTo, 47),
-        SetMinimapColor(P6, SetTo, 47),
-        SetMinimapColor(P7, SetTo, 47),
-        SetMinimapColor(P8, SetTo, 47),
-        SetPlayerColor(P5, SetTo, 47),
-        SetPlayerColor(P6, SetTo, 47),
-        SetPlayerColor(P7, SetTo, 47),
-        SetPlayerColor(P8, SetTo, 47),
+    TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1)}, {
+        SetMinimapColor(P5, SetTo, 254),
+        SetMinimapColor(P6, SetTo, 254),
+        SetMinimapColor(P7, SetTo, 254),
+        SetMinimapColor(P8, SetTo, 111),
+        SetPlayerColor(P5, SetTo, 254),
+        SetPlayerColor(P6, SetTo, 254),
+        SetPlayerColor(P7, SetTo, 254),
+        SetPlayerColor(P8, SetTo, 111),
     }, preserved)
+
     Trigger2X(FP, {
         Deaths(P6, AtLeast, 1, 202),
         Deaths(P6, AtLeast, 1, 203),
@@ -68,13 +62,22 @@ function FinalBossTrigger()
 
     
     
-    TriggerX(FP, Always(), {
-        SetDeaths(P6, SetTo, 1, 202),
-        SetDeaths(P6, SetTo, 1, 203),
-        SetDeaths(P6, SetTo, 1, 204),
-        SetDeaths(P6, SetTo, 1, 205),
-        RemoveUnitAt(All, "Buildings", "Anywhere", Force2)
-    })
+    -- TriggerX(FP, Always(), { -- Debugging Setting
+    --     SetDeaths(P6, SetTo, 1, 202),
+    --     SetDeaths(P6, SetTo, 1, 203),
+    --     SetDeaths(P6, SetTo, 1, 204),
+    --     SetDeaths(P6, SetTo, 1, 205),
+    --     RemoveUnitAt(All, "Buildings", "Anywhere", Force2)
+    -- })
+    -- TriggerX(FP, Always(), {
+    --     CreateUnit(100, 1, "neutralbunker1", P1),
+    --     CreateUnit(100, 1, "neutralbunker2", P1),
+    --     CreateUnit(100, 1, "neutralbunker3", P1),
+    --     CreateUnit(100, 1, "neutralbunker4", P1),
+    -- })
+    -- CDoActions(FP, {
+    --     ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
+    -- }, preserved)
 
     CIf(AllPlayers, {Deaths(P7, AtLeast, 1, 168)})
 
@@ -105,7 +108,7 @@ function FinalBossTrigger()
     CSPlot2(CellScattered, P8, 119, "HealZone", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 100, FBOSS_Initvar)},{SetImageScript(215, 144)})
 
     ----- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
-    TmpNextptr,FnBossPtr,FnBossHP,FnBossHP2 = CreateVars(4, FP)
+    
     CIfOnce(FP,{CDeaths(FP, AtLeast, 100, FBOSS_Initvar)},{})
         f_Read(FP,0x628438,nil,TmpNextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
         CMov(FP,FnBossPtr,TmpNextptr) -- Save FnBossPtr from TmpNextptr's 
@@ -301,7 +304,7 @@ function FinalBossTrigger()
         j = j + 1
     end
     ------------------- Start of rhegb part -----------------------
-    CSPlot(Final_rhegb_Eft, P5, 72, 'battlegen7', nil, 1, 32, FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)})
+    
 CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[8] * SDspeed) - 1, FBOSS_BGM)})
     
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[9] * SDspeed, FBOSS_BGM)}, {CreateUnit(1, 32, "battlegen7", P5)})
@@ -369,9 +372,9 @@ CunitCtrig_Part4X(i,{
 	MoveCp(Add,25*4);})
 end
 CunitCtrig_End()
-
+CSPlot(Final_rhegb_Eft, P5, 84, "callArrival", nil, 1, 32, FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)})
 TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[10] * SDspeed, FBOSS_BGM)}, {KillUnit(32, Force2),RotatePlayer({
-    DisplayTextX("\x04End of rhegb Part.\n Start of 4vs4 Part", 4)
+    DisplayTextX("\x04End of rhegb Part.\nStart of 4vs4 Part", 4)
 }, {Force1,Force5}, FP),})
 CIfEnd()
 -- Todo : PerAction == SetInvincibility Enable to Spawn tables | SetPlayerColor and SetMinimapColor of P8 and plotting
@@ -487,7 +490,7 @@ CSPlotOrder(FBossMainplot, P6, 102, 'HealZone', nil, 1, 32, FBossMainplotA, nil,
 CSPlotOrder(FBossMainplot, P6, 104, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
 
 TriggerX(FP, {
-    {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[10] * SDspeed), FBOSS_BGM)}
+    {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[10] + 3) * SDspeed), FBOSS_BGM)}
 }, {
     RotatePlayer({
         MinimapPing("callArrival");
@@ -496,6 +499,14 @@ TriggerX(FP, {
         DisplayTextX("\x04Invincibility Disable flag", 4);
     }, {Force1,Force5}, FP),
     SetInvincibility(Disable, 122, Force2, "Anywhere")
+})
+
+CAPlot(CS_SortR(Finale_mem,0), P5, 84, "HealZone", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {Deaths(FP, AtLeast, 1, 122)})
+TriggerX(FP, {Deaths(FP, AtLeast, 1, 122)}, {
+    RotatePlayer({
+        DisplayTextX('Boss Clear text.', 4);
+    }, {Force1, Force5}, FP),
+    CreateUnitWithProperties(1, 122, "callArrival", P8, StargateProperties)
 })
 
 -------------------------- Start of Hard Plot --------------------

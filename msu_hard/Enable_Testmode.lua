@@ -11,7 +11,7 @@ function Enable_TestMode(f)
         ModifyUnitHitPoints(All, "Men", P7, "Anywhere", 10),
         ModifyUnitShields(All, "Men", P7, "Anywhere", 1),
         Order("Men", P7, "Anywhere", Move, "callArrival");
-        -- CreateUnit(1, 128, "unlock1", P1),
+        CreateUnit(1, 128, "unlock1", P1),
         SetResources(P1,SetTo,0xFFFFFF,Ore);
         SetCDeaths("X",SetTo,X,TestOn);
         SetMemoryB(0x58D2B0 + (0 * 46) + 7, SetTo, 200)
