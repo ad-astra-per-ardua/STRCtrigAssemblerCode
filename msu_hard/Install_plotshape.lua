@@ -161,7 +161,7 @@ function Install_plotshape()
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
     MemEft = CSMakeSpiral(8, 16, 1/2, 40, 0, 260, 0)
 
-    HiveLv2Shape1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 5), CS_Level("Polygon", 3, 4))
+    HiveLv2Shape1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
     HiveLv2Shape2 = CS_InvertXY(HiveLv2Shape1,nil,0)
     Finale_mem = CSMakeCircle(6,64,0,PlotSizeCalc(6, 10),1)
 
@@ -269,7 +269,7 @@ function Install_plotshape()
     Mem_Flnale1 = CS_SortA(CSMakePolygon(4,64,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
     Mem_Flnale2 = CS_SortA(CSMakePolygon(5,64,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)
     Mem_Flnale3 = CS_SortA(CSMakePolygon(6,64,45,PlotSizeCalc(6,19),PlotSizeCalc(6,18)),0)
-    Mem_Flnale4 = CS_SortA(CSMakeStar(5,108,64,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
+    Mem_Flnale4 = CS_SortA(CSMakeStar(5,136,64,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
 
     Mem_Flnale1A = CS_SortA(CSMakePolygon(4,1,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
     Mem_Flnale2A = CS_SortA(CSMakePolygon(5,1,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)

@@ -1,13 +1,13 @@
 function Install_SpecialGunPlotShape()
     
-    Trigger2X(FP, {Deaths(P11, Exactly, 1, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Ally)}, Force2, FP),CopyCpAction({
+    Trigger2X(FP, {Deaths(P11, Exactly, 1, 100),Deaths(P7, Exactly, 0, 168)}, {CopyCpAction({SetAllianceStatus(Force1, Ally)}, Force2, FP),CopyCpAction({
         RunAIScript('Turn ON Shared Vision for Player 5'),
         RunAIScript('Turn ON Shared Vision for Player 6'),
         RunAIScript('Turn OFF Shared Vision for Player 7'),
         RunAIScript('Turn ON Shared Vision for Player 8')}, Force1, FP)})
         
     
-    Trigger2X(FP, {Deaths(P11, Exactly, 0, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP),CopyCpAction({
+    Trigger2X(FP, {Deaths(P11, Exactly, 0, 100),Deaths(P7, Exactly, 0, 168)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP),CopyCpAction({
         RunAIScript('Turn OFF Shared Vision for Player 5'),
         RunAIScript('Turn OFF Shared Vision for Player 6'),
         RunAIScript('Turn OFF Shared Vision for Player 7'),

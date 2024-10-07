@@ -81,5 +81,5 @@ function check_shape()
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Hp1 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
 	temp = CS_RatioXY(Hp1,4,2)
-    CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    -- CS_BMPGraph(temp1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 end

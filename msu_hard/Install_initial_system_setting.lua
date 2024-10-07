@@ -23,7 +23,7 @@ function Install_initial_system_setting()
 
     for i, t in ipairs(ts) do
         local c, cin = table.unpack(t)
-        TriggerX(FP, {c}, {
+        TriggerX(FP, {c,NVar(FnBossHP2, Exactly, 0)}, {
             SetPlayerColor(4, SetTo, P5_Color[cin]),
             SetPlayerColor(5, SetTo, P6_Color[cin]),
             SetPlayerColor(6, SetTo, P7_Color[cin]),
@@ -210,9 +210,9 @@ end
     
     CElseX()
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。Final \x07N\x04ormal \x07EVF\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x07N\x04ormal \x07EVF\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x07N\x04ormal \x07EVF\x04】")},preserved);
 
     CIfXEnd()
 
@@ -233,16 +233,16 @@ end
 
     CIfX(Force2, {CDeaths(FP, Exactly, 0, Evfmode)})
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard\x04】")},preserved);
     
 
     CElseX()
 
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard \x07EVF\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard \x07EVF\x04】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard \x07EVF\x04】")},preserved);
     CIfXEnd()
 
     CIfXEnd()
@@ -458,7 +458,6 @@ end
     },
     actions = {
         RunAIScript("Turn ON Shared Vision for Player 8");
-        PreserveTrigger();
     },
     }
     Trigger {
