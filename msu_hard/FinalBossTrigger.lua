@@ -27,23 +27,7 @@ function FinalBossTrigger()
         SetPlayerColor(P7, SetTo, 254),
         SetPlayerColor(P8, SetTo, 111),
     })
-    TriggerX(FP, Always(), {
-        CreateUnit(100, 1, "neutralbunker1", P1),
-        CreateUnit(100, 1, "neutralbunker2", P1),
-        CreateUnit(100, 1, "neutralbunker3", P1),
-        CreateUnit(100, 1, "neutralbunker4", P1),
-    })
-    CDoActions(FP, {
-        ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
-        SetMinimapColor(P5, SetTo, 151),
-        SetMinimapColor(P6, SetTo, 151),
-        SetMinimapColor(P7, SetTo, 151),
-        SetMinimapColor(P8, SetTo, 214),
-        SetPlayerColor(P5, SetTo, 151),
-        SetPlayerColor(P6, SetTo, 151),
-        SetPlayerColor(P7, SetTo, 151),
-        SetPlayerColor(P8, SetTo, 214),
-    }, preserved)
+
 
     Trigger2X(FP, {
         Deaths(P6, AtLeast, 1, 202),
@@ -92,9 +76,13 @@ function FinalBossTrigger()
     --     CreateUnit(100, 1, "neutralbunker3", P1),
     --     CreateUnit(100, 1, "neutralbunker4", P1),
     -- })
-    -- CDoActions(FP, {
-    --     ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100),
-    -- }, preserved)
+    TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 1, Difficulty)}, {
+        ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
+    }, preserved)
+
+    TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 2, Difficulty)}, {
+        ModifyUnitShields(All, "Men", P1, "Anywhere", 50);
+    }, preserved)
 
     CIf(AllPlayers, {Deaths(P7, AtLeast, 1, 168)})
 
@@ -108,7 +96,12 @@ function FinalBossTrigger()
             
         },
         }
-
+    TriggerX(FP, {Deaths(P7, AtLeast, 1, 168)}, {
+        MoveUnit(All, 1, P1, "Anywhere", "neutralbunker1"),
+        MoveUnit(All, "Men", P2, "Anywhere", "neutralbunker2"),
+        MoveUnit(All, "Men", P3, "Anywhere", "neutralbunker3"),
+        MoveUnit(All, "Men", P4, "Anywhere", "neutralbunker4"),
+    })
     TriggerX(FP, {Deaths(P7, AtLeast, 1, 168)}, {
         AddCD(FBOSS_Initvar, 1),
         AddCD(FBOSS_Tmpvar, 1)}, preserved)
@@ -167,6 +160,15 @@ function FinalBossTrigger()
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 69, Start_var1)}, {
         KillUnit(119, Force2),
     })
+
+    for i = 0, 3 do -- 보스전 원격 스팀, 스탑, 홀드 활성화 | cp * 288 + unit
+        TriggerX(FP, {CDeaths(FP, Exactly, 2, Difficulty),NVar(FnBossHP2, AtLeast, 1)}, {
+            SetMemoryB(0x57F27C+(228*i)+21,SetTo,1),
+            SetMemoryB(0x57F27C+(228*i)+7,SetTo,1),
+            SetMemoryB(0x57F27C+(228*i)+30,SetTo,1),
+        })
+    end
+
     for i = 1, 15 do
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 69 + (i + 3), Start_var1)}, {
         SetMemoryB(0x657A9C, SetTo, 31-i)

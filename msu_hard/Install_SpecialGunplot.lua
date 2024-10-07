@@ -24,10 +24,10 @@ function Install_SpecialGunplot()
         CreateUnit(1, 175,"middle2", P7);
         CreateUnit(1, 127,"middle3", P7);
         CreateUnit(1, 148,"middle4", P7);
-        -- SetInvincibility(Enable, 127, P7, "Anywhere");
-        -- SetInvincibility(Enable, 148, P7, "Anywhere");
-        -- SetInvincibility(Enable, 174, P7, "Anywhere");
-        -- SetInvincibility(Enable, 175, P7, "Anywhere");
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
 })
 
 ------ Start of Disable invincibility condition trigger -------
@@ -93,11 +93,11 @@ TriggerX(FP, Always(), {
         CreateUnit(1, 200, "generator2", P7);
         CreateUnit(1, 200, "generator3", P7);
         CreateUnit(1, 200, "generator4", P7);
-        -- SetInvincibility(Enable, 127, P7, "Anywhere");
-        -- SetInvincibility(Enable, 148, P7, "Anywhere");
-        -- SetInvincibility(Enable, 174, P7, "Anywhere");
-        -- SetInvincibility(Enable, 175, P7, "Anywhere");
-        -- SetInvincibility(Enable, 200, P7, "Anywhere");
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
+        SetInvincibility(Enable, 200, P7, "Anywhere");
 })
 
 

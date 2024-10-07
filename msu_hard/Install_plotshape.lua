@@ -161,6 +161,8 @@ function Install_plotshape()
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
     MemEft = CSMakeSpiral(8, 16, 1/2, 40, 0, 260, 0)
 
+    HiveLv2Shape1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 5), CS_Level("Polygon", 3, 4))
+    HiveLv2Shape2 = CS_InvertXY(HiveLv2Shape1,nil,0)
     Finale_mem = CSMakeCircle(6,64,0,PlotSizeCalc(6, 10),1)
 
     -- CAPlot(CS_SortR(HiveEtf1,1),P6,33,"Hive3",nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,"Hive3")})
@@ -248,7 +250,7 @@ function Install_plotshape()
     FBossMainplotA = CS_Rotate3D(CSMakePolygon(6,1,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
 
     Mem_shape1 = CS_CompassA({0,0}, {2048,0}, {0,2048}, 0, 30)
-    Mem_shape2 = CS_MirrorX(CS_SymmetryX(Mem_shape1, 1, 2048, 4096),0,1,0)
+    Mem_shape2 = CS_MirrorX(Mem_shape1,0,0,0)
     Mem_shape3 = CS_MirrorY(CS_SymmetryY(Mem_shape1, 1, 2048, 4096),0,1,0)
     Mem_shape4 = CS_MirrorY(CS_SymmetryY(Mem_shape2, 1, 2048, 4096),0,1,0)
 
@@ -308,6 +310,17 @@ function Install_plotshape()
     HiveEftTime = {2.22, 3.18, 4.15, 5.07, 6, 7, 7.9 ,8.8 ,9.7,10.6, 11.5, 12.4, 13.3, 14.2, 15.1}
     HiveGenTime2 = {16.8, 18.7, 20.5, 22.4, 24.3, 26.1, 28, 29.9}
 
+    HiveLv2GenTime = {
+        6.8, 7.3, 7.8, 
+        10.7, 11.1, 11.6, 
+        14.5, 14.99, 15.46,
+        18.8, -- overlayed
+        22.1, 22.6,23.1,
+        25.9, 26.4, 26.8,
+        29.7, 30.2, 30.7,
+        33.5, 34, 35 -- finished
+    }
+
     Starport_gen = {4.1, 6, 8, 12, 14, 16, 19.8, 21.8, 23.8, 27.7, 29.7, 31.7}
 
     Starport_lv2_gen = {
@@ -328,7 +341,7 @@ function Install_plotshape()
         32.9, 36.7, 40.5, -- after effects
         48.1, 55.8 -- after 2nd effects
         }
-        StargateEftTime = {
+    StargateEftTime = {
         32, 32.4, -- reloading effect
         47.2, 47.6 -- 2nd effects
         }

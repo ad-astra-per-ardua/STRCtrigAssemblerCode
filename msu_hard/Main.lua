@@ -70,7 +70,7 @@ Install_verifingPhase()
 Install_plotshape()
 Install_opening()
 check_shape()
--- SetExpire()
+SetExpire()
 
 for i = 4, 7 do
     TriggerX(FP, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})

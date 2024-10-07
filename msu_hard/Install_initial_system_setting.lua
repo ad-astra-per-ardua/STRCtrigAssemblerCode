@@ -46,7 +46,7 @@ for k = 1, 2 do
                 Command(AllPlayers,Exactly,i,111);
             },
             actions = {
-                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 v1.2 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x13\x04양쪽 \x08적진의 수뇌부에서 \x10희망의 빛\x04이 \x19희미하게 \x04보이는 것 같다...?").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
+                SetMissionObjectives(StrDesignX("\x04MSF Universe\x07\x04 Final Ver. 플레이 중입니다.").."\n"..StrDesignX("\x04현재 "..DiffTextArray[k].."\x17 "..i.."명 \x04플레이 중").."\n"..StrDesignX("\x04환전률 : \x1F"..Temparray[k][i].."% \x04 적용 중 입니다").."\n"..StrDesignX("\x19【 해금 조건 】").."\n"..StrDesignX("\x13\x04양쪽 \x08적진의 수뇌부에서 \x10희망의 빛\x04이 \x19희미하게 \x04보이는 것 같다...?").."\n\n"..StrDesignX("\x19플레이 해주셔서 감사합니다.(_ _)"));
             },
         }
         end

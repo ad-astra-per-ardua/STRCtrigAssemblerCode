@@ -102,7 +102,7 @@ function Install_opening()
             PlayWAVX("staredit\\wav\\sound.wav"),
             PlayWAVX("staredit\\wav\\sound.wav"),
             DisplayTextX(StrDesignX("\x07EVF MODE\x04가 활성화 되었습니다."), 4),
-            DisplayTextX(StrDesignX("\x06공격력\x04이 \x171.5배, \x04모든 일반 건물 \x1b투명화\x04가 적용되었습니다."), 4),
+            DisplayTextX(StrDesignX("\x06공격력\x04이 \x171.5배, 쉴드 50% 상시 회복, \x04모든 일반 건물 \x1b투명화\x04가 적용되었습니다."), 4),
         }, {Force1, Force5}, FP),
         MoveUnit(1, 15, P1, "evflocation", "selectlocation"),
         SetCDeaths(FP, SetTo, 1, Evfmode)
@@ -113,7 +113,7 @@ function Install_opening()
             PlayWAVX("staredit\\wav\\sound.wav"),
             PlayWAVX("staredit\\wav\\sound.wav"),
             DisplayTextX(StrDesignX("\x07EVF MODE\x04가 비활성화 되었습니다."), 4),
-            DisplayTextX(StrDesignX("\x06공격력\x04이 \x17기존 수치로, \x04모든 일반 건물 \x1b투명화\x04가 해제되었습니다."), 4),
+            DisplayTextX(StrDesignX("\x06공격력\x04이 \x17기존 수치로, 쉴드 회복이 기존방식으로, \x04모든 일반 건물 \x1b투명화\x04가 해제되었습니다."), 4),
         }, {Force1, Force5}, FP),
         MoveUnit(1, 15, P1, "evflocation", "selectlocation"),
         SetCDeaths(FP, SetTo, 0, Evfmode)

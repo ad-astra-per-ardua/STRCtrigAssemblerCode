@@ -1,7 +1,9 @@
 function EVF_initialsetting()
     CIf(FP, {CDeaths(FP, AtLeast, 1, Evfmode)})
 
-
+    TriggerX(FP, {CDeaths(FP, AtLeast, 1, Evfmode)}, {
+        ModifyUnitShields(All, "Men", Force1, "Anywhere", 50);
+    }, preserved)
 
     for i = 1, 10,2 do
         TriggerX(FP, Always(), {
