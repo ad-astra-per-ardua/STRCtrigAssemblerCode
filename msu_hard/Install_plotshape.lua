@@ -94,6 +94,7 @@ function Install_plotshape()
     P8minimap,BattleGen = CreateCcodes(2)
     FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM, Start_var1 = CreateCcodes(5)
 
+    TmpNextptr,FnBossPtr,FnBossHP,FnBossHP2 = CreateVars(4, FP)
 
     --------- Plot shape
 

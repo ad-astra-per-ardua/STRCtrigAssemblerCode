@@ -30,7 +30,7 @@ OB_BGMArray = CreateVar(FP)
         {16, "staredit\\wav\\betterworld.ogg", 37 * Fixedtime},
         {17, "staredit\\wav\\spPlot1.ogg", 145 * Fixedtime},
         {18, "staredit\\wav\\hat2.ogg", 30 * Fixedtime},
-        {19, "staredit[\\wav\\lair2.ogg", 38 * Fixedtime}
+        {19, "staredit\\wav\\lair2.ogg", 38 * Fixedtime}
         })
     end
     IBGM_EPD(FP, {Force5}, OB_BGMArray, {

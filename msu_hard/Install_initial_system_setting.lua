@@ -198,12 +198,23 @@ end
     
     -- TriggerX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)}, {SetMemory(0x662350 + (), modtype, number)}, Flags, Index) -- max hp
     --- LeaderBoardControl
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。1.2 \x07N\x04ormal】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x07N\x04ormal】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
+
+    CIfX(Force2, {CDeaths(FP, Exactly, 0, Evfmode)})
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。Final \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x07N\x04ormal】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x07N\x04ormal】")},preserved);
+    
+    CElseX()
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals -【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x07N\x04ormal \x07EVF】")},preserved);
+
+    CIfXEnd()
 
     CElseX() -------------------------- 하드모드 분기점
 
@@ -216,13 +227,23 @@ end
         })
     end
     
-
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。1.2 \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。1.2 \x08H\x04ard】")},preserved);
-    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。1.2 \x08H\x04ard】")},preserved);
     TriggerX(FP, {Memory(0x58F44C, AtLeast, 390)},{SetMemory(0x58F44C, SetTo, 0x00000000)},preserved);
     TriggerX(FP, {Always()},{SetMemory(0x58F44C, Add, 0x00000001)},preserved);
     TriggerX(FP, {Always()}, {LeaderBoardComputerPlayers(Disable)})
+
+    CIfX(Force2, {CDeaths(FP, Exactly, 0, Evfmode)})
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard】")},preserved);
+    
+
+    CElseX()
+
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 1)},{LeaderBoardResources(Ore, "\x1fM\x04inerals --【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 131)},{LeaderBoardScore(Custom, "\x08D\x04eaths -- 【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
+    TriggerX(FP, {Memory(0x58F44C, Exactly, 261)},{LeaderBoardKills("Any unit", "\x04K\x04ills -- 【Ver。Final \x08H\x04ard \x07EVF】")},preserved);
+    CIfXEnd()
 
     CIfXEnd()
     TriggerX(FP, CDeaths(FP, AtLeast, 1, BGMdeathVar), {SetCDeaths(FP, Subtract, 1,BGMdeathVar)}, preserved)
