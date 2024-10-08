@@ -51,16 +51,19 @@ function FinalBossTrigger()
         Wait(100),
         CreateUnit(1, 168, "HealZone", P7),
     })
-
-    
-    
-    TriggerX(FP, Always(), { -- Debugging Setting
-        SetDeaths(P6, SetTo, 1, 202),
-        SetDeaths(P6, SetTo, 1, 203),
-        SetDeaths(P6, SetTo, 1, 204),
-        SetDeaths(P6, SetTo, 1, 205),
+    -- DoActions(FP, {AddCD(TestMedic, 1)}, preserved)
+    -- TriggerX(FP, {CDeaths(FP, AtLeast, 11, TestMedic)}, {SetCD(TestMedic, 0)}, preserved)
+    -- TriggerX(FP, {CDeaths(FP, AtLeast, 10, TestMedic)}, {
+    --     ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100);
+    --     ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
+    -- }, preserved)
+    -- TriggerX(FP, Always(), { -- Debugging Setting
+    --     SetDeaths(P6, SetTo, 1, 202),
+    --     SetDeaths(P6, SetTo, 1, 203),
+    --     SetDeaths(P6, SetTo, 1, 204),
+    --     SetDeaths(P6, SetTo, 1, 205),
     --     RemoveUnitAt(All, "Buildings", "Anywhere", Force2)
-    })
+    -- })
     -- TriggerX(FP, Always(), {
     --     CreateUnit(100, 1, "neutralbunker1", P1),
     --     CreateUnit(100, 1, "neutralbunker2", P1),
@@ -68,11 +71,11 @@ function FinalBossTrigger()
     --     CreateUnit(100, 1, "neutralbunker4", P1),
     -- })
     TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 1, Difficulty)}, {
-        ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
+        ModifyUnitShields(All, "Men", P1, "Anywhere", 75);
     }, preserved)
 
     TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 2, Difficulty)}, {
-        ModifyUnitShields(All, "Men", P1, "Anywhere", 50);
+        ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
     }, preserved)
 
     Trigger2X(FP, {Deaths(P7, AtLeast, 168, 1)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7,P8}, FP)},preserved)
@@ -87,12 +90,11 @@ function FinalBossTrigger()
             RunAIScript("Turn OFF Shared Vision for Player 6");
             RunAIScript("Turn OFF Shared Vision for Player 7");
             RunAIScript("Turn OFF Shared Vision for Player 8");
-            SetAllianceStatus(P8, Enemy),
-            PreserveTrigger()
+            SetAllianceStatus(P8, Enemy)
         },
     }
     
-    TriggerX(FP, {Deaths(P7, AtLeast, 168, 1)}, {
+    TriggerX(FP, {Deaths(P7, AtLeast, 1, 168)}, {
         SetMinimapColor(P5, SetTo, 60),
         SetMinimapColor(P6, SetTo, 60),
         SetMinimapColor(P7, SetTo, 60),
@@ -129,11 +131,11 @@ function FinalBossTrigger()
     ------------ End of Boss HP Overflow Trigger ----------------------
     TriggerX(FP, {CDeaths(FP, AtLeast, 198, FBOSS_Initvar)}, {
         RotatePlayer({
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
             DisplayTextX(StrDesignX("\x11모든 세계관의 지식\x04을 가진 \x08재앙이 \x04깨어났습니다."), 4);
             DisplayTextX(StrDesignX("\x04여기서 막지않으면, 이곳도 \x19다른 세계관처럼 \x08그\x04에게 \x10한낱 지식으로 \x08흡수\x04되어질 것 입니다."), 4);
             DisplayTextX(StrDesignX("\x04。 。 。 \x08최후의 전투를 \x1f준비하십시길 바랍니다.\x04"), 4);
-            DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ ＮＯＴＩＣＥ\x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+            DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
             MinimapPing("HealZone"),
         }, {Force1,Force5}, FP),
         SetInvincibility(Disable, 122, P8, "Anywhere"),  
@@ -186,21 +188,13 @@ function FinalBossTrigger()
         SetMemoryB(0x657A9C, SetTo, 31-i)
     })
 
-    Trigger {
-        players = {Force1},
-        conditions = {
-            Label(0),
-            NVar(FnBossHP2, Exactly, 1)
-        },
-        actions = {
-            RunAIScript("Turn ON Shared Vision for Player 5");
-            RunAIScript("Turn ON Shared Vision for Player 6");
-            RunAIScript("Turn ON Shared Vision for Player 7");
-            RunAIScript("Turn ON Shared Vision for Player 8");
-            PreserveTrigger();
-        },
-        }
-        Trigger2X(FP, {NVar(FnBossHP2, AtLeast, 1)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP)},preserved)
+    
+    TriggerX(Force1, {CDeaths(FP, AtLeast, 1, FBOSS_BGM)}, {
+        RunAIScript("Turn ON Shared Vision for Player 5");
+        RunAIScript("Turn ON Shared Vision for Player 6");
+        RunAIScript("Turn ON Shared Vision for Player 7");
+        RunAIScript("Turn ON Shared Vision for Player 8");
+    }, preserved)
 
     end
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 170, Start_var1)}, {
@@ -337,9 +331,11 @@ function FinalBossTrigger()
     end
     ------------------- Start of rhegb part -----------------------
     
-CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[8] * SDspeed) - 1, FBOSS_BGM)})
-    
+CIf(Force2, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (BGM_Gentimeplot[8] * SDspeed) - 10, FBOSS_BGM)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2),nil,0), P5, 84, "battlegen7", nil, 1, 32, FP,{CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)})
+    Trigger2X(FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7,P8}, FP)},preserved)
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[9] * SDspeed, FBOSS_BGM)}, {CreateUnit(1, 32, "battlegen7", P5)})
+    
 
 
 function Simple_TSetLoc(Player,LocID,LeftValue,UpValue,RightValue,DownValue,AddonTrigger)
@@ -387,7 +383,7 @@ LoadCp(FP,BackupCp)
 DoActions(FP,MoveCp(Add,15*4))
 
 TriggerX(FP,{DeathsX(CurrentPlayer,Exactly,32,0,0xFF),CDeaths(FP, AtMost, (BGM_Gentimeplot[10] * SDspeed) - 10, FBOSS_BGM)},{
-	CreateUnit(2,32,"emp2",P6);
+	CreateUnit(2,32,"emp2",P5);
 	CreateUnit(1,84,"emp2",P6);
 },{Preserved})
 
@@ -404,7 +400,7 @@ CunitCtrig_Part4X(i,{
 	MoveCp(Add,25*4);})
 end
 CunitCtrig_End()
-CSPlot(Final_rhegb_Eft, P5, 84, "callArrival", nil, 1, 32, FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[8] * SDspeed, FBOSS_BGM)})
+
 TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[10] * SDspeed, FBOSS_BGM)}, {KillUnit(32, Force2),RotatePlayer({
     DisplayTextX("\x04End of rhegb Part.\nStart of 4vs4 Part", 4)
 }, {Force1,Force5}, FP),})
@@ -422,8 +418,8 @@ SHB26b =
 
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26b,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26a,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,30),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,45),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
 TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)} , {
     RotatePlayer({
         DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
@@ -431,8 +427,8 @@ TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11
 })
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26b,30,30,30), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26a,45,45,45), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26b,30,30,30),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26a,45,45,45),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
 TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)} , {
     RotatePlayer({
         DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
@@ -440,8 +436,8 @@ TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12
 })
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26b,45,45,45), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate3D(SHB26a,60,60,60), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26b,45,45,45),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26a,60,60,60),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
 TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)} , {
     RotatePlayer({
         DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
@@ -449,8 +445,8 @@ TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13
 })
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26b,60,60,60), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26a,75,75,75), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,60,60,60),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,75,75,75),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
 TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)} , {
     RotatePlayer({
         DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
@@ -458,8 +454,8 @@ TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14
 })
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26b,75,75,75), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
-CSPlotOrder(CS_Rotate(SHB26a,90,90,90), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,75,75,75),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
+CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,90,90,90),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
 TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)} , {
     RotatePlayer({
         DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
@@ -534,13 +530,34 @@ TriggerX(FP, {
 })
 
 CAPlot(CS_SortR(Finale_mem,0), P5, 84, "HealZone", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {Deaths(FP, AtLeast, 1, 122)})
+
+Trigger2X(FP, {Deaths(FP, AtLeast, 1, 122)}, RotatePlayer({
+    DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＢＯＳＳ  ＣＬＥＡＲ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+    DisplayTextX(StrDesignX("ＦＩＮＡＬ  ＢＯＳＳ"), 4);
+    DisplayTextX(StrDesignX("\x04모든 세계선의 \x08재앙 \x04"), 4);
+    DisplayTextX(StrDesignX("\x04白蘭 \x11AwakenSense\x04를 처치하였습니다.\x04"), 4);
+    DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＢＯＳＳ  ＣＬＥＡＲ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+    PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
+    PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
+}, {Force1, Force5}, FP))
+
+CIfX(FP, {CDeaths(FP, Exactly, 1, Difficulty)})
 TriggerX(FP, {Deaths(FP, AtLeast, 1, 122)}, {
     RotatePlayer({
-        DisplayTextX('Boss Clear text.', 4);
+        DisplayTextX('Boss Ending intersection 1.', 4);
+        Victory();
     }, {Force1, Force5}, FP),
-    CreateUnitWithProperties(1, 122, "callArrival", P8, StargateProperties)
+    CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties)
 })
-
+CElseX()
+TriggerX(FP, {Deaths(FP, AtLeast, 1, 122)}, {
+    RotatePlayer({
+        DisplayTextX('Boss Ending intersection 2.', 4);
+        Victory();
+    }, {Force1, Force5}, FP),
+    CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties)
+})
+CIfXEnd()
 
 
     

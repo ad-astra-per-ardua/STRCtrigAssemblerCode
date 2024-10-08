@@ -220,7 +220,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
+        DisplayText(StrDesignX("기억의 세계선의 주인, \x02† \x07【 \x04光 \x07】 \x02†\x04을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
@@ -753,7 +753,7 @@ CElseX()
 
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2),nil,0), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2),nil,0), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
     CSPlotOrder(Generator_shape, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
@@ -776,7 +776,7 @@ CElseX()
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
+        DisplayText(StrDesignX("기억의 세계선의 주인, \x02† \x07【 \x04光 \x07】 \x02†\x04을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
