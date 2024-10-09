@@ -13,7 +13,7 @@ function Enable_TestMode(f)
             DisplayTextX("TestMode Enabled, Hero Recall Activated.", 4)
         }, {Force1,Force5}, P1),
         CreateUnit(12,1,"HealZone",CurrentPlayer);
-        -- CreateUnit(12,80,"HealZone",CurrentPlayer);
+        CreateUnit(12,80,"HealZone",CurrentPlayer);
 
         
         SetMemoryB(0x58D2B0 + (0 * 46) + 7, SetTo, 200);

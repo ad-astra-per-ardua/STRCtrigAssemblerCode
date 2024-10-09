@@ -17,7 +17,19 @@ function FinalBossTrigger()
         204, 218.3, 219.2, 220, 230.3
     }
 
-    
+    Trigger {
+        players = {Force1},
+        conditions = {
+            Always();
+        },
+        actions = {
+            RunAIScript('Turn ON Shared Vision for Player 1');
+            RunAIScript('Turn ON Shared Vision for Player 2');
+            RunAIScript('Turn ON Shared Vision for Player 3');
+            RunAIScript('Turn ON Shared Vision for Player 4');
+            PreserveTrigger();
+        },
+        }
 
 
     Trigger2X(FP, {
@@ -51,12 +63,7 @@ function FinalBossTrigger()
         Wait(100),
         CreateUnit(1, 168, "HealZone", P7),
     })
-    -- DoActions(FP, {AddCD(TestMedic, 1)}, preserved)
-    -- TriggerX(FP, {CDeaths(FP, AtLeast, 11, TestMedic)}, {SetCD(TestMedic, 0)}, preserved)
-    -- TriggerX(FP, {CDeaths(FP, AtLeast, 10, TestMedic)}, {
-    --     ModifyUnitHitPoints(All, "Men", P1, "Anywhere", 100);
-    --     ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
-    -- }, preserved)
+
     -- TriggerX(FP, Always(), { -- Debugging Setting
     --     SetDeaths(P6, SetTo, 1, 202),
     --     SetDeaths(P6, SetTo, 1, 203),
@@ -78,7 +85,7 @@ function FinalBossTrigger()
         ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
     }, preserved)
 
-    Trigger2X(FP, {Deaths(P7, AtLeast, 168, 1)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7,P8}, FP)},preserved)
+    -- Trigger2X(FP, {Deaths(P7, AtLeast, 1, 168)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7,P8}, FP)},preserved)
 
     Trigger {
         players = {Force1},
@@ -129,13 +136,14 @@ function FinalBossTrigger()
         SetNVar(FnBossHP2,Subtract,1);
     },{preserved})
     ------------ End of Boss HP Overflow Trigger ----------------------
-    TriggerX(FP, {CDeaths(FP, AtLeast, 198, FBOSS_Initvar)}, {
+    Trigger2X(FP, {CDeaths(FP, AtLeast, 198, FBOSS_Initvar)}, {
         RotatePlayer({
             DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
             DisplayTextX(StrDesignX("\x11모든 세계관의 지식\x04을 가진 \x08재앙이 \x04깨어났습니다."), 4);
             DisplayTextX(StrDesignX("\x04여기서 막지않으면, 이곳도 \x19다른 세계관처럼 \x08그\x04에게 \x10한낱 지식으로 \x08흡수\x04되어질 것 입니다."), 4);
             DisplayTextX(StrDesignX("\x04。 。 。 \x08최후의 전투를 \x1f준비하십시길 바랍니다.\x04"), 4);
             DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+            PlayWAVX("staredit\\wav\\bossopening.ogg"),
             MinimapPing("HealZone"),
         }, {Force1,Force5}, FP),
         SetInvincibility(Disable, 122, P8, "Anywhere"),  
@@ -188,13 +196,13 @@ function FinalBossTrigger()
         SetMemoryB(0x657A9C, SetTo, 31-i)
     })
 
-    
-    TriggerX(Force1, {CDeaths(FP, AtLeast, 1, FBOSS_BGM)}, {
+    Trigger2X(FP, {CDeaths(FP, AtLeast, 2, Start_var1)}, {RotatePlayer({
         RunAIScript("Turn ON Shared Vision for Player 5");
         RunAIScript("Turn ON Shared Vision for Player 6");
         RunAIScript("Turn ON Shared Vision for Player 7");
         RunAIScript("Turn ON Shared Vision for Player 8");
-    }, preserved)
+    }, {Force1}, FP)}, preserved)
+
 
     end
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, 170, Start_var1)}, {
@@ -202,7 +210,7 @@ function FinalBossTrigger()
     }, preserved)
     TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)}, {SetMemoryB(0x657A9C, SetTo, 31)})
 
-
+    
     for i = 1, 10 do
 		local wav
         if i <= 9 then
@@ -222,7 +230,7 @@ function FinalBossTrigger()
     
     CIfX(Force2, {CDeaths(FP, AtLeast, 1, Difficulty)})
 
-    CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)},{MoveUnit(1, 122, P8, "HealZone", "battlegen7")})
+    CSPlotOrder(FBossMainplot, P5, 77, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
     CSPlotOrder(FBossMainplot, P5, 78, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
     CSPlotOrder(FBossMainplot, P5, 88, "HealZone", nil, 1, 32, FBossMainplotA, nil, Attack, "callArrival", nil, 32, nil, FP, {CDeaths(FP, AtLeast, BGM_SplitTL[2] * SDspeed, FBOSS_BGM)})
 
@@ -274,9 +282,7 @@ function FinalBossTrigger()
         CDeaths(FP, AtLeast, StartVar * SDspeed, FBOSS_BGM), 
         CDeaths(FP, AtMost, (EndVar - 1) * SDspeed, FBOSS_BGM)
     }, {
-            RotatePlayer({
-                DisplayTextX("\x04Battle Gen Initiated.", 4)
-            }, {Force1,Force5}, FP),
+
             CreateUnit(1, 72, "battlegen1", P6),
             CreateUnit(1, Unitid, "battlegen1", P6),
             CreateUnit(1, 72, "battlegen2", P6),
@@ -401,9 +407,7 @@ CunitCtrig_Part4X(i,{
 end
 CunitCtrig_End()
 
-TriggerX(FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[10] * SDspeed, FBOSS_BGM)}, {KillUnit(32, Force2),RotatePlayer({
-    DisplayTextX("\x04End of rhegb Part.\nStart of 4vs4 Part", 4)
-}, {Force1,Force5}, FP),})
+
 CIfEnd()
 -- Todo : PerAction == SetInvincibility Enable to Spawn tables | SetPlayerColor and SetMinimapColor of P8 and plotting
 
@@ -420,47 +424,27 @@ SHB26b =
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,30),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,45),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)})
-TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[11] * SDspeed, FBOSS_BGM)} , {
-    RotatePlayer({
-        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-    }, {Force1,Force5}, FP)
-})
+
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26b,30,30,30),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26a,45,45,45),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)})
-TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[12] * SDspeed, FBOSS_BGM)} , {
-    RotatePlayer({
-        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-    }, {Force1,Force5}, FP)
-})
+
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26b,45,45,45),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate3D(SHB26a,60,60,60),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)})
-TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[13] * SDspeed, FBOSS_BGM)} , {
-    RotatePlayer({
-        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-    }, {Force1,Force5}, FP)
-})
+
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,60,60,60),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,75,75,75),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)})
-TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[14] * SDspeed, FBOSS_BGM)} , {
-    RotatePlayer({
-        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-    }, {Force1,Force5}, FP)
-})
+
 
 CSPlotOrder(SHB26a, P5, 70, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26b,75,75,75),1.5,1.5), P5, 102, "callArrival", nil, 1, 32, SHB26b, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
 CSPlotOrder(CS_RatioXY(CS_Rotate(SHB26a,90,90,90),1.5,1.5), P5, 104, "callArrival", nil, 1, 32, SHB26a, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)})
-TriggerX(FP,{NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, BGM_Gentimeplot[15] * SDspeed, FBOSS_BGM)} , {
-    RotatePlayer({
-        DisplayTextX("\x04CAPlot, R-Time Rotation Successfully Executed.", 4)
-    }, {Force1,Force5}, FP)
-})
+
 
 
 ------------- Start of Final Memory2 Part ----------------
@@ -517,49 +501,284 @@ CSPlotOrder(FBossMainplot, P6, 25, 'HealZone', nil, 1, 32, FBossMainplotA, nil, 
 CSPlotOrder(FBossMainplot, P6, 102, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
 CSPlotOrder(FBossMainplot, P6, 104, 'HealZone', nil, 1, 32, FBossMainplotA, nil, Attack, "HealZone", nil, 32, nil, FP, {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, (MemGenTime2[9] * SDspeed), FBOSS_BGM)})
 
-TriggerX(FP, {
+Trigger2X(FP, {
     {NVar(FnBossHP2, Exactly, 1),CDeaths(FP, AtLeast, ((MemGenTime2[10] + 3) * SDspeed), FBOSS_BGM)}
 }, {
     RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＮＯＴＩＣＥ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX(StrDesignX("ＦＩＮＡＬ  ＢＯＳＳ"), 4);
+        DisplayTextX(StrDesignX("\x04모든 세계선의 \x08재앙 \x04"), 4);
+        DisplayTextX(StrDesignX("\x04白蘭 \x11AwakenSense\x04의 무적이 해제되었습니다 !\x04"), 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＮＯＴＩＣＥ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
         MinimapPing("callArrival");
         MinimapPing("callArrival");
         MinimapPing("callArrival");
-        DisplayTextX("\x04Invincibility Disable flag", 4);
+        PlayWAVX("staredit\\wav\\CAUTION.wav"),
     }, {Force1,Force5}, FP),
-    SetInvincibility(Disable, 122, Force2, "Anywhere")
+    SetInvincibility(Disable, 122, Force2, "Anywhere"),
+    SetImageColor(215, 17)
 })
 
 CAPlot(CS_SortR(Finale_mem,0), P5, 84, "HealZone", nil, 1, 32, {1,0,0,0,6,0}, nil, FP, {Deaths(FP, AtLeast, 1, 122)})
 
-Trigger2X(FP, {Deaths(FP, AtLeast, 1, 122)}, RotatePlayer({
+Endingtimer2 = CreateCcode()
+
+Trigger2X(FP, {Deaths(FP, AtLeast, 1, 122)}, {RotatePlayer({
     DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＢＯＳＳ  ＣＬＥＡＲ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
     DisplayTextX(StrDesignX("ＦＩＮＡＬ  ＢＯＳＳ"), 4);
     DisplayTextX(StrDesignX("\x04모든 세계선의 \x08재앙 \x04"), 4);
-    DisplayTextX(StrDesignX("\x04白蘭 \x11AwakenSense\x04를 처치하였습니다.\x04"), 4);
+    DisplayTextX(StrDesignX("\x04白蘭 \x11AwakenSense\x04를 제압하였습니다 !\x04"), 4);
     DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＢＯＳＳ  ＣＬＥＡＲ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
     PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
     PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
-}, {Force1, Force5}, FP))
+}, {Force1, Force5}, FP),
+CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties),
 
+})
+
+Textdealy = 170
+TriggerX(FP, Deaths(FP, AtLeast, 1, 122), {SetCDeaths(FP, Add, 1, Endingtimer2)}, preserved)
 CIfX(FP, {CDeaths(FP, Exactly, 1, Difficulty)})
-TriggerX(FP, {Deaths(FP, AtLeast, 1, 122)}, {
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy, Endingtimer2)}, {
     RotatePlayer({
-        DisplayTextX('Boss Ending intersection 1.', 4);
-        Victory();
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04드디어 모든 지식을 가지고 차례대로 모든 세계선을 파괴하던 재앙, \x08白 蘭 \x04을 저지했다. \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
     }, {Force1, Force5}, FP),
-    CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties)
 })
+
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy*2, Endingtimer2)}, {
+    SetScanImage(391)
+})
+CAPlot(CS_SortR(MemEft,1),P6,33,"HealZone",nil,1,32,{1,0,0,0,MemEft[1]/8,0},nil,FP,{CDeaths(FP, AtLeast, Textdealy*3 - 2, Endingtimer2)})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 3, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04하지만 그 놈은 마지막 발악의 힘으로 또 다른 세계선으로 도망을 갔고, \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+    
+})
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 3 + 10, Endingtimer2)}, {
+    RemoveUnit(122, Force2),
+    SetScanImage(391),
+    SetImageColor(391, 17)
+})
+
+CAPlot(CS_SortR(MemEft,1),P6,33,"HealZone",nil,1,32,{1,0,0,0,MemEft[1]/8,0},nil,FP,{CDeaths(FP, AtLeast, Textdealy * 4 - 2, Endingtimer2)})
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 4, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04우리는 바로 그 뒤를 쫓아갔다. \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+})
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 4 + 10, Endingtimer2)}, {
+    RemoveUnit("Men", Force1)
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04한번 잡은 것, 두번이라고 못 잡겠는가? \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 6, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04그런 생각과 함께 당신은 \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 7, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04다시한번 세계선을 넘는 여행의 준비를 한다. \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav"),
+        PlayWAVX("staredit\\wav\\ep.ogg")
+    }, {Force1, Force5}, FP),
+})
+CIfX(FP, {CDeaths(FP, AtLeast, 1, Evfmode)})
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 8, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX(StrDesignX("\x04Ending No.1 | Another Time Paradox\x04"), 4);
+        DisplayTextX("\n");
+        DisplayTextX(StrDesignX("\x04마린키우기 \x17U\x04niverse \x07Final Ver. \x07N\x04ormal \x07Easy Version Fixed \x04를 클리어 하셨습니다 !\x04"), 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\sound.wav"),
+        PlayWAVX("staredit\\wav\\sound.wav"),
+    }, {Force1, Force5}, FP),
+})
+
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 8.5, Endingtimer2)}, {
+    RotatePlayer({
+        Victory();
+    }, {Force1, Force5}, FP)
+})
+
 CElseX()
-TriggerX(FP, {Deaths(FP, AtLeast, 1, 122)}, {
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 8, Endingtimer2)}, {
     RotatePlayer({
-        DisplayTextX('Boss Ending intersection 2.', 4);
-        Victory();
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX(StrDesignX("\x04Ending No.1 | Another Time Paradox\x04"), 4);
+        DisplayTextX("\n");
+        DisplayTextX(StrDesignX("\x04마린키우기 \x17U\x04niverse \x07Final Ver. \x07N\x04ormal\x04을 클리어 하셨습니다 !\x04"), 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\sound.wav"),
+        PlayWAVX("staredit\\wav\\sound.wav"),
     }, {Force1, Force5}, FP),
-    CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties)
 })
+
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 8.5, Endingtimer2)}, {
+    RotatePlayer({
+        Victory();
+    }, {Force1, Force5}, FP)
+})
+
+CIfXEnd()
+
+CElseX() -------------------------------------------------- Hard level intersection plot --------------------------------------------------
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04드디어 모든 지식을 가지고 차례대로 모든 세계선을 파괴하던 재앙, \x08白 蘭 \x04을 저지했다. \x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+})
+
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy*2, Endingtimer2)}, {
+    SetScanImage(391)
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 3, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04그 놈은 도망갈 힘 조차도 없어보였고.\x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav")
+    }, {Force1, Force5}, FP),
+    
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 4, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04모든 세계선의 위협과 재앙의 끝이 맺어지기 직전이였다.\x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav"),
+    }, {Force1, Force5}, FP),
+})
+
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＡｗａｋｅｎＳｅｎｓｅ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX('\x04 "완패야."\x04'), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＡｗａｋｅｎＳｅｎｓｅ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav"),
+        PlayWAVX("staredit\\wav\\eft1.wav"),
+    }, {Force1, Force5}, FP),
+    KillUnit(122, Force2)
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 6.5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04모든 것을 끝낸 당신은 다시 한번 준비를 한다.\x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav"),
+        PlayWAVX("staredit\\wav\\ep2.ogg")
+    }, {Force1, Force5}, FP),
+})
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 7.5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX("\n", 4);
+        DisplayTextX(StrDesignX("\x04따스한 햇살과 익숙한 일상으로 돌아갈 준비를.\x04"), 4);
+        DisplayTextX("\n", 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\BONUS2.wav"),
+    }, {Force1, Force5}, FP),
+})
+CIfX(FP, {CDeaths(FP, AtLeast, 1, Evfmode)})
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 8.5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX(StrDesignX("\x07True Ending \x04| The New Beginning\x04"), 4);
+        DisplayTextX("\n");
+        DisplayTextX(StrDesignX("\x04마린키우기 \x17U\x04niverse \x07Final Ver. \x08Hard \x07Easy Version Fixed \x04를 클리어 하셨습니다 !\x04"), 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04● ● ● \n\x14\n\x14\n",4);
+        PlayWAVX("staredit\\wav\\sound.wav");
+        PlayWAVX("staredit\\wav\\sound.wav");
+    }, {Force1, Force5}, FP)})
+
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 9.5, Endingtimer2)}, {
+    RotatePlayer({
+        Victory();
+    }, {Force1, Force5}, FP)
+})
+
+
+CElseX()
+
+Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 8.5, Endingtimer2)}, {
+    RotatePlayer({
+        DisplayTextX("\x13\x04\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04 ● ● ●\n\x14\n\x14\n",4);
+        DisplayTextX(StrDesignX("\x07True Ending \x04| The New Beginning\x04"), 4);
+        DisplayTextX("\n");
+        DisplayTextX(StrDesignX("\x04마린키우기 \x17U\x04niverse \x07Final Ver. \x08Hard\x04를 클리어 하셨습니다 !\x04"), 4);
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ! ! ! \x17ＣＬＥＡＲ \x08! ! ! \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        PlayWAVX("staredit\\wav\\sound.wav"),
+        PlayWAVX("staredit\\wav\\sound.wav"),
+    }, {Force1, Force5}, FP)
+})
+TriggerX(FP, {CDeaths(FP, AtLeast, Textdealy * 9.5, Endingtimer2)}, {
+    RotatePlayer({
+        Victory();
+    }, {Force1, Force5}, FP)
+})
+
 CIfXEnd()
 
 
-    
+CIfXEnd()
     CIfXEnd()
 end
