@@ -31,11 +31,17 @@ function Install_CCMU()
     }, preserved)
     TriggerX(FP, {Deaths(P11, AtLeast, 1, 157)}, {SetDeaths(FP, Subtract, 1, 157)},preserved)
 
-    for i = 1 , 3 do
-        TriggerX(Force2, {FMemory(0x58F450, Exactly, i)},{RunAIScriptAt(JYD, "Anywhere")})
+    CIfX(FP, {Memory(0x628438, Exactly, 0)})
+
+    for i = 1, 3 do
+        TriggerX(FP, {FMemory(0x58F450, Exactly, i)},{
+            RotatePlayer({
+                RunAIScriptAt(JYD, "Anywhere");
+            }, {Force2}, FP)
+        })
     end
     
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 1)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 1),Memory(0x628438, Exactly, 0)}, {
         RotatePlayer({
             DisplayTextX(CanText11, 4),
             DisplayTextX(CanText22, 4),
@@ -61,7 +67,7 @@ function Install_CCMU()
         KillUnit(69, Force2),
     })
 
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 2)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 2),Memory(0x628438, Exactly, 0)}, {
         RotatePlayer({
             DisplayTextX(CanText111, 4),
             DisplayTextX(CanText222, 4),
@@ -87,7 +93,7 @@ function Install_CCMU()
         KillUnit(69, Force2),
     })
 
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3),Memory(0x628438, Exactly, 0)}, {
         RotatePlayer({
             DisplayTextX(CanText1111, 4),
             DisplayTextX(CanText2222, 4),
@@ -114,7 +120,7 @@ function Install_CCMU()
     })
     
     
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 4)}, RotatePlayer({
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 4),Memory(0x628438, Exactly, 0)}, RotatePlayer({
         DisplayTextX(CanText11111, 4),
         DisplayTextX(CanText22222, 4),
         DisplayTextX(CanText33333, 4),
@@ -196,6 +202,7 @@ function Install_CCMU()
         RunAIScriptAt(JYD, "mainLocation"),
         SetCp(FP)
     })
+    CIfXEnd()
     CIfXEnd()
 
     end

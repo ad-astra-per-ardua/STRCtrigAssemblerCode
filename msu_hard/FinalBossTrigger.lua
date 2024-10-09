@@ -142,11 +142,13 @@ function FinalBossTrigger()
             DisplayTextX(StrDesignX("\x11모든 세계관의 지식\x04을 가진 \x08재앙이 \x04깨어났습니다."), 4);
             DisplayTextX(StrDesignX("\x04여기서 막지않으면, 이곳도 \x19다른 세계관처럼 \x08그\x04에게 \x10한낱 지식으로 \x08흡수\x04되어질 것 입니다."), 4);
             DisplayTextX(StrDesignX("\x04。 。 。 \x08최후의 전투를 \x1f준비하십시길 바랍니다.\x04"), 4);
+            DisplayTextX(StrDesignX("\x04+ 1,000,000 Ore\x04"), 4);
             DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＦＩＮＡＬ  ＮＯＴＩＣＥ\x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
             PlayWAVX("staredit\\wav\\bossopening.ogg"),
             MinimapPing("HealZone"),
         }, {Force1,Force5}, FP),
-        SetInvincibility(Disable, 122, P8, "Anywhere"),  
+        SetInvincibility(Disable, 122, P8, "Anywhere"), 
+        SetResources(Force1, Add, 1000000, Ore)
     })
 
     
@@ -407,6 +409,7 @@ CunitCtrig_Part4X(i,{
 end
 CunitCtrig_End()
 
+TriggerX(FP, {CDeaths(FP, AtLeast, BGM_Gentimeplot[10] * SDspeed, FBOSS_BGM)}, {KillUnit(32, Force2)}, preserved)
 
 CIfEnd()
 -- Todo : PerAction == SetInvincibility Enable to Spawn tables | SetPlayerColor and SetMinimapColor of P8 and plotting
@@ -532,12 +535,16 @@ Trigger2X(FP, {Deaths(FP, AtLeast, 1, 122)}, {RotatePlayer({
     PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
     PlayWAVX("staredit\\wav\\BOSSClear.ogg"),
 }, {Force1, Force5}, FP),
-CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties),
-
+KillUnit("Men", Force2)
 })
+
+
 
 Textdealy = 170
 TriggerX(FP, Deaths(FP, AtLeast, 1, 122), {SetCDeaths(FP, Add, 1, Endingtimer2)}, preserved)
+TriggerX(FP, {CDeaths(FP, AtLeast, 1, Endingtimer2)}, {
+    CreateUnitWithProperties(1, 122, "HealZone", P8, StargateProperties),
+})
 CIfX(FP, {CDeaths(FP, Exactly, 1, Difficulty)})
 
 Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy, Endingtimer2)}, {
@@ -562,7 +569,7 @@ Trigger2X(FP, {CDeaths(FP, AtLeast, Textdealy * 3, Endingtimer2)}, {
         DisplayTextX("\n", 4);
         DisplayTextX(StrDesignX("\x04하지만 그 놈은 마지막 발악의 힘으로 또 다른 세계선으로 도망을 갔고, \x04"), 4);
         DisplayTextX("\n", 4);
-        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x08 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
+        DisplayTextX("\x13\x04\n\n\x0D\x0D\x13\x04● ● ● ────┫\x07 ＧＵＡＲＤＩＡＮＳ \x04┠──── \x04● ● ● \n\x14\n\x14\n",4),
         PlayWAVX("staredit\\wav\\BONUS2.wav")
     }, {Force1, Force5}, FP),
     
