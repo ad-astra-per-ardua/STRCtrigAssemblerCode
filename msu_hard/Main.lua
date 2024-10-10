@@ -70,7 +70,7 @@ Install_verifingPhase()
 Install_plotshape()
 Install_opening()
 check_shape()
-SetExpire()
+-- SetExpire()
 
 for i = 4, 7 do
     TriggerX(FP, Always(), {SetMemoryB(0x58F32C + (i * 15) + 4, SetTo, 255)})
@@ -83,9 +83,11 @@ CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
 
+-- Enable_TestMode(true)
+
 Install_APMcounter()
 Install_ExchangeTrigger()
--- Install_WaveTrigger()
+Install_WaveTrigger()
 Install_HealZoneTrigger()
 Install_Neutral_bunkerTrigger()
 Install_DonateNbanTrigger()
@@ -94,14 +96,13 @@ Install_HerounitTrigger()
 Install_CCMU()
 Install_BGMPhase()
 EVF_initialsetting()
--- Install_normalGunplot()
--- Install_SpecialGunplot()
--- Install_NormalGunPlotShape()
--- Install_SpecialGunPlotShape()
--- MiddleBossTrigger()
-
+Install_normalGunplot()
+Install_SpecialGunplot()
+Install_NormalGunPlotShape()
+Install_SpecialGunPlotShape()
+MiddleBossTrigger()
 FinalBossTrigger()
-Enable_TestMode(true)
+
 
 CIfEnd()
 CSPlotToCAPlot()
