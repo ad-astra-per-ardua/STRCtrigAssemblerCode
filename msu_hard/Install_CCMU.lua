@@ -29,9 +29,10 @@ function Install_CCMU()
         }, {Force1, Force5}, FP),
         SetDeaths(P11, SetTo, 170, 157)
     }, preserved)
-    TriggerX(FP, {Deaths(P11, AtLeast, 1, 157)}, {SetDeaths(FP, Subtract, 1, 157)},preserved)
+    TriggerX(FP, {Deaths(P11, AtLeast, 0, 157)}, {SetDeaths(P11, Subtract, 1, 157)},preserved)
+    -- TriggerX(FP, {Memory(0x6283F0, AtLeast, 1600)}, {SetDeaths(P11, SetTo, 170, 157)}, preserved)
 
-    CIfX(FP, {Memory(0x628438, Exactly, 0)})
+    CIf(FP, {Memory(0x628438, Exactly, 0)})
 
     for i = 1, 3 do
         TriggerX(FP, {FMemory(0x58F450, Exactly, i)},{
@@ -41,7 +42,7 @@ function Install_CCMU()
         })
     end
     
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 1),Memory(0x628438, Exactly, 0)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 1)}, {
         RotatePlayer({
             DisplayTextX(CanText11, 4),
             DisplayTextX(CanText22, 4),
@@ -67,7 +68,7 @@ function Install_CCMU()
         KillUnit(69, Force2),
     })
 
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 2),Memory(0x628438, Exactly, 0)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 2)}, {
         RotatePlayer({
             DisplayTextX(CanText111, 4),
             DisplayTextX(CanText222, 4),
@@ -93,7 +94,7 @@ function Install_CCMU()
         KillUnit(69, Force2),
     })
 
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3),Memory(0x628438, Exactly, 0)}, {
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3)}, {
         RotatePlayer({
             DisplayTextX(CanText1111, 4),
             DisplayTextX(CanText2222, 4),
@@ -118,9 +119,9 @@ function Install_CCMU()
         KillUnit(55, Force2),
         KillUnit(69, Force2),
     })
+    CIfEnd()
     
-    
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 4),Memory(0x628438, Exactly, 0)}, RotatePlayer({
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, 4)}, RotatePlayer({
         DisplayTextX(CanText11111, 4),
         DisplayTextX(CanText22222, 4),
         DisplayTextX(CanText33333, 4),
@@ -130,7 +131,7 @@ function Install_CCMU()
     CIfX(FP, {CDeaths(FP, Exactly, 2, Difficulty)})
     
     TriggerX(FP, {FMemory(0x58F450, Exactly, 1)}, {
-        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+        SetCDeaths(FP, SetTo, 170, CannotPenalty)
     })
     TriggerX(FP, {FMemory(0x58F450, Exactly, 1),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
     {
@@ -145,6 +146,7 @@ function Install_CCMU()
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
+        MinimapPing("mainLocation"),
         }, {Force1, Force5}, FP),
         CreateUnit(20, 191, "mainLocation", P6),
         CreateUnit(20, 192, "mainLocation", P6),
@@ -154,8 +156,9 @@ function Install_CCMU()
     })
 
     --------------------2
+
     TriggerX(FP, {FMemory(0x58F450, Exactly, 2)}, {
-        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+        SetCDeaths(FP, SetTo, 170, CannotPenalty)
     })
     TriggerX(FP, {FMemory(0x58F450, Exactly, 2),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
     {
@@ -170,6 +173,7 @@ function Install_CCMU()
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
+        MinimapPing("mainLocation"),
         }, {Force1, Force5}, FP),
         CreateUnit(30, 191, "mainLocation", P6),
         CreateUnit(30, 192, "mainLocation", P6),
@@ -180,7 +184,7 @@ function Install_CCMU()
 
     ---------------------3
     TriggerX(FP, {FMemory(0x58F450, Exactly, 3)}, {
-        SetCDeaths(FP, SetTo, 339, CannotPenalty)
+        SetCDeaths(FP, SetTo, 170, CannotPenalty)
     })
     TriggerX(FP, {FMemory(0x58F450, Exactly, 3),CDeaths(FP, AtLeast, 1, CannotPenalty) }, 
     {
@@ -195,6 +199,7 @@ function Install_CCMU()
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
         PlayWAVX("sound\\Bullet\\TNsFir00.WAV"),
+        MinimapPing("mainLocation"),
         }, {Force1, Force5}, FP),
         CreateUnit(40, 191, "mainLocation", P6),
         CreateUnit(40, 192, "mainLocation", P6),
@@ -202,7 +207,7 @@ function Install_CCMU()
         RunAIScriptAt(JYD, "mainLocation"),
         SetCp(FP)
     })
-    CIfXEnd()
+    
     CIfXEnd()
 
     end
