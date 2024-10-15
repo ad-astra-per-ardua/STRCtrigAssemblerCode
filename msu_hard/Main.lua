@@ -85,7 +85,7 @@ Install_initial_system_setting()
 
 -- Enable_TestMode(true)
 
-Install_APMcounter()
+-- Install_APMcounter()
 Install_ExchangeTrigger()
 Install_WaveTrigger()
 Install_HealZoneTrigger()
