@@ -15,23 +15,29 @@
 --↓ Tep에 그대로 붙여넣기 -----------------------------------------------------------------
 SetForces({P1},{P2,P3,P4,P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8})
 SetFixedPlayer(P8)
--- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
-StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12") -- Declare fixed player first
+StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12") -- Declare fixed player first
 CJump(AllPlayers,0x9FF)
 Include_CtrigPlib(360,"Switch 1")
 Include_64BitLibrary("Switch 1")
 CJumpEnd(AllPlayers,0x9FF)
+FP = P8
 --↓ 이곳에 예제를 붙여넣기 (예제에 Include_CtrigPlib가 존재하는경우 삭제) ----------------------
 CJump(AllPlayers,0)
 
-
-
-
-
-
-
+CVariable(FP, 0x10);
+tmp = Ccode(0x10, 258);
 
 CJumpEnd(AllPlayers,0)
+
+DoActions(FP, {SetCDeaths(FP, Add, 1, tmp)})
+
+TriggerX(FP, {CDeaths(FP, AtLeast, 10, tmp)}, {
+	SetResources(P1, Add, 1, Ore)
+}, preserved)
+
+TriggerX(FP, {CDeaths(FP, AtLeast, 11, tmp)}, {SetCDeaths(FP, SetTo, 0, tmp)},preserved)
+
 
 
 --↑ 이곳에 예제를 붙여넣기 -----------------------------------------------------------------
