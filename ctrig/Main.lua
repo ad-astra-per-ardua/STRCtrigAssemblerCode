@@ -17,26 +17,35 @@ SetForces({P1},{P2,P3,P4,P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8})
 SetFixedPlayer(P8)
 StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
 -- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12") -- Declare fixed player first
-CJump(AllPlayers,0x9FF)
+FP = P1
 Include_CtrigPlib(360,"Switch 1")
 Include_64BitLibrary("Switch 1")
+Namefunction()
+Lib322()
+DisplayprintLib()
+DP_Start_init(FP)
+CJump(AllPlayers,0x9FF)
+
+
+
+
 CJumpEnd(AllPlayers,0x9FF)
-FP = P8
+
 --↓ 이곳에 예제를 붙여넣기 (예제에 Include_CtrigPlib가 존재하는경우 삭제) ----------------------
-CJump(AllPlayers,0)
 
-CVariable(FP, 0x10);
-tmp = Ccode(0x10, 258);
 
-CJumpEnd(AllPlayers,0)
+CVariable(FP, 0x10)
+V_value = V(0x10)
+CIf(FP, Always())
+DisplayPrint(P1,{"Player Name is ",PName(P1)})
+CIfEnd()
+DisplayPrintEr(FP, {"V's value : " , V(0x10)})
 
-DoActions(FP, {SetCDeaths(FP, Add, 1, tmp)})
-
-TriggerX(FP, {CDeaths(FP, AtLeast, 10, tmp)}, {
-	SetResources(P1, Add, 1, Ore)
-}, preserved)
-
-TriggerX(FP, {CDeaths(FP, AtLeast, 11, tmp)}, {SetCDeaths(FP, SetTo, 0, tmp)},preserved)
+--DisplayPrintEr는 해당플레이어 오류줄에 텍스트를 넣음. DisplayPrint도 똑같은 원리. CPosX,CPosY의 데이터형은 V임. 
+--PlayerID에는 원하는 플레이어에 발싸할지 결정하는곳. 관전플레이어 넣으면안됨. 상수 가능, Force1 형태 가능(아마?) 안되면 {0,1,2,3} 이렇게 넣어도 됨. 데이터형 W는 DisplayPrint에만 지원가능하지만 64비트 라이브러리 필요.
+--DisplayPrint류 함수는 모두 FP가 주인인 트리거임(트리거 주인을 자유자재로 바꾸는건 어케하는지 몰라서 패스;;;
+--DisplayPrint는 Er와 다르게 관전플레이어에도 쏠 수 있다!!
+--너무 남발하면 트리거수 폭발할수 있으므로 자제할것. (정작 본인이 남발하고있죠?킹받죠?)
 
 
 
@@ -405,6 +414,7 @@ Trigger { -- No comment (43CD0280)
 
 
 EUDTurbo(P1)
+init_Setting()
 EndCtrig()
 ErrorCheck()
 --↑ Tep에 그대로 붙여넣기 -----------------------------------------------------------------
