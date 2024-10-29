@@ -1249,6 +1249,9 @@ function Lib322()
 		end
 		Trigger {
 			players = {PlayerID},
+			conditions = {
+				Label(0);
+			},
 			actions = {
 				Actions,
 			},
