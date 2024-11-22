@@ -91,14 +91,16 @@ function Install_plotshape()
     Wavebreak = CreateCcode()
     TempPos = CreateVar(FP)
 
-    FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM = CreateCcodes(4)
+    P8minimap,BattleGen = CreateCcodes(2)
+    FBOSS_Initvar,Screen_var,FBOSS_Tmpvar, FBOSS_BGM, Start_var1 = CreateCcodes(5)
 
+    TmpNextptr,FnBossPtr,FnBossHP,FnBossHP2 = CreateVars(4, FP)
 
     --------- Plot shape
 
     HeroShape1 = {4,{32,32},{-32,32},{-32,-32},{32,-32}}
     HeroShape2 = {1, {0,0}}
-    CellScattered = {10, {128,128}, {114,-62},{65,168}, {-32,118},{26,158},{-81,148},{-135,149}, {-256,-256},{-64,-68},{32,-32}}
+    CellScattered = {10, {128,128}, {114,-62},{65,168}, {-168,118},{100,158},{-81,148},{-135,149}, {-256,-256},{-64,-68},{32,-128}}
     -- CSPlot(HeroShape1,P1,54,"Location 1",nil,1,32,P1)
     -- CSPlot(HeroShape2,P1,54,"Location 1",nil,1,32,P1)
     WAVE1 = CSMakePolygon(4,50,0,35,5)
@@ -157,8 +159,11 @@ function Install_plotshape()
     Triangle3 = CSMakePolygonX(3, 64, 0, 61, 0)
     Triangle4 = CSMakePolygonX(3, 32, 0, CS_Level("PolygonX", 3, 3), 0)
     HiveEtf1 = CSMakeSpiral(6, 16, 1/2, 40, 0, 130, 0)
+    MemEft = CSMakeSpiral(8, 16, 1/2, 40, 0, 260, 0)
 
-    
+    HiveLv2Shape1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
+    HiveLv2Shape2 = CS_InvertXY(HiveLv2Shape1,nil,0)
+    Finale_mem = CSMakeCircle(6,64,0,PlotSizeCalc(6, 10),1)
 
     -- CAPlot(CS_SortR(HiveEtf1,1),P6,33,"Hive3",nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,"Hive3")})
 
@@ -186,8 +191,9 @@ function Install_plotshape()
     EllipseArr = {EllipseN,CS_Rotate(EllipseN,45),CS_Rotate(EllipseN,90),CS_Rotate(EllipseN,135),CS_Rotate(EllipseN,180),CS_Rotate(EllipseN,225),CS_Rotate(EllipseN,270),CS_Rotate(EllipseN,315)}
     SH_Flower = CS_OverlapX(EllipseArr[1],EllipseArr[2],EllipseArr[3],EllipseArr[4],EllipseArr[5],EllipseArr[6],EllipseArr[7],EllipseArr[8])
     
-    EllipseB = CS_Distortion(E_Base, {5,0}, {5,0}, nil, nil)
-    EliipseN = CS_RemoveStack(CS_MoveXY(EllipseB, 1600, 0), 20)
+    CircleA = CSMakeCircle(6,60,0,91,61)
+    EllipseB = CS_Distortion(CircleA,{5,0},{5,0},nil,nil)
+    EllipseN = CS_RemoveStack(CS_MoveXY(EllipseB,1600,0),32)
     Ellipse1 = CS_Rotate(EllipseN,30)
     Ellipse2 = CS_Rotate(EllipseN,60)
     Ellipse3 = CS_Rotate(EllipseN,90)
@@ -206,12 +212,72 @@ function Install_plotshape()
     Cross1 = CSMakeLineX(2,32,90, 46,0)
     CX2 = CSMakeCircleX(6,80,30,30,0)
     StargateEft = CS_RemoveStack(CS_OverlapX(Shape3, Cross, Cross1,SShape2), 16)
-
+    function CSMakeTornado(Point,Radius,Angle,Numner,Outside,StartNumber)
+		local Shape = {0}
+		if StartNumber == nil then StartNumber = 1 end
+		for i = StartNumber, Numner do
+			CS_OverlapShape(Shape,CSMakePolygon(Point,i*Radius,i*Angle,Point+1,0))
+		end
+		if Outside~=nil then
+			return CS_Rotate((CS_OverlapShape(Shape,CSMakePolygon(Point,Radius,Numner*Angle,PlotSizeCalc(Point,Numner),PlotSizeCalc(Point,Numner-1)))),-Numner*Angle)
+		else
+			return Shape
+		end
+	end
+	function CS_OverlapShape(Shape,...)
+		local RetShape = Shape
+	
+		local arg = table.pack(...)
+		for k = 1, arg.n do
+			RetShape[1] = RetShape[1] + arg[k][1]
+			for i = 1, arg[k][1] do
+				table.insert(RetShape,{arg[k][i+1][1],arg[k][i+1][2]})
+			end
+		end
+		return RetShape	
+	end
+	function CSMakeFillPathXY(Range,Radius)
+		local a = CSMakePath({-Range,-Range},{Range,-Range},{Range,Range},{-Range,Range})
+		return CS_FillPathXY(a,0,Radius,Radius)
+	end
     function HyperCycloid1(T) return {2.1*math.cos(T) - math.cos(2.1*T), 2.1*math.sin(T) - math.sin(2.1*T)} end 
 	Hp0 = CSMakeGraphT({192,192},"HyperCycloid1",0,0,10,10,200)
 	Generator_shape2 = CS_RatioXY(CS_RemoveStack(Hp0,10),0.5,0.5)
     Generator_shape = CSMakePolygon(6,80,0,127,1)
     Generator_shapeA = CSMakePolygon(6,0,0,127,1)
+
+    FBossMainplot = CS_Rotate3D(CSMakePolygon(6,80,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
+    FBossMainplotA = CS_Rotate3D(CSMakePolygon(6,1,0,CS_Level('Polygon', 6, 7),1),90,nil,15)
+
+    Mem_shape1 = CS_CompassA({0,0}, {2048,0}, {0,2048}, 0, 30)
+    Mem_shape2 = CS_MirrorX(Mem_shape1,0,0,0)
+    Mem_shape3 = CS_MirrorY(CS_SymmetryY(Mem_shape1, 1, 2048, 4096),0,1,0)
+    Mem_shape4 = CS_MirrorY(CS_SymmetryY(Mem_shape2, 1, 2048, 4096),0,1,0)
+
+    Mem_CAplot1 = CSMakeTornado(4, 32, 75, 6)
+    Mem_CAplot2 = CS_Rotate(Mem_CAplot1, 10)
+    Mem_CAplot3 = CS_Rotate(Mem_CAplot1, 20)
+    Mem_CAplot4 = CS_Rotate(Mem_CAplot1, 30)
+    Mem_CAplot5 = CS_Rotate(Mem_CAplot1, 40)
+    Mem_CAplot6 = CS_Rotate(Mem_CAplot1, 50)
+    Mem_CAplot7 = CS_Rotate(Mem_CAplot1, 60)
+    Mem_CAplot8 = CS_Rotate(Mem_CAplot1, 70)
+    Circulation1 = CSMakeCircleX(6,115,30,54,24)
+    Circulation2 = CS_Rotate(Circulation1,90)
+    Circulation3 = CS_Rotate(Circulation1,180)
+    Circulation4 = CS_Rotate(Circulation1,270)
+    Mem_Flnale1 = CS_SortA(CSMakePolygon(4,64,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
+    Mem_Flnale2 = CS_SortA(CSMakePolygon(5,64,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)
+    Mem_Flnale3 = CS_SortA(CSMakePolygon(6,64,45,PlotSizeCalc(6,19),PlotSizeCalc(6,18)),0)
+    Mem_Flnale4 = CS_SortA(CSMakeStar(5,136,64,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
+
+    Mem_Flnale1A = CS_SortA(CSMakePolygon(4,1,45,PlotSizeCalc(4,19),PlotSizeCalc(4,18)),0)
+    Mem_Flnale2A = CS_SortA(CSMakePolygon(5,1,45,PlotSizeCalc(5,19),PlotSizeCalc(5,18)),0)
+    Mem_Flnale3A = CS_SortA(CSMakePolygon(6,1,45,PlotSizeCalc(6,19),PlotSizeCalc(6,18)),0)
+    Mem_Flnale4A = CS_SortA(CSMakeStar(5,136,1,36,CS_Level("Star", 5, 20),CS_Level("Star", 5, 19)),0)
+    
+    Middle_Mem_Eft = CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2)
+    Final_rhegb_Eft = CS_RatioXY(CS_Rotate3D(sixline,45,60,80),2,2)
     -------- Plot Timeline
 
     CenterCallGen1 = {
@@ -244,6 +310,17 @@ function Install_plotshape()
     HiveEftTime = {2.22, 3.18, 4.15, 5.07, 6, 7, 7.9 ,8.8 ,9.7,10.6, 11.5, 12.4, 13.3, 14.2, 15.1}
     HiveGenTime2 = {16.8, 18.7, 20.5, 22.4, 24.3, 26.1, 28, 29.9}
 
+    HiveLv2GenTime = {
+        6.8, 7.3, 7.8, 
+        10.7, 11.1, 11.6, 
+        14.5, 14.99, 15.46,
+        18.8, -- overlayed
+        22.1, 22.6,23.1,
+        25.9, 26.4, 26.8,
+        29.7, 30.2, 30.7,
+        33.5, 34, 35 -- finished
+    }
+
     Starport_gen = {4.1, 6, 8, 12, 14, 16, 19.8, 21.8, 23.8, 27.7, 29.7, 31.7}
 
     Starport_lv2_gen = {
@@ -264,7 +341,7 @@ function Install_plotshape()
         32.9, 36.7, 40.5, -- after effects
         48.1, 55.8 -- after 2nd effects
         }
-        StargateEftTime = {
+    StargateEftTime = {
         32, 32.4, -- reloading effect
         47.2, 47.6 -- 2nd effects
         }

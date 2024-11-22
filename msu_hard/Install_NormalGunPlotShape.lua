@@ -310,7 +310,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
 
 
     function HiveGunPlot2lv(Hivename, DeathVar)
-        CIf(Force2, {Deaths(P10, AtMost, (HiveGenTime[#HiveGenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
+        CIf(Force2, {Deaths(P10, AtMost, (HiveLv2GenTime[#HiveLv2GenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
         Trigger {
             players = {P7},
             conditions = {
@@ -321,52 +321,114 @@ function HatcheryGunplot2( Hatname, Deathvar)
                 PreserveTrigger()
             },
         }
-        Trigger2(P6, {Deaths(P10, AtLeast, 1, 10)})
-        CAPlot(CS_SortR(HiveEtf1,1),P6,84,Hivename,nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,Hivename) })
-
+        for i = 1 ,15 do
+            Line2 = CSMakeLineX(2,64,101+11*i,21,1)
+            CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, (4 + i) * SDspeed, DeathVar )},nil,0,EftProperties)
+        end
         for i = 1 ,16 do
-        Line1 = CSMakeLineX(2,64,90+11*i,17,1)
-        CSPlotOrder(Line1,P6,56,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, HiveGenTime[i] * SDspeed, DeathVar )} )
+            Line1 = CSMakeLineX(2,64,90+11*i,21,1)
+            CSPlotOrder(Line1,P6,44,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, AtLeast, (3.5 + i) * SDspeed, DeathVar )} )
         end
 
         for i = 1 ,15 do
-        Line2 = CSMakeLineX(2,64,101+11*i,17,1)
-        CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, HiveEftTime[i] * SDspeed, DeathVar )},nil,0,EftProperties)
+            Line2 = CSMakeLineX(2,64,90-(11*i),21,1)
+            CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, (19.25 + i) * SDspeed, DeathVar )},nil,0,EftProperties)
+        end
+        for i = 1 ,16 do
+            Line1 = CSMakeLineX(2,64,101-(11*i),21,1)
+            CSPlotOrder(Line1,P6,44,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, (18.75 + i) * SDspeed, DeathVar )} )
         end
 
-        CSPlotOrder(Triangle2, P6, 38, Hivename, nil, 1, 20, Triangle2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[1] * SDspeed, DeathVar )})
-        CSPlotOrder(Triangle1, P6, 51, Hivename, nil, 1, 20, Triangle1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[1] * SDspeed, DeathVar )})
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[1] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 66, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[1] * SDspeed, DeathVar)})
 
-        CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU1, P6, 48, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-        CSPlotOrderWithProperties(Trdline, P6, 69, Hivename, nil, 1, 20, Trdline, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )},nil,0,HiveProperties)
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[2] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 16, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[2] * SDspeed, DeathVar)})
 
-        CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU1, P6, 51, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
+        CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[3] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU2, P6, 95, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[3] * SDspeed, DeathVar)})
 
-        CSPlotOrderWithProperties(Trdline2, P6, 62, Hivename, nil, 1, 20, Trdline2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )},nil,0,HiveProperties)
-        CSPlotOrderWithProperties(Trdline, P6, 62, Hivename, nil, 1, 20, Trdline2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )},nil,0,HiveProperties)
 
-        CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
-        CSPlotOrder(LGU1, P6, 51, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
+        
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[4] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 66, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[4] * SDspeed, DeathVar)})
 
-        CSPlotOrder(Triangle2, P6, 38, Hivename, nil, 1, 20, Triangle2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[16] * SDspeed, DeathVar )})
-        CSPlotOrder(Triangle1, P6, 51, Hivename, nil, 1, 20, Triangle1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[16] * SDspeed, DeathVar )})
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[5] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 16, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[5] * SDspeed, DeathVar)})
 
-        for e = 2,8 do
-        CSPlotOrder(CS_Rotate(LGU1,10*(e-1)), P7, 84, Hivename, nil, 1, 20, CS_Rotate(LGU1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 84, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P7, 84, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
+        CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[6] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU2, P6, 95, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[6] * SDspeed, DeathVar)})
 
-        CSPlotOrder(CS_Rotate(LGU1,10*(e-1)), P6, 51, Hivename, nil, 1, 20, CS_Rotate(LGU1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 30, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P6, 16, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        CSPlotOrder(CS_Rotate(spiral1,10*(e-1)), P6, 8, Hivename, nil, 1, 20, CS_Rotate(spiral1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-        end
-        Trigger2(P6, {Deaths(P10, AtLeast, (HiveGenTime2[8] * SDspeed) + 5, DeathVar )})
+
+        
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[7] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 66, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[7] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[8] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 16, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[8] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[9] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU2, P6, 95, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[9] * SDspeed, DeathVar)})
+
+
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 66, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 16, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU2, P6, 3, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+
+        ---- 2nd plot
+
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[11] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 52, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[11] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[12] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 40, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[12] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[13] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU5, P6, 46, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[13] * SDspeed, DeathVar)})
+
+
+        
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[14] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 52, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[14] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[15] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 40, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[15] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[16] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU5, P6, 46, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[16] * SDspeed, DeathVar)})
+
+
+        
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[17] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 52, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[17] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[18] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 40, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[18] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[19] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU5, P6, 46, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[19] * SDspeed, DeathVar)})
+
+
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[20] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 52, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[20] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[21] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 40, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[21] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape1, P6, 52, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+
+        CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        CSPlotOrder(HiveLv2Shape2, P6, 30, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+
+        CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        CSPlotOrder(LGU5, P6, 76, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+
         CIfEnd()
     end
     ------ End of hive shape plot function 
@@ -626,7 +688,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
         function HatcheryGunplot1( Hatname, Deathvar)
             CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
             Trigger{
-                players = {Force2},
+                players = {P6},
                 conditions = {
                     CommandLeastAt(131, Hatname);
                 },
@@ -655,13 +717,46 @@ function HatcheryGunplot2( Hatname, Deathvar)
             CSPlotOrder(square2, P6, 51, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
             CIfEnd()    
             end
+
+            function HatcheryGunplot11( Hatname, Deathvar)
+                CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
+                Trigger{
+                    players = {P7},
+                    conditions = {
+                        CommandLeastAt(131, Hatname);
+                    },
+                    actions = {
+                        SetDeaths(P10,Add,1,Deathvar);
+                        PreserveTrigger();
+                    }
+                }
+                -- Hat1 hatchery phase 1
+                CSPlotOrder(square1, P6, 54, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, FP,{Deaths(P10, AtLeast, 50,Deathvar) })
+                CSPlotOrder(square1, P7, 53, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 85, Deathvar) })
+                CSPlotOrder(square1, P6, 40, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 115, Deathvar) })
+                CSPlotOrder(spiral1, P6, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar) })
+                CSPlotOrder(square1, P7, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar) })
+                
+                CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar) })
+                CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar) })
+                CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar) })
+                CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar) })
+                
+                -- -- Hat1 hatchery phase 2
+                CSPlotOrder(square2, P7, 54, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar) })
+                CSPlotOrder(square2, P6, 53, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar) })
+                CSPlotOrder(spiral1, P7, 56, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
+                CSPlotOrder(spiral2, P6, 55, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+                CSPlotOrder(square2, P6, 40, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+                CIfEnd()    
+                end
         ------ Hat 1 tier
         
         ------ Hat 2 tier
         function HatcheryGunplot2( Hatname, Deathvar)
             CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
             Trigger{
-                players = {Force2},
+                players = {P6},
                 conditions = {
                     CommandLeastAt(131, Hatname);
                 },
@@ -690,6 +785,39 @@ function HatcheryGunplot2( Hatname, Deathvar)
             CSPlotOrder(square2, P6, 76, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
             CIfEnd()
             end
+
+            function HatcheryGunplot22( Hatname, Deathvar)
+                CIf(Force2, {Deaths(P10, AtMost, 724, Deathvar), CommandLeastAt(131, Hatname)})
+                Trigger{
+                    players = {P7},
+                    conditions = {
+                        CommandLeastAt(131, Hatname);
+                    },
+                    actions = {
+                        SetDeaths(P10,Add,1,Deathvar);
+                        PreserveTrigger();
+                    }
+                }
+                -- Hat1 hatchery phase 1
+                CSPlotOrder(square1, P6, 65, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 50,Deathvar )})
+                CSPlotOrder(square1, P7, 66, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 85, Deathvar )})
+                CSPlotOrder(square1, P6, 65, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 115, Deathvar )})
+                CSPlotOrder(spiral1, P6, 16, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 180, Deathvar )})
+                CSPlotOrder(square1, P6, 39, Hatname, nil, 1, 32, square1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 145, Deathvar )})
+                
+                CSPlotOrder(spiral1, P7, 88, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 275, Deathvar )})
+                CSPlotOrder(spiral2, P6, 89, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 345, Deathvar )})
+                CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 415, Deathvar )})
+                CSPlotOrder(spiral2, P6, 44, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 485, Deathvar )})
+                
+                -- -- Hat1 hatchery phase 2
+                CSPlotOrder(square2, P7, 51, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 578, Deathvar )})
+                CSPlotOrder(square2, P6, 52, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 613, Deathvar )})
+                CSPlotOrder(spiral1, P7, 43, Hatname, nil, 1, 32, spiral1, 0, Attack, "HealZone", nil, 0, nil, P7,{Deaths(P10, AtLeast, 640, Deathvar )})
+                CSPlotOrder(spiral2, P6, 56, Hatname, nil, 1, 32, spiral2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+                CSPlotOrder(square2, P6, 65, Hatname, nil, 1, 32, square2, 0, Attack, "HealZone", nil, 0, nil, P6,{Deaths(P10, AtLeast, 691, Deathvar )})
+                CIfEnd()
+                end
             ------ End of hatchery shape plot function 
     
             --- Lair Plot
@@ -854,7 +982,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
     
     
             function HiveGunPlot2lv(Hivename, DeathVar)
-                CIf(Force2, {Deaths(P10, AtMost, (HiveGenTime[#HiveGenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
+                CIf(Force2, {Deaths(P10, AtMost, (HiveLv2GenTime[#HiveLv2GenTime] * SDspeed) + SDspeed, DeathVar), CommandLeastAt(133, Hivename)})
                 Trigger {
                     players = {P7},
                     conditions = {
@@ -865,52 +993,114 @@ function HatcheryGunplot2( Hatname, Deathvar)
                         PreserveTrigger()
                     },
                 }
-                Trigger2(P6, {Deaths(P10, AtLeast, 1, 10)})
-                CAPlot(CS_SortR(HiveEtf1,1),P6,84,Hivename,nil,1,32,{1,0,0,0,HiveEtf1[1]/36,0},nil,P6,{CommandLeastAt(133,Hivename) })
-    
-                for i = 1 ,16 do
-                Line1 = CSMakeLineX(2,64,90+11*i,17,1)
-                CSPlotOrder(Line1,P6,56,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, HiveGenTime[i] * SDspeed, DeathVar )} )
-                end
-    
                 for i = 1 ,15 do
-                Line2 = CSMakeLineX(2,64,101+11*i,17,1)
-                CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, HiveEftTime[i] * SDspeed, DeathVar )},nil,0,EftProperties)
+                    Line2 = CSMakeLineX(2,64,101+11*i,21,1)
+                    CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, (4 + i) * SDspeed, DeathVar )},nil,0,EftProperties)
                 end
-    
-                CSPlotOrder(Triangle2, P6, 38, Hivename, nil, 1, 20, Triangle2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[1] * SDspeed, DeathVar )})
-                CSPlotOrder(Triangle1, P6, 51, Hivename, nil, 1, 20, Triangle1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[1] * SDspeed, DeathVar )})
-    
-                CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU1, P6, 48, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )})
-                CSPlotOrderWithProperties(Trdline, P6, 69, Hivename, nil, 1, 20, Trdline, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[5] * SDspeed, DeathVar )},nil,0,HiveProperties)
-    
-                CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU1, P6, 51, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )})
-    
-                CSPlotOrderWithProperties(Trdline2, P6, 62, Hivename, nil, 1, 20, Trdline2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[9] * SDspeed, DeathVar )},nil,0,HiveProperties)
-                CSPlotOrderWithProperties(Trdline, P6, 62, Hivename, nil, 1, 20, Trdline2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )},nil,0,HiveProperties)
-    
-                CSPlotOrder(LGU3, P6, 16, Hivename, nil, 1, 20, LGU3, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU2, P6, 38, Hivename, nil, 1, 20, LGU2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
-                CSPlotOrder(LGU1, P6, 51, Hivename, nil, 1, 20, LGU1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[13] * SDspeed, DeathVar )})
-    
-                CSPlotOrder(Triangle2, P6, 38, Hivename, nil, 1, 20, Triangle2, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[16] * SDspeed, DeathVar )})
-                CSPlotOrder(Triangle1, P6, 51, Hivename, nil, 1, 20, Triangle1, 0, Attack, "HealZone", nil,0 , nil, P6, {Deaths(P10, AtLeast, HiveGenTime[16] * SDspeed, DeathVar )})
-    
-                for e = 2,8 do
-                CSPlotOrder(CS_Rotate(LGU1,10*(e-1)), P7, 84, Hivename, nil, 1, 20, CS_Rotate(LGU1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-                CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 84, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-                CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P7, 84, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-    
-                CSPlotOrder(CS_Rotate(LGU1,10*(e-1)), P6, 51, Hivename, nil, 1, 20, CS_Rotate(LGU1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-                CSPlotOrder(CS_Rotate(LGU2,10*(e-1)), P6, 17, Hivename, nil, 1, 20, CS_Rotate(LGU2,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P6, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-                CSPlotOrder(CS_Rotate(LGU3,10*(e-1)), P6, 95, Hivename, nil, 1, 20, CS_Rotate(LGU3,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
-                CSPlotOrder(CS_Rotate(spiral1,10*(e-1)), P6, 88, Hivename, nil, 1, 20, CS_Rotate(spiral1,10*(e-1)), 0, Attack , "HealZone", nil, 0, nil, P7, {Deaths(P10, AtLeast, HiveGenTime2[e] * SDspeed,DeathVar )})
+                for i = 1 ,16 do
+                    Line1 = CSMakeLineX(2,64,90+11*i,21,1)
+                    CSPlotOrder(Line1,P6,44,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, AtLeast, (3.5 + i) * SDspeed, DeathVar )} )
                 end
-                Trigger2(P6, {Deaths(P10, AtLeast, (HiveGenTime2[8] * SDspeed) + 5, DeathVar )})
+        
+                for i = 1 ,15 do
+                    Line2 = CSMakeLineX(2,64,90-(11*i),21,1)
+                    CSPlotWithProperties(Line2, P6, 84, Hivename, nil, 1, 32, P6, {Deaths(P10, AtLeast, (19.25 + i) * SDspeed, DeathVar )},nil,0,EftProperties)
+                end
+                for i = 1 ,16 do
+                    Line1 = CSMakeLineX(2,64,101-(11*i),21,1)
+                    CSPlotOrder(Line1,P6,44,Hivename,nil,1,32,Line1,0,Attack, "HealZone",nil,0,nil,P6,{Deaths(P10, Exactly, (18.75 + i) * SDspeed, DeathVar )} )
+                end
+        
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[1] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 17, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[1] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[2] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 78, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[2] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[3] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU2, P6, 104, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[3] * SDspeed, DeathVar)})
+        
+        
+                
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[4] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 17, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[4] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[5] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 78, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[5] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[6] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU2, P6, 104, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[6] * SDspeed, DeathVar)})
+        
+        
+                
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[7] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 17, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[7] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[8] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 78, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[8] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[9] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU2, P6, 104, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[9] * SDspeed, DeathVar)})
+        
+        
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 3, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 75, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU2, P6, 72, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU2, P6, 104, Hivename, nil, 1, 32, LGU2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[10] * SDspeed, DeathVar)})
+        
+                ---- 2nd plot
+        
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[11] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 25, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[11] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[12] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 76, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[12] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[13] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU5, P6, 95, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[13] * SDspeed, DeathVar)})
+        
+        
+                
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[14] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 25, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[14] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[15] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 76, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[15] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[16] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU5, P6, 95, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[16] * SDspeed, DeathVar)})
+        
+        
+                
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[17] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 25, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[17] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[18] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 76, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[18] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[19] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU5, P6, 95, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[19] * SDspeed, DeathVar)})
+        
+        
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[20] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 25, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[20] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[21] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 76, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[21] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape1, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape1, P6, 75, Hivename, nil, 1, 32, HiveLv2Shape1, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(HiveLv2Shape2, P6, 72, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+                CSPlotOrder(HiveLv2Shape2, P6, 78, Hivename, nil, 1, 32, HiveLv2Shape2, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        
+                CSPlotOrder(LGU5, P6, 72, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+                CSPlotOrder(LGU5, P6, 3, Hivename, nil, 1, 32, LGU5, nil, Attack, "HealZone", nil, 32, nil, FP, {Deaths(P10, Atleast, HiveLv2GenTime[22] * SDspeed, DeathVar)})
+        
                 CIfEnd()
             end
             ------ End of hive shape plot function 
@@ -1110,26 +1300,43 @@ function HatcheryGunplot2( Hatname, Deathvar)
             TriggerX(P6, {Deaths(P10, Exactly, StargateGenTime[27] * SDspeed + 100, Deathvar )},{Order("Men", P5, stargatename, Attack, "HealZone")})
             CIfEnd()
             end
-            for i = 1, 6 do -- 1 ~ 6
+
+            for i = 1, 6, 2 do -- 1 ~ 6 P6 1 3 5 
                 HatcheryGunplot1("hat"..i,i);
             end
-            for i = 7 , 10 do -- 7 ~ 10
+        
+            for i = 2 ,6 , 2 do -- P7 2 4 6
+                HatcheryGunplot11("hat"..i,i);
+            end
+            for i = 7 , 10, 2 do -- 7 ~ 10 P6 7 9
                 HatcheryGunplot2("hat"..i,i);
+            end
+        
+            for i = 8 , 10 , 2 do -- P7 8 10
+                HatcheryGunplot22("hat"..i,i);
             end
             for i = 1 , 8 do -- 11 ~ 22
                 LairGunplot("lair"..i, i + 10);
             end
-
+        
             for i = 9, 12 do
                 LairGunplotLv2("lair"..i,LairDeathArray[i-8] );
             end
-
-            for i = 1 , 4 do -- 23 ~ 26
-                HiveGunPlot1lv("hive"..i, i + 22);
-            end
-            for i = 5, 10 do -- 27 ~ 32
-                HiveGunPlot2lv("hive"..i, i + 22);
-            end
+        
+        
+            
+            HiveGunPlot1lv("hive1", 23);
+            HiveGunPlot1lv("hive2", 24);
+            HiveGunPlot1lv("hive3", 25);
+            HiveGunPlot1lv("hive4", 26);
+            HiveGunPlot1lv("hive6", 27);
+            HiveGunPlot1lv("hive9", 28);
+        
+            HiveGunPlot2lv("hive5", 29);
+            HiveGunPlot2lv("hive7", 30);
+            HiveGunPlot2lv("hive8", 31);
+            HiveGunPlot2lv("hive10", 32);
+        
             for i = 1 , 5 do -- 33 ~ 42
                 Starport_GunPlot(StarportSpotArr2[i], i + 32);
             end
@@ -1139,6 +1346,7 @@ function HatcheryGunplot2( Hatname, Deathvar)
             for i = 1 , 10 do -- 43 ~ 52
                 StargateGunplot("starg"..i,  i + 42);
             end
+            
     
             CSPlot(Triangle4, P6, 64, "fcky1", nil, 1, 32, P6, {CommandLeastAt(146, "fcky1")}, {RunAIScriptAt(JYD, "fcky1")})
             CSPlot(Triangle4, P6, 70, "fcky2", nil, 1, 32, P6, {CommandLeastAt(150, "fcky2")}, {RunAIScriptAt(JYD, "fcky2")})

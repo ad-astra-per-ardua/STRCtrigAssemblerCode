@@ -10,7 +10,7 @@ SnowFlake =
 -- __MapDirSetting(__encode_cp949(Curdir.."\\map")) -- 맵파일 경로(\를 \\로 바꿔야함)
 -- __SubDirSetting(__encode_cp949(Curdir)) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
 
--- --- Desktop
+-- - Desktop
 -- Curdir = "C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12\\Mapping\\msu_hard"
 -- __MapDirSetting(__encode_cp949(Curdir.."\\map")) -- 맵파일 경로(\를 \\로 바꿔야함)
 -- __SubDirSetting(__encode_cp949(Curdir)) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
@@ -21,8 +21,8 @@ SnowFlake =
 FP = P8
 SetForces({P1,P2,P3,P4},{P5,P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
--- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
-StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 
 Include_DataTransfer()
@@ -83,7 +83,9 @@ CIf(AllPlayers,{Switch("Switch 248", Set)})
 
 Install_initial_system_setting()
 
-Install_APMcounter()
+-- Enable_TestMode(true)
+
+-- Install_APMcounter()
 Install_ExchangeTrigger()
 Install_WaveTrigger()
 Install_HealZoneTrigger()
@@ -94,14 +96,13 @@ Install_HerounitTrigger()
 Install_CCMU()
 Install_BGMPhase()
 EVF_initialsetting()
--- Install_normalGunplot()
--- Install_SpecialGunplot()
--- Install_NormalGunPlotShape()
--- Install_SpecialGunPlotShape()
--- MiddleBossTrigger()
-
+Install_normalGunplot()
+Install_SpecialGunplot()
+Install_NormalGunPlotShape()
+Install_SpecialGunPlotShape()
+MiddleBossTrigger()
 FinalBossTrigger()
-Enable_TestMode(true)
+
 
 CIfEnd()
 CSPlotToCAPlot()

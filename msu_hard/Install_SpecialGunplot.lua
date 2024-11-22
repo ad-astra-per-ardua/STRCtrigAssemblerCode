@@ -10,7 +10,7 @@ function Install_SpecialGunplot()
     "좌측 하단, \x08평행우주의 \x03동력원, \x11｡˙+ﾟ\x08Parallel's \x03Generator \x11 ﾟ.+｡",
     "우측 하단, \x08평행우주의 \x03동력원, \x11｡˙+ﾟ\x08Parallel's \x03Generator \x11 ﾟ.+｡"
 }
-
+    CIfX(Force2, {CDeaths(FP, AtLeast, 0, Evfmode)})
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
     ----------- Normal plot
@@ -24,10 +24,10 @@ function Install_SpecialGunplot()
         CreateUnit(1, 175,"middle2", P7);
         CreateUnit(1, 127,"middle3", P7);
         CreateUnit(1, 148,"middle4", P7);
-        -- SetInvincibility(Enable, 127, P7, "Anywhere");
-        -- SetInvincibility(Enable, 148, P7, "Anywhere");
-        -- SetInvincibility(Enable, 174, P7, "Anywhere");
-        -- SetInvincibility(Enable, 175, P7, "Anywhere");
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
 })
 
 ------ Start of Disable invincibility condition trigger -------
@@ -79,10 +79,6 @@ CElseX()
 
 ------------ Hard plot 
 
-CTrigger({FP}, {_TP(_TOR(Deaths(P7, AtLeast, 1, 130),Deaths(P7, AtLeast, 1, 106)))}, {
-    SetDeaths(P8, SetTo, 1, 131),
-    SetDeaths(P8, SetTo, 1, 132);
-}, 1)
 
 TriggerX(FP, Always(), {
         CreateUnit(1, 151, "celebrate1", P7);
@@ -97,11 +93,11 @@ TriggerX(FP, Always(), {
         CreateUnit(1, 200, "generator2", P7);
         CreateUnit(1, 200, "generator3", P7);
         CreateUnit(1, 200, "generator4", P7);
-        -- SetInvincibility(Enable, 127, P7, "Anywhere");
-        -- SetInvincibility(Enable, 148, P7, "Anywhere");
-        -- SetInvincibility(Enable, 174, P7, "Anywhere");
-        -- SetInvincibility(Enable, 175, P7, "Anywhere");
-        -- SetInvincibility(Enable, 200, P7, "Anywhere");
+        SetInvincibility(Enable, 127, P7, "Anywhere");
+        SetInvincibility(Enable, 148, P7, "Anywhere");
+        SetInvincibility(Enable, 174, P7, "Anywhere");
+        SetInvincibility(Enable, 175, P7, "Anywhere");
+        SetInvincibility(Enable, 200, P7, "Anywhere");
 })
 
 
@@ -147,6 +143,6 @@ for i = 1 , 4 do
 end
     
 
-
+CIfXEnd()
 CIfXEnd()
 end

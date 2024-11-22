@@ -1,17 +1,23 @@
 function Install_SpecialGunPlotShape()
     
-    Trigger2X(FP, {Deaths(P11, Exactly, 1, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Ally)}, Force2, FP),CopyCpAction({
+    Trigger2X(FP, {Deaths(P11, Exactly, 1, 100),Deaths(P7, Exactly, 0, 168)}, {
+        CopyCpAction({SetAllianceStatus(Force1, Ally)}, Force2, FP),
+        CopyCpAction({
         RunAIScript('Turn ON Shared Vision for Player 5'),
         RunAIScript('Turn ON Shared Vision for Player 6'),
         RunAIScript('Turn OFF Shared Vision for Player 7'),
-        RunAIScript('Turn ON Shared Vision for Player 8')}, Force1, FP)})
+        RunAIScript('Turn ON Shared Vision for Player 8')}
+        , Force1, FP)})
         
     
-    Trigger2X(FP, {Deaths(P11, Exactly, 0, 100)}, {CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP),CopyCpAction({
+    Trigger2X(FP, {Deaths(P11, Exactly, 0, 100),Deaths(P7, Exactly, 0, 168)}, {
+        CopyCpAction({SetAllianceStatus(Force1, Enemy)}, {P5,P6,P7}, FP),
+        CopyCpAction({
         RunAIScript('Turn OFF Shared Vision for Player 5'),
         RunAIScript('Turn OFF Shared Vision for Player 6'),
         RunAIScript('Turn OFF Shared Vision for Player 7'),
-        RunAIScript('Turn ON Shared Vision for Player 8')}, Force1, FP)},preserved)
+        RunAIScript('Turn ON Shared Vision for Player 8')}
+        , Force1, FP)},preserved)
         
     CIfX(Force2, {CDeaths(FP, Exactly, 1, Difficulty)})
 
@@ -125,15 +131,15 @@ function Install_SpecialGunPlotShape()
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 89, P5, "hive3", P6)})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 58, P6, "starg3", P6)})
 
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 89, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 58, Force2, "Anywhere")})
-
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[4] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg8")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive4")})
+
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 89, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 58, Force2, "Anywhere")})
 
     TriggerX(P5, {Deaths(P10, AtLeast, Inf1timeline[6] * SDspeed, 62)}, {
         Order(64, P6, "Anywhere", Attack, "HealZone"),
@@ -146,7 +152,7 @@ function Install_SpecialGunPlotShape()
     for i = 0, 3 do
         TriggerX(P8, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
     end
-    TriggerX(P6, Deaths(P10, AtLeast, 30 * SDspeed, 62), {
+    TriggerX(P6, Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62), {
         SetAllianceStatus(Force1, Enemy)
     })
     TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)
@@ -361,10 +367,10 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 64, P5, "hive3", P6)})
     TriggerX(FP, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 20, 62)}, {GiveUnits(All, 60, P6, "starg3", P6)})
 
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 102, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
-    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed - 5, 62)}, {SetInvincibility(Disable, 60, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 102, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 70, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 64, Force2, "Anywhere")})
+    TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[5] * SDspeed, 62)}, {SetInvincibility(Disable, 60, Force2, "Anywhere")})
 
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[2] * SDspeed, 62)}, {RunAIScriptAt(JYD, "hive3")})
     TriggerX(Force2, {Deaths(P10, AtLeast, Inf1timeline[3] * SDspeed, 62)}, {RunAIScriptAt(JYD, "starg3")})
@@ -383,7 +389,7 @@ InfcomTimeline = {2, 3, 4.1, 5.2, 6.3, 7.4, 8.5, 9.6, 10.7, 11.8, 12.9, 14.0, 15
     for i = 0, 3 do
         TriggerX(P8, {Deaths(P10, AtLeast, 32 * SDspeed, 62)}, {SetAllianceStatus(i, Ally)})
     end
-    TriggerX(P6, Deaths(P10, AtLeast, 30 * SDspeed, 62), {
+    TriggerX(P6, Deaths(P10, AtLeast, Inf1timeline[5]* SDspeed, 62), {
         SetAllianceStatus(Force1, Enemy)
     })
     TriggerX(FP, {Deaths(P10, AtLeast, 80 * SDspeed, 62)}, {SetDeaths(P11, SetTo, 0, 100)

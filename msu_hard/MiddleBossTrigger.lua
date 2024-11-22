@@ -182,7 +182,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     end
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[17] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[17] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2),nil,0), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[18] + 0.6) * SDspeed, 160)})
 
     for i = 1, 8 do
@@ -199,7 +199,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2)), P6, 72, M11, {495,351}, 1, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 1, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
     CSPlotOrder(Shape11_1, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
@@ -215,12 +215,12 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
     TriggerX(Force1, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
+        DisplayText(StrDesignX("기억의 세계선의 주인, \x02† \x07【 \x04光 \x07】 \x02†\x04을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
@@ -245,7 +245,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
                 TSetMemoryX(Vi(MBossHP1[2], 55), SetTo, 0xA00000, 0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP1,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,20)})
+        DoActionsX(FP,{SetNVar(MBossHP1_2,SetTo,30)})
     CIfEnd()
     CTrigger(FP,{
         TMemory(MBossHP1,AtMost,256*2000000);
@@ -374,7 +374,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed,161)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -427,7 +427,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
     CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
-    for i = 1, 12 do
+    for i = 1, 25 do
         local arrayLength = #M5GenG
         local genIndex = ((i - 1) % arrayLength) + 1
         CSPlotOrder2(PE, P6, M5GenG[genIndex], "middle4", nil, 1, 32, PEA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
@@ -453,7 +453,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,12)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,25)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -469,7 +469,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
     TriggerX(Force1, {Deaths(P6, Exactly, 1, 116)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -611,7 +611,7 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
                 TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
             })
         CMov(FP,MBossHP7,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,25)})
+        DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,35)})
     CIfEnd()
 
     CTrigger(FP,{
@@ -623,7 +623,7 @@ STL1 = {21,7,12,58,70,89,64,96,29,88,28}
     },{preserved})
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.9 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -734,9 +734,9 @@ CElseX()
     for i = 1, 8 do
         CSPlotOrder(CS_Rotate(TSFL1, 51.4*(i-1)), P6, MBoss11_2P[i], M11, {495,351}, 3, 32, CSMakeLine(1,0,0,10,1), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[i+8] * SDspeed, 160)})
     end
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[17] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2)), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[17] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 58, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[17] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2)), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[18] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,85,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[18] + 0.6) * SDspeed, 160)})
 
     for i = 1, 8 do
@@ -753,7 +753,7 @@ CElseX()
 
     CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[30] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 58, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[30] + 0.6) * SDspeed, 160)})
-    CSPlot(CS_RatioXY(CS_Rotate3D(sixline,45,0,45),2,2), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
+    CSPlot(CS_InvertXY(CS_RatioXY(CS_Rotate3D(sixline,45,45,45),2,2),nil,0), P6, 72, M11, {495,351}, 2, 32, P7, {Deaths(P11, AtLeast, M11tl[31] * SDspeed, 160)})
     CSPlotOrder(CS_Convert(CSMakePolygon(6,60,0,92,0),45), P6, 69, M11, {495,351}, 2, 32,CSMakePolygon(6,60,0,45,0),nil, Attack, "nuke3", nil, 32, nil, P7,{Deaths(P11, AtLeast, (M11tl[31] + 0.6) * SDspeed, 160)})
     CSPlotOrder(Generator_shape, P6, 23, M11, {495,351}, 1, 32, CSMakePolygon(6,0,0,92,7), nil, Attack, "nuke3", nil, 32, nil, P7, {Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
     -- TriggerX(Force2,{Deaths(P11, AtLeast, M11tl[32] * SDspeed, 160)})
@@ -771,12 +771,12 @@ CElseX()
     
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "nuke3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)})
     TriggerX(Force1, {Deaths(P11, AtLeast, M11tl[39] * SDspeed, 160), Deaths(P6, Exactly, 1, 22)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
-        DisplayText(StrDesignX("기억의 세계선의 주인, † \x07【 \x04光 \x07】 \x02†을 격파하였습니다 ! "), 4),
+        DisplayText(StrDesignX("기억의 세계선의 주인, \x02† \x07【 \x04光 \x07】 \x02†\x04을 격파하였습니다 ! "), 4),
         DisplayText(StrDesignX("+ \x1f322,322 Ore 획득 !"), 4),
         SetResources(CurrentPlayer, Add, 322322, Ore),
         SetDeaths(P6, SetTo, 1, 205)
@@ -931,7 +931,7 @@ CElseX()
 
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle2", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, (MB1TL[45]) * SDspeed , 161), Deaths(P6, AtLeast, 1, 68)})
     TriggerX(Force1, {Deaths(P6, AtLeast, 1, 68),Deaths(P11, AtLeast, MB1TL[45] * SDspeed,161)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -1019,7 +1019,7 @@ CElseX()
 
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle4", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P6, Exactly, 1, 116)})
     TriggerX(Force1, {Deaths(P6, Exactly, 1, 116)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -1142,7 +1142,7 @@ STL1 = {21,7,12,58,70,89,64,96,58,88,28}
         },preserved)
     end 
 
-    VerifingPatternS(VerifLoc[1], MB7TL[2])
+    VerifingPatternS(VerifLoc[4], MB7TL[2])
     VerifingPatternL(VerifLoc[3], MB7TL[4])
     VerifingPatternI(VerifLoc[1], MB7TL[6])
     VerifingPatternE(VerifLoc[4], MB7TL[8])
@@ -1188,7 +1188,7 @@ CIfOnce(FP,{CommandLeastAt(127, "middle3"), Deaths(P11, AtLeast, 10, 166)})
             TSetMemoryX(Vi(MBossPtr7[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
         })
     CMov(FP,MBossHP7,Nextptr,2) 
-    DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,50)})
+    DoActionsX(FP,{SetNVar(MBossHP7_2,SetTo,60)})
 CIfEnd()
 
 CTrigger(FP,{
@@ -1202,7 +1202,7 @@ CTrigger(FP,{
 
     CIfEnd()
 
-    CAPlot(CS_SortR(PE,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
+    CAPlot(CS_SortR(Finale_mem,0), P7, 72, "middle3", nil, 1, 32, {1,0,0,0,6,0}, nil, P7, {Deaths(P11, AtLeast, 131.3 * SDspeed, 166), Deaths(P6, Exactly, 1, 126)})
     TriggerX(Force1, {CommandLeastAt(127, "middle3"),Deaths(P11, AtLeast, 131.3 * SDspeed, 166),Deaths(P6, AtLeast, 1, 126)}, {
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
         PlayWAV("staredit\\wav\\BOSSClear.ogg"),
@@ -1219,16 +1219,16 @@ CTrigger(FP,{
 
     ------- Boss HP Overflow Trigger 4 Times & Status flag NoCollide + IsGathering ------- 
 
-    -- CIfOnce(FP,Always(),{Wait(10000)})
+    -- CIfOnce(FP,{},{})
     --     f_Read(FP,0x628438,nil,Nextptr) -- Save 0x628438(Next unit pointer) Offset, Convert into EPD and save into Variable
     --     CMov(FP,FBossPtr,Nextptr) -- Save FBossPtr from Nextptr's 
     --         CDoActions(FP,{
     --             CreateUnit(1,68,"HealZone",P7);
-    --             TSetMemory(Vi(Nextptr[2],2),SetTo,256*6500000); -- Next unit pointer offset's HP set
-    --             TSetMemoryX(Vi(Nextptr[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
+    --             TSetMemory(Vi(Nextptr[2],2),SetTo,256*200); -- Next unit pointer offset's HP set
+    --             -- TSetMemoryX(Vi(Nextptr[2],55),SetTo,0xA00000,0xA00000); -- Next unit pointer offset's status flag set
     --         })
     --     CMov(FP,FBossHP,Nextptr,2) 
-    --     DoActionsX(FP,{SetNVar(FBossHP2,SetTo,4)})
+    --     -- DoActionsX(FP,{SetNVar(FBossHP2,SetTo,1)})
     -- CIfEnd()
 
     -- CTrigger(FP,{
