@@ -23,10 +23,11 @@ Include_CtrigPlib(360,"Switch 254",1)
 Include_64BitLibrary("Switch 255")
 Namefunction()
 Lib322()
--- DisplayprintLib()
--- DP_Start_init(FP)
+DisplayprintLib()
+DP_Start_init(FP)
 Install_GetCLoc(FP,248,184)
 Install_BackupCP(FP)
+Install_function()
 ------------------
 Convert_Function()
 ------------------
@@ -60,13 +61,20 @@ DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 ---------- End of Set Up Initialization ------
 
+Basement_functions()
+Enable_TestMode()
+
 ----------- 분할 lua 선언 -------
 
+
+Define_Variable()
+-- DonateNbanTrigger()
 N_Gunplot()
 
 ----------- 분할 lua 선언 End ---------
 
 CSPlotToCAPlot()
+init_Setting()
 EndCtrig()
 ErrorCheck()
 EUDTurbo(FP)

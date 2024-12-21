@@ -11,7 +11,7 @@ function Lib322()
 	BGMArr = {}
 	VArrStackArr = {}
 	InitBGMP = 12
-	sindexAlloc = 0x700
+	sindexAlloc = 0x600
 	ASM_MT={}
 	ASM_MT_Func={}
 	ASM_MT_Func.__add=_Add
@@ -56,6 +56,9 @@ function Lib322()
 	---@return string
 	function StrDesignX(Str)
 		return "\x13\x07『 "..Str.." \x07』"
+	end
+	function StrDesign2X(Str)
+		return "\x12\x07『 "..Str.." \x07』"
 	end
 	function RotatePlayer(Print,Players,RecoverCP)
 		return CopyCpAction(Print,Players,RecoverCP)

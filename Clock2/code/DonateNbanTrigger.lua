@@ -9,7 +9,7 @@ function DonateNbanTrigger()
     -- 1000 = 0 // 5000 = 1 // 10000 = 2 // 50000 = 3 // 100000 = 4 // 500000 = 5
     GTable = {{0,1,GText1},{1,2,GText2},{2,3,GText3},{3,4,GText4},{4,5,GText5},{5,0,GText6}}
     --Give Trig -- [ GiveUnit (58,60,69,71,72) ]
-    --GiveRate 0~5 [ 5000, 10000, 50000, 100000, 500000, 1000 ]
+    --GiveRate 0~5 [ 5000, 10000, 50000, 100000, 500000]
     
     GiveRate = CreateNcode()
     
