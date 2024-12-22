@@ -1,7 +1,7 @@
 function Define_Variable()
     -- Healzone function
     DoActions(FP, AddCD(healzone, 1), preserved)
-    TriggerX(FP, {CDeaths(FP, AtLeast, 170, healzone)}, {
+    TriggerX(FP, {CDeaths(FP, AtLeast, 204, healzone)}, {
         ModifyUnitHitPoints(All, "Men", Force1, "home", 100),
         ModifyUnitShields(All, "Men", Force1, "home", 100),
         
@@ -107,17 +107,85 @@ function Define_Variable()
 
     end
 
-    Trigger { -- 일마 생산
-    players = {Force1},
-    conditions = {
+    --- Create Marine and SCV ---
+
+    TriggerX(Force1, {
         Bring(CurrentPlayer, AtLeast, 1, 0, "MainLocation");
-    },
-    actions = {
+        
+    }, {
         CreateUnit(1, 0, "home", CurrentPlayer);
         RemoveUnitAt(1, 0, "MainLocation", CurrentPlayer);
-        PreserveTrigger();
-    },
-}
+    }, preserved)
+
+
+    
+    TriggerX(Force1, {
+        Bring(CurrentPlayer, AtLeast, 1, 20, "MainLocation");
+    }, {
+        CreateUnit(1, 20, "home", CurrentPlayer);
+        RemoveUnitAt(1, 20, "MainLocation", CurrentPlayer);
+    }, preserved)
+    
+
+
+for i = 0 , 4 do
+    CIfX(Force1, CDeaths(i, AtLeast, 12, Combine_marine))
+
+    TriggerX(Force1, { -- Check instant create phase
+        Bring(CurrentPlayer, AtLeast, 1, 1, "MainLocation");
+    }, {
+        DisplayText(StrDesign2X("Instant SMarine Created"), 4);
+        CreateUnit(1, 16, "home", CurrentPlayer);
+        RemoveUnitAt(1, 1, "MainLocation", CurrentPlayer);
+    }, preserved)
+
+    CElseX()
+
+    TriggerX(Force1, { -- Check instant create phase
+        Bring(CurrentPlayer, AtLeast, 1, 1, "MainLocation");
+    }, {
+        DisplayText(StrDesign2X("Instant SMarine Create failed flag. Resource Returned. "), 4);
+        RemoveUnitAt(1, 1, "MainLocation", CurrentPlayer);
+        SetResources(CurrentPlayer, Add, 32500, Ore);
+    }, preserved)
+
+    CIfXEnd()
+
+
+    TriggerX(Force1, {
+        Bring(CurrentPlayer, AtLeast, 1, 7, "MainLocation");
+    }, {
+        CreateUnit(1, 7, "home", CurrentPlayer);
+        RemoveUnitAt(1, 7, "MainLocation", CurrentPlayer);
+    }, preserved)
+
+    --- Instant create Special marine Algorithm ---
+    
+    
+
+    --- Convert Marine Trigger
+
+    TriggerX(Force1, { -- Marine > Hmarine
+        Accumulate(CurrentPlayer, AtLeast, 7500, Ore);
+        Bring(CurrentPlayer, AtLeast, 1, 0, "convertH");
+    }, {
+        SetResources(CurrentPlayer, Subtract, 7500, Ore);
+        CreateUnit(1, 20, "home", CurrentPlayer);
+        RemoveUnitAt(1, 0, "convertH", CurrentPlayer);
+    }, preserved)
+
+
+    TriggerX(Force1, { -- Hmarine > Smarine
+        Accumulate(CurrentPlayer, AtLeast, 15000, Ore);
+        Bring(CurrentPlayer, AtLeast, 1, 20, "convertH");
+    }, {
+        SetResources(CurrentPlayer, Subtract, 15000, Ore);
+        RemoveUnitAt(1, 20, "convertH", CurrentPlayer);
+        CreateUnit(1, 16, "home", CurrentPlayer);
+        SetCDeaths(i, Add, 1, Combine_marine);
+    }, preserved)
+
+end
 
 
 end

@@ -1,4 +1,4 @@
 function Basement_functions()
-    healzone = CreateCcode()
-    DelayMedic = CreateCcode()
+    healzone,DelayMedic = CreateCcodes(2)
+    Combine_marine = CreateCcode()
 end
