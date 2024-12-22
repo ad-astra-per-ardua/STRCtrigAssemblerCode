@@ -83,7 +83,7 @@ function FinalBossTrigger()
     --     CreateUnit(100, 1, "neutralbunker4", P1),
     -- })
     TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 1, Difficulty)}, {
-        ModifyUnitShields(All, "Men", P1, "Anywhere", 75);
+        ModifyUnitShields(All, "Men", P1, "Anywhere", 100);
     }, preserved)
 
     TriggerX(FP, {NVar(FnBossHP2, AtLeast, 1),CDeaths(FP, AtLeast, 2, Difficulty)}, {

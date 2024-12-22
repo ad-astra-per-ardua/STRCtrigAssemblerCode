@@ -2,7 +2,7 @@ function EVF_initialsetting()
     CIf(FP, {CDeaths(FP, AtLeast, 1, Evfmode)})
 
     TriggerX(FP, {CDeaths(FP, AtLeast, 1, Evfmode),CDeaths(FP, Exactly, 1, Difficulty)}, {
-        ModifyUnitShields(All, "Men", Force1, "Anywhere", 75);
+        ModifyUnitShields(All, "Men", Force1, "Anywhere", 100);
     }, preserved)
     TriggerX(FP, {CDeaths(FP, AtLeast, 1, Evfmode),CDeaths(FP, Exactly, 2, Difficulty)}, {
         ModifyUnitShields(All, "Men", Force1, "Anywhere", 100);
@@ -99,7 +99,10 @@ function EVF_initialsetting()
         SetMemory(0x662350 + (0 * 4), SetTo, (21000 * 1.2) * 256),
         SetMemory(0x662350 + (1 * 4), SetTo, (55000 * 1.2) * 256),
         SetMemory(0x662350 + (20 * 4), SetTo, (39000 * 1.2) * 256)
+
     })
+
+    
 
     for i = 0, 3 do -- EVF + Hard 원격 스팀, 스탑, 홀드 활성화 | cp * 288 + unit
         TriggerX(FP, {CDeaths(FP, Exactly, 2, Difficulty),{CDeaths(FP, AtLeast, 1, Evfmode)}}, {

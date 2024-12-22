@@ -427,7 +427,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
     CAPlot(CS_Rotate(CS_Reverse(Circulation1),5), P6, 63, "middle4", nil, 1, 32, {1,0,0,0,1,0}, nil, P7, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil,1) 
     CAPlotOrder(CS_Convert(CS_Rotate(CS_Reverse(Circulation1),5),12), P6, 50, "middle4", nil, 1, 32, {1,0,0,0,1,0},nil,CSMakeCircleX(6,0,30,54,24), Patrol, "unrevealer2", nil, {1,0}, nil, {0,32}, FP, {Deaths(P11, AtLeast, 901, 163),Deaths(P6, Exactly, 0, 116)}, nil, {})
 
-    for i = 1, 25 do
+    for i = 1, 20 do
         local arrayLength = #M5GenG
         local genIndex = ((i - 1) % arrayLength) + 1
         CSPlotOrder2(PE, P6, M5GenG[genIndex], "middle4", nil, 1, 32, PEA, nil, Patrol, "unrevealer2", nil, 32, nil, P7, {Deaths(P11, AtLeast, 1, 165)})
@@ -453,7 +453,7 @@ MB1TL={24.5,25,25.5,26,26.5,27,28,28.5,29,30,30.5,
 
             })
         CMov(FP,MBossHP5,Nextptr,2) 
-        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,25)})
+        DoActionsX(FP,{SetNVar(MBossHP5_2,SetTo,20)})
     CIfEnd()
 
     CTrigger(FP,{
