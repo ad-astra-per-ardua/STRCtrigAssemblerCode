@@ -1,4 +1,4 @@
-# StarCraft Remaster UseMap Setting Project
+# StarCraft Remaster UseMapSetting Project
 
 ## Used Plugin, Project env, Compiler, Engine
 - STRCtrig Assembler v5.5
