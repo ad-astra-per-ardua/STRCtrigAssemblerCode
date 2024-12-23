@@ -7,6 +7,7 @@
 - Eud Draft 0.19.3.0
 - APMCounter v5.4 by Ninfia
 - TEP(Trigger Editor Plus) v3.0 | Visual Studio Compiler Mode
+- All Code Ported by Lua Script
 
 ## Project in Progress
 - Marine Special Force Clock 2
