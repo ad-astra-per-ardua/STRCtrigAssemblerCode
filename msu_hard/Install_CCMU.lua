@@ -19,6 +19,13 @@ function Install_CCMU()
     CanText22222 = StrDesignX("\x08ＣＣＭＵ\x04가 \x074회 이상 \x04감지되었습니다.").."\n"..StrDesignX("\x10게임\x04에서 \x06패배\x04합니다. T^T\x04").."\n"
     CanText33333 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08! ! ! ＤＥＦＥＡＴ ! ! ! \x04 ● ● ●\n\x14\n\x14\n"
     
+
+    CanText11111 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08! ! ! ＡＬＥＲＴ ! ! ! \x04 ● ● ●\n\x14\n\x14\n"
+    CanText22222 = StrDesignX("\x08ＣＣＭＵ\x04가 \x04감지되었습니다.").."\n"..StrDesignX("\x08패널티로 마린을 회수합니다\x04").."\n"
+    CanText33333 = "\x13\x04\n\x0D\x0D\x13\x04● ● ● \x08! ! ! ＡＬＥＲＴ ! ! ! \x04 ● ● ●\n\x14\n\x14\n"
+
+    CCMUDelay = CreateCcode()
+    
     Trigger2X(FP, {Memory(0x6283F0, AtLeast, 1600), Deaths(P11, Exactly, 0, 157)}, { -- 적당히 하십시오 휴먼
         RotatePlayer({
             DisplayTextX(CanText1, 4),
@@ -32,7 +39,6 @@ function Install_CCMU()
     TriggerX(FP, {Deaths(P11, AtLeast, 0, 157)}, {SetDeaths(P11, Subtract, 1, 157)},preserved)
     -- TriggerX(FP, {Memory(0x6283F0, AtLeast, 1600)}, {SetDeaths(P11, SetTo, 170, 157)}, preserved)
 
-    CIf(FP, {Memory(0x628438, Exactly, 0)})
 
     for i = 1, 3 do
         TriggerX(FP, {FMemory(0x58F450, Exactly, i)},{
@@ -119,14 +125,47 @@ function Install_CCMU()
         KillUnit(55, Force2),
         KillUnit(69, Force2),
     })
-    CIfEnd()
     
+    CIfX(FP, {CDeaths(FP, Exactly, 0, Evfmode)})
+
+
+
     Trigger2X(FP, {FMemory(0x58F450, Exactly, 4)}, RotatePlayer({
         DisplayTextX(CanText11111, 4),
         DisplayTextX(CanText22222, 4),
         DisplayTextX(CanText33333, 4),
         Defeat();
     }, {Force1}, FP))
+    CElseX()
+    for i = 4, 20 do
+    Trigger2X(FP, {FMemory(0x58F450, Exactly, i)}, {RotatePlayer({
+        DisplayTextX(CanText11111, 4),
+        DisplayTextX(CanText22222, 4),
+        DisplayTextX(CanText33333, 4),
+        PlayWAVX("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+        PlayWAVX("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+        PlayWAVX("sound\\Terran\\GOLIATH\\TGoPss05.WAV"),
+        PlayWAVX("sound\\Bullet\\TNsHit00.WAV"),
+        PlayWAVX("sound\\Bullet\\TNsHit00.WAV"),
+        PlayWAVX("sound\\Bullet\\TNsHit00.WAV"),
+    }, {Force1, Force5}, FP),
+    KillUnit(16, Force2),
+    KillUnit(44, Force2),
+    KillUnit(56, Force2),
+    KillUnit(16, Force2),
+    KillUnit(51, Force2),
+    KillUnit(88, Force2),
+    KillUnit(89, Force2),
+    KillUnit(66, Force2),
+    KillUnit(65, Force2),
+    KillUnit(95, Force2),
+    KillUnit(55, Force2),
+    KillUnit(69, Force2),
+    KillUnit(96, Force2),
+    RemoveUnitAt(12 + ((i - 4) * 3), 1, "Anywhere", Force1)
+    })
+end
+    CIfXEnd()
 
     CIfX(FP, {CDeaths(FP, Exactly, 2, Difficulty)})
     
@@ -191,7 +230,7 @@ function Install_CCMU()
         SetCDeaths(FP, Subtract, 1, CannotPenalty)
     },preserved)
 
-    Trigger2X(FP, {FMemory(0x58F450, Exactly, 3),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
+    Trigger2X(FP, {FMemory(0x58F450, AtLeast, 3),CDeaths(FP, Exactly, 0, CannotPenalty) }, {
         RotatePlayer(
             {
         PlayWAVX("sound\\Terran\\Advisor\\TAdUpd04.wav"),
