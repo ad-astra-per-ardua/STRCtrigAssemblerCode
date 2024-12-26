@@ -65,6 +65,7 @@ function Define_Variable()
     end
 
 
+
     for i = 0, 4 do
 
         TriggerX(i, {
@@ -104,8 +105,9 @@ function Define_Variable()
             SetMemoryBA(0x57F27C+(228*i)+Medic_SwitchArray[3],SetTo,0);
             SetCDeaths(i, SetTo, 0, DelayMedic)
         }, preserved)
-
     end
+
+----------- Marine Create and movelocation + Convert Trigger ----------
 
     --- Create Marine and SCV ---
 
@@ -160,8 +162,6 @@ for i = 0 , 4 do
     }, preserved)
 
     --- Instant create Special marine Algorithm ---
-    
-    
 
     --- Convert Marine Trigger
 
@@ -187,5 +187,55 @@ for i = 0 , 4 do
 
 end
 
+------------------------ Exchange Trigger
+
+for i = 0, 4 do
+    TriggerX(FP, {Command(Force1,Exactly,i+1,111)},{SetNDeaths(FP,SetTo,i+1,P_Count)},preserved)
+end
+
+CIfX(AllPlayers, {CDeaths(FP, Exactly, 1, Difficulty)}) --- Normal plot (Past)
+    TriggerX(FP, Always(), {SetCDeaths(FP, SetTo, 1, Difficulty)})
+
+    ExRate = {18,19,21,23}
+    ExRate2 = {21,22,24,26}
+    ExRate3 = {23,24,26,28}
+
+    for i = 0, 4 do ---- 
+        for j = 15, 0, -1 do
+            TriggerX(Force1, {
+                Score(CurrentPlayer, Kills, AtLeast, 2^j*100);
+                NDeaths(FP, Exactly, i+1, P_Count);
+                Bring(i, AtLeast, 1, "Men", "exl");
+            }, {
+                SetScore(CurrentPlayer, Kills, AtLeast, 2^j*100);
+                SetResources(CurrentPlayer, Add, 2^j*ExRate[i+1], Ore)
+            }, preserved)
+
+            TriggerX(Force1, {
+                Score(CurrentPlayer, Kills, AtLeast, 2^j*100);
+                NDeaths(FP, Exactly, i+1, P_Count);
+                Bring(i, AtLeast, 1, "Men", "exr");
+            }, {
+                SetScore(CurrentPlayer, Kills, AtLeast, 2^j*100);
+                SetResources(CurrentPlayer, Add, 2^j*ExRate[i+1], Ore)
+            }, preserved)
+        end 
+    end
+
+CElseIfX({CDeaths(FP, Exactly, 2, Difficulty)}) --- Hard plot (Present)
+
+
+
+
+
+
+
+CElseIfX({CDeaths(FP, Exactly, 3, Difficulty)}) --- Lunatic Plot (Future)
+
+
+
+
+
+CIfXEnd()
 
 end
