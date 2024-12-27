@@ -63,6 +63,8 @@ DoActions(FP,{SetSpeed(SetTo, "#X2")})
 ---------- End of Set Up Initialization ------
 
 Basement_functions()
+
+Initial_Setting()
 Enable_TestMode()
 
 ----------- 분할 lua 선언 -------
