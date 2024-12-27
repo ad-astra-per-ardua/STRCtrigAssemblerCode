@@ -3,4 +3,5 @@ function Basement_functions()
     Combine_marine = CreateCcode()
     P_Count = CreateNcode()
     Difficulty = CreateCcode()
+    GiveRate = CreateNcode()
 end

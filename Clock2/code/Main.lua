@@ -1,3 +1,7 @@
+--- 0x58F44C == LeaderBoard change Variable
+--- 0x58F450 +*(4 * i for i in range(5)) ) == CCMU Counter Output 
+
+
 
 -- Laptop
 -- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
