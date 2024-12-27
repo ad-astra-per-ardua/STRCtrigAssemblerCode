@@ -43,76 +43,81 @@ function Install_DonateNbanTrigger()
     CIfEnd()
     
     for k = 0, 3 do
-    for j = 0, 3 do
-    if k~=j then
-    CIf(k,Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere"))
-        for i = 0, 5 do
-        Trigger {
-                players = {k},
-                conditions = {
-                        Label(0);
-                        Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                        PlayerCheck(j,1);
-                        NDeaths(k,Exactly,i,GiveRate);
-                        Accumulate(k,AtMost,GiveRate2[i+1],Ore);
-                    },
-                actions = {
-                        ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                        RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesign2X("\x12\x1F잔액\x04이 부족합니다."),4);
-                        PreserveTrigger()
-                    },
-            }
-        Trigger {
-                players = {k},
-                conditions = {
-                        Label(0);
-                        Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                        PlayerCheck(j,1);
-                        NDeaths(k,Exactly,i,GiveRate);
-                        Accumulate(k,AtLeast,GiveRate2[i+1],Ore);
-                        Accumulate(k,AtMost,0x7FFFFFFF,Ore);
-                    },
-                actions = {
-                        SetResources(k,Subtract,GiveRate2[i+1],Ore);
-                        SetResources(j,Add,GiveRate2[i+1],Ore);
-                        ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                        RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
-                        SetMemory(0x6509B0,SetTo,j);
-                        DisplayText(StrDesign2X("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
-                        SetMemory(0x6509B0,SetTo,k);
-                        PreserveTrigger();
-                    },
-            }
-        end
-    Trigger {
-        players = {k},
-        conditions = {
-                Label(0);
-                Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                PlayerCheck(j,0);
-            },
-        actions = {
-                DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
-                ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                PreserveTrigger();
-                    },
-            }
-        
-    CIfEnd()
-    elseif k==j then
-        TriggerX(k,{Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere")},{
-            ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-            RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-        },{Preserved})
-    end end end
+        for j = 0, 3 do
+            if k~=j then
+            CIf(k,Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere"))
+                    for i = 0, 5 do
+                    Trigger {
+                            players = {k},
+                            conditions = {
+                                    Label(0);
+                                    Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                                    PlayerCheck(j,1);
+                                    NDeaths(k,Exactly,i,GiveRate);
+                                    Accumulate(k,AtMost,GiveRate2[i+1],Ore);
+                                },
+                            actions = {
+                                    ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                                    RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                                    DisplayText(StrDesign2X("\x12\x1F잔액\x04이 부족합니다."),4);
+                                    PreserveTrigger()
+                                },
+                        }
+                    Trigger {
+                            players = {k},
+                            conditions = {
+                                    Label(0);
+                                    Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                                    PlayerCheck(j,1);
+                                    NDeaths(k,Exactly,i,GiveRate);
+                                    Accumulate(k,AtLeast,GiveRate2[i+1],Ore);
+                                    Accumulate(k,AtMost,0x7FFFFFFF,Ore);
+                                },
+                            actions = {
+                                    SetResources(k,Subtract,GiveRate2[i+1],Ore);
+                                    SetResources(j,Add,GiveRate2[i+1],Ore);
+                                    ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                                    RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                                    DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
+                                    SetMemory(0x6509B0,SetTo,j);
+                                    DisplayText(StrDesign2X("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
+                                    SetMemory(0x6509B0,SetTo,k);
+                                    PreserveTrigger();
+                                },
+                        }
+                    end
+                Trigger {
+                    players = {k},
+                    conditions = {
+                            Label(0);
+                            Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                            PlayerCheck(j,0);
+                        },
+                    actions = {
+                            DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
+                            ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                            RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                            PreserveTrigger();
+                                },
+                        }
+                
+            CIfEnd()
+                    elseif k==j then
+                        TriggerX(k,{Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere")},{
+                            ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                            RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                        },{Preserved})
+
+            end 
+
+        end 
+
+    end
     
 --------------------- Ban Trigger ------------------------
 
 BanText = "\x04당신은 \x11방장에 의해 \x08강제퇴장 \x04당하였습니다."
-BanLocArr = {"banP1","banP2","banP3","banP4"}
+BanLocArr = {"banP1","banP2","banP3","banP4","banP5"}
 for i = 0, 3 do
 Trigger {
     players = {FP},
