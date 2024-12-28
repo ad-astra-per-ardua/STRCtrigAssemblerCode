@@ -70,6 +70,7 @@ Basement_functions()
 
 Initial_Setting()
 Enable_TestMode()
+Clock_setting()
 
 ----------- 분할 lua 선언 -------
 

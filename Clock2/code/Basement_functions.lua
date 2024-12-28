@@ -4,4 +4,6 @@ function Basement_functions()
     P_Count = CreateNcode()
     Difficulty = CreateCcode()
     GiveRate = CreateNcode()
+    --- For clock fuctions ---
+    mintemp,hourtemp = CreateVars(2,FP)
 end
