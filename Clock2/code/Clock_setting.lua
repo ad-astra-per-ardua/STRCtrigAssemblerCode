@@ -11,8 +11,14 @@ function Clock_setting()
         CA_Rotate(mintemp)
     end
 
+        -- Middle Boss Appear + Time stopping trigger Should be here -- 
+
+
+        -- Time Adding Trigger Should be here --
+
         
         DoActions(FP, {AddCD(tempv, 1)}, preserved);
+
         CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {CDeaths(FP, Exactly, 1, tempv)},nil, 1);
         CAPlot(mainHour, P6, 213, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {CDeaths(FP, Exactly, 1, tempv)},nil, 1);
         CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {CDeaths(FP, Exactly, 1, tempv)},nil, 1);
@@ -29,4 +35,6 @@ function Clock_setting()
         TriggerX(FP, {CDeaths(FP, AtLeast, 340, tempv)}, {SetCD(tempv, 1)}, preserved);
 
     DisplayPrintEr(P1, {"Minute value : ", mintemp})
+
+
 end

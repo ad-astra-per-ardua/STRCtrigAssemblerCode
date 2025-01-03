@@ -67,16 +67,16 @@ DoActions(FP,{SetSpeed(SetTo, "#X2")})
 ---------- End of Set Up Initialization ------
 
 Basement_functions()
-
+Verifing_Phase()
 Initial_Setting()
 Enable_TestMode()
 Clock_setting()
+Define_Shape()
 
 ----------- 분할 lua 선언 -------
 
 
 Define_Variable()
--- DonateNbanTrigger()
 N_Gunplot()
 
 ----------- 분할 lua 선언 End ---------
