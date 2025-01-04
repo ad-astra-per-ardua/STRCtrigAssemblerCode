@@ -312,6 +312,7 @@ for k = 0, 4 do
         CIfEnd()
                 elseif k==j then
                     TriggerX(k,{Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere")},{
+                        DisplayText(StrDesign2X("\x08본인에게 통큰 기부를~"),4);
                         ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
                         RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
                     },{Preserved})
