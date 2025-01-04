@@ -5,5 +5,8 @@ function Basement_functions()
     Difficulty = CreateCcode()
     GiveRate = CreateNcode()
     --- For clock fuctions ---
-    mintemp,hourtemp = CreateVars(2,FP)
+    mintemp,hourtemp,mainclockmin = CreateVars(3,FP)
+    HDiv,MDiv,mainclockHour,showmainmin,MMDiv = CreateVars(5,FP)
+
+    --- For Main Clock Variable and Converting 
 end

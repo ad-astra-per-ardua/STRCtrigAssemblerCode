@@ -72,6 +72,7 @@ Initial_Setting()
 Enable_TestMode()
 Clock_setting()
 Define_Shape()
+Declare_BGM()
 
 ----------- 분할 lua 선언 -------
 

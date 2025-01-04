@@ -24,43 +24,39 @@ Namefunction()
 Lib322()
 DisplayprintLib()
 DP_Start_init(FP)
-CJump(AllPlayers,0x9FF)
 
-CVariable(FP, 0x10)
-CVariable2(P1, 0x11, nil, SetTo, 1, 0xFFFF)
-
-
-CJumpEnd(AllPlayers,0x9FF)
 
 --↓ 이곳에 예제를 붙여넣기 (예제에 Include_CtrigPlib가 존재하는경우 삭제) ----------------------
-V_value = CreateVar(FP)
-temp = CreateCcode()
-
-CIfOnce(FP, Always())
-DisplayPrint(P1,{"Player Name is ",PName(P1)})
-DisplayPrint(P1, {"Index 0x10's value : ",V(0x10,FP)})
-DisplayPrint(P1, {"Setted Value 1, Index 0x11's value : ",V(0x11,P1)})
-DoActions(FP, {AddV(V(0x11), 32)})
-DisplayPrint(P1, {"Index 0x11's value after AddV 32 function : ",V(0x11,P1)})
-DisplayPrint(P1, {"V_value that using CreateVar's value : ",V_value})
-DoActions(P1, {AddV(V_value, 100)})
-DisplayPrint(P1, {"V_value After AddV 100 function : ",V_value})
-DoActions(P1, {SubV(V_value, 50)})
-DisplayPrint(P1, {"V_value after SubV 50 value : ",V_value})
-DisplayPrint(P1, {"temp _Ccode EPD value : ",_Ccode(FP, temp, 0)})
-DisplayPrint(P1, {"temp _Ccode MEM value : ",_Ccode(FP, temp, 1)})
-
-CIfEnd()
-
-DisplayPrintEr(FP, {"Lastly V's value : " , V_value})
-
---DisplayPrintEr는 해당플레이어 오류줄에 텍스트를 넣음. DisplayPrint도 똑같은 원리. CPosX,CPosY의 데이터형은 V임. 
---PlayerID에는 원하는 플레이어에 발싸할지 결정하는곳. 관전플레이어 넣으면안됨. 상수 가능, Force1 형태 가능(아마?) 안되면 {0,1,2,3} 이렇게 넣어도 됨. 데이터형 W는 DisplayPrint에만 지원가능하지만 64비트 라이브러리 필요.
---DisplayPrint류 함수는 모두 FP가 주인인 트리거임(트리거 주인을 자유자재로 바꾸는건 어케하는지 몰라서 패스;;;
---DisplayPrint는 Er와 다르게 관전플레이어에도 쏠 수 있다!!
---너무 남발하면 트리거수 폭발할수 있으므로 자제할것. (정작 본인이 남발하고있죠?킹받죠?)
 
 
+NIf(P1,Accumulate(P1,Exactly,1,Ore))
+CJumpX(P1,0x10)
+NIfEnd()
+DoActions(P1,DisplayText("CJump1"))
+NIf(P1,Accumulate(P1,Exactly,2,Ore))
+CJumpX(P1,0x10)
+NIfEnd()
+DoActions(P1,DisplayText("CJump2"))
+NIf(P1,Accumulate(P1,Exactly,3,Ore))
+CJumpX(P1,0x10)
+NIfEnd()
+DoActions(P1,DisplayText("CJump3"))
+CJumpXEnd(P1,0x10)
+
+NJumpX(P1,0x11,Accumulate(P1,Exactly,1,Gas))
+	DoActions(P1,DisplayText("NJump1"))
+NJumpX(P1,0x11,Accumulate(P1,Exactly,2,Gas))
+	DoActions(P1,DisplayText("NJump2"))
+NJumpX(P1,0x11,Accumulate(P1,Exactly,3,Gas))
+	DoActions(P1,DisplayText("NJump3"))
+NJumpXEnd(P1,0x11)
+
+
+
+EUDTurbo(P1)
+init_Setting()
+EndCtrig()
+ErrorCheck()
 
 --↑ 이곳에 예제를 붙여넣기 -----------------------------------------------------------------
 Trigger {
@@ -426,8 +422,4 @@ Trigger { -- No comment (43CD0280)
 
 
 
-EUDTurbo(P1)
-init_Setting()
-EndCtrig()
-ErrorCheck()
 --↑ Tep에 그대로 붙여넣기 -----------------------------------------------------------------
