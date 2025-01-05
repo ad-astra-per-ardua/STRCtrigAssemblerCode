@@ -51,9 +51,6 @@ function Install_BackupCP(Player)
 	end
 end
 
-    function StrDesignX(Str)
-        return "\x13\x07。\x18˙\x0F☆\x1C˚ \x04"..Str.." \x1C。\x0F☆\x18.\x07˚"
-    end
     function SetCD(Code,Value)
         if Code == nil then PushErrorMsg("Undefined Code!") end
         if Value == nil then Value = 1 end

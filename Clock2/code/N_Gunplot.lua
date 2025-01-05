@@ -105,7 +105,87 @@ function N_Gunplot()
         12. cgdct : bang
         13. '' : heart connect
         14. '' : infinite
+        15. kakera
     ]]
+    
+    GunMaxAmount = 43 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
 
+    -- 데스,변수 설정 // CAPlot 공통변수설정 -- 
+    CD = CreateCcodeArr(3*GunMaxAmount)
+    GVar = CreateVarArr(4*GunMaxAmount)
+    
+    GPosX, GPosY, Gun_LoopLimit, Gun_DataIndex, Gun_Shape, Gun_Unit, Gun_Player, ShapeNum = CreateVars(8,FP)
+    UV = CreateVarArr(16)
+    ShapeVar = CreateVarArr(12)
+
+    ----< CAFunc , CAPlot CFunc >----
+    CallCAPlot = InitCFunc(FP)
+    CFunc(CallCAPlot)
+        CAPlot(CAShapeArr,P2,193,"CLoc0",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
+        ,{SetNext("X",0x2001),SetNext(0x2002,"X",1)},nil)
+        --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
+    작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
+                -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
+        ]]--
+    CFuncEnd()
+    ----< 유닛생성단락 >----
+    CJump(FP,0x100)
+    SetLabel(0x2001) -- CAPlot PerActions 도착지점
+
+    NIf(FP,{Memory(0x628438,AtLeast,1)})
+        CDoActions(FP,{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"CLoc0",Gun_Player);
+        })
+    NIfEnd()
+
+    SetLabel(0x2002)
+    CJumpEnd(FP,0x100)
+
+
+
+
+    CIf(FP,{Bring(Player,Exactly,0,BuildingID,GLoc)})
+    TriggerX(FP,{},{
+        CopyCpAction({DisplayTextX(LText,4)},{Force1,Force5},FP);
+        SetScore(Force1,Add,20000,Kills);
+        SetNVar(BGMVar[1],SetTo,1);
+        SetNVar(OB_BGMVar,SetTo,1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
+        -- Typical IBGM_EPD, Text output phase
+
+        
+    DoActionsX(FP,{SetNVar(GPosX,SetTo,X),SetNVar(GPosY,SetTo,Y),SetNVar(CDataIndex,SetTo,999)})
+        -- ↑↑건작좌표 상시세팅 // 데이터인덱스999고정 ( 유닛안나오게설정)
+    for i = 1, #BGM_SplitTL do -- 젠 타이밍 맞추는곳
+    TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+        SetNVar(CUnitType,SetTo,UnitA); -- unit id
+        SetNVar(CShapeType,SetTo,3*ShapeNumber); -- shape index
+        SetNVar(CPlayer,SetTo,Player); -- owner
+        SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+        SetCDeaths("X",SetTo,BGM_SplitTL[i]*SDspeed,CTimer); -- Create unit Timer
+        SetCDeaths("X",SetTo,i,CStage); -- Generate counter
+        SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+    })
+    end
+    TriggerX(FP,{CDeaths("X",Exactly,#BGM_SplitTL,CStage),CDeaths("X",Exactly,0,CTimer)},{
+        SetCDeaths("X",SetTo,#BGM_SplitTL+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
+        SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
+    })
+    CIf(FP,{CDeathsX("X",Exactly,1,COrder,0xFF)},{SetCDeathsX("X",SetTo,0,COrder,0xFF)}) -- CAPlot / 오더
+
+    CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
+    CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
+    CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
+    CMov(FP,Gun_Player,CPlayer) -- 공통변수에 각 건작변수값 대입 ( Player )
+
+    OrderLocSize = 512
+        CallCFuncX(FP,CallCAPlot) -- CAPlot 호출
+        Simple_SetLocX(FP,"CLoc1",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
+        Simple_CalcLocX(FP,"CLoc1",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
+        CDoActions(FP,{TOrder(CUnitType,CPlayer,"CLoc1",Attack,"HZ")})
+    CIfEnd()
+
+    DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer),SetCDeathsX("X",Subtract,1,COrder,0xFF)})
+
+    CIfEnd()
 
 end

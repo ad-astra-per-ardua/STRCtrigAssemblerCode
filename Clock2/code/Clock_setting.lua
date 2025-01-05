@@ -31,11 +31,11 @@ function Clock_setting()
         f_Mul(FP, mainclockHour, hourtemp, HDiv)
         f_Div(FP, showmainmin, mainclockmin, MMDiv)
 
-        DoActions(Force2, {
-            SetDeaths(Force2, SetTo, 0, 131);
-            SetDeaths(Force2, SetTo, 0, 132);
-            SetDeaths(Force2, SetTo, 0, 133);
-        }, preserved)
+        -- DoActions(Force2, {
+        --     SetDeaths(Force2, SetTo, 0, 131);
+        --     SetDeaths(Force2, SetTo, 0, 132);
+        --     SetDeaths(Force2, SetTo, 0, 133);
+        -- }, preserved)
 
         -- initial clock setup
         CIfOnce(Force2, Always())
