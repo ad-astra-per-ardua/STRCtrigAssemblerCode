@@ -31,6 +31,15 @@ function Install_function()
         return SetMemoryX(Offset-ret,Type,Value,Mask)
     end
 
+	function SetLabel(Index)
+		Trigger {
+			players = {FP},
+			conditions = {
+					Label(Index);
+				},
+		}
+	end
+
 function Install_BackupCP(Player)
 	BackupCp = CreateVar(Player)
 	SaveCp_CallIndex = SetCallForward()

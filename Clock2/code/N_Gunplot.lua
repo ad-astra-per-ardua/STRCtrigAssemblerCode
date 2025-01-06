@@ -79,7 +79,7 @@ function N_Gunplot()
     CunitCtrig_End()
 
     PB = CSMakePolygon(6,80,0,37,1)
-    CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "home", nil, 32, nil, FP, {Always()})
+    CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
 
     --[[
         gunplot bgm
@@ -108,7 +108,9 @@ function N_Gunplot()
         15. kakera
     ]]
     
-    GunMaxAmount = 43 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
+
+    CAShapeArr = {DHSH1T1}
+    GunMaxAmount = 50 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
 
     -- 데스,변수 설정 // CAPlot 공통변수설정 -- 
     CD = CreateCcodeArr(3*GunMaxAmount)
@@ -121,7 +123,7 @@ function N_Gunplot()
     ----< CAFunc , CAPlot CFunc >----
     CallCAPlot = InitCFunc(FP)
     CFunc(CallCAPlot)
-        CAPlot(CAShapeArr,P2,193,"CLoc0",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
+        CAPlot(DHSH1T1,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2001),SetNext(0x2002,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -134,58 +136,109 @@ function N_Gunplot()
 
     NIf(FP,{Memory(0x628438,AtLeast,1)})
         CDoActions(FP,{ -- 유닛생성단락
-            TCreateUnit(1,Gun_Unit,"CLoc0",Gun_Player);
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
         })
     NIfEnd()
 
     SetLabel(0x2002)
     CJumpEnd(FP,0x100)
 
+    -- 여기에 대충 난이도 변수 정의 조건에 따라서 도형바꾸기 어쩌고
 
+    --------------- End of Initialization function of gunplot Enigne -----
+    
+    --- 대충 여기서부터 함수화 시작하면됨
+    DoActions(FP, {
+        KillUnit(84, Force2),
+        KillUnit(63, Force2),
+        KillUnit(68, Force2)
+    }, preserved)
 
+    function sethatgun(Player,GIndex,X,Y,GLoc,ShapeNumber,UnitArray)
+        ----< 데스, 변수 할당 >----
+        CStage = CD[3*GIndex-2] -- 타이머1
+        CTimer = CD[3*GIndex-1] -- 타이머2
+        COrder = CD[3*GIndex] -- 0xFF ( 오더 & CallCFuncX ) // 0xFF00 ( 건작잠금 ) 
+        CDataIndex = GVar[4*GIndex-3] -- 데이터인덱스변수
+        CUnitType = GVar[4*GIndex-2] -- 유닛변수
+        CShapeType = GVar[4*GIndex-1] -- 도형데이터변수
+        CPlayer = GVar[4*GIndex] -- 플레이어변수
+        ----< 건작제어 단락 >----
 
-    CIf(FP,{Bring(Player,Exactly,0,BuildingID,GLoc)})
-    TriggerX(FP,{},{
-        CopyCpAction({DisplayTextX(LText,4)},{Force1,Force5},FP);
-        SetScore(Force1,Add,20000,Kills);
-        SetNVar(BGMVar[1],SetTo,1);
-        SetNVar(OB_BGMVar,SetTo,1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
-        -- Typical IBGM_EPD, Text output phase
+        CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
+        TriggerX(FP,{},{
+            CopyCpAction({DisplayTextX(StrDesignX("Hatchery Destroyed! + 30,000 Points"), 4)}, {Force1,Force5}, FP);
+            SetScore(Force1, Add, 30000,Kills);
+            SetNVar(BGMArray[1], SetTo, 1);
+            SetNVar(BGMArray[2], SetTo, 1);
+            SetNVar(BGMArray[3], SetTo, 1);
+            SetNVar(BGMArray[4], SetTo, 1);
+            SetNVar(BGMArray[5], SetTo, 1);
+            SetNVar(OB_BGMArray, SetTo, 1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
+            -- Typical IBGM_EPD, Text output phase
 
-        
-    DoActionsX(FP,{SetNVar(GPosX,SetTo,X),SetNVar(GPosY,SetTo,Y),SetNVar(CDataIndex,SetTo,999)})
-        -- ↑↑건작좌표 상시세팅 // 데이터인덱스999고정 ( 유닛안나오게설정)
-    for i = 1, #BGM_SplitTL do -- 젠 타이밍 맞추는곳
-    TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-        SetNVar(CUnitType,SetTo,UnitA); -- unit id
-        SetNVar(CShapeType,SetTo,3*ShapeNumber); -- shape index
-        SetNVar(CPlayer,SetTo,Player); -- owner
-        SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
-        SetCDeaths("X",SetTo,BGM_SplitTL[i]*SDspeed,CTimer); -- Create unit Timer
-        SetCDeaths("X",SetTo,i,CStage); -- Generate counter
-        SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-    })
+            
+        DoActionsX(FP,{SetNVar(GPosX,SetTo,X),SetNVar(GPosY,SetTo,Y),SetNVar(CDataIndex,SetTo,999)})
+            -- ↑↑건작좌표 상시세팅 // 데이터인덱스999고정 ( 유닛안나오게설정)
+        for i = 1, #duskhatTL do -- 젠 타이밍 맞추는곳
+        TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+            SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
+            SetNVar(CShapeType,SetTo,3*ShapeNumber); -- shape index
+            SetNVar(CPlayer,SetTo,Player); -- owner
+            SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+            SetCDeaths("X",SetTo,duskhatTL[i]*SDspeed,CTimer); -- Create unit Timer
+            SetCDeaths("X",SetTo,i,CStage); -- Generate counter
+            SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+        })
+        end
+        TriggerX(FP,{CDeaths("X",Exactly,#duskhatTL,CStage),CDeaths("X",Exactly,0,CTimer)},{
+            SetCDeaths("X",SetTo,#duskhatTL+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
+            SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
+        })
+        CIf(FP,{CDeathsX("X",Exactly,1,COrder,0xFF)},{SetCDeathsX("X",SetTo,0,COrder,0xFF)}) -- CAPlot / 오더
+
+        CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
+        CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
+        CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
+        CMov(FP,Gun_Player,CPlayer) -- 공통변수에 각 건작변수값 대입 ( Player )
+
+        OrderLocSize = 512
+            CallCFuncX(FP,CallCAPlot) -- CAPlot 호출
+            Simple_SetLocX(FP,"249",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
+            Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
+            CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
+        CIfEnd()
+
+        DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer),SetCDeathsX("X",Subtract,1,COrder,0xFF)})
+
+        CIfEnd()
     end
-    TriggerX(FP,{CDeaths("X",Exactly,#BGM_SplitTL,CStage),CDeaths("X",Exactly,0,CTimer)},{
-        SetCDeaths("X",SetTo,#BGM_SplitTL+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
-        SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
-    })
-    CIf(FP,{CDeathsX("X",Exactly,1,COrder,0xFF)},{SetCDeathsX("X",SetTo,0,COrder,0xFF)}) -- CAPlot / 오더
 
-    CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
-    CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
-    CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
-    CMov(FP,Gun_Player,CPlayer) -- 공통변수에 각 건작변수값 대입 ( Player )
+    sethatgun(P6, 1, 2079, 1391, "duskHat2",1, {37,38,39,40,43,44,54,55,56,65,66,39,40,55})
 
-    OrderLocSize = 512
-        CallCFuncX(FP,CallCAPlot) -- CAPlot 호출
-        Simple_SetLocX(FP,"CLoc1",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
-        Simple_CalcLocX(FP,"CLoc1",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
-        CDoActions(FP,{TOrder(CUnitType,CPlayer,"CLoc1",Attack,"HZ")})
-    CIfEnd()
+    Deathvar = CreateCcode()
+    TriggerX(FP, {Bring(P6,Exactly,0,131,"duskHat2")}, {AddCD(Deathvar, 1)}, preserved)
 
-    DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer),SetCDeathsX("X",Subtract,1,COrder,0xFF)})
+    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, 45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[1] * SDspeed, Deathvar)})
 
-    CIfEnd()
+    CAPlotOrder(CS_SortA(baseStar,0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,basestar, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[2] * SDspeed, Deathvar)})
+
+
+    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, -45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[3] * SDspeed, Deathvar)})
+
+    CSPlot(DHSH1T1, P6, 63, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskhatTLeft[4] * SDspeed, Deathvar)})
+    CSPlot(DHSH1T1, P6, 68, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.09 * SDspeed, Deathvar)})
+    CSPlot(DHSH1T1, P6, 63, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.65 * SDspeed, Deathvar)})
+    CSPlot(DHSH1T1, P6, 68, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.94 * SDspeed, Deathvar)})
+
+    CAPlotOrder(CS_SortA(baseStar,1), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,basestar, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[5] * SDspeed, Deathvar)})
+
+    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, 45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[6] * SDspeed, Deathvar)})
+
+    CAPlotOrder(CS_SortA(Heart,1), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[7] * SDspeed, Deathvar)})
+
+    
+
+
 
 end

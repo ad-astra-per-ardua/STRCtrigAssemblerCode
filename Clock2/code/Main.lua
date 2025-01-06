@@ -34,7 +34,7 @@ Install_GetCLoc(FP,248,184)
 Install_BackupCP(FP)
 Install_function()
 ------------------
-Convert_Function()
+-- Convert_Function()
 ------------------
 CSPlotIndexAlloc = 1
 CSPlotOrderIndexAlloc = 1
@@ -65,7 +65,7 @@ NoAirCollision(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 ---------- End of Set Up Initialization ------
-
+Gunplot_Timeline()
 Basement_functions()
 Verifing_Phase()
 Initial_Setting()
@@ -83,7 +83,8 @@ N_Gunplot()
 ----------- 분할 lua 선언 End ---------
 
 Clock_setting()
-CSPlotToCAPlot()
+Clock_modifyloop()
+-- CSPlotToCAPlot()
 init_Setting()
 EndCtrig()
 ErrorCheck()
