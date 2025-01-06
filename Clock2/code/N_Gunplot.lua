@@ -216,29 +216,5 @@ function N_Gunplot()
 
     sethatgun(P6, 1, 2079, 1391, "duskHat2",1, {37,38,39,40,43,44,54,55,56,65,66,39,40,55})
 
-    Deathvar = CreateCcode()
-    TriggerX(FP, {Bring(P6,Exactly,0,131,"duskHat2")}, {AddCD(Deathvar, 1)}, preserved)
-
-    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, 45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[1] * SDspeed, Deathvar)})
-
-    CAPlotOrder(CS_SortA(baseStar,0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,basestar, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[2] * SDspeed, Deathvar)})
-
-
-    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, -45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[3] * SDspeed, Deathvar)})
-
-    CSPlot(DHSH1T1, P6, 63, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskhatTLeft[4] * SDspeed, Deathvar)})
-    CSPlot(DHSH1T1, P6, 68, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.09 * SDspeed, Deathvar)})
-    CSPlot(DHSH1T1, P6, 63, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.65 * SDspeed, Deathvar)})
-    CSPlot(DHSH1T1, P6, 68, "duskHat2", nil, 1, 32, FP, {CDeaths(FP, AtLeast, 15.94 * SDspeed, Deathvar)})
-
-    CAPlotOrder(CS_SortA(baseStar,1), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,basestar, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[5] * SDspeed, Deathvar)})
-
-    CAPlotOrder(CS_SortA(CS_Rotate(baseCircle, 45),0), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[6] * SDspeed, Deathvar)})
-
-    CAPlotOrder(CS_SortA(Heart,1), P6, 84, "duskHat2", nil, 1, 32, {1,0,0,0,2,0}, nil,baseCircle, Attack, "home", nil, {1,0}, nil, {0,32}, FP, {CDeaths(FP, AtLeast, duskhatTLeft[7] * SDspeed, Deathvar)})
-
-    
-
-
 
 end
