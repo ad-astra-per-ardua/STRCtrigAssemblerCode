@@ -9,4 +9,16 @@ function Basement_functions()
     HDiv,MDiv,mainclockHour,showmainmin,MMDiv = CreateVars(5,FP)
 
     --- For Main Clock Variable and Converting 
+    
+    
+
+    ----------- For Main Gunplot Variable ------
+    
+    GPosX, GPosY, Gun_LoopLimit, Gun_DataIndex, Gun_Shape, Gun_Unit, Gun_Player, ShapeNum = CreateVars(8,FP)
+    UV = CreateVarArr(16)
+    ShapeVar = CreateVarArr(12)
+    RetX, RetY, CalcRetX, CalcRetY, Common_UType, Gun_Unit = CreateVars(6,FP)
+
+
+
 end

@@ -82,6 +82,7 @@ function N_Gunplot()
     CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
 
     --[[
+
         gunplot bgm
         Need at Least 15?
 
@@ -106,24 +107,48 @@ function N_Gunplot()
         13. '' : heart connect
         14. '' : infinite
         15. kakera
+
     ]]
+    
     
 
     CAShapeArr = {DHSH1T1}
     GunMaxAmount = 50 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
+    GIndex = 0
+
+
 
     -- 데스,변수 설정 // CAPlot 공통변수설정 -- 
     CD = CreateCcodeArr(3*GunMaxAmount)
-    GVar = CreateVarArr(4*GunMaxAmount)
+    GVar = CreateVarArr(6*GunMaxAmount)
+    ReadXY = InitCFunc(FP)
+    Para = CFunc(ReadXY)
+        -- f_Read(FP,0x58DC60+0x14*TempLocID,RetX,"X",0xFFFFFFFF)
+        -- f_Read(FP,0x58DC64+0x14*TempLocID,RetY,"X",0xFFFFFFFF)
+
+    f_Read(FP,_Add(_Mul(Para[1],0x14/4),EPD(0x58DC60)),RetX,"X",0xFFFFFFFF) -- Para[1] = LocIndex
+    f_Read(FP,_Add(_Mul(Para[1],0x14/4),EPD(0x58DC64)),RetY,"X",0xFFFFFFFF) -- Para[1] = LocIndex
+    CAdd(FP,CalcRetX,RetX,64)
+    CAdd(FP,CalcRetY,RetY,64)
+CFuncEnd()
+
+function f_ReadLocXY(Loc)
+    CIfOnce(FP)
+        TempLoc = ConvertLocation(Loc)
+        CallCFuncX(FP,ReadXY,{TempLoc})
+        CDoActions(FP,{
+            TSetNVar(GunPosX,SetTo,CalcRetX);
+            TSetNVar(GunPosY,SetTo,CalcRetY);
+        })
+    CIfEnd()
     
-    GPosX, GPosY, Gun_LoopLimit, Gun_DataIndex, Gun_Shape, Gun_Unit, Gun_Player, ShapeNum = CreateVars(8,FP)
-    UV = CreateVarArr(16)
-    ShapeVar = CreateVarArr(12)
+    end
+
 
     ----< CAFunc , CAPlot CFunc >----
     CallCAPlot = InitCFunc(FP)
     CFunc(CallCAPlot)
-        CAPlot(DHSH1T1,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
+        CAPlot(CAShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2001),SetNext(0x2002,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -154,15 +179,22 @@ function N_Gunplot()
         KillUnit(68, Force2)
     }, preserved)
 
-    function sethatgun(Player,GIndex,X,Y,GLoc,ShapeNumber,UnitArray)
+
+    function sethatgun(Player,GLoc,ShapeNumber,UnitArray)
         ----< 데스, 변수 할당 >----
+        
+        GIndex = GIndex + 1
+        
         CStage = CD[3*GIndex-2] -- 타이머1
         CTimer = CD[3*GIndex-1] -- 타이머2
         COrder = CD[3*GIndex] -- 0xFF ( 오더 & CallCFuncX ) // 0xFF00 ( 건작잠금 ) 
-        CDataIndex = GVar[4*GIndex-3] -- 데이터인덱스변수
-        CUnitType = GVar[4*GIndex-2] -- 유닛변수
-        CShapeType = GVar[4*GIndex-1] -- 도형데이터변수
-        CPlayer = GVar[4*GIndex] -- 플레이어변수
+        CDataIndex = GVar[6*GIndex-5] -- 데이터인덱스변수
+        CUnitType = GVar[6*GIndex-4] -- 유닛변수
+        CShapeType = GVar[6*GIndex-3] -- 도형데이터변수
+        CPlayer = GVar[6*GIndex-2] -- 플레이어변수
+        GunPosX = GVar[6*GIndex-1]
+        GunPosY = GVar[6*GIndex]
+        
         ----< 건작제어 단락 >----
 
         CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
@@ -177,26 +209,38 @@ function N_Gunplot()
             SetNVar(OB_BGMArray, SetTo, 1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
             -- Typical IBGM_EPD, Text output phase
 
-            
-        DoActionsX(FP,{SetNVar(GPosX,SetTo,X),SetNVar(GPosY,SetTo,Y),SetNVar(CDataIndex,SetTo,999)})
-            -- ↑↑건작좌표 상시세팅 // 데이터인덱스999고정 ( 유닛안나오게설정)
+            -- Auto calc location X pos and Y pos
+            f_ReadLocXY(GLoc)
+            CDoActions(FP,{TSetNVar(GPosX,SetTo,GunPosX),TSetNVar(GPosY,SetTo,GunPosY),SetNVar(CDataIndex,SetTo,999)})
+
         for i = 1, #duskhatTL do -- 젠 타이밍 맞추는곳
-        TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-            SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
-            SetNVar(CShapeType,SetTo,3*ShapeNumber); -- shape index
-            SetNVar(CPlayer,SetTo,Player); -- owner
-            SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
-            SetCDeaths("X",SetTo,duskhatTL[i]*SDspeed,CTimer); -- Create unit Timer
-            SetCDeaths("X",SetTo,i,CStage); -- Generate counter
-            SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-        })
+            if i == 1 then
+                TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                    SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
+                    SetCDeaths("X",SetTo,duskhatTL[i]*SDspeed,CTimer); -- Create unit Timer
+                    SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                })
+                else
+
+            TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
+                SetNVar(CShapeType,SetTo,ShapeNumber); -- shape index
+                SetNVar(CPlayer,SetTo,Player); -- owner
+                SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+                SetCDeaths("X",SetTo,(duskhatTL[i] - duskhatTL[i-1])*SDspeed,CTimer); -- Create unit Timer
+                SetCDeaths("X",SetTo,i,CStage); -- Generate counter
+                SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+            })
+            end
         end
+
+
         TriggerX(FP,{CDeaths("X",Exactly,#duskhatTL,CStage),CDeaths("X",Exactly,0,CTimer)},{
             SetCDeaths("X",SetTo,#duskhatTL+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
             SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
         })
         CIf(FP,{CDeathsX("X",Exactly,1,COrder,0xFF)},{SetCDeathsX("X",SetTo,0,COrder,0xFF)}) -- CAPlot / 오더
-
+        
         CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
         CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
         CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
@@ -214,7 +258,11 @@ function N_Gunplot()
         CIfEnd()
     end
 
-    sethatgun(P6, 1, 2079, 1391, "duskHat2",1, {37,38,39,40,43,44,54,55,56,65,66,39,40,55})
+
+
+    
+    sethatgun(P6,"duskHat2",1, {37,38,39,40,43,44,54,55,56,65,66,39,40,55})
+
 
 
 end
