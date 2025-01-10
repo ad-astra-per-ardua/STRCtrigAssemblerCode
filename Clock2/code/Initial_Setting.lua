@@ -1,9 +1,19 @@
 function Initial_Setting()
+
+    TriggerX(FP, Always(),{
+        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "duskHive6"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P6}, FP),
+        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "noonHive1"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P7}, FP),
+        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "morHive5"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P8}, FP),
+        RotatePlayer({CenterView("mainclock")}, {Force1,Force5}, FP);
+    })
     
 TriggerX(Force2, Always(), {
     SetResources(P6, SetTo, 0xFFFFF, Ore);
     SetResources(P7, SetTo, 0xFFFFF, Ore);
     SetResources(P8, SetTo, 0xFFFFF, Ore);
+    SetResources(P6, SetTo, 0xFFFFF, Gas);
+    SetResources(P7, SetTo, 0xFFFFF, Gas);
+    SetResources(P8, SetTo, 0xFFFFF, Gas);
     SetAllianceStatus(Force1, Enemy);
     SetAllianceStatus(Force2, Ally);
     RunAIScript('Turn ON Shared Vision for Player 1');
@@ -61,6 +71,8 @@ for i = 0, 3 do
         },
     }
     end
+
+
 
 
 

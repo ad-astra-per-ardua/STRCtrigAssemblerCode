@@ -11,6 +11,14 @@ function Define_Shape()
 	HCC0 = CS_Rotate(HCCC,180)
 	Heart = CS_RemoveStack(HCC0,15,0) -------하트
 
+    HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
+    HEFT2 = CS_SortA(baseStar,0)
+    HEFT3 = CS_SortA(Heart,1)
+    HEFT4 = CS_SortA(CS_Rotate(baseCircle, -45),0)
+    HEFT5 = CS_SortA(baseStar,1)
+    HEFT6 = CS_SortA(CS_Rotate(baseCircle, -45),0)
+    HEFT7 = CS_SortA(Heart,0)
+
 
     CS_BMPGraph(DHSH1T1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 
