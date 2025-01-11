@@ -93,7 +93,7 @@ function f_ReadLocXY(Loc)
     }, preserved)
 
 
-    function SetLoopInfPlot(Player,GLoc,ShapeNumber,UnitArray,TimeLine)
+    function SetLoopInfPlot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
         ----< 데스, 변수 할당 >----
         
         GIndex = GIndex + 1
@@ -110,17 +110,7 @@ function f_ReadLocXY(Loc)
         
         ----< 건작제어 단락 >----
 
-        CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
-        TriggerX(FP,{},{
-            CopyCpAction({DisplayTextX(StrDesignX("Hatchery Destroyed! + 30,000 Points"), 4)}, {Force1,Force5}, FP);
-            SetScore(Force1, Add, 30000,Kills);
-            SetNVar(BGMArray[1], SetTo, 1);
-            SetNVar(BGMArray[2], SetTo, 1);
-            SetNVar(BGMArray[3], SetTo, 1);
-            SetNVar(BGMArray[4], SetTo, 1);
-            SetNVar(BGMArray[5], SetTo, 1);
-            SetNVar(OB_BGMArray, SetTo, 1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
-            -- Typical IBGM_EPD, Text output phase
+        CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
 
             -- Auto calc location X pos and Y pos
             f_ReadLocXY(GLoc)
@@ -182,7 +172,7 @@ function f_ReadLocXY(Loc)
     end
 
 
-    function SetLoop2Plot(Player,GLoc,ShapeNumber,UnitArray,TimeLine)
+    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
         ----< 데스, 변수 할당 >----
         
         GIndex = GIndex + 1
@@ -199,17 +189,7 @@ function f_ReadLocXY(Loc)
         
         ----< 건작제어 단락 >----
 
-        CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
-        TriggerX(FP,{},{
-            CopyCpAction({DisplayTextX(StrDesignX("Hatchery Destroyed! + 30,000 Points"), 4)}, {Force1,Force5}, FP);
-            SetScore(Force1, Add, 30000,Kills);
-            SetNVar(BGMArray[1], SetTo, 1);
-            SetNVar(BGMArray[2], SetTo, 1);
-            SetNVar(BGMArray[3], SetTo, 1);
-            SetNVar(BGMArray[4], SetTo, 1);
-            SetNVar(BGMArray[5], SetTo, 1);
-            SetNVar(OB_BGMArray, SetTo, 1);}) -- 대충여따가 건작텍스트 브금변수 한번만 실행
-            -- Typical IBGM_EPD, Text output phase
+        CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
 
             -- Auto calc location X pos and Y pos
             f_ReadLocXY(GLoc)
@@ -272,7 +252,7 @@ function f_ReadLocXY(Loc)
         CIfEnd()
     end
 
-    function SetEffectplot1(Player,GLoc,EffectUnit,ShapeNumber,Timeline)
+    function SetEffectplot1(Player,GLoc,BuildingIndex,EffectUnit,ShapeNumber,Timeline)
 
         
         GIndex = GIndex + 1
@@ -289,7 +269,7 @@ function f_ReadLocXY(Loc)
         
         ----< 건작제어 단락 >----
 
-        CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
+        CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
             -- Auto calc location X pos and Y pos
             f_ReadLocXY(GLoc)
             CDoActions(FP,{TSetNVar(GPosX,SetTo,GunPosX),TSetNVar(GPosY,SetTo,GunPosY)})
@@ -350,7 +330,7 @@ function f_ReadLocXY(Loc)
         CIfEnd()
     end
 
-    function SetEffectplotInf(Player,GLoc,EffectUnit,ShapeNumber,Timeline)
+    function SetEffectplotInf(Player,GLoc,BuildingIndex,EffectUnit,ShapeNumber,Timeline)
         ----< 데스, 변수 할당 >----
         
         GIndex = GIndex + 1
@@ -367,7 +347,7 @@ function f_ReadLocXY(Loc)
         
         ----< 건작제어 단락 >----
 
-        CIf(FP,{Bring(Player,Exactly,0,131,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
+        CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
             -- Auto calc location X pos and Y pos
             f_ReadLocXY(GLoc)
             CDoActions(FP,{TSetNVar(GPosX,SetTo,GunPosX),TSetNVar(GPosY,SetTo,GunPosY),SetNVar(CDataIndex,SetTo,999)})

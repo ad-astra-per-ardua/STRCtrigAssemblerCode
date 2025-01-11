@@ -131,8 +131,8 @@ function N_Gunplot()
 
     ]]
     
-    -- SetLoopInfPlot(P6, , ShapeNumber, UnitArray, TimeLine)
-
+    SetLoopInfPlot(P6, "duskHat2", 131, 1, {54,53,55,56,77,78,40,41,43,44,45,46,47,48}, duskhatTL)
+    SetEffectplot1(P6, "duskHat2", 131, 84, {1,2,3,4,5,6,7,8}, duskhatTLeft)
 
 
 

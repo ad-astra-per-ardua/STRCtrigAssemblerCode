@@ -1,25 +1,36 @@
+MATHRAND = math.random
+function math.random(X,Y)
+    if X == nil then
+        return MATHRAND()
+    end
+    if Y == nil then
+        return MATHRAND(math.floor(X))
+    end
+    return MATHRAND(math.floor(X),math.floor(Y))
+end
+
 --- 0x58F44C == LeaderBoard change Variable
 --- 0x58F450 +*(4 * i for i in range(5)) ) == CCMU Counter Output 
 
 
 
 -- Laptop
-Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
-__MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
-__SubDirSetting(__encode_cp949(Curdir.."\\code")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
-
--- --- Desktop
--- Curdir = "C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
+-- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
 -- __MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
 -- __SubDirSetting(__encode_cp949(Curdir.."\\code")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
+
+-- --- Desktop
+Curdir = "C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
+__MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
+__SubDirSetting(__encode_cp949(Curdir.."\\code")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
 -- -- End of VSC Compile Mode Initialization
 
 FP = P8
 CP = CurrentPlayer
 SetForces({P1,P2,P3,P4,P5},{P6,P7,P8},{},{},{P1,P2,P3,P4,P5,P6,P7,P8}) 
 SetFixedPlayer(P8)
-StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
--- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
+-- StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
+StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12")
 CJump(AllPlayers,0)
 
 Include_DataTransfer()
