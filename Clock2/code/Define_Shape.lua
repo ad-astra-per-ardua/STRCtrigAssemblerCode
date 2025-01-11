@@ -6,11 +6,14 @@ function Define_Shape()
     SHH15x = CSMakePath({0,-191},{-240,-179},{-240,17},{363,-15})
     SHH15xa = CS_FillPathGradX(SHH15x,1,60,"GRADX",3,0,0,1)
     baseCircle = CS_RatioXY(CSMakeCircleX(6,64,30,150,96),1,0.5)
+    baseCircle1 = CS_Rotate(baseCircle, 90)
     baseStar = CSMakeStarX(5,108,64,36,CS_Level("StarX", 5, 6),CS_Level("StarX", 5, 5))
     function HyperCycloidC(T) return {12*math.sin(T) - 4*math.sin(3*T), 13*math.cos(T) - 5*math.cos(2*T) - 2*math.cos(3*T) - math.cos(4*T)} end
 	HCCC = CSMakeGraphT({12,12},"HyperCycloidC",0,0,2,2,51) 
 	HCC0 = CS_Rotate(HCCC,180)
 	Heart = CS_RemoveStack(HCC0,15,0) -------하트
+    baseCircle2 = CS_RatioXY(CSMakeCircleX(6,128,30,54,24),1,0.5)
+    baseCircle3 = CS_Rotate(baseCircle2, 90)
 
 
     HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
@@ -22,6 +25,6 @@ function Define_Shape()
     HEFT7 = CS_SortA(Heart,0)
 
 
-    CS_BMPGraph(DHSH1T1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(baseCircle2, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 
 end
