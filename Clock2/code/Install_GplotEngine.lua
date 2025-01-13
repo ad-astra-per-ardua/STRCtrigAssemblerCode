@@ -63,7 +63,7 @@ function f_ReadLocXY(Loc)
     CAEffectshapeArr = {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7}
     CallCAPlot2 = InitCFunc(FP)
     CFunc(CallCAPlot2)
-        CAPlot(CAEffectshapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,2,Gun_DataIndex},nil,FP,nil
+        CAPlot(CAEffectshapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,8,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2003),SetNext(0x2004,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -90,7 +90,7 @@ function f_ReadLocXY(Loc)
     CAShapeArr2 = {baseCircle2, baseCircle3,Heart,baseStar}
     CallCAPlot3 = InitCFunc(FP)
     CFunc(CallCAPlot3)
-        CAPlot(CAShapeArr2,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,1,Gun_DataIndex},nil,FP,nil
+        CAPlot(CAShapeArr2,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,2,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -267,7 +267,7 @@ function f_ReadLocXY(Loc)
                 SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
                 SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
                 SetNVar(CPlayer,SetTo,Player); -- owner
-                SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+                SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                 SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
                 SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
@@ -277,7 +277,7 @@ function f_ReadLocXY(Loc)
                 SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
                 SetNVar(CShapeType,SetTo,ShapeNumber[i]); -- shape index
                 SetNVar(CPlayer,SetTo,Player); -- owner
-                SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+                SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                 SetCDeaths("X",SetTo,(TimeLine[i] - TimeLine[i-1])*SDspeed,CTimer); -- Create unit Timer
                 SetCDeaths("X",SetTo,i,CStage); -- Generate counter
                 SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
@@ -370,7 +370,7 @@ function f_ReadLocXY(Loc)
             SetCDeaths("X",SetTo,#Timeline+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
             SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
         })
-        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,2)},{Preserved})
+        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,8)},{Preserved})
         
 
         CMov(FP,Gun_Unit,CUnitType) 
