@@ -347,7 +347,7 @@ function f_ReadLocXY(Loc)
                 SetNVar(CUnitType,SetTo,EffectUnit); 
                 SetNVar(CShapeType,SetTo,ShapeNumber[1]);
                 SetNVar(CPlayer,SetTo,Player); 
-                SetNVar(CDataIndex,SetTo,1); 
+                SetNVar(CDataIndex,SetTo,0); 
                 SetCDeaths("X",SetTo,(Timeline[1])*SDspeed,CTimer);
                 SetCDeaths("X",SetTo,1,CStage); 
                 SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
@@ -357,7 +357,7 @@ function f_ReadLocXY(Loc)
                 SetNVar(CUnitType,SetTo,EffectUnit); 
                 SetNVar(CShapeType,SetTo,ShapeNumber[i]); 
                 SetNVar(CPlayer,SetTo,Player); 
-                SetNVar(CDataIndex,SetTo,1); 
+                SetNVar(CDataIndex,SetTo,0); 
                 SetCDeaths("X",SetTo,(Timeline[i] - Timeline[i-1])*SDspeed,CTimer); 
                 SetCDeaths("X",SetTo,i,CStage); 
                 SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot

@@ -77,6 +77,9 @@ NoAirCollision(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 ---------- End of Set Up Initialization ------
+
+
+
 Gunplot_Timeline()
 Basement_functions()
 Verifing_Phase()
@@ -98,6 +101,7 @@ Control_PlotBGM()
 
 Clock_setting()
 Clock_modifyloop()
+MainclockG()
 -- CSPlotToCAPlot()
 init_Setting()
 EndCtrig()

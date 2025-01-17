@@ -1,12 +1,23 @@
 function Basement_functions()
+
+    
+
     healzone,DelayMedic = CreateCcodes(2)
     Combine_marine = CreateCcode()
     P_Count = CreateNcode()
     Difficulty = CreateCcode()
     GiveRate = CreateNcode()
+
+    DelayTimer = CreateCcode()
+    DoActions(FP, {SubCD(DelayTimer, 1)}, preserved)
+
+    function SetDelay(Code, Value)
+        TriggerX(FP, {Always()}, {SetCD(Code, Value)})
+    end
+
     --- For clock fuctions ---
     mintemp,hourtemp,mainclockmin = CreateVars(3,FP)
-    HDiv,MDiv,mainclockHour,showmainmin,MMDiv = CreateVars(5,FP)
+    HDiv,MDiv,mainclockHour,showmainmin,MMDiv,FDiv, finMainclock, mainclockCycled = CreateVars(8,FP)
 
     --- For Main Clock Variable and Converting 
     
