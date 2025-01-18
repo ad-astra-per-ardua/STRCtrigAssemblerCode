@@ -25,7 +25,12 @@ function Define_Shape()
     HEFT6 = CS_SortA(CS_Rotate(baseCircle, -45),0)
     HEFT7 = Heart
 
+    duskHat3S = CSMakePathX({1.3,1.3},{0,192}, {96,192},{144,16},{32,-112},{-144,-32},{-96,78})
+    duskHat3SF = CS_SortXY(CS_FillPathHX2(duskHat3S, 1, 60, 60, 0, 0,45,1),"SORTXYT",nil,0)
 
-    CS_BMPGraph(baseCircle2, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    lairShape1 = CSMakeCircleX(6,48,30,150,96)
+
+
+    CS_BMPGraph(lairShape1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 
 end

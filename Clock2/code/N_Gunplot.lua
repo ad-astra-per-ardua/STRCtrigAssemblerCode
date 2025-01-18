@@ -137,6 +137,21 @@ function N_Gunplot()
     SetLoop2Plot(P6, "duskHat1", 131, {1,2,1,2,1,2,3,4,3}, {54,53,55,56,44,45,46,47,48}, duskhat2TL)
     SetEffectplotInf(P6, "duskHat1", 131, 84, {8,9,3,5,8,9,3,5,8,9,2,3}, duskhat2EftTL)
 
+    SetEffectplotInf(P6, "duskHat3", 131, 84, {8,9,3,5,8,9,3,5,8,9,2,3}, duskhat2EftTL)
+    SetLoop2Plot(P6, "duskHat3", 131, {5,1,5,2,5,1,5,2,5}, {54,55,53,56,48,55,54,56,54}, duskhat2TL)
+
+
+
+    ------ Lair ---------
+    
+    L1timer = CreateCcode()
+    SetLoop2Plot(P6, "duskLair1", 132, {6,6,6,6,6,6,6,6}, {54,53,65,66,54,77,78}, duskLair1TL)
+    SetLoop2Plot(P6, "duskLair1", 132, {6,6,6,6,6,6,6,6}, {55,56,55,56,55,56,55}, duskLair1TL)
+
+    CIf(FP, {Bring(P6, Exactly, 0, 132, "duskLair1")})
+    DoActions(FP, {AddCD(L1timer, 1)}, preserved)
+    CAPlot(lairShape1, P6, 84,"duskLair1", nil, 1, 32, {lairShape1[1],0,0,0,2,0}, nil, FP, {CDeaths(FP, AtMost, 24.2 * SDspeed, L1timer)}, nil, 1)
+    CIfEnd()
 
 
 end

@@ -1,4 +1,38 @@
 function Install_GplotEngine()
+
+    -- CAShapeArr2D = {
+    --     {DHSH1T1},
+    --     {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7},
+    --     {baseCircle2, baseCircle3,Heart,baseStar},
+    --     {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,baseCircle, baseCircle1},
+    -- }
+
+    -- cr8Array = {}
+    -- cnt = 0
+    -- for K, V in pairs(CAShapeArr2D) do
+    --     table.insert(cr8Array,cnt)
+    --     cnt = #V + cnt
+    -- end
+
+    -- CAShapeArr = {} -- -> CAPlot 삽입
+    -- for LIMIT, MODE in pairs(CAShapeArr2D) do
+    --     for K, V in pairs(MODE) do
+    --         table.insert(CAShapeArr,V)
+    --     end
+    -- end
+
+    -- ModifyshapeArr = CreateArr(#cr8Array,FP)
+    -- FshapeArr = {}
+    -- for K, V in pairs(cr8Array) do
+    --     table.insert(FshapeArr,SetMemX(Arr(ModifyshapeArr,K-1),SetTo,V))
+    -- end
+    -- DoActionsX(FP,FshapeArr,{}) -- CArray Init
+
+    -- DMMM = CreateVar(FP)
+    -- CAdd(FP,DMMM,_Read(Arr(ModifyshapeArr,(i-1))),j) -- get Shape Index (=Loc(i,j))
+    
+
+
         
     GunMaxAmount = 60 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
     GIndex = 0
@@ -31,9 +65,9 @@ function f_ReadLocXY(Loc)
     
     end
     ----
-    CAShapeArr = {DHSH1T1}
 
     ----< CAFunc , CAPlot CFunc >----
+    CAShapeArr = {DHSH1T1}
     CallCAPlot = InitCFunc(FP)
     CFunc(CallCAPlot)
         CAPlot(CAShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
@@ -65,9 +99,9 @@ function f_ReadLocXY(Loc)
     CFunc(CallCAPlot2)
         CAPlot(CAEffectshapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,8,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2003),SetNext(0x2004,"X",1)},nil)
-        --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
-    작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
-                -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
+        --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2003로 설정 // 0x2004의 Next트리거를 현재트리거의 다음트리거로 설정)
+    작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2003로설정) -> CJump(0x200)~CJumpEnd(0x200) 단락으로 진입후 유닛생성 -> 0x2003
+                -> 트리거0x2004의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
         ]]--
     CFuncEnd()
     ----< 유닛생성단락 >----
@@ -87,7 +121,7 @@ function f_ReadLocXY(Loc)
 
 
     ----< CAFunc , CAPlot CFunc >---- 3 Ver
-    CAShapeArr2 = {baseCircle2, baseCircle3,Heart,baseStar}
+    CAShapeArr2 = {baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape1}
     CallCAPlot3 = InitCFunc(FP)
     CFunc(CallCAPlot3)
         CAPlot(CAShapeArr2,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,2,Gun_DataIndex},nil,FP,nil
@@ -165,6 +199,7 @@ function f_ReadLocXY(Loc)
         CPlayer = GVar[6*GIndex-2] -- 플레이어변수
         GunPosX = GVar[6*GIndex-1]
         GunPosY = GVar[6*GIndex]
+
         
         ----< 건작제어 단락 >----
 

@@ -14,12 +14,14 @@ function Declare_BGM()
         IBGM_EPD(FP, {i}, BGMArray[i+1],{
             {1,"staredit\\wav\\hat1.ogg",25 * Fixedtime},
             {2,"staredit\\wav\\duskHat2.ogg",20 * Fixedtime},
+            {3,"staredit\\wav\\duskLair1.ogg",25 * Fixedtime},
         })
     end
     
     IBGM_EPD(FP, {Force5}, OB_BGMArray, {
         {1,"staredit\\wav\\hat1.ogg",25 * Fixedtime},
         {2,"staredit\\wav\\duskHat2.ogg",20 * Fixedtime},
+        {3,"staredit\\wav\\duskLair1.ogg",25 * Fixedtime},
     })
     
 
