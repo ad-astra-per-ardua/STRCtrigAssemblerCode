@@ -111,7 +111,7 @@ function f_ReadLocXY(Loc)
     NIf(FP,{Memory(0x628438,AtLeast,1)})
     CDoActions(FP,{ -- 유닛생성단락
         TCreateUnit(1,Gun_Unit,"248",Gun_Player);
-        TSetResources(P1, SetTo, Gun_Unit, Gas);
+        TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
     })
     NIfEnd()
 
@@ -138,6 +138,7 @@ function f_ReadLocXY(Loc)
     NIf(FP,{Memory(0x628438,AtLeast,1)})
         CDoActions(FP,{ -- 유닛생성단락
             TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
         })
     NIfEnd()
 
@@ -296,17 +297,19 @@ function f_ReadLocXY(Loc)
                     SetNVar(CDataIndex,SetTo,999); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 })
+
+                TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                    SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
+                    SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
+                    SetNVar(CPlayer,SetTo,Player); -- owner
+                    SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
+                    SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
+                    SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                    SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+                })
                 else
 
-            TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-                SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
-                SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
-                SetNVar(CPlayer,SetTo,Player); -- owner
-                SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
-                SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
-                SetCDeaths("X",SetTo,1,CStage); -- Generate counter
-                SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-            })
+            
 
             TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                 SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
@@ -325,7 +328,7 @@ function f_ReadLocXY(Loc)
             SetCDeaths("X",SetTo,#TimeLine+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
             SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
         })
-        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,2)},{Preserved})
+        
         
         
         CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
@@ -337,9 +340,9 @@ function f_ReadLocXY(Loc)
             CallCFuncX(FP,CallCAPlot3) -- CAPlot 호출
             Simple_SetLocX(FP,"249",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
-            CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
+            -- CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
         
-
+        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,2)},{Preserved})
         DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer)})
 
         CIfEnd()
@@ -372,21 +375,23 @@ function f_ReadLocXY(Loc)
                 TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,EffectUnit); -- unit id
                     SetNVar(CShapeType,SetTo,ShapeNumber[i]);
-                    SetNVar(CDataIndex,SetTo,999); -- 데이터인덱스 초기화
+                    SetNVar(CDataIndex,SetTo,999);
                     SetCDeaths("X",SetTo,Timeline[i]*SDspeed,CTimer); -- Create unit Timer
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 })
+                
+                
                 else
 
-            TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-                SetNVar(CUnitType,SetTo,EffectUnit); 
-                SetNVar(CShapeType,SetTo,ShapeNumber[1]);
-                SetNVar(CPlayer,SetTo,Player); 
-                SetNVar(CDataIndex,SetTo,0); 
-                SetCDeaths("X",SetTo,(Timeline[1])*SDspeed,CTimer);
-                SetCDeaths("X",SetTo,1,CStage); 
-                SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-            })
+                TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                    SetNVar(CUnitType,SetTo,EffectUnit); 
+                    SetNVar(CShapeType,SetTo,ShapeNumber[1]);
+                    SetNVar(CPlayer,SetTo,Player); 
+                    SetNVar(CDataIndex,SetTo,0); 
+                    SetCDeaths("X",SetTo,(Timeline[1])*SDspeed,CTimer);
+                    SetCDeaths("X",SetTo,1,CStage); 
+                    SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+                })
 
             TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                 SetNVar(CUnitType,SetTo,EffectUnit); 
@@ -405,7 +410,7 @@ function f_ReadLocXY(Loc)
             SetCDeaths("X",SetTo,#Timeline+1,CStage); -- Total length of array + 1 == End of unit generation. Thus, Set to them means, end of plot. 
             SetCDeathsX("X",SetTo,1*256,COrder,0xFF00); -- 건작잠금, Mask to condition for control gunplot
         })
-        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,8)},{Preserved})
+        
         
 
         CMov(FP,Gun_Unit,CUnitType) 
@@ -417,8 +422,8 @@ function f_ReadLocXY(Loc)
             CallCFuncX(FP,CallCAPlot2) 
             Simple_SetLocX(FP,"249",GPosX,GPosY,GPosX,GPosY) 
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) 
-            CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
-
+            -- CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
+            TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,8)},{Preserved})
             DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer)})
 
         CIfEnd()
