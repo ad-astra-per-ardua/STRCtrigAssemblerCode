@@ -66,7 +66,7 @@ function f_ReadLocXY(Loc)
     end
     ----
 
-    ----< CAFunc , CAPlot CFunc >----
+    ----< CAFunc , CAPlot CFunc >---- SetLoopInfPlot
     CAShapeArr = {DHSH1T1}
     CallCAPlot = InitCFunc(FP)
     CFunc(CallCAPlot)
@@ -93,8 +93,10 @@ function f_ReadLocXY(Loc)
     ----
 
 
-    ----< CAFunc , CAPlot CFunc >----
-    CAEffectshapeArr = {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7}
+    ----< CAFunc , CAPlot CFunc >---- SetEffectplot1
+    CAEffectshapeArr = {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,
+    DLSH3SHEft1,DLSH3SHEft2
+}
     CallCAPlot2 = InitCFunc(FP)
     CFunc(CallCAPlot2)
         CAPlot(CAEffectshapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,8,Gun_DataIndex},nil,FP,nil
@@ -120,11 +122,14 @@ function f_ReadLocXY(Loc)
 
 
 
-    ----< CAFunc , CAPlot CFunc >---- 3 Ver
-    CAShapeArr2 = {baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape1}
+    ----< CAFunc , CAPlot CFunc >---- SetLoop2Plot
+    CAShapeArr2 = {
+        baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape1,
+        DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4
+    }
     CallCAPlot3 = InitCFunc(FP)
     CFunc(CallCAPlot3)
-        CAPlot(CAShapeArr2,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,2,Gun_DataIndex},nil,FP,nil
+        CAPlot(CAShapeArr2,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,8,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -148,7 +153,7 @@ function f_ReadLocXY(Loc)
 
 
 
-    ----< CAFunc , CAPlot CFunc >---- 4 Ver
+    ----< CAFunc , CAPlot CFunc >---- SetEffectplotInf
     CAEffectshapeArr2 = {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,baseCircle, baseCircle1}
     CallCAPlot4 = InitCFunc(FP)
     CFunc(CallCAPlot4)
@@ -342,7 +347,7 @@ function f_ReadLocXY(Loc)
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
             -- CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
         
-        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,2)},{Preserved})
+        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,8)},{Preserved})
         DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer)})
 
         CIfEnd()
