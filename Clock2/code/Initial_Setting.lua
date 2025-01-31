@@ -72,7 +72,28 @@ for i = 0, 3 do
     }
     end
 
+    TriggerX(Force1, Always(), { -- 노말 무기 0번 할당
+        SetMemory(0x515B84+0x14*0+0x4*0,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*1,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*2,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*3,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*4,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*5,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*6,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*7,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*8,SetTo,256);
+        SetMemory(0x515B84+0x14*0+0x4*9,SetTo,256);
+    })
 
+    TriggerX(Force1, Always(), { --  퍼뎀 무기 2번 할당 | 스마 : P1 = 16, P2 = 10, P3 = 1, P4 = 99 , P5 = 100 | 
+    SetMemory(0x515B84+0x14*2+0x4*7,SetTo,( 2100/ 1000) * 256); -- 일마
+    SetMemory(0x515B84+0x14*2+0x4*1,SetTo,( 3900/ 1000) * 256); -- 영마
+    SetMemory(0x515B84+0x14*2+0x4*2,SetTo,( 5500/ 1000) * 256); -- 스마 1P
+    SetMemory(0x515B84+0x14*2+0x4*3,SetTo,( 5500/ 1000) * 256); -- 스마 2P
+    SetMemory(0x515B84+0x14*2+0x4*4,SetTo,( 5500/ 1000) * 256); -- 스마 3P
+    SetMemory(0x515B84+0x14*2+0x4*5,SetTo,( 5500/ 1000) * 256); -- 스마 4P
+    SetMemory(0x515B84+0x14*2+0x4*6,SetTo,( 5500/ 1000) * 256); -- 스마 5P
+    }, preserved)
 
 
 

@@ -2,9 +2,69 @@ function Define_Shape()
     function GRADX(X) return X end
     function GRADRY(Y) return Y*3 end
     function SORTXYT(X,Y) return {math.abs(X)} end
+
+	function CreateMShapes(Name,Pathdata,Type,Init1,Dev1,Init2,Dev2,InvertFlag)
+		local InitTemp1 = Init1
+		local InitTemp2 = Init2
+	for i = 1, 8 do
+		local varName = Name .. i
+		local varName2 = Name ..'_'.. i
+		local ShapeType = Type
+		if i <= 4 then
+			if ShapeType == 1 then
+				_G[varName] = CS_FillPathGradX(Pathdata,1,InitTemp1,"GRADX",3,0,0,1)
+			else if ShapeType == 2 then
+				_G[varName] = CS_FillPathGradY(Pathdata,1,InitTemp1,"GRADX",3,0,0,1)
+			end end
+			if i == 1 then
+				InitTemp1 = InitTemp1-Dev1*(5-i)-Dev1
+			else
+				InitTemp1 = InitTemp1-Dev1*(5-i)
+			end
+		else -- 5<=i<=8
+			if ShapeType == 1 then
+				_G[varName] = CS_FillPathGradX(Pathdata,1,InitTemp2,"GRADX",3,0,0,1)
+			else if ShapeType == 2 then
+				_G[varName] = CS_FillPathGradY(Pathdata,1,InitTemp2,"GRADX",3,0,0,1)
+			end end
+			if i == 5 then
+				InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*2
+			else if i == 6 then
+				InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*1.25
+			else -- i == 7
+				InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*0.75
+			end end
+			
+		end
+		if InvertFlag == 0 then
+			_G[varName2] = _G[varName]
+		else if InvertFlag == 1 then
+			_G[varName2] = CS_InvertXY(_G[varName],nil,0)
+		end end
+	end
+	end
+
+
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
     DHSH1T1 = CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1)
     SHH15x = CSMakePath({0,-191},{-240,-179},{-240,17},{363,-15})
+
+	-- 1 ~ 4 4는 거의 이펙트로 사용
+	-- 5 ~ 7 5는 강유닛 혹은 영작유닛
+	DLSH3 = CS_InvertXY(CSMakePath({-32,144}, {-160,112}, {-160,-48}, {-64,-80}, {-32,-144}, {160,-144}, {64,80}, {-32,144}),nil,1)
+	CreateMShapes("DLSH3SH",DLSH3, 2, 48, 3, 96, 3, 0)
+	DLSH3SHEft1 = CS_SortY(DLSH3SH_4, 1)
+	DLSG3SH1G1 = CS_SortY(DLSH3SH1, 1)
+	DLSH3SH5G2 = CS_SortR(DLSH3SH5, 0)
+	DLSH3SH5G3 = CS_InvertXY(CS_SortR(DLSH3SH5, 1),nil,1)
+	DLSH3SHEft2 = CS_InvertXY(CS_SortR(DLSH3SH_4, 1),nil,1)
+	DLSH3SH5G4 = CS_SortR(DLSH3SH1, 0)
+
+	
+
+
+
+
     SHH15xa = CS_FillPathGradX(SHH15x,1,60,"GRADX",3,0,0,1)
     baseCircle = CS_RatioXY(CSMakeCircleX(6,64,30,150,96),1,0.5)
     baseCircle1 = CS_Rotate(baseCircle, 90)
@@ -31,6 +91,9 @@ function Define_Shape()
     lairShape1 = CSMakeCircleX(6,48,30,150,96)
 
 
-    CS_BMPGraph(lairShape1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(DLSH3SH_4, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DLSH3SH5, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+
+
 
 end

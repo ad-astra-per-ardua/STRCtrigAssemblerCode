@@ -432,4 +432,45 @@ function CSPlotOrder2(Shape,Owner,UnitId,Location,CenterXY,PerUnit,PlotSize,Orde
 	end
 end
 
+function CreateMShapes(Name,Pathdata,Type,Init1,Dev1,Init2,Dev2,InvertFlag)
+	local InitTemp1 = Init1
+	local InitTemp2 = Init2
+for i = 1, 8 do
+	local varName = Name ..'_'.. i
+	local varName2 = Name ..'_'.. i
+	local ShapeType = Type
+	if i <= 4 then
+		if ShapeType == 1 then
+			_G[varName] = CS_FillPathGradX(Pathdata,1,InitTemp1,"GRADX",3,0,0,1)
+		else if ShapeType == 2 then
+			_G[varName] = CS_FillPathGradY(Pathdata,1,InitTemp1,"GRADX",3,0,0,1)
+		end end
+		if i == 1 then
+			InitTemp1 = InitTemp1-Dev1*(5-i)-Dev1
+		else
+			InitTemp1 = InitTemp1-Dev1*(5-i)
+		end
+	else -- 5<=i<=8
+		if ShapeType == 1 then
+			_G[varName] = CS_FillPathGradX(Pathdata,1,InitTemp2,"GRADX",3,0,0,1)
+		else if ShapeType == 2 then
+			_G[varName] = CS_FillPathGradY(Pathdata,1,InitTemp2,"GRADX",3,0,0,1)
+		end end
+		if i == 5 then
+			InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*2
+		else if i == 6 then
+			InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*1.25
+		else -- i == 7
+			InitTemp2= InitTemp2-Dev2*(9-i)-Dev2*0.75
+		end end
+		
+	end
+	if InvertFlag == 0 then
+		_G[varName2] = _G[varName]
+	else if InvertFlag == 1 then
+		_G[varName2] = CS_InvertXY(_G[varName],nil,0)
+	end end
+end
+end
+
 end

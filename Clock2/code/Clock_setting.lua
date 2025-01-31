@@ -53,10 +53,11 @@ function Clock_setting()
         RemoveUnitAt(All, 211, "home", P6);
         RemoveUnitAt(All, 212, "home", P6);
     }, preserved)
-        
+        DoActions(FP, {SetImageScript(213, 131)})
         CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
         CAPlot(mainHour, P6, 213, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
         CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {Always()},nil, 1);
+        DoActions(FP, {SetImageScript(213, 142)})
         SetDelay(DelayTimer, 340);
         CIfEnd()
         DoActions(FP, {SetCD(tempv, 0)}, preserved)
