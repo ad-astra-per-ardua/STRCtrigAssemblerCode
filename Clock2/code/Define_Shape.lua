@@ -1,5 +1,5 @@
 function Define_Shape()
-    function GRADX(X) return X end
+    function GRADX(X) return math.abs(X) end
     function GRADRY(Y) return Y*3 end
     function SORTXYT(X,Y) return {math.abs(X)} end
 
@@ -44,6 +44,8 @@ function Define_Shape()
 	end
 	end
 
+	PSZ = 128
+
 
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
     DHSH1T1 = CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1)
@@ -60,7 +62,16 @@ function Define_Shape()
 	DLSH3SHEft2 = CS_InvertXY(CS_SortR(DLSH3SH_4, 1),nil,1)
 	DLSH3SH5G4 = CS_SortR(DLSH3SH1, 0)
 
-	
+	DuskHive1PTH = CS_InvertXY(CSMakePath(
+	{0,1.5 * PSZ},{-1 * PSZ, 1 * PSZ}, {-2 * PSZ, 1 * PSZ},{-2.2*PSZ, 0.5*PSZ},{-2*PSZ,-0.5*PSZ},{-1*PSZ, 1*PSZ}, {0,-1.5*PSZ}, {1.5*PSZ,-1.5*PSZ},
+	{2*PSZ, -0.5*PSZ},{2*PSZ,1.5*PSZ}
+	),nil,0)
+	CreateMShapes("DuskHive1SH", DuskHive1PTH, 1, 64, 4, 128, 10, 0) -- 2 약 지상유닛, 1 공중유닛, 5 강유닛
+
+	DuskCerebratePTH = CS_InvertXY(CSMakePath(
+		{0,0},{-2/3*PSZ,5/3*PSZ},{-(3+2/3)*PSZ,-4/3*PSZ},{-(3+2/3)*PSZ,-(2+1/3)*PSZ},{-(2+2/3)*PSZ,-(3+1/3)*PSZ},{-(1+2/3)*PSZ,-(3+1/3)*PSZ},{1/3*PSZ,-(1+1/3*PSZ)},{4/3*PSZ,-4/3*PSZ},{4/3*PSZ,2/3*PSZ}
+	),nil,0)
+	CreateMShapes("DuskCerebrateSH", DuskCerebratePTH, 1, 64, 4, 128, 10, 0) -- 2 약 지상유닛, 1 공중유닛 5 강유닛
 
 
 
@@ -90,9 +101,15 @@ function Define_Shape()
 
     lairShape1 = CSMakeCircleX(6,48,30,150,96)
 
-
-    CS_BMPGraph(DLSH3SH_4, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DLSH3SH5, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebratePTH, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(DuskCerebrateSH1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH2, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH3, {0x00FFC0}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH4, {0x00FFC0}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH_5, {0x00FFC0}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH_6, {0x00FFC0}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH_7, {0x00FFC0}, "7", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskCerebrateSH_7, {0x00FFC0}, "8", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 
 
 
