@@ -156,6 +156,8 @@ function N_Gunplot()
     SetLoop2Plot(P6, "duskLair3", 132, {7,8,7,8,9,8,9,7,7,8,7,9,8,10}, {37,44,38,58,80,78,56,48,65,68,66,58,56,53}, duskLair3TL)
     SetEffectplot1(P6, "duskLair3", 132, 84, {8,9,8,9,9,9,9,8,8,9,8,9,9,8}, duskLair3TLEft)
 
+    SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {40,40,40,40,40,40,40,40}, duskHive1TL)
+    -- SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
 
 
 end

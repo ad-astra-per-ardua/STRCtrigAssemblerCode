@@ -22,5 +22,6 @@ function Control_PlotBGM()
     plotBGM(P6, 131, "duskHat3", 2, 30000);
     plotBGM(P6, 132, "duskLair1", 3, 40000);
     plotBGM(P6, 132, "duskLair3", 4, 40000);
+    plotBGM(P6, 133, "duskHive1", 5, 50000);
 
 end
