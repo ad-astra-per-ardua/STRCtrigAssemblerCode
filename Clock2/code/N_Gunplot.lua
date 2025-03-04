@@ -122,7 +122,7 @@ function N_Gunplot()
         7. linear ring : eden without eve
         8. Author Wind : Forest
         9. pikasonic : factory
-        10. synthion : Aurora
+        10. synthion :s Aurora
         11. ARforest : Relics
         12. cgdct : bang
         13. '' : heart connect
