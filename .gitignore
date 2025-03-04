@@ -18,3 +18,5 @@ msu_hard/map/Ctemp/TRIGP8.chk
 msu_hard/map/Ctemp/TRIGP0.chk
 ctrig/.vscode/c_cpp_properties.json
 ctrig/.vscode/launch.json
+Clock2/Clock2.e3s
+*.e3s

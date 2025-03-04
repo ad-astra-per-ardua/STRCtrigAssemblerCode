@@ -1,12 +1,24 @@
+---- Deal with floor prob on random ----
+MATHRAND = math.random
+function math.random(X,Y)
+    if X == nil then
+        return MATHRAND()
+    end
+    if Y == nil then
+        return MATHRAND(math.floor(X))
+    end
+    return MATHRAND(math.floor(X),math.floor(Y))
+end
+
 --- 0x58F44C == LeaderBoard change Variable
 --- 0x58F450 +*(4 * i for i in range(5)) ) == CCMU Counter Output 
 
 
 
 -- Laptop
--- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
--- __MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
--- __SubDirSetting(__encode_cp949(Curdir.."\\code")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
+Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
+__MapDirSetting(__encode_cp949(Curdir.."\\Map")) -- 맵파일 경로(\를 \\로 바꿔야함)
+__SubDirSetting(__encode_cp949(Curdir.."\\code")) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
 
 -- --- Desktop
 -- Curdir = "C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12\\Mapping\\Clock2"
@@ -34,7 +46,7 @@ Install_GetCLoc(FP,248,184)
 Install_BackupCP(FP)
 Install_function()
 ------------------
-Convert_Function()
+-- Convert_Function()
 ------------------
 CSPlotIndexAlloc = 1
 CSPlotOrderIndexAlloc = 1
@@ -55,7 +67,7 @@ TestOn = CreateCcode()
 -- Include_MatheMatics(360)
 ---- Calculating death variable ----
 SDspeed = 1000 // 29
-
+JYD = "Set Unit Order To: Junk Yard Dog"
 HumanPlayers = {P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12}
 
 CJumpEnd(AllPlayers,0)
@@ -66,23 +78,32 @@ DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 ---------- End of Set Up Initialization ------
 
+
+
+Gunplot_Timeline()
 Basement_functions()
 Verifing_Phase()
 Initial_Setting()
 Enable_TestMode()
-Clock_setting()
 Define_Shape()
-Declare_BGM()
+Install_GplotEngine()
+ 
+
 
 ----------- 분할 lua 선언 -------
 
 
 Define_Variable()
+Declare_BGM()
 N_Gunplot()
+Control_PlotBGM()
 
 ----------- 분할 lua 선언 End ---------
 
-CSPlotToCAPlot()
+Clock_setting()
+Clock_modifyloop()
+MainclockG()
+-- CSPlotToCAPlot()
 init_Setting()
 EndCtrig()
 ErrorCheck()

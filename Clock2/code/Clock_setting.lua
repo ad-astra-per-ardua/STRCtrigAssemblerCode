@@ -3,8 +3,8 @@ function Clock_setting()
     tempv = CreateCcode()
     mainMinute = CSMakeLine(1, 12, 0, 9, 1)
     mainHour = CSMakeLine(1, 12, 0, 6, 1)
-    DoActions(FP, {SetV(HDiv, 30, SetTo), SetV(MDiv, 360, SetTo),SetV(MMDiv, 6, SetTo)})
-
+    DoActions(FP, {SetV(HDiv, 30, SetTo), SetV(MDiv, 360, SetTo),SetV(MMDiv, 6, SetTo),SetV(FDiv, 12, SetTo)})
+    
     function mainminuteCAfunc1()
         local CA = CAPlotDataArr
         local CB = CAPlotCreateArr
@@ -31,11 +31,14 @@ function Clock_setting()
         f_Mul(FP, mainclockHour, hourtemp, HDiv)
         f_Div(FP, showmainmin, mainclockmin, MMDiv)
 
-        DoActions(Force2, {
-            SetDeaths(Force2, SetTo, 0, 131);
-            SetDeaths(Force2, SetTo, 0, 132);
-            SetDeaths(Force2, SetTo, 0, 133);
-        }, preserved)
+        f_Mod(FP, finMainclock, hourtemp, FDiv)
+        f_Div(FP, mainclockCycled, hourtemp, FDiv)
+
+        -- DoActions(Force2, {
+        --     SetDeaths(Force2, SetTo, 0, 131);
+        --     SetDeaths(Force2, SetTo, 0, 132);
+        --     SetDeaths(Force2, SetTo, 0, 133);
+        -- }, preserved)
 
         -- initial clock setup
         CIfOnce(Force2, Always())
@@ -50,13 +53,15 @@ function Clock_setting()
         RemoveUnitAt(All, 211, "home", P6);
         RemoveUnitAt(All, 212, "home", P6);
     }, preserved)
-        
+        DoActions(FP, {SetImageScript(213, 131)})
         CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
         CAPlot(mainHour, P6, 213, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
         CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {Always()},nil, 1);
+        DoActions(FP, {SetImageScript(213, 142)})
+        SetDelay(DelayTimer, 340);
         CIfEnd()
         DoActions(FP, {SetCD(tempv, 0)}, preserved)
-    DisplayPrintEr(P1, {"Total minute : ", mintemp, " Clock's Minute Value : ", showmainmin," Hour Value : ", hourtemp})
+    DisplayPrintEr(P1, {"Total minute : ", mintemp, " | Clock's Minute Value : ", showmainmin," | Hour Value : ", finMainclock," | Hour Cycled Executed : ", mainclockCycled})
 
 
 end
