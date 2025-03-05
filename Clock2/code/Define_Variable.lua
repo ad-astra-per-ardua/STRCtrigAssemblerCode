@@ -1,4 +1,11 @@
 function Define_Variable()
+
+    ----- HP Upgrade Trigger
+
+
+
+    ----- End of HP Upgrade Trigger
+
     -- Healzone function
     DoActions(FP, AddCD(healzone, 1), preserved)
     TriggerX(FP, {CDeaths(FP, AtLeast, 204, healzone)}, {
@@ -10,7 +17,7 @@ function Define_Variable()
         
         SetCD(healzone, 1)
     }, preserved)
-
+f_Bread(PlayerID, Offset, Output, Multiplier)
     TriggerX(FP, Always(), {
         RemoveUnit("Men", P12),
         RemoveUnit(111, P12),
@@ -19,7 +26,7 @@ function Define_Variable()
     }, preserved)
 
     ------- Medic Heal Trigger --- 
-    
+    TSetMemory(Offset, Type, Value)_Mul(Source, Operand)
     --- 1 Tick heal ----
 
     TriggerX(Force1, {
