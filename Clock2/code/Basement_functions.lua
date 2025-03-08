@@ -1,6 +1,6 @@
 function Basement_functions()
 
-    
+    InitHPV = CreateVar(FP)
 
     healzone,DelayMedic = CreateCcodes(2)
     Combine_marine = CreateCcode()

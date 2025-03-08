@@ -1,7 +1,24 @@
 function Define_Variable()
+    SMarineArray = {16,10,1,99,100}
+    HPValue = CreateVar(FP)
+    ----- HP Upgrade Trigger
+
+    for i = 0, 4 do
+        f_Bread(FP, 0x58D2B0 + (i * 46) + 15, HPValue)
+        for e = 1, 5 do
+        CDoActions(i, {
+            TSetMemory(0x662350 + SMarineArray[e] * 4, SetTo, _Add(_Mul(HPValue, 250*256),5500*256))
+        })
+        end
+    end
+           
+    ----- End of HP Upgrade Trigger
+
     -- Healzone function
+    
     DoActions(FP, AddCD(healzone, 1), preserved)
     TriggerX(FP, {CDeaths(FP, AtLeast, 204, healzone)}, {
+
         ModifyUnitHitPoints(All, "Men", Force1, "home", 100),
         ModifyUnitShields(All, "Men", Force1, "home", 100),
         
@@ -19,36 +36,21 @@ function Define_Variable()
     }, preserved)
 
     ------- Medic Heal Trigger --- 
-    
+
     --- 1 Tick heal ----
-
-    TriggerX(Force1, {
-        Command(CurrentPlayer, AtLeast, 1, 34)
-    }, {
-        ModifyUnitHitPoints(All, "Men", CurrentPlayer, "Anywhere", 100),
-        ModifyUnitShields(All, "Men", CurrentPlayer, "Anywhere", 100),
-        RemoveUnit(34, CurrentPlayer)
-    }, preserved)
-
-    --- 2 Tick heal ----
-
-    TriggerX(Force1, {
-        Command(CurrentPlayer, AtLeast, 1, 21)
-    }, {
-        ModifyUnitHitPoints(All, "Men", CurrentPlayer, "Anywhere", 100),
-        ModifyUnitShields(All, "Men", CurrentPlayer, "Anywhere", 100),
-        RemoveUnit(21, CurrentPlayer)    
-    }, preserved)
-
-    --- 3 Tick heal ---
-
-    TriggerX(Force1, {
-        Command(CurrentPlayer, AtLeast, 1, 23)
-    }, {
-        ModifyUnitHitPoints(All, "Men", CurrentPlayer, "Anywhere", 100),
-        ModifyUnitShields(All, "Men", CurrentPlayer, "Anywhere", 100),
-        RemoveUnit(23, CurrentPlayer)
-    }, preserved)
+    MedicDelay = {34,21,23}
+    
+    for i = 0, 4 do 
+        for e = 1, 3 do
+            TriggerX(i, {
+                Command(CurrentPlayer, AtLeast, 1, MedicDelay[e])
+            }, {
+                ModifyUnitHitPoints(All, "Men", CurrentPlayer, "Anywhere", 100),
+                ModifyUnitShields(All, "Men", CurrentPlayer, "Anywhere", 100),
+                RemoveUnitAt(All, MedicDelay[e], "MainLocation", i)
+            }, preserved)
+        end
+    end 
 
 
     --- Time switch Phase | Trigger unit == 22 ---

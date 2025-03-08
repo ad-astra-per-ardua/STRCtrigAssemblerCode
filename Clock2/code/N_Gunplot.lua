@@ -122,7 +122,7 @@ function N_Gunplot()
         7. linear ring : eden without eve
         8. Author Wind : Forest
         9. pikasonic : factory
-        10. synthion : Aurora
+        10. synthion :s Aurora
         11. ARforest : Relics
         12. cgdct : bang
         13. '' : heart connect
@@ -134,8 +134,8 @@ function N_Gunplot()
     SetLoopInfPlot(P6, "duskHat2", 131, {1,1,1,1,1,1,1,1,1,1,1,1,1,1}, {54,53,55,56,77,78,40,41,43,44,45,46,47,48}, duskhatTL)
     SetEffectplot1(P6, "duskHat2", 131, 84, {1,2,3,4,5,6,7,7}, duskhatTLeft)
 
-    SetLoop2Plot(P6, "duskHat1", 131, {1,2,1,2,1,2,3,4,3}, {54,53,55,56,44,45,46,47,48}, duskhat2TL)
-    SetEffectplotInf(P6, "duskHat1", 131, 84, {8,9,3,5,8,9,3,5,8,9,2,3}, duskhat2EftTL)
+    SetLoop2Plot(P6, "duskHat1", 131, {1,2,1,2,1,2,3,2,3}, {54,53,55,56,44,45,46,47,48}, duskhat2TL)
+    SetEffectplotInf(P6, "duskHat1", 131, 84, {8,9,3,5,8,9,3,5,8,9,4,2}, duskhat2EftTL)
 
     SetEffectplotInf(P6, "duskHat3", 131, 84, {8,9,3,5,8,9,3,5,8,9,2,3}, duskhat2EftTL)
     SetLoop2Plot(P6, "duskHat3", 131, {5,1,5,2,5,1,5,2,5}, {54,55,53,56,48,55,54,56,54}, duskhat2TL)
