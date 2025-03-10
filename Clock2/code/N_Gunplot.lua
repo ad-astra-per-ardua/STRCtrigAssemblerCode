@@ -35,6 +35,7 @@ function N_Gunplot()
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,137,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,138,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF))
 
     
     -----------------
@@ -52,7 +53,16 @@ function N_Gunplot()
     LoadCp(FP,BackupCp)
     DoActions(FP,MoveCp(Add,15*4))
 
+    NIf(FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF)})
+        CreateUnit(10, 37, "248", P6);
+        Order(37, P6, "248", Attack, "home");
 
+        CreateUnit(10, 54, "248", P6);
+        Order(54, P6, "248", Attack, "home");
+
+        CreateUnit(10, 56, "248", P6);
+        Order(56, P6, "248", Attack, "home");
+    NIfEnd()
     
     TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,135,0,0xFF)}, {
         CreateUnit(10, 53, "248", P6);
@@ -99,8 +109,8 @@ function N_Gunplot()
     end
     CunitCtrig_End()
 
-    PB = CSMakePolygon(6,80,0,37,1)
-    CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
+    
+    
 
     --[[
 
@@ -159,5 +169,5 @@ function N_Gunplot()
     SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {40,40,40,40,40,40,40,40}, duskHive1TL)
     -- SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
 
-
+    
 end

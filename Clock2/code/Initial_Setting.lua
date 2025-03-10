@@ -1,4 +1,7 @@
 function Initial_Setting()
+    PB = CSMakePolygon(6,80,0,37,1)
+    CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
+    TriggerX(FP, Always(), CreateUnit(1, 98, "home", P1))
 
     TriggerX(FP, Always(),{
         RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "duskHive6"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P6}, FP),
@@ -77,9 +80,8 @@ for i = 0, 3 do
         퍼뎀 == 2번(진동형) , 노말 == 0번(독립형)
     
     ]]
-    TriggerX(Force1, Always(), { -- 노말 무기 0번 할당
-        SetMemory(0x515B84+0x14*0+0x4*0,SetTo,0); -- Mineral Chunk == Independence type
-        SetMemory(0x515B84+0x14*0+0x4*1,SetTo,256);
+    TriggerX(FP, Always(), { -- 0번무기 Section == 노말 트루데미지 
+        SetMemory(0x515B84+0x14*0+0x4*1,SetTo,0); -- Mineral Chunk == Independence type
         SetMemory(0x515B84+0x14*0+0x4*2,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*3,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*4,SetTo,256);
@@ -88,19 +90,17 @@ for i = 0, 3 do
         SetMemory(0x515B84+0x14*0+0x4*7,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*8,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*9,SetTo,256);
-    })
+    },preserved)
 
-    TriggerX(Force1, Always(), { --  퍼뎀 무기 2번 할당 | 스마 : P1 = 16, P2 = 10, P3 = 1, P4 = 99 , P5 = 100 | 
-    SetMemory(0x515B84+0x14*2+0x4*0,SetTo,0); -- Mineral Chunk == Independence type
-    SetMemory(0x515B84+0x14*2+0x4*7,SetTo,( 2100/ 1000) * 256); -- 일마
-    SetMemory(0x515B84+0x14*2+0x4*1,SetTo,( 3900/ 1000) * 256); -- 영마
-    SetMemory(0x515B84+0x14*2+0x4*2,SetTo,( 5500/ 1000) * 256); -- 스마 1P
-    SetMemory(0x515B84+0x14*2+0x4*3,SetTo,( 5500/ 1000) * 256); -- 스마 2P
-    SetMemory(0x515B84+0x14*2+0x4*4,SetTo,( 5500/ 1000) * 256); -- 스마 3P
-    SetMemory(0x515B84+0x14*2+0x4*5,SetTo,( 5500/ 1000) * 256); -- 스마 4P
-    SetMemory(0x515B84+0x14*2+0x4*6,SetTo,( 5500/ 1000) * 256); -- 스마 5P
+    CTriggerX(FP, Always(), { --  퍼뎀 무기 2번 할당 | 스마 : P1 = 16, P2 = 10, P3 = 1, P4 = 99 , P5 = 100 | 
+        SetMemory(0x515B88+0x14*2+0x4*0,SetTo,0); -- Mineral Chunk == Independence type
+        SetMemory(0x515B88+0x14*2+0x4*7,SetTo,2100 * 256 / 1000); -- 일마
+        SetMemory(0x515B88+0x14*2+0x4*1,SetTo,3900 * 256 / 1000); -- 영마
+        TSetMemory(0x515B88+0x14*2+0x4*2,SetTo,_Div(_ReadF(0x662350 + 16*4),1000)); -- 스마 1P
+        TSetMemory(0x515B88+0x14*2+0x4*3,SetTo,_Div(_ReadF(0x662350 + 10*4),1000)); -- 스마 2P
+        TSetMemory(0x515B88+0x14*2+0x4*4,SetTo,_Div(_ReadF(0x662350 + 1*4),1000)); -- 스마 3P
+        TSetMemory(0x515B88+0x14*2+0x4*5,SetTo,_Div(_ReadF(0x662350 + 99*4),1000)); -- 스마 4P
+        TSetMemory(0x515B88+0x14*2+0x4*6,SetTo,_Div(_ReadF(0x662350 + 100*4),1000)); -- 스마 5P
     }, preserved)
-
-
 
 end

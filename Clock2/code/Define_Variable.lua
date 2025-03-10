@@ -5,13 +5,11 @@ function Define_Variable()
 
     for i = 0, 4 do
         f_Bread(FP, 0x58D2B0 + (i * 46) + 15, HPValue)
-        for e = 1, 5 do
-        CDoActions(i, {
-            TSetMemory(0x662350 + SMarineArray[e] * 4, SetTo, _Add(_Mul(HPValue, 250*256),5500*256))
-        })
-        end
+        CDoActions(FP, {
+            TSetMemory(0x662350 + SMarineArray[i+1] * 4, SetTo, _Add(_Mul(HPValue, 250*256),5500*256))
+        },preserved)
+        
     end
-           
     ----- End of HP Upgrade Trigger
 
     -- Healzone function

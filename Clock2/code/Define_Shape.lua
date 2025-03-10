@@ -106,6 +106,10 @@ function Define_Shape()
 
     lairShape1 = CSMakeCircleX(6,48,30,150,96)
 
+
+	TriangleDuskhive1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
+	TriangleDuskhive2 = CS_InvertXY(TriangleDuskhive1,nil,0)
+
 	CS_BMPGraph(DuskHive1PTH, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
     CS_BMPGraph(DuskHive1SH1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH2, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
