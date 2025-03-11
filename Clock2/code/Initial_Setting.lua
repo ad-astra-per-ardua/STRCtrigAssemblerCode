@@ -2,6 +2,12 @@ function Initial_Setting()
     PB = CSMakePolygon(6,80,0,37,1)
     CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
     TriggerX(FP, Always(), CreateUnit(1, 98, "home", P1))
+    TriggerX(FP, {
+        Bring(P1, AtLeast, 1, 49, "home")
+    }, {
+        KillUnitAt(All, "Men", "Anywhere", Force2),
+        KillUnitAt(All, 49, "home", P1)
+    }, preserved)
 
     TriggerX(FP, Always(),{
         RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "duskHive6"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P6}, FP),

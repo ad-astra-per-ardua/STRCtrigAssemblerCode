@@ -36,7 +36,7 @@ function Gunplot_Timeline()
         1.167, 7.755, -- 1T Ground | 2plot 8
         2.37, 10.742, -- 1T Air | 6plot 10
         3.573, 15.588, -- 2T Unit | 1plot 7
-        5.966, 18.123, -- Hero Unit | 5plot 9
+        5.966, 18.123 -- Hero Unit | 5plot 9
     }
     duskHive1TLEft = {
         1.167, 2.37, 3.573, 5.966, -- X Axis Asc

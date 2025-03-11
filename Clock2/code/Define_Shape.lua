@@ -44,8 +44,7 @@ function Define_Shape()
 	end
 	end
 
-	PSZ = 128
-
+	PSZ = 128																																																																																											
 
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
     DHSH1T1 = CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1)
@@ -62,10 +61,10 @@ function Define_Shape()
 	DLSH3SHEft2 = CS_InvertXY(CS_SortR(DLSH3SH_4, 1),nil,1)
 	DLSH3SH5G4 = CS_SortR(DLSH3SH1, 0)
 
-	DuskHive1PTH = CS_InvertXY(CSMakePath(
+	DuskHive1PTH = CS_MoveXY(CS_InvertXY(CSMakePath(
 	{0,1.5 * PSZ},{-1 * PSZ, 1 * PSZ}, {-2 * PSZ, 1 * PSZ},{-2.2*PSZ, 0.5*PSZ},{-2*PSZ,-0.5*PSZ},{-1*PSZ, 1*PSZ}, {0,-1.5*PSZ}, {1.5*PSZ,-1.5*PSZ},
 	{2*PSZ, -0.5*PSZ},{2*PSZ,1.5*PSZ}
-	),nil,0)
+	),nil,0),16,-16)
 	CreateMShapes("DuskHive1SH", DuskHive1PTH, 1, 64, 4, 128, 10, 0) -- 2 약 지상유닛, 1 공중유닛, 5 강유닛
 	DuskHive1SH1plt = CS_SortX(DuskHive1SH1, 0)
 	DuskHive1SH2plt = CS_SortX(DuskHive1SH2, 0)
@@ -110,10 +109,10 @@ function Define_Shape()
 	TriangleDuskhive1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
 	TriangleDuskhive2 = CS_InvertXY(TriangleDuskhive1,nil,0)
 
-	CS_BMPGraph(DuskHive1PTH, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(DuskHive1SH1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH2, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH3, {0x00FFC0}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH1plt, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(DuskHive1SH2plt, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH5plt, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH6plt, {0x00FFC0}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH4, {0x00FFC0}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH_5, {0x00FFC0}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH_6, {0x00FFC0}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
