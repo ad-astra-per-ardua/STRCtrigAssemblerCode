@@ -78,7 +78,7 @@ function Define_Shape()
 
 
 
-
+	
 
     SHH15xa = CS_FillPathGradX(SHH15x,1,60,"GRADX",3,0,0,1)
     baseCircle = CS_RatioXY(CSMakeCircleX(6,64,30,150,96),1,0.5)
@@ -90,7 +90,7 @@ function Define_Shape()
 	Heart = CS_SortXY(CS_RemoveStack(HCC0,15,0),"SORTXYT",nil,1) -------하트
     baseCircle2 = CS_RatioXY(CSMakeCircleX(6,128,30,54,24),1,0.5)
     baseCircle3 = CS_Rotate(baseCircle2, 90)
-
+	HeartV2 = CS_FillPathGradY(Heart,1,32,"GRADX",3,0,0,1)
 
     HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
     HEFT2 = baseStar
@@ -106,12 +106,15 @@ function Define_Shape()
     lairShape1 = CSMakeCircleX(6,48,30,150,96)
 
 
-	TriangleDuskhive1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
+	TriangleDuskhive1 = CSMakePolygon(3, 48, 0, CS_Level("Polygon", 3, 5), CS_Level("Polygon", 3, 4))
 	TriangleDuskhive2 = CS_InvertXY(TriangleDuskhive1,nil,0)
+	OctagonDuskhive1 = CSMakePolygon(6, 48, 0, CS_Level("Polygon", 6, 5), CS_Level("Polygon", 6, 4))
+	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
+	
 
-	CS_BMPGraph(DuskHive1SH1plt, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(DuskHive1SH2plt, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH5plt, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(TriangleDuskhive1, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(TriangleDuskhive2, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(HeartV2, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH6plt, {0x00FFC0}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH4, {0x00FFC0}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(DuskHive1SH_5, {0x00FFC0}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)

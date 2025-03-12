@@ -1,9 +1,36 @@
 function N_Gunplot()
 
     ----- 사망인식 건작 -----
+    DuskHive3Var = CreateCcode()
+    SettingFlag = CreateCcode()
+
+    NIf(Force2, {Bring(P6, Exactly, 0, 133, "duskHive3")} )
+        DoActions(FP, {AddCD(DuskHive3Var, 1)}, preserved)
+
+        CSPlot2(TriangleDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[1] * SDspeed, DuskHive3Var)})
+        CSPlot2(TriangleDuskhive2, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[2] * SDspeed, DuskHive3Var)})
+
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[3] * SDspeed,DuskHive3Var)},{Order(179, P6, "Anywhere", Move, "duskHive3A")})
+        TriggerX(Force2, {CDeaths(FP, AtLeast, duskHive3TL[4] * SDspeed,DuskHive3Var)}, {RunAIScriptAt(JYD, "duskHive3")})
+        TriggerX(Force2, {CDeaths(FP, AtLeast, (duskHive3TL[4] + 0.5) * SDspeed,DuskHive3Var)}, {RunAIScriptAt(JYD, "duskHive3")})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[5] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+
+        CAPlot(PentagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, {PentagonDuskhive1[1],0,0,0,1/5,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[6] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[10] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+        
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[10]+1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,1 )})
+
+        CSPlot2(TriangleDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[11] * SDspeed, DuskHive3Var)})
+        CSPlot2(TriangleDuskhive2, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[12] * SDspeed, DuskHive3Var)})
+        CSPlot2(OctagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+
+        CSPlotOrder2(HeartV2, P6, 55, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
+        CSPlotOrder2(HeartV2, P6, 84, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
+
+    NIfEnd()
+
     
-
-
     ------------------------
 
     function Simple_TSetLoc(Player,LocID,LeftValue,UpValue,RightValue,DownValue,AddonTrigger)
@@ -59,15 +86,26 @@ function N_Gunplot()
     LoadCp(FP,BackupCp)
     DoActions(FP,MoveCp(Add,15*4))
 
-    TriggerX(FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF)},{
-        CreateUnit(10, 37, "248", P6);
-        Order(37, P6, "248", Attack, "home");
+    TriggerX(FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 0, SettingFlag)},{
+        CreateUnit(3, 65, "248", P6);
+        Order(65, P6, "248", Attack, "home");
 
-        CreateUnit(10, 54, "248", P6);
+        CreateUnit(3, 54, "248", P6);
         Order(54, P6, "248", Attack, "home");
 
-        CreateUnit(10, 56, "248", P6);
+        CreateUnit(3, 56, "248", P6);
         Order(56, P6, "248", Attack, "home");
+    },preserved)
+
+    TriggerX(FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},{
+        CreateUnit(1, 77, "248", P6);
+        Order(77, P6, "248", Attack, "home");
+
+        CreateUnit(1, 78, "248", P6);
+        Order(78, P6, "248", Attack, "home");
+
+        CreateUnit(1, 80, "248", P6);
+        Order(80, P6, "248", Attack, "home");
     },preserved)
     
     TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,135,0,0xFF)}, {
@@ -171,9 +209,11 @@ function N_Gunplot()
 
     SetLoop2Plot(P6, "duskLair3", 132, {7,8,7,8,9,8,9,7,7,8,7,9,8,10}, {37,44,38,58,80,78,56,48,65,68,66,58,56,53}, duskLair3TL)
     SetEffectplot1(P6, "duskLair3", 132, 84, {8,9,8,9,9,9,9,8,8,9,8,9,9,8}, duskLair3TLEft)
-
-    SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {0,0,0,0,0,0,0,0}, duskHive1TLEft)
+    
+    SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {54,55,77,80,87,56,51,78}, duskHive1TLEft)
     SetLoop2Plot(P6, "duskHive1", 133, {12,12,12,12,12,12,12,12}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
+
+    
 
 
     

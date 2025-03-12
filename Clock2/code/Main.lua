@@ -95,8 +95,8 @@ Install_GplotEngine()
 
 Define_Variable()
 Declare_BGM()
-N_Gunplot()
 Control_PlotBGM()
+N_Gunplot()
 
 ----------- 분할 lua 선언 End ---------
 
