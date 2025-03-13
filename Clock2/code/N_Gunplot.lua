@@ -18,16 +18,19 @@ function N_Gunplot()
         CAPlot(PentagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, {PentagonDuskhive1[1],0,0,0,1/5,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[6] * SDspeed, DuskHive3Var)})
         TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[10] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
         
-        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[10]+1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,1 )})
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[10] + 1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,1 )})
 
         CSPlot2(TriangleDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[11] * SDspeed, DuskHive3Var)})
         CSPlot2(TriangleDuskhive2, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[12] * SDspeed, DuskHive3Var)})
-        CSPlot2(OctagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed, DuskHive3Var)})
+        CSPlot2(HexagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed, DuskHive3Var)})
         TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
 
         CSPlotOrder2(HeartV2, P6, 55, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
         CSPlotOrder2(HeartV2, P6, 84, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
 
+        CAPlot(line1, P6, 179, "duskHive3", nil, 1, 32, {line2[1],0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[15] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[15] + 1)* SDspeed, DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", Force2)})
+        
     NIfEnd()
 
     
