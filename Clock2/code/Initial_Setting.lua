@@ -3,10 +3,10 @@ function Initial_Setting()
     CSPlotOrder(PB, P1, 16, "home", nil, 1, 32, PB, nil, Attack, "mainclock", nil, 32, nil, FP, {Always()})
     TriggerX(FP, Always(), CreateUnit(1, 98, "home", P1))
     TriggerX(FP, {
-        Bring(P1, AtLeast, 1, 49, "home")
+        Bring(P1, AtLeast, 1, 9, "home")
     }, {
         KillUnitAt(All, "Men", "Anywhere", Force2),
-        KillUnitAt(All, 49, "home", P1)
+        KillUnitAt(All, 9, "home", P1)
     }, preserved)
 
     TriggerX(FP, Always(),{

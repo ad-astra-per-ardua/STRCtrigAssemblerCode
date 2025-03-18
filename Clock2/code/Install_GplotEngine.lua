@@ -123,7 +123,7 @@ function f_ReadLocXY(Loc)
 
     ----< CAFunc , CAPlot CFunc >---- SetLoop2Plot
     CAShapeArr2 = {
-        baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape1,
+        baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2,
         DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4,
         DuskHive1SH1plt,DuskHive1SH2plt,DuskHive1SH5plt,DuskHive1SH6plt
     }
