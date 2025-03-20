@@ -128,13 +128,18 @@ function Define_Shape()
 	HexagonDuskhive1 = CSMakePolygon(6, 48, 0, CS_Level("Polygon", 6, 5), CS_Level("Polygon", 6, 4))
 	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
 	
+	---- duskHive2 ----
+	DHPRT1lower1 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,40)
+	DHPRT1lower2 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-40)
+	DHPRT1lower3 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,100)
+	DHPRT1lower4 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-100)
 
-
+	
 
 	------ Shape Check Section ------
 
-	CS_BMPGraph(TriangleDuskhive1, {0x000000}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(TriangleDuskhive2, {0x000000}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DHPRT1lower1, {0x000000}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(DHPRT1lower1, {0x000000}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(HeartV2, {0x000000}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(line2, {0x000000}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 	CS_BMPGraph(lairShape2, {0x000000}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
