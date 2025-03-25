@@ -208,7 +208,7 @@ ExRate3 = {14,15,17,18,19}
 -------- End of Exchange Trigger ------------
 
 
-------<  기부 트리거  >--------------------------------------------- [ GiveRateUnit = 8  ]
+------<  기부 트리거  >--------------------------------------------- [ GiveRateUnit = 11  ]
 GText1 = StrDesign2X("\x04기부금액 단위가 \x1F5,000 Ore \x04로 \x11변경\x04되었습니다.")
 GText2 = StrDesign2X("\x04기부금액 단위가 \x1F10,000 Ore \x04로 \x11변경\x04되었습니다.")
 GText3 = StrDesign2X("\x04기부금액 단위가 \x1F50,000 Ore \x04로 \x11변경\x04되었습니다.")
@@ -225,103 +225,118 @@ GiveRate2 = {1000,5000,10000,50000,100000,500000}
 GiveUnitID = {58,60,69,71,72}
 PlayerArr = {"\x08P1","\x0EP2","\x0FP3","\x10P4","\x11P5"}
 
-CIf(Force1,{Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")})
 
-for i = 0, 4 do
-for j = 1, 6 do
-Trigger {
-    players = {i},
-    conditions = {
-            Label(0);
-            NDeaths(i,Exactly,GTable[j][1],GiveRate);
-            Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")
-        },
-    actions = {
-            GiveUnits(all,11,i,"Anywhere",P12);
-            ModifyUnitEnergy(all, 11, P12, "Anywhere", 0);
-            RemoveUnit(11,P12);
-            DisplayText(GTable[j][3],4);
-            SetNDeaths(i,SetTo,GTable[j][2],GiveRate);
-            PreserveTrigger();
-        }
-}
+---- Present 이상의 난이도에서는 비활성화 처리
+CIf(Force1, CDeaths(FP, AtLeast, 2, Difficulty))
+
+    for i = 0, 4 do
+
+        DoActionsX(i, {
+            SetMemoryBA(0x57F27C+(228*i)+GiveUnitID[1],SetTo,0);
+            SetMemoryBA(0x57F27C+(228*i)+GiveUnitID[2],SetTo,0);
+            SetMemoryBA(0x57F27C+(228*i)+GiveUnitID[3],SetTo,0);
+            SetMemoryBA(0x57F27C+(228*i)+GiveUnitID[4],SetTo,0);
+            SetMemoryBA(0x57F27C+(228*i)+GiveUnitID[5],SetTo,0);
+            SetMemoryBA(0x57F27C+(228*i)+11,SetTo,0);
+        })
     end
-end 
 
 CIfEnd()
 
-for k = 0, 4 do
-    for j = 0, 4 do
-        if k~=j then
-        CIf(k,Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere"))
-                for i = 0, 5 do
+    for i = 0, 4 do
+        for j = 1, 6 do
+        Trigger {
+            players = {i},
+            conditions = {
+                    Label(0);
+                    NDeaths(i,Exactly,GTable[j][1],GiveRate);
+                    Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")
+                },
+            actions = {
+                    GiveUnits(all,11,i,"Anywhere",P12);
+                    ModifyUnitEnergy(all, 11, P12, "Anywhere", 0);
+                    RemoveUnit(11,P12);
+                    DisplayText(GTable[j][3],4);
+                    SetNDeaths(i,SetTo,GTable[j][2],GiveRate);
+                    PreserveTrigger();
+                }
+        }
+            end
+        end 
+
+    for k = 0, 4 do
+        for j = 0, 4 do
+            if k~=j then
+            CIf(k,Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere"))
+                    for i = 0, 5 do
+                    Trigger {
+                            players = {k},
+                            conditions = {
+                                    Label(0);
+                                    Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                                    PlayerCheck(j,1);
+                                    NDeaths(k,Exactly,i,GiveRate);
+                                    Accumulate(k,AtMost,GiveRate2[i+1],Ore);
+                                },
+                            actions = {
+                                    ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                                    RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                                    DisplayText(StrDesign2X("\x12\x1F잔액\x04이 부족합니다."),4);
+                                    PreserveTrigger()
+                                },
+                        }
+                    Trigger {
+                            players = {k},
+                            conditions = {
+                                    Label(0);
+                                    Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                                    PlayerCheck(j,1);
+                                    NDeaths(k,Exactly,i,GiveRate);
+                                    Accumulate(k,AtLeast,GiveRate2[i+1],Ore);
+                                    Accumulate(k,AtMost,0x7FFFFFFF,Ore);
+                                },
+                            actions = {
+                                    SetResources(k,Subtract,GiveRate2[i+1],Ore);
+                                    SetResources(j,Add,GiveRate2[i+1],Ore);
+                                    ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                                    RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                                    DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
+                                    SetMemory(0x6509B0,SetTo,j);
+                                    DisplayText(StrDesign2X("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
+                                    SetMemory(0x6509B0,SetTo,k);
+                                    PreserveTrigger();
+                                },
+                        }
+                    end
                 Trigger {
-                        players = {k},
-                        conditions = {
-                                Label(0);
-                                Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                                PlayerCheck(j,1);
-                                NDeaths(k,Exactly,i,GiveRate);
-                                Accumulate(k,AtMost,GiveRate2[i+1],Ore);
-                            },
-                        actions = {
-                                ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                                RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                                DisplayText(StrDesign2X("\x12\x1F잔액\x04이 부족합니다."),4);
-                                PreserveTrigger()
-                            },
-                    }
-                Trigger {
-                        players = {k},
-                        conditions = {
-                                Label(0);
-                                Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                                PlayerCheck(j,1);
-                                NDeaths(k,Exactly,i,GiveRate);
-                                Accumulate(k,AtLeast,GiveRate2[i+1],Ore);
-                                Accumulate(k,AtMost,0x7FFFFFFF,Ore);
-                            },
-                        actions = {
-                                SetResources(k,Subtract,GiveRate2[i+1],Ore);
-                                SetResources(j,Add,GiveRate2[i+1],Ore);
-                                ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                                RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                                DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부하였습니다."),4);
-                                SetMemory(0x6509B0,SetTo,j);
-                                DisplayText(StrDesign2X("\x12"..PlayerArr[k+1].."\x04에게 \x1F"..GiveRate2[i+1].." Ore\x04를 기부받았습니다."),4);
-                                SetMemory(0x6509B0,SetTo,k);
-                                PreserveTrigger();
-                            },
-                    }
-                end
-            Trigger {
-                players = {k},
-                conditions = {
-                        Label(0);
-                        Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
-                        PlayerCheck(j,0);
-                    },
-                actions = {
-                        DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
-                        ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                        RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                        PreserveTrigger();
-                            },
-                    }
-            
-        CIfEnd()
-                elseif k==j then
-                    TriggerX(k,{Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere")},{
-                        DisplayText(StrDesign2X("\x08본인에게 통큰 기부를~"),4);
-                        ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
-                        RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
-                    },{Preserved})
+                    players = {k},
+                    conditions = {
+                            Label(0);
+                            Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere");
+                            PlayerCheck(j,0);
+                        },
+                    actions = {
+                            DisplayText(StrDesign2X("\x12"..PlayerArr[j+1].."\x04이(가) 존재하지 않습니다."),4);
+                            ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                            RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                            PreserveTrigger();
+                                },
+                        }
+                
+            CIfEnd()
+                    elseif k==j then
+                        TriggerX(k,{Bring(k,AtLeast,1,GiveUnitID[j+1],"Anywhere")},{
+                            DisplayText(StrDesign2X("\x08본인에게 통큰 기부를~"),4);
+                            ModifyUnitEnergy(all, GiveUnitID[j+1], k, "Anywhere", 0);
+                            RemoveUnitAt(1,GiveUnitID[j+1],"Anywhere",k);
+                        },{Preserved})
+
+            end 
 
         end 
 
-    end 
+    end
 
-end
 
 --------------------- Ban Trigger ------------------------
 

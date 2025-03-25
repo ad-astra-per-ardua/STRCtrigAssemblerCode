@@ -1,5 +1,5 @@
 function Install_function()
-    PlayerString = {"\x08P1","\x0EP2","\x0FP3","\x10P4"} 
+    PlayerString = {"\x08P1","\x0EP2","\x0FP3","\x10P4","\x11P5"} 
     
     function RotatePlayer(Print,Players,RecoverCP)
         return CopyCpAction(Print,Players,RecoverCP)

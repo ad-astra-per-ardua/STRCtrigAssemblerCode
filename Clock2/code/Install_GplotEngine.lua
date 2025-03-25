@@ -249,19 +249,24 @@ function f_ReadLocXY(Loc)
     
 
         ----< CAFunc , CAPlot CFunc >---- SetLoop2Plot
-        L2Arr1 = {
-            baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2
-        }
-        L2Arr2 = {
-            DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4
-        }
-        L2Arr3 = {
+        SetLoop2PlotShapeArr = {
+            baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2,
+            DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4,
             DuskHive1SH1plt,DuskHive1SH2plt,DuskHive1SH5plt,DuskHive1SH6plt
         }
+
+        CallCAPlot3 = InitCFunc(FP)
+        CFunc(CallCAPlot3)
+            CAPlot(SetLoop2PlotShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,6,Gun_DataIndex},nil,FP,nil
+            ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
+            --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
+        작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
+                    -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
+            ]]--
+        CFuncEnd()
         ----< 유닛생성단락 >----
         CJump(FP,0x300)
         SetLabel(0x2005) -- CAPlot PerActions 도착지점
-
         NIf(FP,{Memory(0x628438,AtLeast,1)})
             CDoActions(FP,{ -- 유닛생성단락
                 TCreateUnit(1,Gun_Unit,"248",Gun_Player);
@@ -272,16 +277,8 @@ function f_ReadLocXY(Loc)
         SetLabel(0x2006)
         CJumpEnd(FP,0x300)
 
-    function SetLoop2Plot(ShapeArr,Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
-        CallCAPlot3 = InitCFunc(FP)
-        CFunc(CallCAPlot3)
-            CAPlot(ShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,6,Gun_DataIndex},nil,FP,nil
-            ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
-            --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
-        작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
-                    -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
-            ]]--
-        CFuncEnd()
+    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
+
 
         ----< 데스, 변수 할당 >----
         
