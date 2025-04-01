@@ -1,8 +1,8 @@
 function Clock_setting()
     
-    tempv = CreateCcode()
-    mainMinute = CSMakeLine(1, 12, 0, 9, 1)
-    mainHour = CSMakeLine(1, 12, 0, 6, 1)
+    TimeModSignal = CreateCcode()
+    mainMinute = CSMakeLine(1, 6, 0, 18, 1)
+    mainHour = CSMakeLine(1, 6, 0, 8, 1)
     DoActions(FP, {SetV(HDiv, 30, SetTo), SetV(MDiv, 360, SetTo),SetV(MMDiv, 6, SetTo),SetV(FDiv, 12, SetTo)})
     
     function mainminuteCAfunc1()
@@ -22,9 +22,9 @@ function Clock_setting()
 
         
 
-        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 131)}, {AddV(mintemp, 180),AddCD(tempv, 1)}, preserved)
-        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 132)}, {AddV(mintemp, 120),AddCD(tempv, 1)}, preserved)
-        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 133)}, {AddV(mintemp, 270),AddCD(tempv, 1)}, preserved)
+        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 131)}, {AddV(mintemp, 180),AddCD(TimeModSignal, 1)}, preserved)
+        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 132)}, {AddV(mintemp, 120),AddCD(TimeModSignal, 1)}, preserved)
+        TriggerX(Force2, {Deaths(Force2, AtLeast, 1, 133)}, {AddV(mintemp, 270),AddCD(TimeModSignal, 1)}, preserved)
 
         f_Div(FP, hourtemp, mintemp, MDiv)
         f_Mod(FP, mainclockmin, mintemp, MDiv)
@@ -43,24 +43,21 @@ function Clock_setting()
         -- initial clock setup
         CIfOnce(Force2, Always())
 
-        CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {Always()},nil, nil);
-        CAPlot(mainHour, P6, 213, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {Always()},nil, nil);
-        CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {Always()},nil, nil);
+            CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {Always()},nil, nil);
+            CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, nil, FP, {Always()},nil, nil);
         CIfEnd()
 
-        CIf(Force2, {CDeaths(FP, AtLeast, 1, tempv)})
-        TriggerX(FP, Always(), {
-        RemoveUnitAt(All, 211, "home", P6);
-        RemoveUnitAt(All, 212, "home", P6);
-    }, preserved)
-        DoActions(FP, {SetImageScript(213, 131)})
-        CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
-        CAPlot(mainHour, P6, 213, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
-        CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {Always()},nil, 1);
-        DoActions(FP, {SetImageScript(213, 142)})
-        SetDelay(DelayTimer, 340);
+        CIf(Force2, {CDeaths(FP, AtLeast, 1, TimeModSignal),Memory(0x628438, AtLeast, 1)})
+            TriggerX(FP, Always(), {
+            RemoveUnitAt(All, 211, "home", P6);
+            RemoveUnitAt(All, 212, "home", P6);
+        }, preserved)
+            DoActions(FP, {SetImageScript(213, 131)})
+            CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
+            CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {Always()},nil, 1);
+            DoActions(FP, {SetImageScript(213, 142)})
         CIfEnd()
-        DoActions(FP, {SetCD(tempv, 0)}, preserved)
+        DoActions(FP, {SetCD(TimeModSignal, 0)}, preserved)
     DisplayPrintEr(P1, {"Total minute : ", mintemp, " | Clock's Minute Value : ", showmainmin," | Hour Value : ", finMainclock," | Hour Cycled Executed : ", mainclockCycled})
 
 
