@@ -228,23 +228,23 @@ PlayerArr = {"\x08P1","\x0EP2","\x0FP3","\x10P4","\x11P5"}
 CIf(Force1,{Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")})
 
 for i = 0, 4 do
-for j = 1, 6 do
-Trigger {
-    players = {i},
-    conditions = {
-            Label(0);
-            NDeaths(i,Exactly,GTable[j][1],GiveRate);
-            Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")
-        },
-    actions = {
-            GiveUnits(all,11,i,"Anywhere",P12);
-            ModifyUnitEnergy(all, 11, P12, "Anywhere", 0);
-            RemoveUnit(11,P12);
-            DisplayText(GTable[j][3],4);
-            SetNDeaths(i,SetTo,GTable[j][2],GiveRate);
-            PreserveTrigger();
-        }
-}
+    for j = 1, 6 do
+    Trigger {
+        players = {i},
+        conditions = {
+                Label(0);
+                NDeaths(i,Exactly,GTable[j][1],GiveRate);
+                Bring(CurrentPlayer,AtLeast,1,11,"Anywhere")
+            },
+        actions = {
+                GiveUnits(all,11,i,"Anywhere",P12);
+                ModifyUnitEnergy(all, 11, P12, "Anywhere", 0);
+                RemoveUnit(11,P12);
+                DisplayText(GTable[j][3],4);
+                SetNDeaths(i,SetTo,GTable[j][2],GiveRate);
+                PreserveTrigger();
+            }
+    }
     end
 end 
 

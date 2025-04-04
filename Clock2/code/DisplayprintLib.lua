@@ -13,7 +13,7 @@ function DisplayprintLib()
 			
 			Dev=Dev+CT[2]
 
-		elseif type(k)=="table" and k[4]=="V" then
+					elseif type(k)=="table" and k[4]=="V" then
 
 			if k["fwc"] == true then
 				CMov(FP,dp.publicItoDecV,k)
