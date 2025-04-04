@@ -1,5 +1,7 @@
 function N_Gunplot()
 
+
+
     ----- 사망인식 건작 -----
     DuskHive3Var = CreateCcode()
     SettingFlag = CreateCcode()
@@ -67,15 +69,47 @@ function N_Gunplot()
     end
     
     Trigger2(FP,{},SpellcasterPatch)
+
+    -- "\x07·\x11·\x08·\x07『 "
+    -- "\x07』\x08·\x11·\x07·"
+    -- HIndex = {2,17,15,52,58,65,66,68}
+    function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
+        HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
+        HInfoArr = {} -- Main 1 Dim
+        local X = {} -- Sub 1 Dim
+        table.insert(X,HeroIndex)
+        table.insert(X,HeroText)
+        table.insert(X,HeroPoint)
+        table.insert(HInfoArr,X) -- Create 2 Dim
+    end
+    --[[
+        HInfoArr[i][1] == Index, 2 == Text, 3 == Point
+    ]]
     
-    
+    CreateHeroAlert(2, , HeroPoint)
     
     BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
     LocSize = 128
     
     CunitCtrig_Part1(FP)
     MoveCp("X",25*4)
-    -----------------
+    ----------------- Hero Section
+    DoActions(FP,MoveCp(Subtract,16*4))
+    CIf(FP,{DeathsX(CurrentPlayer,Exactly,1*65536,0,0xFF0000)},SetDeathsX(CurrentPlayer,SetTo,0*65536,0,0xFF0000)) -- EPD 9 ( 1 = 영작유닛표식 )
+        DoActions(FP,MoveCp(Add,16*4))
+        for i = 1, #HInfoArr do
+            CIf(FP,{DeathsX(CurrentPlayer,Exactly,HInfoArr[i][1],0,0xFF)})
+            Call_SaveCp() -- EPD 25
+                TriggerX(FP,{},{
+                    CopyCpAction({DisplayTextX(HInfoArr[i][2],4)},{Force1,Force5},FP);
+                    CopyCpAction({PlayWAVX("staredit\\wav\\HeroKill.ogg")},{Force1,Force5},FP); --Force5가 관전자 플레이어
+                    SetScore(Force1,Add,HInfoArr[i][3],Kills);
+                },{Preserved})
+            Call_LoadCp() -- EPD 25
+            CIfEnd()
+        end
+    CIfEnd()
+    ----------------
     
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,136,0,0xFF))
@@ -102,24 +136,11 @@ function N_Gunplot()
     DoActions(FP,MoveCp(Add,15*4))
 
     ---------- Hive Dth Section -----------
+    
+    dthGenfunc(179, {54,65,56}, {1,1,1}, P6, Attack, 0)
+    dthGenfunc(179, {60,77,30}, {1,1,1}, P6, Attack, 3)
+    
 
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,179,0,0xFF),CDeaths(FP, Exactly, 0, SettingFlag)}, {
-        CreateUnit(1, 54, "248", P6);
-        Order(54, P6, "248", Attack, "home");
-        CreateUnit(1, 65, "248", P6);
-        Order(65, P6, "248", Attack, "home");
-        CreateUnit(1, 56, "248", P6);
-        Order(56, P6, "248", Attack, "home");
-    }, preserved)
-
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,179,0,0xFF),CDeaths(FP, Exactly, 3, SettingFlag)}, {
-        CreateUnit(1, 60, "248", P6);
-        Order(60, P6, "248", Attack, "home");
-        CreateUnit(1, 77, "248", P6);
-        Order(77, P6, "248", Attack, "home");
-        CreateUnit(1, 30, "248", P6);
-        Order(30, P6, "248", Attack, "home");
-    }, preserved)
 
     CSPlotOrder2(DthdetectShape, P6, 54, "248", nil, 1, 32, DthdetectShape, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
     CSPlotOrder2(DthdetectShape2, P6, 65, "248", nil, 1, 32, DthdetectShape2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
@@ -140,44 +161,26 @@ function N_Gunplot()
 
     --------- Normal plot Section ------------
 
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,136,0,0xFF)}, {
-        CreateUnit(10, 52, "248", P6);
-        Order(52, P6, "248", Attack, "home");
-    },preserved)
-    
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,137,0,0xFF)}, {
-        CreateUnit(5, 55, "248", P6);
-        CreateUnit(5, 56, "248", P6);
-        Order(55, P6, "248", Attack, "home");
-        Order(56, P6, "248", Attack, "home");
-    },preserved)
-
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,138,0,0xFF)}, {
-        CreateUnit(5, 45, "248", P6);
-        CreateUnit(5, 104, "248", P6);
-        Order(45, P6, "248", Attack, "home");
-        Order(104, P6, "248", Attack, "home");
-    },preserved)
-
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,142,0,0xFF)}, {
-        CreateUnit(10, 54, "248", P6);
-        Order(54, P6, "248", Attack, "home");
-    },preserved)
-
+    dthGenfunc(136, {52}, {10}, P6, Attack,nil)
+    dthGenfunc(137, {55,56}, {5,5}, P6, Attack, nil)
+    dthGenfunc(138, {45,104,3,2,1,3}, {5,5,1,1,1,3}, P6, Attack, nil)
+    dthGenfunc(142, {54}, {10}, P6, Attack, nil)
 
     
     ClearCalc()
     CJumpEnd(FP,0x2)
+
     CunitCtrig_Part2()
     CunitCtrig_Part3X()
     for i = 0, 1699 do
-    CunitCtrig_Part4X(i,{
+    CunitCtrig_Part4X(i,{ -- 잡건
         DeathsX(EPDF(0x628298-0x150*i+(40*4)),AtLeast,1*16777216,0,0xFF000000),
         DeathsX(EPDF(0x628298-0x150*i+(19*4)),Exactly,0*256,0,0xFF00),
     },
     {	SetDeathsX(EPDF(0x628298-0x150*i+(40*4)),SetTo,0*16777216,0,0xFF000000);
         MoveCp(Add,25*4);})
     end
+
     CunitCtrig_End()
 
     

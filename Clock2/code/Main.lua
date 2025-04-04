@@ -71,14 +71,12 @@ JYD = "Set Unit Order To: Junk Yard Dog"
 HumanPlayers = {P1,P2,P3,P4,P5,P6,P7,P8,P9,P10,P11,P12}
 
 CJumpEnd(AllPlayers,0)
-Enable_PlayerCheck(0x58F468)
-Enable_HumanCheck(0x58F46C)
+Enable_PlayerCheck()
 ObserverChatToAll(FP, _Void(0xFF), nil, nil, 0)
 NoAirCollision(FP)
 DoActions(FP,{SetSpeed(SetTo, "#X2")})
 
 ---------- End of Set Up Initialization ------
-
 
 
 Gunplot_Timeline()
@@ -88,7 +86,7 @@ Initial_Setting()
 Enable_TestMode()
 Define_Shape()
 Install_GplotEngine()
-CheatVerificationSystem()
+-- CheatVerificationSystem()
 
 
 ----------- 분할 lua 선언 -------
@@ -99,11 +97,14 @@ Declare_BGM()
 Control_PlotBGM()
 N_Gunplot()
 
+
+
 ----------- 분할 lua 선언 End ---------
 
 Clock_setting()
 Clock_modifyloop()
 MainclockG()
+-- TextEft()
 -- CSPlotToCAPlot()
 init_Setting()
 EndCtrig()
