@@ -6,7 +6,7 @@ function Define_Variable()
     for i = 0, 4 do
         f_Bread(FP, 0x58D2B0 + (i * 46) + 15, HPValue)
         CDoActions(FP, {
-            TSetMemory(0x662350 + SMarineArray[i+1] * 4, SetTo, _Add(_Mul(HPValue, 250*256),5500*256))
+            TSetMemory(0x662350 + SMarineArray[i+1] * 4, SetTo, _Add(_Mul(HPValue, 100*256),4900*256))
         },preserved)
         
     end
@@ -118,8 +118,6 @@ function Define_Variable()
         CreateUnit(1, 0, "home", CurrentPlayer);
         RemoveUnitAt(1, 0, "MainLocation", CurrentPlayer);
     }, preserved)
-
-
     
     TriggerX(Force1, {
         Bring(CurrentPlayer, AtLeast, 1, 20, "MainLocation");
@@ -128,12 +126,18 @@ function Define_Variable()
         RemoveUnitAt(1, 20, "MainLocation", CurrentPlayer);
     }, preserved)
     
+    TriggerX(Force1, {
+        Bring(CurrentPlayer, AtLeast, 1, 7, "MainLocation");
+    }, {
+        CreateUnit(1, 7, "home", CurrentPlayer);
+        RemoveUnitAt(1, 7, "MainLocation", CurrentPlayer);
+    }, preserved)
 
 
 for i = 0 , 4 do
     CIfX(Force1, CDeaths(i, AtLeast, 12, Combine_marine))
 
-    TriggerX(Force1, { -- Check instant create phase
+    TriggerX(i, { -- Check instant create phase
         Bring(CurrentPlayer, AtLeast, 1, 16, "MainLocation");
     }, {
         DisplayText(StrDesign2X("Instant SMarine Created"), 4);
@@ -143,7 +147,7 @@ for i = 0 , 4 do
 
     CElseX()
 
-    TriggerX(Force1, { -- Check instant create phase
+    TriggerX(i, { -- Check instant create phase
         Bring(CurrentPlayer, AtLeast, 1, 16, "MainLocation");
     }, {
         DisplayText(StrDesign2X("Instant SMarine Create failed flag. Resource Returned. "), 4);
@@ -154,7 +158,7 @@ for i = 0 , 4 do
     CIfXEnd()
 
 
-    TriggerX(Force1, {
+    TriggerX(i, {
         Bring(CurrentPlayer, AtLeast, 1, 7, "MainLocation");
     }, {
         CreateUnit(1, 7, "home", CurrentPlayer);
@@ -165,7 +169,7 @@ for i = 0 , 4 do
 
     --- Convert Marine Trigger
 
-    TriggerX(Force1, { -- Marine > Hmarine
+    TriggerX(i, { -- Marine > Hmarine
         Accumulate(CurrentPlayer, AtLeast, 7500, Ore);
         Bring(CurrentPlayer, AtLeast, 1, 0, "convertH");
     }, {
@@ -175,7 +179,7 @@ for i = 0 , 4 do
     }, preserved)
 
 
-    TriggerX(Force1, { -- Hmarine > Smarine
+    TriggerX(i, { -- Hmarine > Smarine
         Accumulate(CurrentPlayer, AtLeast, 15000, Ore);
         Bring(CurrentPlayer, AtLeast, 1, 20, "convertH");
     }, {
