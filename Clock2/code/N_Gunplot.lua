@@ -1,5 +1,54 @@
 function N_Gunplot()
 
+
+
+    ----- 사망인식 건작 -----
+    DuskHive3Var = CreateCcode()
+    SettingFlag = CreateCcode()
+
+    NIf(Force2, {Bring(P6, Exactly, 0, 133, "duskHive3")} )
+        DoActions(FP, {AddCD(DuskHive3Var, 1)}, preserved)
+
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[1]) * SDspeed -1, DuskHive3Var)}, {SetCD(SettingFlag,0)})
+
+        CSPlot2(TriangleDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[1] * SDspeed, DuskHive3Var)})
+        CSPlot2(TriangleDuskhive2, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[2] * SDspeed, DuskHive3Var)})
+
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[3] * SDspeed,DuskHive3Var)},{Order(179, P6, "Anywhere", Move, "duskHive3A")})
+        TriggerX(Force2, {CDeaths(FP, AtLeast, duskHive3TL[4] * SDspeed,DuskHive3Var)}, {RunAIScriptAt(JYD, "duskHive3")})
+        TriggerX(Force2, {CDeaths(FP, AtLeast, (duskHive3TL[4] + 0.5) * SDspeed,DuskHive3Var)}, {RunAIScriptAt(JYD, "duskHive3")})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[5] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[5] + 1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,2 )})
+
+        CAPlot(PentagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, {PentagonDuskhive1[1],0,0,0,1/5,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[6] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[10] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+        
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[10] + 1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,3)})
+
+        CSPlot2(TriangleDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[11] * SDspeed, DuskHive3Var)})
+        CSPlot2(TriangleDuskhive2, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[12] * SDspeed, DuskHive3Var)})
+        CSPlot2(HexagonDuskhive1, P6, 179, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, duskHive3TL[13] * SDspeed,DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", P6)})
+
+        CSPlotOrder2(HeartV2, P6, 58, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
+        CSPlotOrder2(HeartV2, P6, 84, "duskHive3", nil, 1, 32, HeartV2, nil, Attack, "home", nil, 32, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[14] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[14] + 1) * SDspeed,DuskHive3Var)}, {SetCD(SettingFlag,4)})
+        CAPlot(line1, P6, 179, "duskHive3", nil, 1, 32, {line1[1],0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[15] * SDspeed, DuskHive3Var)})
+
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[15] + 1)* SDspeed, DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", Force2)})
+        
+        CSPlot2(TriangleDuskhive1, P6, 30, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[16] * SDspeed, DuskHive3Var)},{SetCD(SettingFlag,5)})
+        CSPlot2(TriangleDuskhive2, P6, 30, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[17] * SDspeed, DuskHive3Var)})
+        CSPlot2(HexagonDuskhive1, P6, 30, "duskHive3", nil, 1, 32, FP, {CDeaths(FP, AtLeast, duskHive3TL[18] * SDspeed, DuskHive3Var)})
+        CAPlot(line1, P6, 179, "duskHive3", nil, 1, 32, {line1[1],0,0,0,1,0}, nil, FP, {CDeaths(FP, AtLeast, duskHive3TL[19] * SDspeed, DuskHive3Var)})
+        TriggerX(FP, {CDeaths(FP, AtLeast, (duskHive3TL[20])* SDspeed, DuskHive3Var)}, {KillUnitAt(All, 179, "Anywhere", Force2)})
+
+
+    NIfEnd()
+
+    
+    ------------------------
+
     function Simple_TSetLoc(Player,LocID,LeftValue,UpValue,RightValue,DownValue,AddonTrigger)
         CDoActions(Player,{
             TSetLoc(LocID,0,SetTo,LeftValue);
@@ -20,22 +69,55 @@ function N_Gunplot()
     end
     
     Trigger2(FP,{},SpellcasterPatch)
+
+    -- "\x07·\x11·\x08·\x07『 "
+    -- "\x07』\x08·\x11·\x07·"
+    -- HIndex = {2,17,15,52,58,65,66,68}
+    function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
+        HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
+        HInfoArr = {} -- Main 1 Dim
+        local X = {} -- Sub 1 Dim
+        table.insert(X,HeroIndex)
+        table.insert(X,HeroText)
+        table.insert(X,HeroPoint)
+        table.insert(HInfoArr,X) -- Create 2 Dim
+    end
+    --[[
+        HInfoArr[i][1] == Index, 2 == Text, 3 == Point
+    ]]
     
-    
+    CreateHeroAlert(2, , HeroPoint)
     
     BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
     LocSize = 128
     
     CunitCtrig_Part1(FP)
     MoveCp("X",25*4)
-    -----------------
+    ----------------- Hero Section
+    DoActions(FP,MoveCp(Subtract,16*4))
+    CIf(FP,{DeathsX(CurrentPlayer,Exactly,1*65536,0,0xFF0000)},SetDeathsX(CurrentPlayer,SetTo,0*65536,0,0xFF0000)) -- EPD 9 ( 1 = 영작유닛표식 )
+        DoActions(FP,MoveCp(Add,16*4))
+        for i = 1, #HInfoArr do
+            CIf(FP,{DeathsX(CurrentPlayer,Exactly,HInfoArr[i][1],0,0xFF)})
+            Call_SaveCp() -- EPD 25
+                TriggerX(FP,{},{
+                    CopyCpAction({DisplayTextX(HInfoArr[i][2],4)},{Force1,Force5},FP);
+                    CopyCpAction({PlayWAVX("staredit\\wav\\HeroKill.ogg")},{Force1,Force5},FP); --Force5가 관전자 플레이어
+                    SetScore(Force1,Add,HInfoArr[i][3],Kills);
+                },{Preserved})
+            Call_LoadCp() -- EPD 25
+            CIfEnd()
+        end
+    CIfEnd()
+    ----------------
     
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,136,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,137,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,138,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF))
+
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF)) -- Death gunplot unit
 
     
     -----------------
@@ -53,60 +135,52 @@ function N_Gunplot()
     LoadCp(FP,BackupCp)
     DoActions(FP,MoveCp(Add,15*4))
 
-    NIf(FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF)})
-        CreateUnit(10, 37, "248", P6);
-        Order(37, P6, "248", Attack, "home");
-
-        CreateUnit(10, 54, "248", P6);
-        Order(54, P6, "248", Attack, "home");
-
-        CreateUnit(10, 56, "248", P6);
-        Order(56, P6, "248", Attack, "home");
-    NIfEnd()
+    ---------- Hive Dth Section -----------
     
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,135,0,0xFF)}, {
-        CreateUnit(10, 53, "248", P6);
-        Order(53, P6, "248", Attack, "home");
-    },preserved)
-
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,136,0,0xFF)}, {
-        CreateUnit(10, 52, "248", P6);
-        Order(52, P6, "248", Attack, "home");
-    },preserved)
+    dthGenfunc(179, {54,65,56}, {1,1,1}, P6, Attack, 0)
+    dthGenfunc(179, {60,77,30}, {1,1,1}, P6, Attack, 3)
     
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,137,0,0xFF)}, {
-        CreateUnit(5, 55, "248", P6);
-        CreateUnit(5, 56, "248", P6);
-        Order(55, P6, "248", Attack, "home");
-        Order(56, P6, "248", Attack, "home");
-    },preserved)
 
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,138,0,0xFF)}, {
-        CreateUnit(5, 45, "248", P6);
-        CreateUnit(5, 104, "248", P6);
-        Order(45, P6, "248", Attack, "home");
-        Order(104, P6, "248", Attack, "home");
-    },preserved)
 
-    TriggerX(FP, {DeathsX(CurrentPlayer,Exactly,142,0,0xFF)}, {
-        CreateUnit(10, 54, "248", P6);
-        Order(54, P6, "248", Attack, "home");
-    },preserved)
+    CSPlotOrder2(DthdetectShape, P6, 54, "248", nil, 1, 32, DthdetectShape, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
+    CSPlotOrder2(DthdetectShape2, P6, 65, "248", nil, 1, 32, DthdetectShape2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
+    CSPlotOrder2(DthdetectShape3, P6, 56, "248", nil, 1, 32, DthdetectShape3, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
 
+
+    CSPlotOrder2(DthdetectShape, P6, 66, "248", nil, 1, 32, DthdetectShape, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 2, SettingFlag)},nil,preserved)
+    CSPlotOrder2(DthdetectShape2, P6, 52, "248", nil, 1, 32, DthdetectShape2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 2, SettingFlag)},nil,preserved)
+    CSPlotOrder2(DthdetectShape3, P6, 58, "248", nil, 1, 32, DthdetectShape3, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 2, SettingFlag)},nil,preserved)
+    
+    CSPlotOrder2(line2, P6, 89, "248", nil, 1, 32, line2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 4, SettingFlag)},nil,preserved)
+    CSPlotOrder2(line2, P6, 76, "248", nil, 1, 32, line2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 4, SettingFlag)},nil,preserved)
+
+    CSPlot2(line2, P6, 57, "248", nil, 1, 32, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 5, SettingFlag)},nil,preserved)
+
+    
+    
+
+    --------- Normal plot Section ------------
+
+    dthGenfunc(136, {52}, {10}, P6, Attack,nil)
+    dthGenfunc(137, {55,56}, {5,5}, P6, Attack, nil)
+    dthGenfunc(138, {45,104,3,2,1,3}, {5,5,1,1,1,3}, P6, Attack, nil)
+    dthGenfunc(142, {54}, {10}, P6, Attack, nil)
 
     
     ClearCalc()
     CJumpEnd(FP,0x2)
+
     CunitCtrig_Part2()
     CunitCtrig_Part3X()
     for i = 0, 1699 do
-    CunitCtrig_Part4X(i,{
+    CunitCtrig_Part4X(i,{ -- 잡건
         DeathsX(EPDF(0x628298-0x150*i+(40*4)),AtLeast,1*16777216,0,0xFF000000),
         DeathsX(EPDF(0x628298-0x150*i+(19*4)),Exactly,0*256,0,0xFF00),
     },
     {	SetDeathsX(EPDF(0x628298-0x150*i+(40*4)),SetTo,0*16777216,0,0xFF000000);
         MoveCp(Add,25*4);})
     end
+
     CunitCtrig_End()
 
     
@@ -165,9 +239,12 @@ function N_Gunplot()
 
     SetLoop2Plot(P6, "duskLair3", 132, {7,8,7,8,9,8,9,7,7,8,7,9,8,10}, {37,44,38,58,80,78,56,48,65,68,66,58,56,53}, duskLair3TL)
     SetEffectplot1(P6, "duskLair3", 132, 84, {8,9,8,9,9,9,9,8,8,9,8,9,9,8}, duskLair3TLEft)
+    
+    SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {54,55,77,80,87,56,51,78}, duskHive1TLEft)
+    SetLoop2Plot(P6, "duskHive1", 133, {12,12,12,12,12,12,12,12}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
 
-    SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {40,40,40,40,40,40,40,40}, duskHive1TL)
-    -- SetLoop2Plot(P6, "duskHive1", 133, {12,14,11,13,12,14,11,13}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
+    
+
 
     
 end

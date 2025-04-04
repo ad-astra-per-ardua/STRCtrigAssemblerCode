@@ -45,6 +45,10 @@ function Define_Shape()
 	end
 
 	PSZ = 128
+	
+	DthdetectShape = CSMakePolygon(3, 128, 0, 4, 1)
+	DthdetectShape2 = CSMakePolygon(3, 128, 20, 4, 1)
+	DthdetectShape3 = CSMakePolygon(3, 128, 40, 4, 1)
 
 
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
@@ -62,10 +66,10 @@ function Define_Shape()
 	DLSH3SHEft2 = CS_InvertXY(CS_SortR(DLSH3SH_4, 1),nil,1)
 	DLSH3SH5G4 = CS_SortR(DLSH3SH1, 0)
 
-	DuskHive1PTH = CS_InvertXY(CSMakePath(
+	DuskHive1PTH = CS_MoveXY(CS_InvertXY(CSMakePath(
 	{0,1.5 * PSZ},{-1 * PSZ, 1 * PSZ}, {-2 * PSZ, 1 * PSZ},{-2.2*PSZ, 0.5*PSZ},{-2*PSZ,-0.5*PSZ},{-1*PSZ, 1*PSZ}, {0,-1.5*PSZ}, {1.5*PSZ,-1.5*PSZ},
 	{2*PSZ, -0.5*PSZ},{2*PSZ,1.5*PSZ}
-	),nil,0)
+	),nil,0),0,-3)
 	CreateMShapes("DuskHive1SH", DuskHive1PTH, 1, 64, 4, 128, 10, 0) -- 2 약 지상유닛, 1 공중유닛, 5 강유닛
 	DuskHive1SH1plt = CS_SortX(DuskHive1SH1, 0)
 	DuskHive1SH2plt = CS_SortX(DuskHive1SH2, 0)
@@ -77,9 +81,9 @@ function Define_Shape()
 	),nil,0)
 	CreateMShapes("DuskCerebrateSH", DuskCerebratePTH, 1, 64, 4, 128, 10, 0) -- 2 약 지상유닛, 1 공중유닛 5 강유닛
 
-
-
-
+	line1 = CS_SortX(CSMakeLine(2, 128, 90, 7, 0),0)
+	line2 = CS_SortY(CSMakeLine(2, 96, 0, 5, 0),0)
+	
 
     SHH15xa = CS_FillPathGradX(SHH15x,1,60,"GRADX",3,0,0,1)
     baseCircle = CS_RatioXY(CSMakeCircleX(6,64,30,150,96),1,0.5)
@@ -89,9 +93,11 @@ function Define_Shape()
 	HCCC = CSMakeGraphT({12,12},"HyperCycloidC",0,0,2,2,51) 
 	HCC0 = CS_Rotate(HCCC,180)
 	Heart = CS_SortXY(CS_RemoveStack(HCC0,15,0),"SORTXYT",nil,1) -------하트
+	Heart = CS_SortA(Heart,0)
     baseCircle2 = CS_RatioXY(CSMakeCircleX(6,128,30,54,24),1,0.5)
     baseCircle3 = CS_Rotate(baseCircle2, 90)
 
+	
 
     HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
     HEFT2 = baseStar
@@ -100,26 +106,48 @@ function Define_Shape()
     HEFT5 = baseStar
     HEFT6 = CS_SortA(CS_Rotate(baseCircle, -45),0)
     HEFT7 = Heart
+	function splitfunc(i)
+		return i*2+1
+	end
 
+	function splitfunc2(i)
+		return i*3
+	end
+
+	HeartV2 = CS_Split(CS_SortA(Heart,0), {CS_SortA(Heart,0)[1]/2,"splitfunc"},0,0)
     duskHat3S = CSMakePathX({1.3,1.3},{0,192}, {96,192},{144,16},{32,-112},{-144,-32},{-96,78})
     duskHat3SF = CS_SortXY(CS_FillPathHX2(duskHat3S, 1, 60, 60, 0, 0,45,1),"SORTXYT",nil,0)
 
     lairShape1 = CSMakeCircleX(6,48,30,150,96)
+	lairShape2 = CS_Split(lairShape1, {lairShape1[1] / 3 , "splitfunc2"}, 0, 0)
 
-
-	TriangleDuskhive1 = CSMakePolygon(3, 32, 0, CS_Level("Polygon", 3, 10), CS_Level("Polygon", 3, 9))
+	TriangleDuskhive1 = CS_RatioXY(CSMakePolygon(3, 80, 0, CS_Level("Polygon", 3, 4), CS_Level("Polygon", 3, 3)),1.1,1.1)
 	TriangleDuskhive2 = CS_InvertXY(TriangleDuskhive1,nil,0)
+	TriangleDuskhive3 = CSMakePolygon(3, 80, 0, CS_Level("Polygon", 3, 4), CS_Level("Polygon", 3, 3))
+	TriangleDuskhive4 = CS_InvertXY(TriangleDuskhive1,nil,0)
+	HexagonDuskhive1 = CSMakePolygon(6, 48, 0, CS_Level("Polygon", 6, 5), CS_Level("Polygon", 6, 4))
+	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
+	
+	---- duskHive2 ----
+	DHPRT1lower1 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,40)
+	DHPRT1lower2 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-40)
+	DHPRT1lower3 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,100)
+	DHPRT1lower4 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-100)
 
-	CS_BMPGraph(DuskHive1PTH, {0x00FFC0}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(DuskHive1SH1, {0x00FFC0}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH2, {0x00FFC0}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH3, {0x00FFC0}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH4, {0x00FFC0}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_5, {0x00FFC0}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_6, {0x00FFC0}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x00FFC0}, "7", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x00FFC0}, "8", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	
 
+	------ Shape Check Section ------
 
+	CS_BMPGraph(DHPRT1lower1, {0x000000}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    CS_BMPGraph(DHPRT1lower1, {0x000000}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(HeartV2, {0x000000}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(line2, {0x000000}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(lairShape2, {0x000000}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(lairShape1, {0x000000}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH_6, {0x000000}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "7", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "8", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+
+	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
 
 end

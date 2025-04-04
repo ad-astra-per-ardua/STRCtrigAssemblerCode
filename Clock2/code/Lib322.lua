@@ -2130,4 +2130,104 @@ function Lib322()
 			CallTrigger(Player,LoadCp_CallIndex,nil)
 		end
 	end
+
+	PatchArr = {}
+	PatchArrPrsv = {}
+	CTrigPatchTable = {}
+	function SetToUnitDef(UnitID,Value)
+	table.insert(PatchArr,SetMemoryB(0x65FEC8 + UnitID,SetTo,Value))
+	end
+
+	function UnitSizePatch(UnitID,L,U,R,D)
+	table.insert(PatchArr,SetMemory(0x6617C8 + (UnitID*8),SetTo,(L)+(U*65536)))
+	table.insert(PatchArr,SetMemory(0x6617CC + (UnitID*8),SetTo,(R)+(D*65536)))
+	end
+
+	function SetUnitClass(UnitID,Value)
+	table.insert(PatchArr,SetMemoryB(0x663DD0 + UnitID,SetTo,Value))
+	end
+
+	function DefTypePatch(UnitID,Value)
+	table.insert(PatchArr,SetMemoryB(0x662180 + UnitID,SetTo,Value))
+	end
+
+	function SetShield(UnitID)
+	table.insert(PatchArr,SetMemoryW(0x660E00 + (UnitID *2), SetTo, 1000))
+	table.insert(PatchArr,SetMemoryB(0x6647B0 + (UnitID), SetTo, 255))
+	end
+	
+	function UnitEnable(UnitID,MinCost,GasCost,BuildTime,SuppCost,StartDistance)
+		if StartDistance == nil then StartDistance = 5 end
+	if StartDistance ~= "X" then
+		table.insert(PatchArrPrsv,SetMemoryW(0x660A70 + (UnitID *2),SetTo,StartDistance))
+	end
+	table.insert(PatchArr,SetMemoryB(0x57F27C + (4 * 228) + UnitID,SetTo,0))
+	table.insert(PatchArr,SetMemoryB(0x57F27C + (5 * 228) + UnitID,SetTo,0))
+	table.insert(PatchArr,SetMemoryB(0x57F27C + (6 * 228) + UnitID,SetTo,0))
+	table.insert(PatchArr,SetMemoryB(0x57F27C + (7 * 228) + UnitID,SetTo,0))
+	if MinCost ~= nil then
+	table.insert(PatchArr,SetMemoryW(0x663888 + (UnitID *2),SetTo,MinCost)) -- 미네랄
+	else
+	table.insert(PatchArr,SetMemoryW(0x663888 + (UnitID *2),SetTo,0)) -- 미네랄
+	end
+	if GasCost ~= nil then
+	table.insert(PatchArr,SetMemoryW(0x65FD00 + (UnitID *2),SetTo,GasCost)) -- 가스
+	else
+	table.insert(PatchArr,SetMemoryW(0x65FD00 + (UnitID *2),SetTo,0)) -- 가스
+	end
+	if BuildTime ~= nil then
+	table.insert(PatchArr,SetMemoryW(0x660428 + (UnitID *2),SetTo,BuildTime)) -- 생산속도
+	else
+	table.insert(PatchArr,SetMemoryW(0x660428 + (UnitID *2),SetTo,1)) -- 생산속도
+	end
+	if SuppCost ~= nil then
+	table.insert(PatchArr,SetMemoryB(0x663CE8 + UnitID,SetTo,SuppCost)) -- 서플
+	else
+	table.insert(PatchArr,SetMemoryB(0x663CE8 + UnitID,SetTo,0)) -- 서플
+	end
+
+	end
+	function SetUnitDefUpType(UnitID,Value)
+	table.insert(PatchArr,SetMemoryB(0x6635D0 + UnitID,SetTo,Value))
+	end
+
+	function SetUnitAdvFlag(UnitID,Value,Mask)
+	table.insert(PatchArr,SetMemoryX(0x664080 + (UnitID*4),SetTo,Value,Mask))
+	end
+
+
+	function SetWepTargetFlags(WeaponID,Value)
+	table.insert(PatchArr,SetMemoryW(0x657998 + (WeaponID*2), SetTo, Value))
+	end
+
+	function WeaponTypePatch(WeaponID,Value)
+	table.insert(PatchArr,SetMemoryB(0x657258 + WeaponID,SetTo,Value))
+	end
+
+
+	function SetWepUpType(WeaponID,Value)
+	table.insert(PatchArr,SetMemoryB(0x6571D0 + WeaponID, SetTo, Value))
+	end
+
+	function SetUnitCost(UnitID,Cost)
+	table.insert(PatchArr,SetMemoryW(0x65FD00+(UnitID*2), SetTo, 0))
+	table.insert(PatchArr,SetMemoryW(0x663888+(UnitID*2), SetTo, Cost))
+	end
+
+	function SetUnitGrpToMarine(UnitID) -- 플레이어 마린에게만 적용하는것
+	table.insert(PatchArr,SetMemoryW(0x661FC0+(UnitID*2), SetTo, 0))
+	table.insert(PatchArr,SetMemoryW(0x663C10+(UnitID*2), SetTo, 466))
+	table.insert(PatchArr,SetMemoryW(0x661440+(UnitID*2), SetTo, 469))
+	table.insert(PatchArr,SetMemoryW(0x65FFB0+(UnitID*2), SetTo, 462))
+	table.insert(PatchArr,SetMemoryW(0x662BF0+(UnitID*2), SetTo, 465))
+	table.insert(PatchArr,SetMemoryW(0x663B38+(UnitID*2), SetTo, 457))
+	table.insert(PatchArr,SetMemoryW(0x661EE8+(UnitID*2), SetTo, 461))
+	table.insert(PatchArr,SetMemoryB(0x6644F8 + UnitID, SetTo, 77))
+	table.insert(PatchArr,SetMemoryW(0x662F88+(UnitID*2), SetTo, 12))
+	end
+
+	function SetGroupFlags(UnitID,Value)
+		table.insert(PatchArr,SetMemoryB(0x6637A0 + (UnitID),SetTo,Value))
+	end
+	
 end
