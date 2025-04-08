@@ -69,13 +69,13 @@ function N_Gunplot()
     end
     
     Trigger2(FP,{},SpellcasterPatch)
-
+    HInfoArr = {} -- Main 1 Dim
     -- "\x07·\x11·\x08·\x07『 "
     -- "\x07』\x08·\x11·\x07·"
     -- HIndex = {2,17,15,52,58,65,66,68}
     function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
         HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
-        HInfoArr = {} -- Main 1 Dim
+        
         local X = {} -- Sub 1 Dim
         table.insert(X,HeroIndex)
         table.insert(X,HeroText)
@@ -86,13 +86,37 @@ function N_Gunplot()
         HInfoArr[i][1] == Index, 2 == Text, 3 == Point
     ]]
     
-    CreateHeroAlert(2, , HeroPoint)
+    CreateHeroAlert(2, "<11>Ⅰ<8>Disorderness <19>F<4>ragmentation<11>Ⅰ", 30000)
+    CreateHeroAlert(15, "<11>Ⅰ<8>Disorderness <19>R<4>eservist<11>Ⅰ", 30000)
+    CreateHeroAlert(17, "<11>Ⅰ<8>Disorderness <19>T<4>itan<11>Ⅰ", 32000)
+    CreateHeroAlert(52, "<11>Ⅰ <8>Disorderness <19>U<4>nholy <11>Ⅰ", 30000)
+    CreateHeroAlert(58, "<11>Ⅰ <8>Disorderness <19>M<4>ystic <19>D<4>ream <11>Ⅰ", 35000)
+    CreateHeroAlert(65, "<11>Ⅰ <8>Disorderness <19>J<4>uggler <11>Ⅰ", 33000)
+    CreateHeroAlert(66, "<11>Ⅰ <8>Disorderness <19>U<4>ndyne <11>Ⅰ", 33000)
+    CreateHeroAlert(68, "<11>Ⅰ <8>Disorderness <19>B<4>ulb <11>Ⅰ", 37000)
+
+    CreateHeroAlert(5, "<11>Ⅴ <8>Disorderness <19><4><19>T<4>heft <11>Ⅴ", 55000)
+    CreateHeroAlert(21, "<11>Ⅴ <8>Disorderness <19>D<4>isturbing <19>F<4>ly <11>Ⅴ", 60000)
+    CreateHeroAlert(40, "<11>Ⅴ <8>Disorderness <19>J<4>giwara <19>J<4>otyu <11>Ⅴ", 66666)
+    CreateHeroAlert(60, "<11>Ⅴ <8>Disorderness <19>A<4>rc <11>Ⅴ", 65000)
+    CreateHeroAlert(61, "<11>Ⅴ <8>Disorderness <19>B<4>lindness <11>Ⅴ", 63000)
+    CreateHeroAlert(70, "<11>Ⅴ <8>Disorderness <19>P<4>ersonality <11>Ⅴ", 62000)
+
     
     BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
     LocSize = 128
     
     CunitCtrig_Part1(FP)
     MoveCp("X",25*4)
+
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,136,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,137,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,138,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
+
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF)) -- Death gunplot unit
+    
     ----------------- Hero Section
     DoActions(FP,MoveCp(Subtract,16*4))
     CIf(FP,{DeathsX(CurrentPlayer,Exactly,1*65536,0,0xFF0000)},SetDeathsX(CurrentPlayer,SetTo,0*65536,0,0xFF0000)) -- EPD 9 ( 1 = 영작유닛표식 )
@@ -109,20 +133,14 @@ function N_Gunplot()
             CIfEnd()
         end
     CIfEnd()
+    ClearCalc()
     ----------------
     
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,136,0,0xFF))
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,137,0,0xFF))
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,138,0,0xFF))
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
-
-    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF)) -- Death gunplot unit
 
     
     -----------------
 
-    ClearCalc()
+    
     
     NJumpXEnd(FP,0x1)
     
@@ -140,7 +158,7 @@ function N_Gunplot()
     dthGenfunc(179, {54,65,56}, {1,1,1}, P6, Attack, 0)
     dthGenfunc(179, {60,77,30}, {1,1,1}, P6, Attack, 3)
     
-
+    
 
     CSPlotOrder2(DthdetectShape, P6, 54, "248", nil, 1, 32, DthdetectShape, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
     CSPlotOrder2(DthdetectShape2, P6, 65, "248", nil, 1, 32, DthdetectShape2, nil, Attack, "home",nil, 32, nil, FP, {DeathsX(CurrentPlayer, Exactly, 179, 0, 0xFF),CDeaths(FP, Exactly, 1, SettingFlag)},nil,preserved)
