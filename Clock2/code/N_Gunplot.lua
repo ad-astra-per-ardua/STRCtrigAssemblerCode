@@ -73,20 +73,20 @@ function N_Gunplot()
     -- "\x07·\x11·\x08·\x07『 "
     -- "\x07』\x08·\x11·\x07·"
     -- HIndex = {2,17,15,52,58,65,66,68}
-    function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
-        HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
-        HInfoArr = {} -- Main 1 Dim
-        local X = {} -- Sub 1 Dim
-        table.insert(X,HeroIndex)
-        table.insert(X,HeroText)
-        table.insert(X,HeroPoint)
-        table.insert(HInfoArr,X) -- Create 2 Dim
-    end
+    -- function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
+    --     HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
+    --     HInfoArr = {} -- Main 1 Dim
+    --     local X = {} -- Sub 1 Dim
+    --     table.insert(X,HeroIndex)
+    --     table.insert(X,HeroText)
+    --     table.insert(X,HeroPoint)
+    --     table.insert(HInfoArr,X) -- Create 2 Dim
+    -- end
     --[[
         HInfoArr[i][1] == Index, 2 == Text, 3 == Point
     ]]
     
-    CreateHeroAlert(2, , HeroPoint)
+    -- CreateHeroAlert(2, , HeroPoint)
     
     BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
     LocSize = 128
@@ -94,21 +94,21 @@ function N_Gunplot()
     CunitCtrig_Part1(FP)
     MoveCp("X",25*4)
     ----------------- Hero Section
-    DoActions(FP,MoveCp(Subtract,16*4))
-    CIf(FP,{DeathsX(CurrentPlayer,Exactly,1*65536,0,0xFF0000)},SetDeathsX(CurrentPlayer,SetTo,0*65536,0,0xFF0000)) -- EPD 9 ( 1 = 영작유닛표식 )
-        DoActions(FP,MoveCp(Add,16*4))
-        for i = 1, #HInfoArr do
-            CIf(FP,{DeathsX(CurrentPlayer,Exactly,HInfoArr[i][1],0,0xFF)})
-            Call_SaveCp() -- EPD 25
-                TriggerX(FP,{},{
-                    CopyCpAction({DisplayTextX(HInfoArr[i][2],4)},{Force1,Force5},FP);
-                    CopyCpAction({PlayWAVX("staredit\\wav\\HeroKill.ogg")},{Force1,Force5},FP); --Force5가 관전자 플레이어
-                    SetScore(Force1,Add,HInfoArr[i][3],Kills);
-                },{Preserved})
-            Call_LoadCp() -- EPD 25
-            CIfEnd()
-        end
-    CIfEnd()
+    -- DoActions(FP,MoveCp(Subtract,16*4))
+    -- CIf(FP,{DeathsX(CurrentPlayer,Exactly,1*65536,0,0xFF0000)},SetDeathsX(CurrentPlayer,SetTo,0*65536,0,0xFF0000)) -- EPD 9 ( 1 = 영작유닛표식 )
+    --     DoActions(FP,MoveCp(Add,16*4))
+    --     for i = 1, #HInfoArr do
+    --         CIf(FP,{DeathsX(CurrentPlayer,Exactly,HInfoArr[i][1],0,0xFF)})
+    --         Call_SaveCp() -- EPD 25
+    --             TriggerX(FP,{},{
+    --                 CopyCpAction({DisplayTextX(HInfoArr[i][2],4)},{Force1,Force5},FP);
+    --                 CopyCpAction({PlayWAVX("staredit\\wav\\HeroKill.ogg")},{Force1,Force5},FP); --Force5가 관전자 플레이어
+    --                 SetScore(Force1,Add,HInfoArr[i][3],Kills);
+    --             },{Preserved})
+    --         Call_LoadCp() -- EPD 25
+    --         CIfEnd()
+    --     end
+    -- CIfEnd()
     ----------------
     
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))

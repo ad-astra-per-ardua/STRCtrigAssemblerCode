@@ -44,6 +44,34 @@ function Define_Shape()
 	end
 	end
 
+local idx = 0
+local idx2 = 0
+
+function ShapeDebugging(shapeTable)
+    local args = {}
+    for key, shape in pairs(shapeTable) do
+        _G[key] = shape
+        table.insert(args, shape)
+    end
+
+    local debugShape = CS_OverlapX(table.unpack(args))
+
+    for _, shape in ipairs(args) do
+        local fileName = tostring(idx)
+        CS_BMPGraph(shape, {0x000000}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+        idx = idx + 1
+    end
+
+    -- Overlapped
+    local debugFileName = tostring(idx2)
+    CS_BMPGraph(debugShape, {0x000000}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+    idx2 = idx2 + 1
+
+    return debugShape
+end
+
+	
+
 	PSZ = 128
 	
 	DthdetectShape = CSMakePolygon(3, 128, 0, 4, 1)
@@ -129,24 +157,19 @@ function Define_Shape()
 	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
 	
 	---- duskHive2 ----
-	DHPRT1lower1 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,40)
-	DHPRT1lower2 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-40)
-	DHPRT1lower3 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,100)
-	DHPRT1lower4 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-100)
+	DH2PRT1lower1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,60),1)
+	DH2PRT1lower2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,-60),1)
+	DH2PRT1lower3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,180),1)
+	DH2PRT1lower4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,-180),1)
 
+	DH2PRT1Horizontal1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),60,0),0)
+	DH2PRT1Horizontal2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-60,0),0)
+	DH2PRT1Horizontal3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),180,0),0)
+	DH2PRT1Horizontal4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-180,0),0)
+	ShapeDebugging({
+	DH2PRT2ASHAPE1 = CSMakeCircle(6, 48, 0, CS_Level("Circle", 6, 5), CS_Level("Circle", 6, 4))
+	})
 	
-
-	------ Shape Check Section ------
-
-	CS_BMPGraph(DHPRT1lower1, {0x000000}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(DHPRT1lower1, {0x000000}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(HeartV2, {0x000000}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(line2, {0x000000}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(lairShape2, {0x000000}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(lairShape1, {0x000000}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_6, {0x000000}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "7", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "8", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
 
