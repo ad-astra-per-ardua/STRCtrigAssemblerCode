@@ -39,11 +39,6 @@ function Verifing_Phase()
         }
     end
     -- Detecting Modifing with cheat engine to extend upgrade value
-    for i = 0, 4 do
-        TriggerX(i, {MemoryB(0x58D088 + (i * 7) + 7, AtLeast, 201)}, {
-            DisplayText(StrDesignX("Cheating test"), 4);
-            SetMemory(0x69746977, SetTo, 1);
-        }, preserved)
-    end
+
 
 end

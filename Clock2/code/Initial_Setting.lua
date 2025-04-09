@@ -12,8 +12,6 @@ function Initial_Setting()
     --     CreateUnit(1, 25, "home", P5);
     -- })
 
-    CIfOnce(Force1, Always())
-
     for i = 0, 227 do
         SetUnitDefUpType(i,60) -- 방업 적용 방지
         SetToUnitDef(i,0) -- 방어력 전부 0으로 설정 
@@ -26,8 +24,7 @@ function Initial_Setting()
         SetUnitAdvFlag(InitialMArray[i], 0x4000, 0x4000)
         UnitSizePatch(InitialMArray[i],6,9,6,10)
     end
-
-    CIfEnd()
+    DoActions2(FP, PatchArr)
 
     function UnitLimit(Player,UID,Limit,Text,ReturnResources)
         Trigger {
@@ -69,7 +66,7 @@ function Initial_Setting()
 		
 
     BuildingArr = {130,131,132} 
-    HeroArr = {2,17,15,52,58,65,66,68,4,19,21,15} 
+    HeroArr = {2,15,17,52,58,65,66,68,5,21,40,60,61,70,3,25,19 } 
             
         
     CIfOnce(FP,{Always()})
