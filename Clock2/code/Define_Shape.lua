@@ -49,31 +49,30 @@ local idx2 = 0
 
 function ShapeDebugging(shapeTable)
     local args = {}
-    for key, shape in pairs(shapeTable) do
-        _G[key] = shape
-        table.insert(args, shape)
-    end
+	if shapeTable ~= nil and next(shapeTable) ~= nil then
+		for key, shape in pairs(shapeTable) do
+			_G[key] = shape
+			table.insert(args, shape)
+		end
 
-    local debugShape = CS_OverlapX(table.unpack(args))
+		local debugShape = CS_OverlapX(table.unpack(args))
 
-    for _, shape in ipairs(args) do
-        local fileName = tostring(idx)
-        CS_BMPGraph(shape, {0x000000}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-        idx = idx + 1
-    end
+		for _, shape in ipairs(args) do
+			local fileName = tostring(idx)
+			CS_BMPGraph(shape, {0x000000}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+			idx = idx + 1
+		end
 
-    -- Overlapped
-    local debugFileName = tostring(idx2)
-    CS_BMPGraph(debugShape, {0x000000}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    idx2 = idx2 + 1
+		-- Overlapped
+		local debugFileName = tostring(idx2)
+		CS_BMPGraph(debugShape, {0x000000}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+		idx2 = idx2 + 1
 
-    return debugShape
+		return debugShape
+	end
 end
 
-	
-
 	PSZ = 128
-	
 	DthdetectShape = CSMakePolygon(3, 128, 0, 4, 1)
 	DthdetectShape2 = CSMakePolygon(3, 128, 20, 4, 1)
 	DthdetectShape3 = CSMakePolygon(3, 128, 40, 4, 1)
@@ -125,8 +124,6 @@ end
     baseCircle2 = CS_RatioXY(CSMakeCircleX(6,128,30,54,24),1,0.5)
     baseCircle3 = CS_Rotate(baseCircle2, 90)
 
-	
-
     HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
     HEFT2 = baseStar
     HEFT3 = Heart
@@ -134,13 +131,11 @@ end
     HEFT5 = baseStar
     HEFT6 = CS_SortA(CS_Rotate(baseCircle, -45),0)
     HEFT7 = Heart
-	function splitfunc(i)
-		return i*2+1
-	end
 
-	function splitfunc2(i)
-		return i*3
-	end
+	function splitfunc(i) return i*2+1 end
+	function splitfunc2(i) return i*3 end
+	function splitfunc3(i) return i*2 end
+	function splitfunc4(i) return i*4 end
 
 	HeartV2 = CS_Split(CS_SortA(Heart,0), {CS_SortA(Heart,0)[1]/2,"splitfunc"},0,0)
     duskHat3S = CSMakePathX({1.3,1.3},{0,192}, {96,192},{144,16},{32,-112},{-144,-32},{-96,78})
@@ -166,10 +161,33 @@ end
 	DH2PRT1Horizontal2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-60,0),0)
 	DH2PRT1Horizontal3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),180,0),0)
 	DH2PRT1Horizontal4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-180,0),0)
-	ShapeDebugging({
-	DH2PRT2ASHAPE1 = CSMakeCircle(6, 48, 0, CS_Level("Circle", 6, 5), CS_Level("Circle", 6, 4))
-	})
+
+	DH2PRT2ASHAPE1EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 7), CS_Level("Circle", 8, 6)) -- 약 유닛 큰원
+	DH2PRT2ASHAPE2EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 4), CS_Level("Circle", 8, 3)) -- 약 유닛 작은원
+
+	DH2PRT2ASHAPEplot1 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 2 , "splitfunc3"}, 0, 0)
+	DH2PRT2ASHAPEplot2 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 2 , "splitfunc3"}, 0, 0)  
+
+	DH2PRT2ASHAPEplot3 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 큰원
+	DH2PRT2ASHAPEplot4 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 작은원
+
+	DH2PRT2TEMPline1EFT = CSMakeLine(2, 48, 0, 19, 1)
+	DH2PRT2TEMPline2EFT = CSMakeLine(2, 48, 90, 19, 0)
+	DH2PRT2TEMPline1 = CSMakeLine(2, 96, 0, 9, 1)
+	DH2PRT2TEMPline2 = CSMakeLine(2, 96, 90, 9, 0)
+
+	DH2PRT2SHAPEline1EFT = CS_OverlapX(DH2PRT2TEMPline1EFT, DH2PRT2TEMPline2EFT)
+	DH2PRT2SHAPEline1 = CS_OverlapX(DH2PRT2TEMPline1,DH2PRT2TEMPline2)
+
+	-------------
 	
+
+
+
+	
+	ShapeDebugging({
+		DH2PRT2ASHAPEplot1,DH2PRT2ASHAPEplot2,DH2PRT2ASHAPEplot3,DH2PRT2ASHAPEplot4,DH2PRT2SHAPEline1
+	})
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
 
