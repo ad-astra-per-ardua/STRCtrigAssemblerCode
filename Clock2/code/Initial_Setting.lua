@@ -94,7 +94,7 @@ function Initial_Setting()
                     TriggerX(FP, NVar(HPlayerV, Exactly, 8),{SetNVar(HPlayerV2, SetTo, 5)},{Preserved})
                     TriggerX(FP, NVar(HPlayerV, Exactly, 9),{SetNVar(HPlayerV2, SetTo, 6)},{Preserved})
                     TriggerX(FP, NVar(HPlayerV, Exactly, 10),{SetNVar(HPlayerV2, SetTo, 7)},{Preserved})
-                    f_Read(FP,0x628438,nil,Nextptr) -- 재생성될 유닛의 좌표를 지정
+                    f_Read(FP,0x628438,nil,Nextptr)
                 CTrigger(FP,{},{  -- Replace Hero
                         TMoveLocation("248",RepHeroIndex,HPlayerV,"Anywhere");
                         TModifyUnitEnergy(1,RepHeroIndex,HPlayerV,"248",0);
