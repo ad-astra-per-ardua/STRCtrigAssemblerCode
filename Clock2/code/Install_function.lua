@@ -123,7 +123,7 @@ end
             return TSetCVar(FP,V[2],Subtract,Value)
         end
     end
-    function CD(Code,Value,Type)
+    function CD2(Code,Value,Type)
         if Value == nil then Value = 1 end
         if Type == nil then Type = Exactly end
         if FP == nil then PushErrorMsg("FP Player not defined") end

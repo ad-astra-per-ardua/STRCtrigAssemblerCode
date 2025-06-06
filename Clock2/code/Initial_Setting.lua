@@ -13,7 +13,7 @@ function Initial_Setting()
     -- })
 
     for i = 0, 227 do
-        SetUnitDefUpType(i,60) -- 방업 적용 방지
+        SetUnitDefUpType(i,45) -- 방업 적용 방지
         SetToUnitDef(i,0) -- 방어력 전부 0으로 설정 
         SetUnitAdvFlag(i,0,0x4000) -- 모든유닛 어드밴스드 플래그 중 로보틱 전부제거
         
@@ -21,27 +21,12 @@ function Initial_Setting()
     InitialMArray = {0,20,16,10,1,99,100}
 
     for i = 1, #InitialMArray do
+        SetUnitDefUpType(i,0)
         SetUnitAdvFlag(InitialMArray[i], 0x4000, 0x4000)
         UnitSizePatch(InitialMArray[i],6,9,6,10)
     end
     DoActions2(FP, PatchArr)
 
-    function UnitLimit(Player,UID,Limit,Text,ReturnResources)
-        Trigger {
-            players = {Player},
-            conditions = {
-                Label();
-                Bring(Player,AtLeast,Limit+1,UID,64);
-                },
-            
-            actions = {
-                KillUnitAt(1,UID,"Anywhere",Player);
-                DisplayText(StrDesign("\x04"..Text.." "..Limit.."기를 넘어서 소지할 수 없습니다. \x1C자원 반환 \x1F+ "..ReturnResources.." Ore\x07"),4);
-                SetResources(Player,Add,ReturnResources,Ore);
-                PreserveTrigger();
-            },
-        }
-    end
 
     ------------- Hero placement loop --------------
     
@@ -66,7 +51,7 @@ function Initial_Setting()
 		
 
     BuildingArr = {130,131,132} 
-    HeroArr = {2,15,17,52,58,65,66,68,5,21,40,60,61,70,3,25,19 } 
+    HeroArr = {2,15,17,52,58,65,66,68,5,21,40,60,61,70,3,25,19,49,64 } 
             
         
     CIfOnce(FP,{Always()})
@@ -124,9 +109,6 @@ function Initial_Setting()
 
     -- DisplayPrintTbl(1346, {"\x07·\x11·\x08·\x07【 ",temp123})
     TriggerX(FP, Always(),{
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "duskHive6"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P6}, FP),
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "noonHive1"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P7}, FP),
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "morHive5"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P8}, FP),
         RotatePlayer({CenterView("mainclock")}, {Force1,Force5}, FP);
     })
     

@@ -69,12 +69,28 @@ function N_Gunplot()
     end
     
     Trigger2(FP,{},SpellcasterPatch)
+
+    function Convert_ColorCode(str)
+        if str:find("<[^>]+$") then
+            PushErrorMsg("COLOR_CODE_ERROR: Missing '>'")
+            return str
+        end
+    
+        return str:gsub("<(%x+)>", function(code)
+            local num = tonumber(code, 16)
+            if not num then
+                PushErrorMsg("COLOR_CODE_ERROR: Invalid hex")
+                return "<"..code..">"
+            end
+            return string.char(num)
+        end)
+    end
     HInfoArr = {} -- Main 1 Dim
     -- "\x07·\x11·\x08·\x07『 "
     -- "\x07』\x08·\x11·\x07·"
     -- HIndex = {2,17,15,52,58,65,66,68}
     function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
-        HeroText = "\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·"
+        HeroText = Convert_ColorCode("\x13\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·")
         
         local X = {} -- Sub 1 Dim
         table.insert(X,HeroIndex)
@@ -86,27 +102,31 @@ function N_Gunplot()
         HInfoArr[i][1] == Index, 2 == Text, 3 == Point
     ]]
     
-    CreateHeroAlert(2, "<11>Ⅰ<8>Disorderness <19>F<4>ragmentation<11>Ⅰ", 30000)
-    CreateHeroAlert(15, "<11>Ⅰ<8>Disorderness <19>R<4>eservist<11>Ⅰ", 30000)
-    CreateHeroAlert(17, "<11>Ⅰ<8>Disorderness <19>T<4>itan<11>Ⅰ", 32000)
-    CreateHeroAlert(52, "<11>Ⅰ <8>Disorderness <19>U<4>nholy <11>Ⅰ", 30000)
-    CreateHeroAlert(58, "<11>Ⅰ <8>Disorderness <19>M<4>ystic <19>D<4>ream <11>Ⅰ", 35000)
-    CreateHeroAlert(65, "<11>Ⅰ <8>Disorderness <19>J<4>uggler <11>Ⅰ", 33000)
-    CreateHeroAlert(66, "<11>Ⅰ <8>Disorderness <19>U<4>ndyne <11>Ⅰ", 33000)
-    CreateHeroAlert(68, "<11>Ⅰ <8>Disorderness <19>B<4>ulb <11>Ⅰ", 37000)
+    CreateHeroAlert(2, " <11>Ⅰ <19>F<4>ragmentation<11>Ⅰ", 30000)
+    CreateHeroAlert(15, " <11>Ⅰ <19>R<4>eservist<11>Ⅰ", 30000)
+    CreateHeroAlert(17, " <11>Ⅰ <19>T<4>itan<11>Ⅰ", 32000)
+    CreateHeroAlert(52, " <11>Ⅰ <19>U<4>nholy <11>Ⅰ", 30000)
+    CreateHeroAlert(58, " <11>Ⅰ <19>M<4>ystic <19>D<4>ream <11>Ⅰ", 35000)
+    CreateHeroAlert(65, " <11>Ⅰ <19>J<4>uggler <11>Ⅰ", 33000)
+    CreateHeroAlert(66, " <11>Ⅰ <19>U<4>ndyne <11>Ⅰ", 33000)
+    CreateHeroAlert(68, " <11>Ⅰ <19>B<4>ulb <11>Ⅰ", 37000)
 
-    CreateHeroAlert(5, "<11>Ⅴ <8>Disorderness <19><4><19>T<4>heft <11>Ⅴ", 55000)
-    CreateHeroAlert(21, "<11>Ⅴ <8>Disorderness <19>D<4>isturbing <19>F<4>ly <11>Ⅴ", 60000)
-    CreateHeroAlert(40, "<11>Ⅴ <8>Disorderness <19>J<4>giwara <19>J<4>otyu <11>Ⅴ", 66666)
-    CreateHeroAlert(60, "<11>Ⅴ <8>Disorderness <19>A<4>rc <11>Ⅴ", 65000)
-    CreateHeroAlert(61, "<11>Ⅴ <8>Disorderness <19>B<4>lindness <11>Ⅴ", 63000)
-    CreateHeroAlert(70, "<11>Ⅴ <8>Disorderness <19>P<4>ersonality <11>Ⅴ", 62000)
+    CreateHeroAlert(5, " <11>Ⅴ <19><4><19>T<4>heft <11>Ⅴ", 55000)
+    CreateHeroAlert(21, " <11>Ⅴ <19>D<4>isturbing <19>F<4>ly <11>Ⅴ", 60000)
+    CreateHeroAlert(40, " <11>Ⅴ <19>J<4>giwara <19>J<4>otyu <11>Ⅴ", 66666)
+    CreateHeroAlert(60, " <11>Ⅴ <19>A<4>rc <11>Ⅴ", 65000)
+    CreateHeroAlert(61, " <11>Ⅴ <19>B<4>lindness <11>Ⅴ", 63000)
+    CreateHeroAlert(70, " <11>Ⅴ <19>P<4>ersonality <11>Ⅴ", 62000)
+    
+    CreateHeroAlert(64, " <11>Ⅹ <19>V<4>oltississimo<11> Ⅹ", 70000)
 
     
     BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
     LocSize = 128
     
     CunitCtrig_Part1(FP)
+    MoveCp("X", 0x64)
+    -- NJumpX(FP,0x3,{CVar(FP,finMainclock[2],AtLeast,0), CVar(FP,finMainclock[2],AtMost,4)}) -- Debuff Hour Condition
     MoveCp("X",25*4)
 
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,135,0,0xFF))
@@ -116,6 +136,8 @@ function N_Gunplot()
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
 
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF)) -- Death gunplot unit
+
+    
     
     ----------------- Hero Section
     DoActions(FP,MoveCp(Subtract,16*4))
@@ -186,9 +208,36 @@ function N_Gunplot()
 
     
     ClearCalc()
-    CJumpEnd(FP,0x2)
-
+    CJumpEnd(FP,0x2)    
     CunitCtrig_Part2()
+    -- NJumpXEnd(FP, 0x3)
+    -- MoveCp("X", 0x64)
+
+    
+    -- SetDelayLoop(DebuffTimer, 34)
+    -- SMarineArray = {16,10,1,99,100}
+
+    -- CTriggerX(FP, {Deaths(CurrentPlayer, Exactly, 0, 0),CD2(DebuffFlag,1,Exactly),CD2(DebuffTimer,2,Exactly)}, {
+    --         MoveCp("X", 0x08);
+    --         TSetDeaths(CurrentPlayer, Subtract, _Mul(_Div(_ReadF(0x662350 + 0*4),1000),mainclockCycled), 0*4);
+    --         MoveCp("X", 0x64)
+    --     }, preserved)
+
+    -- CTriggerX(FP, {Deaths(CurrentPlayer, Exactly, 20, 0),CD2(DebuffFlag,1,Exactly),CD2(DebuffTimer,2,Exactly)}, {
+    --     MoveCp("X", 0x08);
+    --     TSetDeaths(CurrentPlayer, Subtract, _Mul(_Div(_ReadF(0x662350 + 20*4),1000),mainclockCycled), 20*4);
+    --     MoveCp("X", 0x64)
+    -- }, preserved)
+
+    -- for i = 1, 5 do
+    --     CTriggerX(FP, {Deaths(CurrentPlayer, Exactly, SMarineArray[i], 0),CD2(DebuffFlag,1,Exactly),CD2(DebuffTimer,2,Exactly)}, {
+    --         MoveCp("X", 0x08);
+    --         TSetDeaths(CurrentPlayer, Subtract, _Mul(_Div(_ReadF(0x662350 + SMarineArray[i]*4),1000),mainclockCycled), SMarineArray[i]*4);
+    --         MoveCp("X", 0x64);
+    --     }, preserved)
+    -- end
+    -- ClearCalc()
+
     CunitCtrig_Part3X()
     for i = 0, 1699 do
     CunitCtrig_Part4X(i,{ -- 잡건
@@ -233,6 +282,8 @@ function N_Gunplot()
 
     ]]
     
+
+    
     SetLoopInfPlot(P6, "duskHat2", 131, {1,1,1,1,1,1,1,1,1,1,1,1,1,1}, {54,53,55,56,77,78,40,41,43,44,45,46,47,48}, duskhatTL)
     SetEffectplot1(P6, "duskHat2", 131, 84, {1,2,3,4,5,6,7,7}, duskhatTLeft)
 
@@ -262,7 +313,28 @@ function N_Gunplot()
     SetLoop2Plot(P6, "duskHive1", 133, {12,12,12,12,12,12,12,12}, {84,84,84,84,84,84,84,84}, duskHive1TLEft)
 
     
+    SetLoopInfPlot(P6, "duskHive2", 133, {2,3,4,5,6,7,8,9,6,7,8,9,16,16,17,13,14,15,18,18,18}, {54,53,54,53,54,53,54,53,54,193,193,193,193,193,193,193,193,193,193,193,3}, duskHive2TL)
+    SetLoopInfPlot(P6, "duskHive2", 133, {2,3,4,5,6,7,8,9,6,7,8,9,16,16,17,13,14,15,18,18,18}, {44,43,44,43,54,53,54,53,44,193,193,193,193,193,193,193,193,3,193,193,3}, duskHive2TL)
+    SetLoopInfPlot(P6, "duskHive2", 133, {2,3,4,5,6,7,8,9,6,7,8,9,16,16,17,13,14,15,18,18,18}, {65,66,68,52,54,53,49,53,65,193,193,193,193,193,193,193,193,193,193,193,3}, duskHive2TL)
+    SetLoopInfPlot(P6, "duskHive2", 133, {2,3,4,5,6,7,8,9,6,7,8,9,16,16,17,13,14,15,18,18,18}, {70,61,15,17,54,73,54,40,70,193,193,193,193,193,193,193,193,193,193,193,3}, duskHive2TL)
 
+    SetLoopInfPlot(P6, "duskHive2", 133, {
+        2,3,4,5,6,7,8,9,6,7,8,9,
+        10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,
+        11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,
+        12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
+    }, {
+        84,84,84,84,57,57,57,57,84,84,84,84,
+        84,84,84,84,84,84,84,57,57,57,57,57,57,57,84,84,84,84,84,84,84,
+        84,84,84,84,84,84,84,57,57,57,57,57,57,57,84,84,84,84,84,84,84,
+        84,84,84,84,84,84,84,57,57,57,57,57,57,57,84,84,84,84,84
+    }, duskHive2TLEft)
 
+    SetLoopInfPlot(P6, "duskHive5", 133, {19,20,21,22,23,24,19,20,21,22,23,24}, {54,66,70,64,64,64,56,68,78,25,25,25}, duskHive5TL)
+    SetLoopInfPlot(P6, "duskHive5", 133, {19,19}, {84,84}, duskHive5TLEft)
+    
+    SetLoop2Plot(P6, "duskHive5", 133, {15,15,16,17,18}, {28,58,70,73,64}, duskHive5TL2)
+    SetLoop2Plot(P6, "duskHive5", 133, {15,15,16,17,18}, {5,2,15,52,17}, duskHive5TL2)
+    SetLoop2Plot(P6, "duskHive5", 133, {15,15,16,17,18}, {84,84,84,84,84}, duskHive5TL2)
     
 end

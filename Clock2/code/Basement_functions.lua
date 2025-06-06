@@ -7,12 +7,21 @@ function Basement_functions()
     P_Count = CreateNcode()
     Difficulty = CreateCcode()
     GiveRate = CreateNcode()
+    DebuffFlag = CreateCcode()
+    DebuffTimer = CreateCcode()
 
     DelayTimer = CreateCcode()
     DoActions(FP, {SubCD(DelayTimer, 1)}, preserved)
 
     function SetDelay(Code, Value)
-        TriggerX(FP, {Always()}, {SetCD(Code, Value)})
+        TriggerX(FP, {Always()}, {SetCD(Code, Value)});
+        DoActionsX(FP, {SubCD(Code, 1)},preserved);
+    end
+
+    function SetDelayLoop(Code, Value)
+        TriggerX(FP, {Always()}, {SetCD(Code, Value)});
+        DoActionsX(FP, {SubCD(Code, 1)},preserved);
+        TriggerX(FP, {CD2(Code,1,Exactly)}, {SetCD(Code, Value)}, preserved)
     end
 
     --- For clock fuctions ---

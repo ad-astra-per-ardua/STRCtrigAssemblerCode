@@ -79,7 +79,7 @@ end
 
 
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
-    DHSH1T1 = CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1)
+    DHSH1T1 = CS_SortX(CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1),1)
     SHH15x = CSMakePath({0,-191},{-240,-179},{-240,17},{363,-15})
 
 	-- 1 ~ 4 4는 거의 이펙트로 사용
@@ -152,24 +152,30 @@ end
 	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
 	
 	---- duskHive2 ----
-	DH2PRT1lower1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,60),1)
-	DH2PRT1lower2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,-60),1)
-	DH2PRT1lower3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,180),1)
-	DH2PRT1lower4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 90, 13, 0),0,-180),1)
+	DH2PRT1lower1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,-90),1)
+	DH2PRT1lower2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,-30),1)
+	DH2PRT1lower3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,30),1)
+	DH2PRT1lower4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,90),1)
 
-	DH2PRT1Horizontal1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),60,0),0)
-	DH2PRT1Horizontal2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-60,0),0)
-	DH2PRT1Horizontal3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),180,0),0)
-	DH2PRT1Horizontal4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 128, 0, 12, 0),-180,0),0)
+	DH2PRT1Horizontal1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),-90,0),0)
+	DH2PRT1Horizontal2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),-30,0),0)
+	DH2PRT1Horizontal3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),30,0),0)
+	DH2PRT1Horizontal4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),90,0),0)
 
 	DH2PRT2ASHAPE1EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 7), CS_Level("Circle", 8, 6)) -- 약 유닛 큰원
 	DH2PRT2ASHAPE2EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 4), CS_Level("Circle", 8, 3)) -- 약 유닛 작은원
 
+	DH2PRT2ASHAPE1EFTF = CS_Overlap(DH2PRT2ASHAPE1EFT, DH2PRT2ASHAPE2EFT)
+
 	DH2PRT2ASHAPEplot1 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 2 , "splitfunc3"}, 0, 0)
 	DH2PRT2ASHAPEplot2 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 2 , "splitfunc3"}, 0, 0)  
 
+	DH2PRT2ASHAPEplot2F = CS_Overlap(DH2PRT2ASHAPEplot1, DH2PRT2ASHAPEplot2)
+
 	DH2PRT2ASHAPEplot3 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 큰원
 	DH2PRT2ASHAPEplot4 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 작은원
+
+	DH2PRT2ASHAPEplot3F = CS_Overlap(DH2PRT2ASHAPEplot3, DH2PRT2ASHAPEplot4)
 
 	DH2PRT2TEMPline1EFT = CSMakeLine(2, 48, 0, 19, 1)
 	DH2PRT2TEMPline2EFT = CSMakeLine(2, 48, 90, 19, 0)
@@ -179,14 +185,33 @@ end
 	DH2PRT2SHAPEline1EFT = CS_OverlapX(DH2PRT2TEMPline1EFT, DH2PRT2TEMPline2EFT)
 	DH2PRT2SHAPEline1 = CS_OverlapX(DH2PRT2TEMPline1,DH2PRT2TEMPline2)
 
-	-------------
-	
+	DH2PRT2SHAPE3EFT = CS_Overlap(DH2PRT2ASHAPE1EFTF, DH2PRT2SHAPEline1EFT)
 
+	------------- duskHive5 == flashback ----
+	DH5PTH1 = CS_MoveCenter(CSMakePath({2036, 229},{2125, 155},{2171, 56},{2321, 46},{2334, 137},{2425, 203},{2395, 335},{2375, 395},{2285, 403},{2109, 435},{2051, 355}),0,0)
+	DH5Entrance = CS_MoveCenter({4   ,{1922, 315},{1921, 376},{1920, 438},{1919, 504}},-192,-256)
+	DH5RightSide = CS_MoveCenter({4   ,{2305, 475},{2363, 423},{2427, 357},{2493, 293}},160,-160)
+	DH5UpperSide = CS_MoveCenter({3   ,{2462, 59},{2523, 120},{2595, 156}},320,144)
 
+	CreateMShapes("DH5PTH1SHAPE", DH5PTH1, 1, 128, 4, 64, 10, 0) -- 1, 2, 3 | H T E
+
+	-- DH5PTH1SHAPEF1 = CS_MoveCenter(DH5PTH1SHAPE3, 2208, 239)
+	-- DH5PTH1SHAPEF2 = CS_MoveCenter(DH5PTH1SHAPE2, 2208, 239)
+	-- DH5PTH1SHAPEF3 = CS_MoveCenter(DH5PTH1SHAPE1, 2208, 239)
+	-- DH5Entrance = CS_MoveCenter(DH5Entranc, 1920, 408)
+	-- DH5RightSide = CS_MoveCenter(DH5RightSid, 2397, 516)
+	-- DH5UpperSide = CS_MoveCenter(DH5UpperSid, 2526, 111)
+
+	DH5PTH1SHAPEF4 = CS_DoubleSortRA(DH5PTH1SHAPE4, 32, 1, 0)
+	DH5PTH1SHAPEF5 = CS_DoubleSortRA(DH5PTH1SHAPE4, 32, 0, 0)
+
+	function SortXYFunc(X) return {math.abs(X)} end
+	DH5PTH1SHAPEF6 = CS_SortXY(DH5PTH1SHAPE4, "SortXYFunc", nil, 0)
+	DH5PTH1SHAPEF7 = CS_SortXY(DH5PTH1SHAPE4, "SortXYFunc", nil, 1)
 
 	
 	ShapeDebugging({
-		DH2PRT2ASHAPEplot1,DH2PRT2ASHAPEplot2,DH2PRT2ASHAPEplot3,DH2PRT2ASHAPEplot4,DH2PRT2SHAPEline1
+		DH5Entrance
 	})
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 

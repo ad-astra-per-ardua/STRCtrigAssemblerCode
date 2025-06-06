@@ -1,39 +1,6 @@
 function Install_GplotEngine()
-
-    -- CAShapeArr2D = {
-    --     {DHSH1T1},
-    --     {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7},
-    --     {baseCircle2, baseCircle3,Heart,baseStar},
-    --     {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,baseCircle, baseCircle1},
-    -- }
-
-    -- cr8Array = {}
-    -- cnt = 0
-    -- for K, V in pairs(CAShapeArr2D) do
-    --     table.insert(cr8Array,cnt)
-    --     cnt = #V + cnt
-    -- end
-
-    -- CAShapeArr = {} -- -> CAPlot 삽입
-    -- for LIMIT, MODE in pairs(CAShapeArr2D) do
-    --     for K, V in pairs(MODE) do
-    --         table.insert(CAShapeArr,V)
-    --     end
-    -- end
-
-    -- ModifyshapeArr = CreateArr(#cr8Array,FP)
-    -- FshapeArr = {}
-    -- for K, V in pairs(cr8Array) do
-    --     table.insert(FshapeArr,SetMemX(Arr(ModifyshapeArr,K-1),SetTo,V))
-    -- end
-    -- DoActionsX(FP,FshapeArr,{}) -- CArray Init
-
-    -- DMMM = CreateVar(FP)
-    -- CAdd(FP,DMMM,_Read(Arr(ModifyshapeArr,(i-1))),j) -- get Shape Index (=Loc(i,j))
     
-
-
-        
+       
     GunMaxAmount = 60 -- 최대건작갯수 ( 넘어가면 컴파일오류 )
     GIndex = 0
 
@@ -67,10 +34,23 @@ function f_ReadLocXY(Loc)
     ----
 
     ----< CAFunc , CAPlot CFunc >---- SetLoopInfPlot function 
-    CAShapeArr = {DHSH1T1}
+    CAShapeArr = {
+        DHSH1T1, 
+
+        DH2PRT1lower1,DH2PRT1lower2,DH2PRT1lower3,DH2PRT1lower4,
+        DH2PRT1Horizontal1,DH2PRT1Horizontal2,DH2PRT1Horizontal3,DH2PRT1Horizontal4,
+        DH2PRT2ASHAPE1EFTF, DH2PRT2SHAPEline1EFT, DH2PRT2SHAPE3EFT, -- Circle,Line,overlapped
+        DH2PRT2ASHAPE1EFTF, DH2PRT2ASHAPEplot2F, DH2PRT2ASHAPEplot3F,
+        -- 1/1 | 1/2 | 1/3 Circle
+        DH2PRT2SHAPEline1EFT, DH2PRT2SHAPEline1, -- 1/1 | 1/2 Line
+        DH2PRT2SHAPE3EFT, -- Overlapped
+        DH5PTH1SHAPE4, DH5PTH1SHAPE3, DH5PTH1SHAPE2, DH5Entrance, DH5RightSide, DH5UpperSide,
+
+
+    }
     CallCAPlot = InitCFunc(FP)
     CFunc(CallCAPlot)
-        CAPlot(CAShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,600,Gun_DataIndex},nil,FP,nil
+        CAPlot(CAShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,998,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2001),SetNext(0x2002,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -91,10 +71,43 @@ function f_ReadLocXY(Loc)
     CJumpEnd(FP,0x100)
     ----
 
+    ----< CAFunc , CAPlot CFunc >---- SetLoop2Plot
+    SetLoop2PlotShapeArr = {
+        baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2,
+        DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4,
+        DuskHive1SH1plt,DuskHive1SH2plt,DuskHive1SH5plt,DuskHive1SH6plt,
+        DH5PTH1SHAPEF4,DH5PTH1SHAPEF5,DH5PTH1SHAPEF6,DH5PTH1SHAPEF7
+
+
+    }
+
+    CallCAPlot3 = InitCFunc(FP)
+    CFunc(CallCAPlot3)
+        CAPlot(SetLoop2PlotShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,6,Gun_DataIndex},nil,FP,nil
+        ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
+        --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
+    작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
+                -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
+        ]]--
+    CFuncEnd()
+    ----< 유닛생성단락 >----
+    CJump(FP,0x300)
+    SetLabel(0x2005) -- CAPlot PerActions 도착지점
+    NIf(FP,{Memory(0x628438,AtLeast,1)})
+        CDoActions(FP,{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
+        })
+    NIfEnd()
+
+    SetLabel(0x2006)
+    CJumpEnd(FP,0x300)
 
      ----< CAFunc , CAPlot CFunc >---- SetEffectplot1
-     CAEffectshapeArr = {HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,
-     DLSH3SHEft1,DLSH3SHEft2
+     CAEffectshapeArr = {
+        HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,
+        DLSH3SHEft1,DLSH3SHEft2,
+        
  }
     CallCAPlot2 = InitCFunc(FP)
     CFunc(CallCAPlot2)
@@ -121,14 +134,10 @@ function f_ReadLocXY(Loc)
 
 
 
-    
-
-
-
-
     ----< CAFunc , CAPlot CFunc >---- SetEffectplotInf
     CAEffectshapeArr2 = {
-        HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,baseCircle, baseCircle1
+        HEFT1,HEFT2,HEFT3,HEFT4,HEFT5,HEFT6,HEFT7,baseCircle, baseCircle1,
+        
     }
     CallCAPlot4 = InitCFunc(FP)
     CFunc(CallCAPlot4)
@@ -167,6 +176,8 @@ function f_ReadLocXY(Loc)
 
 
     function SetLoopInfPlot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
+        
+
         ----< 데스, 변수 할당 >----
         
         GIndex = GIndex + 1
@@ -191,34 +202,47 @@ function f_ReadLocXY(Loc)
             CDoActions(FP,{TSetNVar(GPosX,SetTo,GunPosX),TSetNVar(GPosY,SetTo,GunPosY),SetNVar(CDataIndex,SetTo,999)})
 
         for i = 1, #TimeLine do -- 젠 타이밍 맞추는곳
-            if i == 1 then
+                if i == 1 then
+                    TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                        SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
+                        SetNVar(CShapeType,SetTo,ShapeNumber[i]);
+                        SetCDeaths("X",SetTo,TimeLine[i]*SDspeed,CTimer); -- Create unit Timer
+                        SetNVar(CDataIndex,SetTo,999);
+                        SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                    })
+
+                    TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                    SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
+                    SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
+                    SetNVar(CPlayer,SetTo,Player); -- owner
+                    SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
+                    SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
+                    SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                    SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+                })
+
+                    else
+
+                -- TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                --     SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
+                --     SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
+                --     SetNVar(CPlayer,SetTo,Player); -- owner
+                --     SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+                --     SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
+                --     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                --     SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
+                -- })
+
                 TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
-                    SetCDeaths("X",SetTo,TimeLine[i]*SDspeed,CTimer); -- Create unit Timer
-                    SetCDeaths("X",SetTo,1,CStage); -- Generate counter
+                    SetNVar(CShapeType,SetTo,ShapeNumber[i]); -- shape index
+                    SetNVar(CPlayer,SetTo,Player); -- owner
+                    SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
+                    SetCDeaths("X",SetTo,(TimeLine[i] - TimeLine[i-1])*SDspeed,CTimer); -- Create unit Timer
+                    SetCDeaths("X",SetTo,i,CStage); -- Generate counter
+                    SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
                 })
-                else
-
-            TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-                SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
-                SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
-                SetNVar(CPlayer,SetTo,Player); -- owner
-                SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
-                SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
-                SetCDeaths("X",SetTo,1,CStage); -- Generate counter
-                SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-            })
-
-            TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
-                SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
-                SetNVar(CShapeType,SetTo,ShapeNumber[i]); -- shape index
-                SetNVar(CPlayer,SetTo,Player); -- owner
-                SetNVar(CDataIndex,SetTo,1); -- 데이터인덱스 초기화
-                SetCDeaths("X",SetTo,(TimeLine[i] - TimeLine[i-1])*SDspeed,CTimer); -- Create unit Timer
-                SetCDeaths("X",SetTo,i,CStage); -- Generate counter
-                SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
-            })
-            end
+                end   
         end
 
 
@@ -240,42 +264,13 @@ function f_ReadLocXY(Loc)
             CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
         CIfEnd()
 
+        CTriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{TSetNVar(CDataIndex,Add,998)},{Preserved})
         DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer),SetCDeathsX("X",Subtract,1,COrder,0xFF)})
 
         CIfEnd()
     end
 
 
-    
-
-        ----< CAFunc , CAPlot CFunc >---- SetLoop2Plot
-        SetLoop2PlotShapeArr = {
-            baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2,
-            DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4,
-            DuskHive1SH1plt,DuskHive1SH2plt,DuskHive1SH5plt,DuskHive1SH6plt
-        }
-
-        CallCAPlot3 = InitCFunc(FP)
-        CFunc(CallCAPlot3)
-            CAPlot(SetLoop2PlotShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,6,Gun_DataIndex},nil,FP,nil
-            ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
-            --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
-        작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
-                    -> 트리거0x2002의 Next를 CAPlot트리거로 설정 -> 점 다찍힐때까지 위 과정반복 -> CAPlot 종료
-            ]]--
-        CFuncEnd()
-        ----< 유닛생성단락 >----
-        CJump(FP,0x300)
-        SetLabel(0x2005) -- CAPlot PerActions 도착지점
-        NIf(FP,{Memory(0x628438,AtLeast,1)})
-            CDoActions(FP,{ -- 유닛생성단락
-                TCreateUnit(1,Gun_Unit,"248",Gun_Player);
-                TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
-            })
-        NIfEnd()
-
-        SetLabel(0x2006)
-        CJumpEnd(FP,0x300)
 
     function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
 
@@ -355,7 +350,7 @@ function f_ReadLocXY(Loc)
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
             -- CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
         
-        TriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{SetNVar(CDataIndex,Add,6)},{Preserved})
+        CTriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{TSetNVar(CDataIndex,Add,6)},{Preserved})
         DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer)})
 
         CIfEnd()
