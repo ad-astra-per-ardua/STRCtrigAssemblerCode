@@ -94,6 +94,8 @@ Verifing_Phase()
 Initial_Setting()
 Enable_TestMode()
 Define_Shape()
+Declare_BGM()
+Control_PlotBGM()
 Install_GplotEngine()
 -- CheatVerificationSystem()
 
@@ -102,8 +104,6 @@ Install_GplotEngine()
 
 
 Define_Variable()
-Declare_BGM()
-Control_PlotBGM()
 MainclockG()
 N_Gunplot()
 

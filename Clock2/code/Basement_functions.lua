@@ -9,6 +9,7 @@ function Basement_functions()
     GiveRate = CreateNcode()
     DebuffFlag = CreateCcode()
     DebuffTimer = CreateCcode()
+    GeneratePlotControl = CreateVar(FP)
 
     DelayTimer = CreateCcode()
     DoActions(FP, {SubCD(DelayTimer, 1)}, preserved)

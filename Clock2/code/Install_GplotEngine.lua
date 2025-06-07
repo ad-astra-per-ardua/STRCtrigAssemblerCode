@@ -44,7 +44,7 @@ function f_ReadLocXY(Loc)
         -- 1/1 | 1/2 | 1/3 Circle
         DH2PRT2SHAPEline1EFT, DH2PRT2SHAPEline1, -- 1/1 | 1/2 Line
         DH2PRT2SHAPE3EFT, -- Overlapped
-        DH5PTH1SHAPE4, DH5PTH1SHAPE3, DH5PTH1SHAPE2, DH5Entrance, DH5RightSide, DH5UpperSide,
+        DH5PTH1SHAPE5, DH5PTH1SHAPE2, DH5PTH1SHAPE1, DH5Entrance, DH5RightSide, DH5UpperSide,
 
 
     }
@@ -76,7 +76,12 @@ function f_ReadLocXY(Loc)
         baseCircle2, baseCircle3,Heart,baseStar,duskHat3SF,lairShape2,
         DLSG3SH1G1,DLSH3SH5G2,DLSH3SH5G3,DLSH3SH5G4,
         DuskHive1SH1plt,DuskHive1SH2plt,DuskHive1SH5plt,DuskHive1SH6plt,
-        DH5PTH1SHAPEF4,DH5PTH1SHAPEF5,DH5PTH1SHAPEF6,DH5PTH1SHAPEF7
+        DH5PTH1SHAPEF4,DH5PTH1SHAPEF5,DH5PTH1SHAPEF6,DH5PTH1SHAPEF7,
+
+        DHat5ShapeOverlapped, DHat5ShapePartI1, DHat5ShapePartII4_SortXD,
+        DHat5ShapeOverlapped_SortYD, DHat5ShapePartII4_SortXY0,DHat5ShapePartII4_SortXY1,
+        DHat5ShapeOverlapped_SortYA,
+        DHat5ShapePartII2_SortXD,DHat5ShapePartII2_SortYD,DHat5ShapePartII2_SortYA,DHat5ShapePartII3_SortYA
 
 
     }
@@ -305,7 +310,6 @@ function f_ReadLocXY(Loc)
                     SetNVar(CDataIndex,SetTo,999); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 })
-
                 TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
                     SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
@@ -315,6 +319,7 @@ function f_ReadLocXY(Loc)
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                     SetCDeathsX("X",SetTo,1,COrder,0xFF); -- Mask to condition for control gunplot
                 })
+
                 else
 
             

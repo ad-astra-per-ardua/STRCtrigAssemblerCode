@@ -59,13 +59,13 @@ function ShapeDebugging(shapeTable)
 
 		for _, shape in ipairs(args) do
 			local fileName = tostring(idx)
-			CS_BMPGraph(shape, {0x000000}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+			CS_BMPGraph(shape, {0xFFFFFF}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 			idx = idx + 1
 		end
 
 		-- Overlapped
 		local debugFileName = tostring(idx2)
-		CS_BMPGraph(debugShape, {0x000000}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+		CS_BMPGraph(debugShape, {0xFFFFFF}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
 		idx2 = idx2 + 1
 
 		return debugShape
@@ -189,29 +189,63 @@ end
 
 	------------- duskHive5 == flashback ----
 	DH5PTH1 = CS_MoveCenter(CSMakePath({2036, 229},{2125, 155},{2171, 56},{2321, 46},{2334, 137},{2425, 203},{2395, 335},{2375, 395},{2285, 403},{2109, 435},{2051, 355}),0,0)
-	DH5Entrance = CS_MoveCenter({4   ,{1922, 315},{1921, 376},{1920, 438},{1919, 504}},-192,-256)
-	DH5RightSide = CS_MoveCenter({4   ,{2305, 475},{2363, 423},{2427, 357},{2493, 293}},160,-160)
-	DH5UpperSide = CS_MoveCenter({3   ,{2462, 59},{2523, 120},{2595, 156}},320,144)
+	DH5Entrance = CS_MoveCenter({4   ,{1922, 315},{1921, 376},{1920, 438},{1919, 504}},-192,256)
+	DH5RightSide = CS_MoveCenter({4   ,{2305, 475},{2363, 423},{2427, 357},{2493, 293}},160,160)
+	DH5UpperSide = CS_MoveCenter({3   ,{2462, 59},{2523, 120},{2595, 156}},320,-144)
 
-	CreateMShapes("DH5PTH1SHAPE", DH5PTH1, 1, 128, 4, 64, 10, 0) -- 1, 2, 3 | H T E
+	CreateMShapes("DH5PTH1SHAPE", DH5PTH1, 1, 64, 4, 64, 10, 0) -- 1, 2, 3 | H T E
 
-	-- DH5PTH1SHAPEF1 = CS_MoveCenter(DH5PTH1SHAPE3, 2208, 239)
-	-- DH5PTH1SHAPEF2 = CS_MoveCenter(DH5PTH1SHAPE2, 2208, 239)
-	-- DH5PTH1SHAPEF3 = CS_MoveCenter(DH5PTH1SHAPE1, 2208, 239)
-	-- DH5Entrance = CS_MoveCenter(DH5Entranc, 1920, 408)
-	-- DH5RightSide = CS_MoveCenter(DH5RightSid, 2397, 516)
-	-- DH5UpperSide = CS_MoveCenter(DH5UpperSid, 2526, 111)
-
-	DH5PTH1SHAPEF4 = CS_DoubleSortRA(DH5PTH1SHAPE4, 32, 1, 0)
-	DH5PTH1SHAPEF5 = CS_DoubleSortRA(DH5PTH1SHAPE4, 32, 0, 0)
+	DH5PTH1SHAPEF4 = CS_DoubleSortRA(DH5PTH1SHAPE2, 32, 1, 0)
+	DH5PTH1SHAPEF5 = CS_DoubleSortRA(DH5PTH1SHAPE2, 32, 0, 0)
 
 	function SortXYFunc(X) return {math.abs(X)} end
-	DH5PTH1SHAPEF6 = CS_SortXY(DH5PTH1SHAPE4, "SortXYFunc", nil, 0)
-	DH5PTH1SHAPEF7 = CS_SortXY(DH5PTH1SHAPE4, "SortXYFunc", nil, 1)
+	DH5PTH1SHAPEF6 = CS_SortXY(DH5PTH1SHAPE2, "SortXYFunc", nil, 0)
+	DH5PTH1SHAPEF7 = CS_SortXY(DH5PTH1SHAPE2, "SortXYFunc", nil, 1)
+
+	------------------- Start Of duskHat5  --------------
+	---Entrance == A | Main == B
+	---A + B | B | X Desc Sorted A+B | 3T | Eft | Eft | 1T + H, A+B | Y Aesc Eft + Eft A+B, 1T + H 
+	
+	DHat5PTH1 = CS_MoveCenter(CSMakePath({1840, 310},{1839, 557},{1935, 309},{1937, 561},{1940, 358},{2011, 359},{2014, 528},{1941, 525},{1830, 359},{1788, 355},{1782, 457},{1835, 457}),-320,-64)
+	DHat5PTH2 = CS_MoveCenter(CSMakePath({2208, 339},{2065, 487},{2213, 636},{2372, 483}),0,0)
+	-- CreateMShapes("DHat5ShapePartI", DHat5PTH1, 1, 64, 5, 64, 10, 0)
+	CreateMShapes("DHat5ShapePartII", DHat5PTH2, 1, 64, 4, 64, 6, 0) -- 4, 3, 2 | 3, 2, H
+	DHat5ShapePartI1 = CS_FillPathXY(DHat5PTH1, 1, 48, 48, 0) 
+
+	DHat5ShapeOverlapped = CS_Overlap(DHat5ShapePartI1, DHat5ShapePartII4)
+	DHat5ShapeOverlapped_SortYD = CS_SortY(DHat5ShapeOverlapped, 1)
+	DHat5ShapeOverlapped_SortYA = CS_SortY(DHat5ShapeOverlapped, 0)
+	DHat5ShapeOverlapped_SortXD = CS_SortX(DHat5ShapeOverlapped, 1)
+	DHat5ShapeOverlapped_SortXA = CS_SortX(DHat5ShapeOverlapped, 0)
+
+	DHat5ShapePartII4_SortXD = CS_SortX(DHat5ShapePartII4,1)
+	DHat5ShapePartII4_SortXA = CS_SortX(DHat5ShapePartII4,0)
+	DHat5ShapePartII4_SortYD = CS_SortY(DHat5ShapePartII4,1)
+	DHat5ShapePartII4_SortYA = CS_SortY(DHat5ShapePartII4,0)
+
+	DHat5ShapePartII3_SortXD = CS_SortX(DHat5ShapePartII3,1)
+	DHat5ShapePartII3_SortXA = CS_SortX(DHat5ShapePartII3,0)
+	DHat5ShapePartII3_SortYD = CS_SortY(DHat5ShapePartII3,1)
+	DHat5ShapePartII3_SortYA = CS_SortY(DHat5ShapePartII3,0)
+
+	DHat5ShapePartII2_SortXD = CS_SortX(DHat5ShapePartII2,1)
+	DHat5ShapePartII2_SortXA = CS_SortX(DHat5ShapePartII2,0)
+	DHat5ShapePartII2_SortYD = CS_SortY(DHat5ShapePartII2,1)
+	DHat5ShapePartII2_SortYA = CS_SortY(DHat5ShapePartII2,0)
+
+	DHat5ShapePartII4_SortXY0 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,0)
+	DHat5ShapePartII4_SortXY1 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,1)
+	--------------- duskHat4 -------------
 
 	
+
+
+
+
+
+
 	ShapeDebugging({
-		DH5Entrance
+		DHat5ShapePartII1,DHat5ShapePartII2,DHat5ShapePartII3,DHat5ShapePartII4,DHat5ShapePartII5,DHat5ShapePartII6
 	})
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
