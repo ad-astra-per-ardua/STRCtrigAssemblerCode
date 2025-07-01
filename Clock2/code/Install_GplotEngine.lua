@@ -8,7 +8,7 @@ function Install_GplotEngine()
 
     -- 데스,변수 설정 // CAPlot 공통변수설정 -- 
     CD = CreateCcodeArr(3*GunMaxAmount)
-    GVar = CreateVarArr(6*GunMaxAmount)
+    GVar = CreateVarArr(7*GunMaxAmount)
     ReadXY = InitCFunc(FP)
     Para = CFunc(ReadXY)
         -- f_Read(FP,0x58DC60+0x14*TempLocID,RetX,"X",0xFFFFFFFF)
@@ -88,7 +88,7 @@ function f_ReadLocXY(Loc)
 
     CallCAPlot3 = InitCFunc(FP)
     CFunc(CallCAPlot3)
-        CAPlot(SetLoop2PlotShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,6,Gun_DataIndex},nil,FP,nil
+        CAPlot(SetLoop2PlotShapeArr,P2,193,"248",{GPosX,GPosY},1,32,{Gun_Shape,0,0,0,Gun_LoopLimit,Gun_DataIndex},nil,FP,nil
         ,{SetNext("X",0x2005),SetNext(0x2006,"X",1)},nil)
         --[[ PerAction 부분 (현재트리거의 Next트리거를 0x2001로 설정 // 0x2002의 Next트리거를 현재트리거의 다음트리거로 설정)
     작동순서 : 193유닛생성(로케만이동) -> PerActions(다음트리거 0x2001로설정) -> CJump(0x100)~CJumpEnd(0x100) 단락으로 진입후 유닛생성 -> 0x2002
@@ -190,12 +190,12 @@ function f_ReadLocXY(Loc)
         CStage = CD[3*GIndex-2] -- 타이머1
         CTimer = CD[3*GIndex-1] -- 타이머2
         COrder = CD[3*GIndex] -- 0xFF ( 오더 & CallCFuncX ) // 0xFF00 ( 건작잠금 ) 
-        CDataIndex = GVar[6*GIndex-5] -- 데이터인덱스변수
-        CUnitType = GVar[6*GIndex-4] -- 유닛변수
-        CShapeType = GVar[6*GIndex-3] -- 도형데이터변수
-        CPlayer = GVar[6*GIndex-2] -- 플레이어변수
-        GunPosX = GVar[6*GIndex-1]
-        GunPosY = GVar[6*GIndex]
+        CDataIndex = GVar[7*GIndex-5] -- 데이터인덱스변수
+        CUnitType = GVar[7*GIndex-4] -- 유닛변수
+        CShapeType = GVar[7*GIndex-3] -- 도형데이터변수
+        CPlayer = GVar[7*GIndex-2] -- 플레이어변수
+        GunPosX = GVar[7*GIndex-1]
+        GunPosY = GVar[7*GIndex]
 
         
         ----< 건작제어 단락 >----
@@ -277,28 +277,30 @@ function f_ReadLocXY(Loc)
 
 
 
-    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,TimeLine)
+    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,Perdot,TimeLine)
 
 
-        ----< 데스, 변수 할당 >----
         
         GIndex = GIndex + 1
         
-        CStage = CD[3*GIndex-2] -- 타이머1
-        CTimer = CD[3*GIndex-1] -- 타이머2
-        COrder = CD[3*GIndex] -- 0xFF ( 오더 & CallCFuncX ) // 0xFF00 ( 건작잠금 ) 
-        CDataIndex = GVar[6*GIndex-5] -- 데이터인덱스변수
-        CUnitType = GVar[6*GIndex-4] -- 유닛변수
-        CShapeType = GVar[6*GIndex-3] -- 도형데이터변수
-        CPlayer = GVar[6*GIndex-2] -- 플레이어변수
-        GunPosX = GVar[6*GIndex-1]
-        GunPosY = GVar[6*GIndex]
+        CStage = CD[3*GIndex-2] -- Generate Phase Timer
+        CTimer = CD[3*GIndex-1] -- Death Value Timer
+        COrder = CD[3*GIndex] -- 0xFF ( Order & CallCFuncX ) // 0xFF00 ( Lock ) 
+        CLoopLimit = GVar[7*GIndex-6] -- Dot per Fuck
+        CDataIndex = GVar[7*GIndex-5] -- DataIndex Var
+        CUnitType = GVar[7*GIndex-4] -- UnitID Var
+        CShapeType = GVar[7*GIndex-3] -- ShapeArray Var
+        CPlayer = GVar[7*GIndex-2] -- Player Var
+        GunPosX = GVar[7*GIndex-1]
+        GunPosY = GVar[7*GIndex]
         
-        ----< 건작제어 단락 >----
+        local Perdot = Perdot or {}
+        setmetatable(Perdot, {
+            __index = function() return 999 end
+        })
 
         CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
 
-            -- Auto calc location X pos and Y pos
             f_ReadLocXY(GLoc)
             CDoActions(FP,{TSetNVar(GPosX,SetTo,GunPosX),TSetNVar(GPosY,SetTo,GunPosY)})
 
@@ -307,6 +309,7 @@ function f_ReadLocXY(Loc)
                 TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
                     SetCDeaths("X",SetTo,TimeLine[i]*SDspeed,CTimer); -- Create unit Timer
+                    SetNVar(CLoopLimit,SetTo,Perdot[i]); -- 대충 틱당 점찍는변수 넘기는곳
                     SetNVar(CDataIndex,SetTo,999); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 })
@@ -314,6 +317,7 @@ function f_ReadLocXY(Loc)
                     SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
                     SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
                     SetNVar(CPlayer,SetTo,Player); -- owner
+                    SetNVar(CLoopLimit,SetTo,Perdot[i]); -- dot
                     SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
@@ -328,6 +332,7 @@ function f_ReadLocXY(Loc)
                 SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
                 SetNVar(CShapeType,SetTo,ShapeNumber[i]); -- shape index
                 SetNVar(CPlayer,SetTo,Player); -- owner
+                SetNVar(CLoopLimit,SetTo,Perdot[i]); -- dot
                 SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                 SetCDeaths("X",SetTo,(TimeLine[i] - TimeLine[i-1])*SDspeed,CTimer); -- Create unit Timer
                 SetCDeaths("X",SetTo,i,CStage); -- Generate counter
@@ -343,7 +348,7 @@ function f_ReadLocXY(Loc)
         })
         
         
-        
+        CMov(FP,Gun_LoopLimit,CLoopLimit) 
         CMov(FP,Gun_Unit,CUnitType) -- 공통변수에 각 건작변수값 대입 ( UnitID )
         CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
         CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
@@ -355,7 +360,7 @@ function f_ReadLocXY(Loc)
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
             -- CDoActions(FP,{TOrder(CUnitType,CPlayer,"249",Attack,"home")})
         
-        CTriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{TSetNVar(CDataIndex,Add,6)},{Preserved})
+        CTriggerX(FP,{CDeaths("X",AtLeast,1,CTimer)},{TSetNVar(CDataIndex,Add,Gun_LoopLimit)},{Preserved})
         DoActionsX(FP,{SetCDeaths("X",Subtract,1,CTimer)})
 
         CIfEnd()
@@ -369,12 +374,12 @@ function f_ReadLocXY(Loc)
         CStage = CD[3*GIndex-2]
         CTimer = CD[3*GIndex-1]
         COrder = CD[3*GIndex] 
-        CDataIndex = GVar[6*GIndex-5] 
-        CUnitType = GVar[6*GIndex-4] 
-        CShapeType = GVar[6*GIndex-3] 
-        CPlayer = GVar[6*GIndex-2] 
-        GunPosX = GVar[6*GIndex-1]
-        GunPosY = GVar[6*GIndex]
+        CDataIndex = GVar[7*GIndex-5] 
+        CUnitType = GVar[7*GIndex-4] 
+        CShapeType = GVar[7*GIndex-3] 
+        CPlayer = GVar[7*GIndex-2] 
+        GunPosX = GVar[7*GIndex-1]
+        GunPosY = GVar[7*GIndex]
         
         ----< 건작제어 단락 >----
 
@@ -450,12 +455,12 @@ function f_ReadLocXY(Loc)
         CStage = CD[3*GIndex-2] -- 타이머1
         CTimer = CD[3*GIndex-1] -- 타이머2
         COrder = CD[3*GIndex] -- 0xFF ( 오더 & CallCFuncX ) // 0xFF00 ( 건작잠금 ) 
-        CDataIndex = GVar[6*GIndex-5] -- 데이터인덱스변수
-        CUnitType = GVar[6*GIndex-4] -- 유닛변수
-        CShapeType = GVar[6*GIndex-3] -- 도형데이터변수
-        CPlayer = GVar[6*GIndex-2] -- 플레이어변수
-        GunPosX = GVar[6*GIndex-1]
-        GunPosY = GVar[6*GIndex]
+        CDataIndex = GVar[7*GIndex-5] -- 데이터인덱스변수
+        CUnitType = GVar[7*GIndex-4] -- 유닛변수
+        CShapeType = GVar[7*GIndex-3] -- 도형데이터변수
+        CPlayer = GVar[7*GIndex-2] -- 플레이어변수
+        GunPosX = GVar[7*GIndex-1]
+        GunPosY = GVar[7*GIndex]
         
         ----< 건작제어 단락 >----
 

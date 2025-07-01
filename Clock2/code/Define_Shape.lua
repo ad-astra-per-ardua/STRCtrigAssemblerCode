@@ -209,7 +209,7 @@ end
 	DHat5PTH1 = CS_MoveCenter(CSMakePath({1840, 310},{1839, 557},{1935, 309},{1937, 561},{1940, 358},{2011, 359},{2014, 528},{1941, 525},{1830, 359},{1788, 355},{1782, 457},{1835, 457}),-320,-64)
 	DHat5PTH2 = CS_MoveCenter(CSMakePath({2208, 339},{2065, 487},{2213, 636},{2372, 483}),0,0)
 	-- CreateMShapes("DHat5ShapePartI", DHat5PTH1, 1, 64, 5, 64, 10, 0)
-	CreateMShapes("DHat5ShapePartII", DHat5PTH2, 1, 64, 4, 64, 6, 0) -- 4, 3, 2 | 3, 2, H
+	CreateMShapes("DHat5ShapePartII", DHat5PTH2, 1, 96, 4, 96, 6, 0) -- 4, 3, 2 | 3, 2, H
 	DHat5ShapePartI1 = CS_FillPathXY(DHat5PTH1, 1, 48, 48, 0) 
 
 	DHat5ShapeOverlapped = CS_Overlap(DHat5ShapePartI1, DHat5ShapePartII4)
@@ -237,9 +237,11 @@ end
 	DHat5ShapePartII4_SortXY1 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,1)
 	--------------- duskHat4 -------------
 
+	DHAT4ShapePart1 = CSMakePolygon(6,80,0,61,1)
+    DHAT4ShapePart2 = CSMakePolygon(6,80,0,37,1)
+    DHAT4ShapePart3 = CSMakePolygon(6,80,0,19,1)
+
 	
-
-
 
 
 

@@ -82,7 +82,11 @@ function Gunplot_Timeline()
 
     duskHive5TL = {
         2.1, 2.8, 3.27, 3.9, 4.4, 5.2, -- 1, 2, 3, E, R ,U
-        12.16, 12.64, 13.1, 13.8, 14.6, 16.94 -- End of phase 2
+        12.16, 12.64, 13.1, 13.8, 14.6, 16.94, -- End of phase 2
+        21.851, 26.856, -- End of phase 3 sort theta -> radius
+        31.718, -- Reversed
+        36.806, -- Y -> X sorted
+        39 -- Reversed
     }
     duskHive5TL2 = {
         21.851, 26.856, -- End of phase 3 sort theta -> radius
