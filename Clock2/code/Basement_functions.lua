@@ -2,7 +2,7 @@ function Basement_functions()
 
     InitHPV = CreateVar(FP)
 
-    healzone,DelayMedic = CreateCcodes(2)
+    healzone,DelayMedic,EftFlag,Putty = CreateCcodes(4)
     Combine_marine = CreateCcode()
     P_Count = CreateNcode()
     Difficulty = CreateCcode()

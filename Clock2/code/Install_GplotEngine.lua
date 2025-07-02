@@ -9,6 +9,7 @@ function Install_GplotEngine()
     -- 데스,변수 설정 // CAPlot 공통변수설정 -- 
     CD = CreateCcodeArr(3*GunMaxAmount)
     GVar = CreateVarArr(7*GunMaxAmount)
+    DVar = CreateVarArr(7*GunMaxAmount)
     ReadXY = InitCFunc(FP)
     Para = CFunc(ReadXY)
         -- f_Read(FP,0x58DC60+0x14*TempLocID,RetX,"X",0xFFFFFFFF)
@@ -99,10 +100,41 @@ function f_ReadLocXY(Loc)
     CJump(FP,0x300)
     SetLabel(0x2005) -- CAPlot PerActions 도착지점
     NIf(FP,{Memory(0x628438,AtLeast,1)})
-        CDoActions(FP,{ -- 유닛생성단락
+        CTrigger(FP,{CDeaths("X", Exactly, 0, EftFlag),CDeaths("X", Exactly, 0, Putty)},{ -- 유닛생성단락
             TCreateUnit(1,Gun_Unit,"248",Gun_Player);
             TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
-        })
+            DisplayText("0 0", 4);
+        },preserved)
+        CTrigger(FP,{CDeaths("X", Exactly, 1, EftFlag),CDeaths("X", Exactly, 0, Putty)},{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TCreateUnit(1,84,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
+            DisplayText("1 0", 4);
+        },preserved)
+        CTrigger(FP,{CDeaths("X", Exactly, 2, EftFlag),CDeaths("X", Exactly, 0, Putty)},{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TCreateUnit(1,57,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Attack,"home");
+            DisplayText("2 0", 4);
+        },preserved)
+
+        CTrigger(FP,{CDeaths("X", Exactly, 0, EftFlag),CDeaths("X", Exactly, 1, Putty)},{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Patrol,"249");
+            DisplayText("0 1", 4);
+        },preserved)
+        CTrigger(FP,{CDeaths("X", Exactly, 1, EftFlag),CDeaths("X", Exactly, 1, Putty)},{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TCreateUnit(1,84,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Patrol,"249");
+            DisplayText("1 1", 4);
+        },preserved)
+        CTrigger(FP,{CDeaths("X", Exactly, 2, EftFlag),CDeaths("X", Exactly, 1, Putty)},{ -- 유닛생성단락
+            TCreateUnit(1,Gun_Unit,"248",Gun_Player);
+            TCreateUnit(1,57,"248",Gun_Player);
+            TOrder(Gun_Unit,Gun_Player,"248",Patrol,"249");
+            DisplayText("2 1", 4);
+        },preserved)
     NIfEnd()
 
     SetLabel(0x2006)
@@ -277,7 +309,7 @@ function f_ReadLocXY(Loc)
 
 
 
-    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,Perdot,TimeLine)
+    function SetLoop2Plot(Player,GLoc,BuildingIndex,ShapeNumber,UnitArray,Perdot,GEftFlag,GPutty,TimeLine)
 
 
         
@@ -293,10 +325,22 @@ function f_ReadLocXY(Loc)
         CPlayer = GVar[7*GIndex-2] -- Player Var
         GunPosX = GVar[7*GIndex-1]
         GunPosY = GVar[7*GIndex]
+
+
         
         local Perdot = Perdot or {}
         setmetatable(Perdot, {
             __index = function() return 999 end
+        })
+
+        local GEftFlag = GEftFlag or {}
+        setmetatable(GEftFlag, {
+            __index = function () return 0 end
+        })
+
+        local GPutty = GPutty or {}
+        setmetatable(GPutty, {
+            __index = function () return 0 end
         })
 
         CIf(FP,{Bring(Player,Exactly,0,BuildingIndex,GLoc),CDeathsX("X",Exactly,0*256,COrder,0xFF00)})
@@ -306,18 +350,22 @@ function f_ReadLocXY(Loc)
 
         for i = 1, #TimeLine do -- 젠 타이밍 맞추는곳
             if i == 1 then
-                TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                CTriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
                     SetCDeaths("X",SetTo,TimeLine[i]*SDspeed,CTimer); -- Create unit Timer
                     SetNVar(CLoopLimit,SetTo,Perdot[i]); -- 대충 틱당 점찍는변수 넘기는곳
+                    TSetCDeaths("X", SetTo, GEftFlag[i], EftFlag),
+                    TSetCDeaths("X", SetTo, GPutty[i], Putty),
                     SetNVar(CDataIndex,SetTo,999); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
                 })
-                TriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+                CTriggerX(FP,{CDeaths("X",Exactly,1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                     SetNVar(CUnitType,SetTo,UnitArray[1]); -- unit id
                     SetNVar(CShapeType,SetTo,ShapeNumber[1]); -- shape index
                     SetNVar(CPlayer,SetTo,Player); -- owner
                     SetNVar(CLoopLimit,SetTo,Perdot[i]); -- dot
+                    TSetCDeaths("X", SetTo, GEftFlag[i], EftFlag),
+                    TSetCDeaths("X", SetTo, GPutty[i], Putty),
                     SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                     SetCDeaths("X",SetTo,(TimeLine[1])*SDspeed,CTimer); -- Create unit Timer
                     SetCDeaths("X",SetTo,1,CStage); -- Generate counter
@@ -328,11 +376,13 @@ function f_ReadLocXY(Loc)
 
             
 
-            TriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
+            CTriggerX(FP,{CDeaths("X",Exactly,i-1,CStage),CDeaths("X",Exactly,0,CTimer)},{
                 SetNVar(CUnitType,SetTo,UnitArray[i]); -- unit id
                 SetNVar(CShapeType,SetTo,ShapeNumber[i]); -- shape index
                 SetNVar(CPlayer,SetTo,Player); -- owner
                 SetNVar(CLoopLimit,SetTo,Perdot[i]); -- dot
+                TSetCDeaths("X", SetTo, GEftFlag[i], EftFlag),
+                TSetCDeaths("X", SetTo, GPutty[i], Putty),
                 SetNVar(CDataIndex,SetTo,0); -- 데이터인덱스 초기화
                 SetCDeaths("X",SetTo,(TimeLine[i] - TimeLine[i-1])*SDspeed,CTimer); -- Create unit Timer
                 SetCDeaths("X",SetTo,i,CStage); -- Generate counter
@@ -353,8 +403,9 @@ function f_ReadLocXY(Loc)
         CMov(FP,Gun_Shape,CShapeType) -- 공통변수에 각 건작변수값 대입 ( Shape )
         CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
         CMov(FP,Gun_Player,CPlayer) -- 공통변수에 각 건작변수값 대입 ( Player )
+        
 
-        OrderLocSize = 512
+        OrderLocSize = 256
             CallCFuncX(FP,CallCAPlot3) -- CAPlot 호출
             Simple_SetLocX(FP,"249",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
@@ -513,7 +564,7 @@ function f_ReadLocXY(Loc)
         CMov(FP,Gun_DataIndex,CDataIndex) -- 공통변수에 각 건작변수값 대입 ( DataIndex )
         CMov(FP,Gun_Player,CPlayer) -- 공통변수에 각 건작변수값 대입 ( Player )
 
-        OrderLocSize = 512
+        OrderLocSize = 256
             CallCFuncX(FP,CallCAPlot4) -- CAPlot 호출
             Simple_SetLocX(FP,"249",GPosX,GPosY,GPosX,GPosY) -- 로케 복사
             Simple_CalcLocX(FP,"249",-OrderLocSize,-OrderLocSize,OrderLocSize,OrderLocSize) -- 로케크기설정
