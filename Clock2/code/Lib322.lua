@@ -581,6 +581,16 @@ function Lib322()
 		end
 	end
 
+	function TSetNW(W,Value,Type,Mask)
+		if Type == nil then Type = SetTo end
+		if FP == nil then PushErrorMsg("FP Player not defined") end
+		if type(Value) == "table" and #Value == 1 then
+			return TSetWariableX(W[1],W[2],"Value2",Type,Value[1],Mask)
+		else
+			return TSetWariableX(W[1],W[2],"Value1",Type,Value,Mask)
+		end
+	end
+
 	function AddVX(V,Value,Mask)
 		if Value == nil then Value = 1 end
 		if FP == nil then PushErrorMsg("FP Player not defined") end

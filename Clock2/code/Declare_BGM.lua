@@ -21,6 +21,7 @@ function Declare_BGM()
             {7,"staredit\\wav\\forHive2.ogg", 28 * Fixedtime},
             {8,"staredit\\wav\\duskHive5.ogg", 42 * Fixedtime},
             {9,"staredit\\wav\\duskHat5.ogg", 28 * Fixedtime},
+            {10,"staredit\\wav\\duskHat4.ogg", 28 * Fixedtime},
         })
     end
     
@@ -34,6 +35,7 @@ function Declare_BGM()
         {7,"staredit\\wav\\forHive2.ogg", 28 * Fixedtime},
         {8,"staredit\\wav\\duskHive5.ogg", 42 * Fixedtime},
         {9,"staredit\\wav\\duskHat5.ogg", 28 * Fixedtime},
+        {10,"staredit\\wav\\duskHat4.ogg", 28 * Fixedtime},
     })
     
 

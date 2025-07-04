@@ -237,10 +237,11 @@ end
 	DHat5ShapePartII4_SortXY1 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,1)
 	--------------- duskHat4 -------------
 
-	DHAT4ShapePart1 = CSMakePolygon(6,80,0,61,37)
-    DHAT4ShapePart2 = CSMakePolygon(6,80,0,37,19)
-    DHAT4ShapePart3 = CSMakePolygon(6,80,0,19,7)
-	DHAT4ShapePart4 = CSMakePolygon(6,80,0,7,1)
+	DHAT4ShapePart1 = CS_SortR(CSMakePolygon(6,80,0,61,37),1)
+    DHAT4ShapePart2 = CS_SortR(CSMakePolygon(6,80,0,37,19),1)
+    DHAT4ShapePart3 = CS_SortR(CSMakePolygon(6,80,0,19,7),1)
+	DHAT4ShapePart4 = CS_SortR(CSMakePolygon(6,80,0,7,1),1)
+	DHAT4ShapePart5 = CS_SortR(CS_OverlapX(DHAT4ShapePart1,DHAT4ShapePart2,DHAT4ShapePart3,DHAT4ShapePart4),1)
 
 	
 
