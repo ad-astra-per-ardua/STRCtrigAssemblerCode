@@ -1,5 +1,7 @@
 function N_Gunplot()
-
+    
+    BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
+    LocSize = 128
 
 
     ----- 사망인식 건작 -----
@@ -45,7 +47,7 @@ function N_Gunplot()
 
 
     NIfEnd()
-
+    
     
     ------------------------
 
@@ -58,7 +60,6 @@ function N_Gunplot()
             AddonTrigger
         })
     end
-    
     SpellcasterPatch = {}
     
     function SetUnitAdvFlag(UnitID,Value,Mask)
@@ -90,7 +91,7 @@ function N_Gunplot()
     -- "\x07』\x08·\x11·\x07·"
     -- HIndex = {2,17,15,52,58,65,66,68}
     function CreateHeroAlert(HeroIndex, HeroName, HeroPoint)
-        HeroText = Convert_ColorCode("\x13\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았았습니다! \x07』\x08·\x11·\x07·")
+        HeroText = Convert_ColorCode("\x13\x07·\x11·\x08·\x07『 \x11시간\x04의 \x08무질서\x04 \x19【\x04 "..HeroName.." \x19】 \x04를 \x0F파괴\x04하였습니다. "..HeroPoint.." \x07만큼\x04의 \x1F원동력\x04을 \x17되찾았습니다! \x07』\x08·\x11·\x07·")
         
         local X = {} -- Sub 1 Dim
         table.insert(X,HeroIndex)
@@ -120,9 +121,7 @@ function N_Gunplot()
     
     CreateHeroAlert(64, " <11>Ⅹ <19>V<4>oltississimo<11> Ⅹ", 70000)
 
-    
-    BackupCp, BPosXY, BPosX, BPosY = CreateVars(4,FP)
-    LocSize = 128
+
     
     CunitCtrig_Part1(FP)
     MoveCp("X", 0x64)
@@ -134,6 +133,7 @@ function N_Gunplot()
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,137,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,138,0,0xFF))
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,142,0,0xFF))
+    NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,13,0,0xFF))
 
     NJumpX(FP,0x1,DeathsX(CurrentPlayer,Exactly,179,0,0xFF)) -- Death gunplot unit
 
@@ -206,6 +206,11 @@ function N_Gunplot()
     dthGenfunc(138, {45,104,3,2,1,3}, {5,5,1,1,1,3}, P6, Attack, nil)
     dthGenfunc(142, {54}, {10}, P6, Attack, nil)
 
+    dthGenfunc(13, {78}, {1}, P6, Attack, 4)
+    dthGenfunc(13, {77}, {1}, P6, Attack, 5)
+    dthGenfunc(13, {70}, {1}, P6, Attack, 6)
+    dthGenfunc(13, {58}, {1}, P6, Attack, 7)
+
     
     ClearCalc()
     CJumpEnd(FP,0x2)    
@@ -249,39 +254,6 @@ function N_Gunplot()
     end
 
     CunitCtrig_End()
-
-    
-    
-
-    --[[
-
-        gunplot bgm
-        Need at Least 15?
-
-        Main BGM under below
-        1. auvic : what a wonderful world
-        2. pikasonic : timeleap
-        3.
-        
-        Normal plot under below
-        1. linear ring : waiting for you
-        2. AAAA : Recollect Lines
-        3. Hyun : Illusion of inflict
-        4. linear ring : isomorph
-        5. ARforest : FlashBack
-        6. cute girl doing spicy things : too spicy
-        7. linear ring : eden without eve
-        8. Author Wind : Forest
-        9. pikasonic : factory
-        10. synthion :s Aurora
-        11. ARforest : Relics
-        12. cgdct : bang
-        13. '' : heart connect
-        14. '' : infinite
-        15. kakera
-
-    ]]
-    
 
     local function repeatTable(value, n)
     local t = {}
@@ -360,6 +332,26 @@ function N_Gunplot()
     SetLoop2Plot(P6, "duskHat4", 131, {30,33,33,33,33,33,33,33,33,33,33,33,33,33,33}, {193,25,3,193,193,193,193,3,3,193,193,193,193,193,3}, {999,999,999,999,999,999,999,999,999,1,1,1,1,1,999}, {0,2,2,2,0,0,0,2,2,2,0,0,0,2,2}, {}, duskHat4TL)
     SetLoop2Plot(P6, "duskHat4", 131, {30,33,33,33,33,33,33,33,33,33,33,33,33,33,33}, {193,69,64,193,193,193,193,64,64,193,193,193,193,193,64}, {999,999,999,999,999,999,999,999,999,1,1,1,1,1,999}, {}, DH4Ord, duskHat4TL)
 
+    SetLoop2Plot(P6, "duskHive4", 133, {
+        38,37,36,35,43,
+        42,41,40,39,44,
+        45,45,45,45,45,46,47,48,49,
+        46,49,46
+    }, {
+        15,17,66,52,193,
+        15,17,66,52,193,
+        15,17,66,52,65,5,2,40,
+        40,55,193,25
+    }, {999,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,998,1}, {
+        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1
+}, {}, duskHive4TL)
+
+    SetLoop2Plot(P6, "duskLair4", 132, {52,53,54,55,56,57,57,57,55,54,53,52}, {
+        73,71,64,62,25,58,56,55,60,64,71,73
+    }, {1,1,1,1,1,1,1,1,1,1,1,1}, {1,1,1,1,1,1,1,1,1,1,1,1}, {}, duskLair4TL)
+    MinegunSet(P6, "duskHive6", 133, {1,1,1,1}, {4,5,6,7}, duskHive6TL)
+
+    
     
 
 end

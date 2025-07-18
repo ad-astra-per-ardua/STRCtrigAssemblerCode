@@ -109,7 +109,6 @@ MainclockG()
 N_Gunplot()
 
 
-
 ----------- 분할 lua 선언 End ---------
 
 Clock_setting()
@@ -119,6 +118,7 @@ Clock_modifyloop()
 -- CSPlotToCAPlot()
 init_Setting()
 
+-- TriggerX(FP, Always(), CreateUnit(1, 13, "home", P6))
 CIfXEnd()
 
 EndCtrig()

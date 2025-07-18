@@ -194,6 +194,18 @@ for i = 0, 3 do
         SetMemory(0x515B84+0x14*0+0x4*9,SetTo,256);
     },preserved)
 
+    TriggerX(FP, Always(), { -- 0번무기 Section == 노말 트루데미지 ㅅㅂ 515B88부터 시작해서 1번슬롯이 0번방어구임
+        SetMemory(0x515B84+0x14*1+0x4*1,SetTo,256); -- Mineral Chunk == Independence type
+        SetMemory(0x515B84+0x14*1+0x4*2,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*3,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*4,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*5,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*6,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*7,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*8,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*9,SetTo,256);
+    },preserved)
+
     CTriggerX(FP, Always(), { --  퍼뎀 무기 2번 할당 | 스마 : P1 = 16, P2 = 10, P3 = 1, P4 = 99 , P5 = 100 | Only CPU
         SetMemory(0x515B88+0x14*2+0x4*0,SetTo,256); -- Independence type vs Percentage | Plague, Storm
         SetMemory(0x515B88+0x14*2+0x4*7,SetTo,2100 * 256 / 1000); -- 일마

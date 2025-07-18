@@ -244,12 +244,33 @@ end
 	DHAT4ShapePart5 = CS_SortR(CS_OverlapX(DHAT4ShapePart1,DHAT4ShapePart2,DHAT4ShapePart3,DHAT4ShapePart4),1)
 
 	
+	DHive4DropShape1 = CS_MoveCenter(CS_SortX(CSMakePath({2848, 480},{2784, 480},{2720, 480},{2656, 480}),1),-117,-322)
+	DHive4DropShape2 = CS_MoveCenter(CS_SortY(CSMakePath({2848, 416},{2784, 416},{2720, 416},{2656, 416},{2656, 352},{2656, 288},{2720, 288},{2784, 288},{2848, 288},{2848, 224},{2848, 160},{2784, 160},{2720, 160},{2656, 160}),0),-117,-64)
+	DHive4DropShape3 = CS_MoveCenter(CS_SortX(CSMakePath({2656, 96},{2720, 96},{2784, 96},{2848, 96}),0),-117,158)
+	DHive4DropShape4 = CS_MoveCenter(CS_SortX(CSMakePath({2656, 64},{2720, 64},{2784, 64},{2848, 64}),1),-117,254)
+	DHive4DropShapeOverlapped1 = CS_OverlapX(DHive4DropShape1,DHive4DropShape2,DHive4DropShape3,DHive4DropShape4)
+
+	DHive4DropShape5 = CS_InvertXY(DHive4DropShape1, 0,nil)
+	DHive4DropShape6 = CS_InvertXY(DHive4DropShape2, 0,nil)
+	DHive4DropShape7 = CS_InvertXY(DHive4DropShape3, 0,nil)
+	DHive4DropShape8 = CS_InvertXY(DHive4DropShape4, 0,nil)
+	DHive4DropShapeOverlapped2 = CS_OverlapX(DHive4DropShape5,DHive4DropShape6,DHive4DropShape7,DHive4DropShape8)
+	DHive4DropShapeOverlapped3 = CS_OverlapX(DHive4DropShapeOverlapped1,DHive4DropShapeOverlapped2)
+	DHive4DropShapeOverlapped4 = CS_SortXY(DHive4DropShapeOverlapped1,"SortXYFunc",nil,0)
+	DHive4DropShapeOverlapped5 = CS_SortXY(DHive4DropShapeOverlapped2,"SortXYFunc",nil,0)
 
 
+	DL4Shape4 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 4), CS_Level("PolygonX", 8,3)),0)
+	DL4Shape3 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 3), CS_Level("PolygonX", 8, 2)),0)
+	DL4Shape2 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 2), CS_Level("PolygonX", 8, 1)),0)
+	DL4Shape1 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 1),0),0)
+	DL4ShapeOverlapped = CS_SortR(CS_OverlapX(DL4Shape1,DL4Shape2,DL4Shape3,DL4Shape4),1)
+	DL4ShapeFilled1 = CS_Rotate(CS_SortX(CSMakePolygonX(4, 128, 0, CS_Level("PolygonX", 4, 3), 0),1),45)
 
+	DH6Circle = CSMakeCircle(6, 86, 0, CS_Level("Circle", 6, 4),0)
 
 	ShapeDebugging({
-		DHAT4ShapePart1,DHAT4ShapePart2,DHAT4ShapePart3,DHAT4ShapePart4
+		DH6Circle
 	})
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
