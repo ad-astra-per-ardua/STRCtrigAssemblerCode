@@ -12,10 +12,8 @@ function Initial_Setting()
     --     CreateUnit(1, 25, "home", P5);
     -- })
 
-    CIfOnce(Force1, Always())
-
     for i = 0, 227 do
-        SetUnitDefUpType(i,60) -- 방업 적용 방지
+        SetUnitDefUpType(i,45) -- 방업 적용 방지
         SetToUnitDef(i,0) -- 방어력 전부 0으로 설정 
         SetUnitAdvFlag(i,0,0x4000) -- 모든유닛 어드밴스드 플래그 중 로보틱 전부제거
         
@@ -23,28 +21,12 @@ function Initial_Setting()
     InitialMArray = {0,20,16,10,1,99,100}
 
     for i = 1, #InitialMArray do
+        SetUnitDefUpType(i,0)
         SetUnitAdvFlag(InitialMArray[i], 0x4000, 0x4000)
         UnitSizePatch(InitialMArray[i],6,9,6,10)
     end
+    DoActions2(FP, PatchArr)
 
-    CIfEnd()
-
-    function UnitLimit(Player,UID,Limit,Text,ReturnResources)
-        Trigger {
-            players = {Player},
-            conditions = {
-                Label();
-                Bring(Player,AtLeast,Limit+1,UID,64);
-                },
-            
-            actions = {
-                KillUnitAt(1,UID,"Anywhere",Player);
-                DisplayText(StrDesign("\x04"..Text.." "..Limit.."기를 넘어서 소지할 수 없습니다. \x1C자원 반환 \x1F+ "..ReturnResources.." Ore\x07"),4);
-                SetResources(Player,Add,ReturnResources,Ore);
-                PreserveTrigger();
-            },
-        }
-    end
 
     ------------- Hero placement loop --------------
     
@@ -69,7 +51,7 @@ function Initial_Setting()
 		
 
     BuildingArr = {130,131,132} 
-    HeroArr = {2,17,15,52,58,65,66,68,4,19,21,15} 
+    HeroArr = {2,15,17,52,58,65,66,68,5,21,40,60,61,70,3,25,19,49,64 } 
             
         
     CIfOnce(FP,{Always()})
@@ -97,7 +79,7 @@ function Initial_Setting()
                     TriggerX(FP, NVar(HPlayerV, Exactly, 8),{SetNVar(HPlayerV2, SetTo, 5)},{Preserved})
                     TriggerX(FP, NVar(HPlayerV, Exactly, 9),{SetNVar(HPlayerV2, SetTo, 6)},{Preserved})
                     TriggerX(FP, NVar(HPlayerV, Exactly, 10),{SetNVar(HPlayerV2, SetTo, 7)},{Preserved})
-                    f_Read(FP,0x628438,nil,Nextptr) -- 재생성될 유닛의 좌표를 지정
+                    f_Read(FP,0x628438,nil,Nextptr)
                 CTrigger(FP,{},{  -- Replace Hero
                         TMoveLocation("248",RepHeroIndex,HPlayerV,"Anywhere");
                         TModifyUnitEnergy(1,RepHeroIndex,HPlayerV,"248",0);
@@ -127,9 +109,6 @@ function Initial_Setting()
 
     -- DisplayPrintTbl(1346, {"\x07·\x11·\x08·\x07【 ",temp123})
     TriggerX(FP, Always(),{
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "duskHive6"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P6}, FP),
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "noonHive1"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P7}, FP),
-        RotatePlayer({RunAIScriptAt("Expansion Zerg Campaign Insane", "morHive5"),RunAIScriptAt("Value This Area Higher","mainclock")}, {P8}, FP),
         RotatePlayer({CenterView("mainclock")}, {Force1,Force5}, FP);
     })
     
@@ -213,6 +192,18 @@ for i = 0, 3 do
         SetMemory(0x515B84+0x14*0+0x4*7,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*8,SetTo,256);
         SetMemory(0x515B84+0x14*0+0x4*9,SetTo,256);
+    },preserved)
+
+    TriggerX(FP, Always(), { -- 0번무기 Section == 노말 트루데미지 ㅅㅂ 515B88부터 시작해서 1번슬롯이 0번방어구임
+        SetMemory(0x515B84+0x14*1+0x4*1,SetTo,256); -- Mineral Chunk == Independence type
+        SetMemory(0x515B84+0x14*1+0x4*2,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*3,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*4,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*5,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*6,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*7,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*8,SetTo,256);
+        SetMemory(0x515B84+0x14*1+0x4*9,SetTo,256);
     },preserved)
 
     CTriggerX(FP, Always(), { --  퍼뎀 무기 2번 할당 | 스마 : P1 = 16, P2 = 10, P3 = 1, P4 = 99 , P5 = 100 | Only CPU

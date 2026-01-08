@@ -44,15 +44,42 @@ function Define_Shape()
 	end
 	end
 
+local idx = 0
+local idx2 = 0
+
+function ShapeDebugging(shapeTable)
+    local args = {}
+	if shapeTable ~= nil and next(shapeTable) ~= nil then
+		for key, shape in pairs(shapeTable) do
+			_G[key] = shape
+			table.insert(args, shape)
+		end
+
+		local debugShape = CS_OverlapX(table.unpack(args))
+
+		for _, shape in ipairs(args) do
+			local fileName = tostring(idx)
+			CS_BMPGraph(shape, {0xFFFFFF}, fileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+			idx = idx + 1
+		end
+
+		-- Overlapped
+		local debugFileName = tostring(idx2)
+		CS_BMPGraph(debugShape, {0xFFFFFF}, "Overlapped_"..debugFileName, {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+		idx2 = idx2 + 1
+
+		return debugShape
+	end
+end
+
 	PSZ = 128
-	
 	DthdetectShape = CSMakePolygon(3, 128, 0, 4, 1)
 	DthdetectShape2 = CSMakePolygon(3, 128, 20, 4, 1)
 	DthdetectShape3 = CSMakePolygon(3, 128, 40, 4, 1)
 
 
     DHSH1 = CSMakePath({-160,128},{160,128},{64,0},{160,-128},{-160,-128},{-64,0})
-    DHSH1T1 = CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1)
+    DHSH1T1 = CS_SortX(CS_FillPathXY2(DHSH1, 1, 60, 60, 0, 0, 1),1)
     SHH15x = CSMakePath({0,-191},{-240,-179},{-240,17},{363,-15})
 
 	-- 1 ~ 4 4는 거의 이펙트로 사용
@@ -97,8 +124,6 @@ function Define_Shape()
     baseCircle2 = CS_RatioXY(CSMakeCircleX(6,128,30,54,24),1,0.5)
     baseCircle3 = CS_Rotate(baseCircle2, 90)
 
-	
-
     HEFT1 = CS_SortA(CS_Rotate(baseCircle, 45),0)
     HEFT2 = baseStar
     HEFT3 = Heart
@@ -106,13 +131,11 @@ function Define_Shape()
     HEFT5 = baseStar
     HEFT6 = CS_SortA(CS_Rotate(baseCircle, -45),0)
     HEFT7 = Heart
-	function splitfunc(i)
-		return i*2+1
-	end
 
-	function splitfunc2(i)
-		return i*3
-	end
+	function splitfunc(i) return i*2+1 end
+	function splitfunc2(i) return i*3 end
+	function splitfunc3(i) return i*2 end
+	function splitfunc4(i) return i*4 end
 
 	HeartV2 = CS_Split(CS_SortA(Heart,0), {CS_SortA(Heart,0)[1]/2,"splitfunc"},0,0)
     duskHat3S = CSMakePathX({1.3,1.3},{0,192}, {96,192},{144,16},{32,-112},{-144,-32},{-96,78})
@@ -129,24 +152,126 @@ function Define_Shape()
 	PentagonDuskhive1 = CS_SortA(CSMakePolygon(5, 80, 0, CS_Level("Polygon", 5, 4), CS_Level("Polygon", 5, 3)),0)
 	
 	---- duskHive2 ----
-	DHPRT1lower1 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,40)
-	DHPRT1lower2 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-40)
-	DHPRT1lower3 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,100)
-	DHPRT1lower4 = CS_MoveXY(CSMakeLine(2, 64, 90, 13, 0),0,-100)
+	DH2PRT1lower1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,-90),1)
+	DH2PRT1lower2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,-30),1)
+	DH2PRT1lower3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,30),1)
+	DH2PRT1lower4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 90, 13, 0),0,90),1)
+
+	DH2PRT1Horizontal1 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),-90,0),0)
+	DH2PRT1Horizontal2 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),-30,0),0)
+	DH2PRT1Horizontal3 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),30,0),0)
+	DH2PRT1Horizontal4 = CS_SortY(CS_MoveXY(CSMakeLine(2, 96, 0, 12, 0),90,0),0)
+
+	DH2PRT2ASHAPE1EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 7), CS_Level("Circle", 8, 6)) -- 약 유닛 큰원
+	DH2PRT2ASHAPE2EFT = CSMakeCircle(8, 48, 0, CS_Level("Circle", 8, 4), CS_Level("Circle", 8, 3)) -- 약 유닛 작은원
+
+	DH2PRT2ASHAPE1EFTF = CS_Overlap(DH2PRT2ASHAPE1EFT, DH2PRT2ASHAPE2EFT)
+
+	DH2PRT2ASHAPEplot1 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 2 , "splitfunc3"}, 0, 0)
+	DH2PRT2ASHAPEplot2 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 2 , "splitfunc3"}, 0, 0)  
+
+	DH2PRT2ASHAPEplot2F = CS_Overlap(DH2PRT2ASHAPEplot1, DH2PRT2ASHAPEplot2)
+
+	DH2PRT2ASHAPEplot3 = CS_Split(DH2PRT2ASHAPE1EFT, {DH2PRT2ASHAPE1EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 큰원
+	DH2PRT2ASHAPEplot4 = CS_Split(DH2PRT2ASHAPE2EFT, {DH2PRT2ASHAPE2EFT[1] / 3, "splitfunc4"}, 0, 0) -- 영작유닛 작은원
+
+	DH2PRT2ASHAPEplot3F = CS_Overlap(DH2PRT2ASHAPEplot3, DH2PRT2ASHAPEplot4)
+
+	DH2PRT2TEMPline1EFT = CSMakeLine(2, 48, 0, 19, 1)
+	DH2PRT2TEMPline2EFT = CSMakeLine(2, 48, 90, 19, 0)
+	DH2PRT2TEMPline1 = CSMakeLine(2, 96, 0, 9, 1)
+	DH2PRT2TEMPline2 = CSMakeLine(2, 96, 90, 9, 0)
+
+	DH2PRT2SHAPEline1EFT = CS_OverlapX(DH2PRT2TEMPline1EFT, DH2PRT2TEMPline2EFT)
+	DH2PRT2SHAPEline1 = CS_OverlapX(DH2PRT2TEMPline1,DH2PRT2TEMPline2)
+
+	DH2PRT2SHAPE3EFT = CS_Overlap(DH2PRT2ASHAPE1EFTF, DH2PRT2SHAPEline1EFT)
+
+	------------- duskHive5 == flashback ----
+	DH5PTH1 = CS_MoveCenter(CSMakePath({2036, 229},{2125, 155},{2171, 56},{2321, 46},{2334, 137},{2425, 203},{2395, 335},{2375, 395},{2285, 403},{2109, 435},{2051, 355}),0,0)
+	DH5Entrance = CS_MoveCenter({4   ,{1922, 315},{1921, 376},{1920, 438},{1919, 504}},-192,256)
+	DH5RightSide = CS_MoveCenter({4   ,{2305, 475},{2363, 423},{2427, 357},{2493, 293}},160,160)
+	DH5UpperSide = CS_MoveCenter({3   ,{2462, 59},{2523, 120},{2595, 156}},320,-144)
+
+	CreateMShapes("DH5PTH1SHAPE", DH5PTH1, 1, 64, 4, 64, 10, 0) -- 1, 2, 3 | H T E
+
+	DH5PTH1SHAPEF4 = CS_DoubleSortRA(DH5PTH1SHAPE2, 32, 1, 0)
+	DH5PTH1SHAPEF5 = CS_DoubleSortRA(DH5PTH1SHAPE2, 32, 0, 0)
+
+	function SortXYFunc(X) return {math.abs(X)} end
+	DH5PTH1SHAPEF6 = CS_SortXY(DH5PTH1SHAPE2, "SortXYFunc", nil, 0)
+	DH5PTH1SHAPEF7 = CS_SortXY(DH5PTH1SHAPE2, "SortXYFunc", nil, 1)
+
+	------------------- Start Of duskHat5  --------------
+	---Entrance == A | Main == B
+	---A + B | B | X Desc Sorted A+B | 3T | Eft | Eft | 1T + H, A+B | Y Aesc Eft + Eft A+B, 1T + H 
+	
+	DHat5PTH1 = CS_MoveCenter(CSMakePath({1840, 310},{1839, 557},{1935, 309},{1937, 561},{1940, 358},{2011, 359},{2014, 528},{1941, 525},{1830, 359},{1788, 355},{1782, 457},{1835, 457}),-320,-64)
+	DHat5PTH2 = CS_MoveCenter(CSMakePath({2208, 339},{2065, 487},{2213, 636},{2372, 483}),0,0)
+	-- CreateMShapes("DHat5ShapePartI", DHat5PTH1, 1, 64, 5, 64, 10, 0)
+	CreateMShapes("DHat5ShapePartII", DHat5PTH2, 1, 96, 4, 96, 6, 0) -- 4, 3, 2 | 3, 2, H
+	DHat5ShapePartI1 = CS_FillPathXY(DHat5PTH1, 1, 48, 48, 0) 
+
+	DHat5ShapeOverlapped = CS_Overlap(DHat5ShapePartI1, DHat5ShapePartII4)
+	DHat5ShapeOverlapped_SortYD = CS_SortY(DHat5ShapeOverlapped, 1)
+	DHat5ShapeOverlapped_SortYA = CS_SortY(DHat5ShapeOverlapped, 0)
+	DHat5ShapeOverlapped_SortXD = CS_SortX(DHat5ShapeOverlapped, 1)
+	DHat5ShapeOverlapped_SortXA = CS_SortX(DHat5ShapeOverlapped, 0)
+
+	DHat5ShapePartII4_SortXD = CS_SortX(DHat5ShapePartII4,1)
+	DHat5ShapePartII4_SortXA = CS_SortX(DHat5ShapePartII4,0)
+	DHat5ShapePartII4_SortYD = CS_SortY(DHat5ShapePartII4,1)
+	DHat5ShapePartII4_SortYA = CS_SortY(DHat5ShapePartII4,0)
+
+	DHat5ShapePartII3_SortXD = CS_SortX(DHat5ShapePartII3,1)
+	DHat5ShapePartII3_SortXA = CS_SortX(DHat5ShapePartII3,0)
+	DHat5ShapePartII3_SortYD = CS_SortY(DHat5ShapePartII3,1)
+	DHat5ShapePartII3_SortYA = CS_SortY(DHat5ShapePartII3,0)
+
+	DHat5ShapePartII2_SortXD = CS_SortX(DHat5ShapePartII2,1)
+	DHat5ShapePartII2_SortXA = CS_SortX(DHat5ShapePartII2,0)
+	DHat5ShapePartII2_SortYD = CS_SortY(DHat5ShapePartII2,1)
+	DHat5ShapePartII2_SortYA = CS_SortY(DHat5ShapePartII2,0)
+
+	DHat5ShapePartII4_SortXY0 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,0)
+	DHat5ShapePartII4_SortXY1 = CS_SortXY(DHat5ShapePartII4,"SortXYFunc",nil,1)
+	--------------- duskHat4 -------------
+
+	DHAT4ShapePart1 = CS_SortR(CSMakePolygon(6,80,0,61,37),1)
+    DHAT4ShapePart2 = CS_SortR(CSMakePolygon(6,80,0,37,19),1)
+    DHAT4ShapePart3 = CS_SortR(CSMakePolygon(6,80,0,19,7),1)
+	DHAT4ShapePart4 = CS_SortR(CSMakePolygon(6,80,0,7,1),1)
+	DHAT4ShapePart5 = CS_SortR(CS_OverlapX(DHAT4ShapePart1,DHAT4ShapePart2,DHAT4ShapePart3,DHAT4ShapePart4),1)
 
 	
+	DHive4DropShape1 = CS_MoveCenter(CS_SortX(CSMakePath({2848, 480},{2784, 480},{2720, 480},{2656, 480}),1),-117,-322)
+	DHive4DropShape2 = CS_MoveCenter(CS_SortY(CSMakePath({2848, 416},{2784, 416},{2720, 416},{2656, 416},{2656, 352},{2656, 288},{2720, 288},{2784, 288},{2848, 288},{2848, 224},{2848, 160},{2784, 160},{2720, 160},{2656, 160}),0),-117,-64)
+	DHive4DropShape3 = CS_MoveCenter(CS_SortX(CSMakePath({2656, 96},{2720, 96},{2784, 96},{2848, 96}),0),-117,158)
+	DHive4DropShape4 = CS_MoveCenter(CS_SortX(CSMakePath({2656, 64},{2720, 64},{2784, 64},{2848, 64}),1),-117,254)
+	DHive4DropShapeOverlapped1 = CS_OverlapX(DHive4DropShape1,DHive4DropShape2,DHive4DropShape3,DHive4DropShape4)
 
-	------ Shape Check Section ------
+	DHive4DropShape5 = CS_InvertXY(DHive4DropShape1, 0,nil)
+	DHive4DropShape6 = CS_InvertXY(DHive4DropShape2, 0,nil)
+	DHive4DropShape7 = CS_InvertXY(DHive4DropShape3, 0,nil)
+	DHive4DropShape8 = CS_InvertXY(DHive4DropShape4, 0,nil)
+	DHive4DropShapeOverlapped2 = CS_OverlapX(DHive4DropShape5,DHive4DropShape6,DHive4DropShape7,DHive4DropShape8)
+	DHive4DropShapeOverlapped3 = CS_OverlapX(DHive4DropShapeOverlapped1,DHive4DropShapeOverlapped2)
+	DHive4DropShapeOverlapped4 = CS_SortXY(DHive4DropShapeOverlapped1,"SortXYFunc",nil,0)
+	DHive4DropShapeOverlapped5 = CS_SortXY(DHive4DropShapeOverlapped2,"SortXYFunc",nil,0)
 
-	CS_BMPGraph(DHPRT1lower1, {0x000000}, "0", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-    CS_BMPGraph(DHPRT1lower1, {0x000000}, "1", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(HeartV2, {0x000000}, "2", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(line2, {0x000000}, "3", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(lairShape2, {0x000000}, "4", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(lairShape1, {0x000000}, "5", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_6, {0x000000}, "6", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "7", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
-	CS_BMPGraph(DuskHive1SH_7, {0x000000}, "8", {{-10},{10}}, {{-10},{10}}, 1, nil, nil, nil, 3, 1, 1, 1)
+
+	DL4Shape4 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 4), CS_Level("PolygonX", 8,3)),0)
+	DL4Shape3 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 3), CS_Level("PolygonX", 8, 2)),0)
+	DL4Shape2 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 2), CS_Level("PolygonX", 8, 1)),0)
+	DL4Shape1 = CS_SortR(CSMakePolygonX(8, 128, 0, CS_Level("PolygonX", 8, 1),0),0)
+	DL4ShapeOverlapped = CS_SortR(CS_OverlapX(DL4Shape1,DL4Shape2,DL4Shape3,DL4Shape4),1)
+	DL4ShapeFilled1 = CS_Rotate(CS_SortX(CSMakePolygonX(4, 128, 0, CS_Level("PolygonX", 4, 3), 0),1),45)
+
+	DH6Circle = CSMakeCircle(6, 86, 0, CS_Level("Circle", 6, 4),0)
+
+	ShapeDebugging({
+		DH6Circle
+	})
 
 	-- PushErrorMsg(lairShape2[1]) -- Check dotted number 
 

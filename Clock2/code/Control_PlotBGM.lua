@@ -4,7 +4,7 @@ function Control_PlotBGM()
 
         CIf(FP,{Bring(Player,Exactly,0,BIndex,BLoc)})
         Trigger2X(FP, {},{
-            RotatePlayer({DisplayTextX("test", 4)}, {Force1,Force5}, FP);
+            RotatePlayer({DisplayTextX("\x13\07"..BIndex.." \x08D\x04estroyed\x07 "..BScore.." \x04Added.", 4)}, {Force1,Force5}, FP);
                 SetScore(Force1, Add, BScore,Kills);
                 SetNVar(BGMArray[1], SetTo, BGMIndex);
                 SetNVar(BGMArray[2], SetTo, BGMIndex);
@@ -23,5 +23,13 @@ function Control_PlotBGM()
     plotBGM(P6, 132, "duskLair3", 4, 40000);
     plotBGM(P6, 133, "duskHive1", 5, 50000);
     plotBGM(P6, 133, "duskHive3", 6, 50000);
+    plotBGM(P6, 133, "duskHive2", 7, 50000);
+
+    plotBGM(P6, 133, "duskHive5", 8, 50000);
+    plotBGM(P6, 131, "duskHat5", 9, 30000);
+    plotBGM(P6, 131, "duskHat4", 10, 30000);
+    plotBGM(P6, 133, "duskHive4", 11, 50000);
+    plotBGM(P6, 132, "duskLair4", 12, 40000);
+    plotBGM(P6, 133, "duskHive6", 13, 50000);
 
 end

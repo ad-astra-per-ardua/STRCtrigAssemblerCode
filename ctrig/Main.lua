@@ -1,9 +1,8 @@
-
 -- Copy from here
 -- Laptop
--- Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\ctrig"
--- __MapDirSetting(__encode_cp949(Curdir.."\\map")) -- 맵파일 경로(\를 \\로 바꿔야함)
--- __SubDirSetting(__encode_cp949(Curdir)) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
+Curdir = "C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12\\Mapping\\ctrig"
+__MapDirSetting(__encode_cp949(Curdir.."\\map")) -- 맵파일 경로(\를 \\로 바꿔야함)
+__SubDirSetting(__encode_cp949(Curdir)) -- Main.lua 폴더경로 (\를 \\로 바꿔야함, 없으면 비우기)
 
 -- - Desktop
 -- Curdir = "C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12\\Mapping\\ctrig"
@@ -18,45 +17,70 @@ SetFixedPlayer(P8)
 StartCtrig(1,nil,0,1,"C:\\Users\\rlatj\\Desktop\\workingarea\\mapping\\euddraft0.9.10.12")
 -- StartCtrig(1,nil,0,1,"C:\\Users\\USER\\Desktop\\mapping\\euddraft0.9.10.12") -- Declare fixed player first
 FP = P1
+CJump(AllPlayers,0x9FF)
 Include_CtrigPlib(360,"Switch 1")
 Include_64BitLibrary("Switch 1")
 Namefunction()
-Lib322()
 DisplayprintLib()
+Lib322()
 DP_Start_init(FP)
-
-
+CJumpEnd(AllPlayers,0x9FF)
 --↓ 이곳에 예제를 붙여넣기 (예제에 Include_CtrigPlib가 존재하는경우 삭제) ----------------------
 
+CJump(AllPlayers,0)
+iStr1 = GetiStrId(P1,MakeiStrLetter(" ",20))
+S1 = MakeiTblString(372,"일반명령","CU",MakeiStrLetter(" ",20),"Base") -- Cntr+U가 단축키
+-- ↑ TBLString.txt에서 == 사이에 들어있는 텍스트를 그대로 복사해서
+-- EUDEditor2,3의 372번 TBL스트링에 붙여넣고 해당 tbl파일을 맵에 삽입해야함
+iTbl1 = GetiTblId(P1,372,S1)
+Str0, Str0a, Str0s = SaveiStrArr(P1,MakeiStrWord("\x1B \x19 \x1D \x16 \x02 \x1E \x04 ",2)) -- 인코딩 타입 무관
+Str1, Str1a, Str1s = SaveiStrArr(P1,MakeiStrWord("\x08 \x11 \x17 \x07 \x1F \x1C \x10 \x15 \x04 ",3)) -- 인코딩 타입 무관
+Str2, Str2a, Str2s = SaveiStrArr(P1," \x04CBPrint \x1B예제\x08-J\x06100.0% ") -- strx : utf8
+Str3, Str3a, Str3s = SaveiStrArr(P1,__encode_cp949(" \x04CBPrint \x1B예제\x08-J\x06100.0% ")) -- tbl : cp949
+CJumpEnd(AllPlayers,0)
+DoActions(P1,DisplayText(MakeiStrWord("\r\n",11),4))
+DoActions(P1,{CreateUnit(1,"Kakaru (Twilight)","Anywhere",P1),RemoveUnitAt(1,"Kakaru (Twilight)","Anywhere",P1)}) -- TBL Refresh
+A, B, C, D, E = CreateVars(5,P1)
+function TEST()
+	local PlayerID = CAPrintPlayerID
 
-NIf(P1,Accumulate(P1,Exactly,1,Ore))
-CJumpX(P1,0x10)
-NIfEnd()
-DoActions(P1,DisplayText("CJump1"))
-NIf(P1,Accumulate(P1,Exactly,2,Ore))
-CJumpX(P1,0x10)
-NIfEnd()
-DoActions(P1,DisplayText("CJump2"))
-NIf(P1,Accumulate(P1,Exactly,3,Ore))
-CJumpX(P1,0x10)
-NIfEnd()
-DoActions(P1,DisplayText("CJump3"))
-CJumpXEnd(P1,0x10)
+	DoActionsX(PlayerID,{SetNVar(A,Add,604),SetNVar(C,Add,604),SetNVar(E,Subtract,1)})
+	
+	TriggerX(PlayerID,NVar(A,AtLeast,9*604),SetNVar(A,SetTo,0*604),{preserved})
+	TriggerX(PlayerID,NVar(C,AtLeast,7*604),SetNVar(C,SetTo,0*604),{preserved})
+	TriggerX(PlayerID,NVar(E,Exactly,0),{SetNVar(B,Add,1),SetNVar(E,SetTo,3)},{preserved})
+	TriggerX(PlayerID,{NVar(B,AtLeast,20+Str3s/2),NVar(B,AtMost,0x7FFFFFFF)},SetNVar(B,SetTo,-Str3s),{preserved})
+	
+	CMov(PlayerID,D,_Mod(_Read(0x57F0F0),1000))
+	CA__ItoCustom(SVA1(Str3,14),D,nil,0xFFFF0000,{10,3},1,"0",nil,nil,{0,1,3},nil,nil)
+	CIfX(PlayerID,Memory(0x57F0F0,Exactly,1000))
+	CA__Input(MakeiStrData("1",1),SVA1(Str3,13),0xFFFF0000)
+	CElseX()
+	CA__Input(MakeiStrData(" ",1),SVA1(Str3,13),0xFFFF0000)
+	CIfXEnd()
+	CA__InputSVA1(SVA1(Str3,1),SVA1(Str1,A),12,0xFF,1,12)
+	CA__InputSVA1(SVA1(Str3,13),SVA1(Str0,C),6,0xFF,13,18)
+	CA__InputVA(B,Str3,Str3s,nil,0,19)
+end
+function TEST2()
+	local PlayerID = CAPrintPlayerID
+	CMov(PlayerID,D,_Mod(_Read(0x57F0F0),1000))
+	CA__ItoCustom(SVA1(Str2,14),D,nil,0xFFFFFF00,{10,3},1,"0",nil,nil,{0,1,3},nil,nil,1)
+	CIfX(PlayerID,Memory(0x57F0F0,Exactly,1000))
+	CA__Input(MakeiStrDataX("1",1),SVA1(Str2,13),0xFFFFFF00)
+	CElseX()
+	CA__Input(MakeiStrDataX(" ",1),SVA1(Str2,13),0xFFFFFF00)
+	CIfXEnd()
+	CA__InputVA(B,Str2,Str2s,nil,0,19)
+end
+DoActions(P1,{CopyCpAction({LeaderBoardScoreX(Custom,iStr1[4])},{P1},0)},{}) -- 리더보드 액션은 1회만 실행
+DoActions(P1,{
+CopyCpAction({SetMissionObjectivesX(iStr1[4])},{P1},0); -- String 자체를 넣어야 String 에러가 뜨지않음
+SetUnitName(54,iStr1[2]); -- 디버링원 유닛이름 스트링 변경
+})
+CBPrint(iTbl1,{1,0,0,0,1},"TEST",P1)
+CAPrint(iStr1,P1,{1,0,0,0,1,3,0,0},"TEST2",P1)
 
-NJumpX(P1,0x11,Accumulate(P1,Exactly,1,Gas))
-	DoActions(P1,DisplayText("NJump1"))
-NJumpX(P1,0x11,Accumulate(P1,Exactly,2,Gas))
-	DoActions(P1,DisplayText("NJump2"))
-NJumpX(P1,0x11,Accumulate(P1,Exactly,3,Gas))
-	DoActions(P1,DisplayText("NJump3"))
-NJumpXEnd(P1,0x11)
-
-
-
-EUDTurbo(P1)
-init_Setting()
-EndCtrig()
-ErrorCheck()
 
 --↑ 이곳에 예제를 붙여넣기 -----------------------------------------------------------------
 Trigger {
@@ -422,4 +446,8 @@ Trigger { -- No comment (43CD0280)
 
 
 
+EUDTurbo(P1)
+init_Setting()
+EndCtrig()
+ErrorCheck()
 --↑ Tep에 그대로 붙여넣기 -----------------------------------------------------------------

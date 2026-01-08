@@ -123,7 +123,7 @@ end
             return TSetCVar(FP,V[2],Subtract,Value)
         end
     end
-    function CD(Code,Value,Type)
+    function CD2(Code,Value,Type)
         if Value == nil then Value = 1 end
         if Type == nil then Type = Exactly end
         if FP == nil then PushErrorMsg("FP Player not defined") end
@@ -505,8 +505,8 @@ end
 
 function dthGenfunc(ScannedUnitID, Cr8ID, Cr8num, Owner, OrderType,SettingFlagVar)
         
+	dthGenfuncTable = {}
 	if SettingFlagVar ~= nil then
-		dthGenfuncTable = {}
 		for i = 1, #Cr8ID do
 			table.insert(dthGenfuncTable,CreateUnit(Cr8num[i], Cr8ID[i], "248", Owner))
 			table.insert(dthGenfuncTable,Order(Cr8ID[i], Owner, "248", OrderType, "home"))
@@ -515,7 +515,6 @@ function dthGenfunc(ScannedUnitID, Cr8ID, Cr8num, Owner, OrderType,SettingFlagVa
 			dthGenfuncTable
 		}, preserved)
 	else
-		dthGenfuncTable = {}
 		for i = 1, #Cr8ID do
 			table.insert(dthGenfuncTable,CreateUnit(Cr8num[i], Cr8ID[i], "248", Owner))
 			table.insert(dthGenfuncTable,Order(Cr8ID[i], Owner, "248", OrderType, "home"))
@@ -524,6 +523,22 @@ function dthGenfunc(ScannedUnitID, Cr8ID, Cr8num, Owner, OrderType,SettingFlagVa
 			dthGenfuncTable
 		}, preserved)
 	end
+end
+
+function Convert_ColorCode(str)
+	if str:find("<[^>]+$") then
+		PushErrorMsg("COLOR_CODE_ERROR: Missing '>'")
+		return str
+	end
+
+	return str:gsub("<(%x+)>", function(code)
+		local num = tonumber(code, 16)
+		if not num then
+			PushErrorMsg("COLOR_CODE_ERROR: Invalid hex")
+			return "<"..code..">"
+		end
+		return string.char(num)
+	end)
 end
 
 end

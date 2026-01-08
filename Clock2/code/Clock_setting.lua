@@ -34,11 +34,6 @@ function Clock_setting()
         f_Mod(FP, finMainclock, hourtemp, FDiv)
         f_Div(FP, mainclockCycled, hourtemp, FDiv)
 
-        -- DoActions(Force2, {
-        --     SetDeaths(Force2, SetTo, 0, 131);
-        --     SetDeaths(Force2, SetTo, 0, 132);
-        --     SetDeaths(Force2, SetTo, 0, 133);
-        -- }, preserved)
 
         -- initial clock setup
         CIfOnce(Force2, Always())
@@ -55,9 +50,9 @@ function Clock_setting()
             DoActions(FP, {SetImageScript(213, 131)})
             CAPlot(mainHour, P6, 211, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainhourCAfunc1", FP, {Always()},nil, 1);
             CAPlot(mainMinute, P6, 212, "mainclock", nil, 1, 32, {1,0,0,0,600,0}, "mainminuteCAfunc1", FP, {Always()},nil, 1);
-            DoActions(FP, {SetImageScript(213, 142)})
         CIfEnd()
         DoActions(FP, {SetCD(TimeModSignal, 0)}, preserved)
+        DoActions(FP, {SetImageScript(213, 142)},preserved)
     DisplayPrintEr(P1, {"Total minute : ", mintemp, " | Clock's Minute Value : ", showmainmin," | Hour Value : ", finMainclock," | Hour Cycled Executed : ", mainclockCycled})
 
 
